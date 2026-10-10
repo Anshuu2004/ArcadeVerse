@@ -1768,6 +1768,13 @@ body {
   transform: translateY(-16px);
 }
 
+.solo-podium {
+  width: 340px;
+  padding: 2.8rem 2.2rem 2.2rem;
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), 0 0 30px rgba(245, 158, 11, 0.12);
+}
+
 .podium-1:hover {
   transform: translateY(-22px);
   border-color: #fbbf24;

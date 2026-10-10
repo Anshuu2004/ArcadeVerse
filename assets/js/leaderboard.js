@@ -34,61 +34,48 @@ document.addEventListener("DOMContentLoaded", () => {
     contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
   }
 
-  // Render Top 3 Podium
+  // Render Podium for Verified Contributors Only (No Dummies)
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
 
-    const topThree = contributorsData.slice(0, 3);
-    if (topThree.length === 0) return;
+    if (contributorsData.length === 0) return;
 
-    // Order for podium display: [2nd, 1st, 3rd]
-    const podiumOrder = [];
-    if (topThree[1]) {
-      podiumOrder.push({ ...topThree[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" });
+    // Filter to only real contributors
+    const realContributors = contributorsData.filter(c => !c.isPlaceholder);
+
+    let displayOrder = [];
+    if (realContributors.length === 1) {
+      // Only 1 contributor (Project Lead) -> display center solo champion podium
+      displayOrder = [{
+        ...realContributors[0],
+        rank: 1,
+        badge: "👑 #1 Project Lead & Champion",
+        height: "podium-1 solo-podium"
+      }];
+    } else if (realContributors.length === 2) {
+      displayOrder = [
+        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
+        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
+      ];
     } else {
-      podiumOrder.push({
-        login: "awaiting-dev",
-        name: "Next Contributor",
-        role: "Open Slot",
-        avatar_url: "https://github.com/identicons/awaiting-dev.png",
-        commits: 0,
-        gamesCount: 0,
-        rank: 2,
-        badge: "🥈 2nd Place",
-        height: "podium-2",
-        isPlaceholder: true
-      });
+      // 3 or more contributors
+      displayOrder = [
+        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
+        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
+        { ...realContributors[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" }
+      ];
     }
 
-    if (topThree[0]) podiumOrder.push({ ...topThree[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" });
-
-    if (topThree[2]) {
-      podiumOrder.push({ ...topThree[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" });
-    } else {
-      podiumOrder.push({
-        login: "awaiting-dev-3",
-        name: "Next Contributor",
-        role: "Open Slot",
-        avatar_url: "https://github.com/identicons/awaiting-dev-3.png",
-        commits: 0,
-        gamesCount: 0,
-        rank: 3,
-        badge: "🥉 3rd Place",
-        height: "podium-3",
-        isPlaceholder: true
-      });
-    }
-
-    podiumOrder.forEach((item) => {
-      const score = item.isPlaceholder ? 0 : calculateScore(item);
+    displayOrder.forEach((item) => {
+      const score = calculateScore(item);
       const card = document.createElement("div");
       card.className = `podium-card ${item.height}`;
       card.innerHTML = `
         <div class="podium-badge">${item.badge}</div>
-        <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" style="${item.isPlaceholder ? 'opacity: 0.45; filter: grayscale(1);' : ''}">
+        <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
-        <span class="podium-handle">${item.isPlaceholder ? 'Claim this rank!' : `@${item.login}`}</span>
+        <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
