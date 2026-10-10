@@ -11,52 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const fetchBtn = document.getElementById("fetch-github-btn");
   const syncStatusText = document.getElementById("sync-status-text");
 
-  // Default seed data with realistic commit counts and games
+  // Initial verified contributors (Project Lead)
   let contributorsData = [
     {
       login: "debasmita-admin",
       name: "Debasmita",
-      role: "Project Admin",
+      role: "Project Admin & Lead",
       avatar_url: "https://github.com/identicons/debasmita-admin.png",
       commits: 42,
       gamesCount: 1,
       games: ["Quantum Memory Matrix", "Arcade Core Platform"]
-    },
-    {
-      login: "arjun-coder",
-      name: "Arjun Verma",
-      role: "Contributor",
-      avatar_url: "https://github.com/identicons/arjun-coder.png",
-      commits: 28,
-      gamesCount: 2,
-      games: ["Cyber Pong", "Space Invaders"]
-    },
-    {
-      login: "sneha-dev",
-      name: "Sneha Mukherjee",
-      role: "Contributor",
-      avatar_url: "https://github.com/identicons/sneha-dev.png",
-      commits: 19,
-      gamesCount: 1,
-      games: ["Quantum 2048"]
-    },
-    {
-      login: "rohit-ui",
-      name: "Rohit Roy",
-      role: "Contributor",
-      avatar_url: "https://github.com/identicons/rohit-ui.png",
-      commits: 14,
-      gamesCount: 1,
-      games: ["Flappy Cyber Jet"]
-    },
-    {
-      login: "priya-tech",
-      name: "Priya Sharma",
-      role: "Contributor",
-      avatar_url: "https://github.com/identicons/priya-tech.png",
-      commits: 9,
-      gamesCount: 1,
-      games: ["Whack-a-Bug"]
     }
   ];
 
@@ -80,19 +44,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Order for podium display: [2nd, 1st, 3rd]
     const podiumOrder = [];
-    if (topThree[1]) podiumOrder.push({ ...topThree[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" });
+    if (topThree[1]) {
+      podiumOrder.push({ ...topThree[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" });
+    } else {
+      podiumOrder.push({
+        login: "awaiting-dev",
+        name: "Next Contributor",
+        role: "Open Slot",
+        avatar_url: "https://github.com/identicons/awaiting-dev.png",
+        commits: 0,
+        gamesCount: 0,
+        rank: 2,
+        badge: "🥈 2nd Place",
+        height: "podium-2",
+        isPlaceholder: true
+      });
+    }
+
     if (topThree[0]) podiumOrder.push({ ...topThree[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" });
-    if (topThree[2]) podiumOrder.push({ ...topThree[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" });
+
+    if (topThree[2]) {
+      podiumOrder.push({ ...topThree[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" });
+    } else {
+      podiumOrder.push({
+        login: "awaiting-dev-3",
+        name: "Next Contributor",
+        role: "Open Slot",
+        avatar_url: "https://github.com/identicons/awaiting-dev-3.png",
+        commits: 0,
+        gamesCount: 0,
+        rank: 3,
+        badge: "🥉 3rd Place",
+        height: "podium-3",
+        isPlaceholder: true
+      });
+    }
 
     podiumOrder.forEach((item) => {
-      const score = calculateScore(item);
+      const score = item.isPlaceholder ? 0 : calculateScore(item);
       const card = document.createElement("div");
       card.className = `podium-card ${item.height}`;
       card.innerHTML = `
         <div class="podium-badge">${item.badge}</div>
-        <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
+        <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" style="${item.isPlaceholder ? 'opacity: 0.45; filter: grayscale(1);' : ''}">
         <h3 class="podium-name">${item.name}</h3>
-        <span class="podium-handle">@${item.login}</span>
+        <span class="podium-handle">${item.isPlaceholder ? 'Claim this rank!' : `@${item.login}`}</span>
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
@@ -175,8 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (syncStatusText) syncStatusText.textContent = `Live sync active (Simulated NSOC contributors loaded)`;
       }
     } catch (err) {
-      console.warn("GitHub API rate limit or private repo, using verified local seed data:", err);
-      if (syncStatusText) syncStatusText.textContent = `Synced with verified project registry (${contributorsData.length} active contributors)`;
+      console.warn("GitHub API rate limit or repository not yet pushed:", err);
+      if (syncStatusText) syncStatusText.textContent = `Project in local development • Ready for NSOC community push`;
     }
 
     sortContributors();
