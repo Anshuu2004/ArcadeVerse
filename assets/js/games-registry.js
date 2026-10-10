@@ -4,36 +4,12 @@
  * 
  * Contributor Instructions:
  * To register your game here:
- * 1. Ensure your game folder is placed inside `games/<your-game-name>/`
- * 2. Add an object to the `GAMES_REGISTRY` list below.
- * 3. Update the `CONTRIBUTORS_REGISTRY` with your github profile.
+ * 1. Place your game inside `games/<your-game-name>/` (or `games/<game-name>-<your-name>/`)
+ * 2. Add an entry to the `GAMES_REGISTRY` list below.
+ * 3. Add your details to `CONTRIBUTORS_REGISTRY` and `CONTRIBUTORS.md`.
  */
 
 const GAMES_REGISTRY = [
-  {
-    id: "cyber-snake",
-    title: "Cyber Snake Neo",
-    category: "Retro",
-    icon: "🐍",
-    description: "Classic retro snake revived with neon cyber aesthetics, velocity multipliers, and power-up glow treats.",
-    author: "Debasmita",
-    github: "debasmita-admin",
-    role: "Project Admin",
-    path: "games/cyber-snake/index.html",
-    tags: ["Classic", "Canvas", "Neon"]
-  },
-  {
-    id: "galaxy-brick-breaker",
-    title: "Galaxy Brick Breaker",
-    category: "Arcade",
-    icon: "🚀",
-    description: "Futuristic cosmic paddle & ball game with multi-hit shields, particle bursts, and progressive speed stages.",
-    author: "Debasmita",
-    github: "debasmita-admin",
-    role: "Project Admin",
-    path: "games/galaxy-brick-breaker/index.html",
-    tags: ["Paddle", "Physics", "Sci-Fi"]
-  },
   {
     id: "memory-matrix",
     title: "Quantum Memory Matrix",
@@ -44,7 +20,9 @@ const GAMES_REGISTRY = [
     github: "debasmita-admin",
     role: "Project Admin",
     path: "games/memory-matrix/index.html",
-    tags: ["Cards", "Mind", "Timed"]
+    tags: ["Cards", "Mind", "Timed"],
+    stars: 24,
+    featured: true
   }
 ];
 
@@ -54,6 +32,6 @@ const CONTRIBUTORS_REGISTRY = [
     github: "debasmita-admin",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
-    contributions: ["Cyber Snake Neo", "Galaxy Brick Breaker", "Quantum Memory Matrix", "Arcade Core Platform"]
+    contributions: ["Quantum Memory Matrix", "Arcade Core Engine & Contributor Sandbox"]
   }
 ];

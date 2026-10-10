@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArcadeVerse | Open Source Mini-Games Arcade (NSOC '26)</title>
-  <meta name="description" content="ArcadeVerse is an open-source web arcade platform built with pure HTML, CSS, and JS. Contributed by the open-source community for NSOC Winter Edition 2026.">
+  <title>ArcadeVerse | Open Source Gaming Platform (NSOC '26)</title>
+  <meta name="description" content="ArcadeVerse is an open-source community arcade built with pure HTML, CSS, and JS for NSOC Winter Edition 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="dark-theme">
-  <!-- Glowing Background Mesh / Grid -->
+  <!-- Cyber Background Elements -->
   <div class="cyber-grid"></div>
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
@@ -27,18 +27,17 @@
 
       <nav class="nav-links">
         <a href="#games" class="nav-item">🎮 Explore Games</a>
-        <a href="#features" class="nav-item">⚡ Highlights</a>
+        <a href="#ideas-generator" class="nav-item">💡 Ideas Vault</a>
+        <a href="#sandbox" class="nav-item">🧪 Preview Sandbox</a>
+        <a href="#code-generator" class="nav-item">⚡ PR Generator</a>
         <a href="#contributors" class="nav-item">🏆 Hall of Fame</a>
         <a href="CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com" target="_blank" class="btn btn-secondary btn-icon" id="github-repo-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
-          <span>Star on GitHub</span>
-        </a>
+        <button class="btn btn-primary btn-sm btn-glow" id="header-add-game-btn">
+          <span>➕ Add Your Game</span>
+        </button>
       </div>
     </div>
   </header>
@@ -48,39 +47,43 @@
     <section class="hero-section">
       <div class="hero-content">
         <div class="hero-badge">
-          <span class="pulse-dot"></span> NSOC Winter Edition 2026 Flagship Open-Source Arcade
+          <span class="pulse-dot"></span> NSOC Winter Edition 2026 • Official Gaming Initiative
         </div>
         <h1 class="hero-title">
-          Build, Play & Conquer in the <br>
-          <span class="gradient-text glitch-effect">Ultimate Web Arcade</span>
+          The Ultimate Open-Source <br>
+          <span class="gradient-text glitch-effect">Community Arcade Station</span>
         </h1>
         <p class="hero-subtitle">
-          A high-voltage, community-driven game station. No complex frameworks, zero dependencies — built completely with pure <strong>HTML5, CSS3, & Modern Vanilla JS</strong>. Add your own game, claim your spot in the Hall of Fame!
+          Built with pure <strong>HTML5, CSS3, & Vanilla JavaScript</strong>. Zero heavy bundlers, zero dependencies. 
+          Pick a concept, test your game in our live sandbox, generate your PR config, and claim your place in the Hall of Fame!
         </p>
         
         <div class="hero-cta-group">
           <a href="#games" class="btn btn-primary btn-glow">
-            <span>🎮 Browse Games</span>
+            <span>🎮 Play Live Games</span>
           </a>
-          <a href="CONTRIBUTING.md" target="_blank" class="btn btn-glass">
-            <span>🚀 Submit Your Game</span>
+          <button class="btn btn-accent btn-glow" id="hero-submit-trigger">
+            <span>🚀 Submit New Game</span>
+          </button>
+          <a href="#ideas-generator" class="btn btn-glass">
+            <span>🎲 Roll Game Idea</span>
           </a>
         </div>
 
         <div class="quick-stats">
           <div class="stat-card">
-            <span class="stat-number" id="total-games-count">0</span>
+            <span class="stat-number" id="total-games-count">1</span>
             <span class="stat-label">Playable Games</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-card">
-            <span class="stat-number" id="total-contributors-count">0</span>
-            <span class="stat-label">Contributors</span>
+            <span class="stat-number" id="total-contributors-count">1</span>
+            <span class="stat-label">Active Contributors</span>
           </div>
           <div class="stat-divider"></div>
           <div class="stat-card">
-            <span class="stat-number">100%</span>
-            <span class="stat-label">Open Source</span>
+            <span class="stat-number" id="pending-ideas-count">20+</span>
+            <span class="stat-label">Open Ideas Claimable</span>
           </div>
         </div>
       </div>
@@ -90,9 +93,9 @@
     <section class="games-section" id="games">
       <div class="section-header">
         <div>
-          <span class="section-tag">CATALOG</span>
-          <h2 class="section-title">Play Live Games</h2>
-          <p class="section-subtitle">Click any game card to instantly launch and play inside our arcade launcher!</p>
+          <span class="section-tag">GAMES CATALOG</span>
+          <h2 class="section-title">Explore & Play Games</h2>
+          <p class="section-subtitle">Click any game to launch and play directly in our high-resolution arcade launcher!</p>
         </div>
 
         <!-- Filter & Search Controls -->
@@ -102,13 +105,13 @@
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" id="game-search-input" placeholder="Search by game or contributor...">
+            <input type="text" id="game-search-input" placeholder="Search game, category or author...">
           </div>
 
           <div class="category-pills" id="category-pills">
             <button class="pill active" data-category="all">All</button>
-            <button class="pill" data-category="Arcade">Arcade</button>
             <button class="pill" data-category="Puzzle">Puzzle</button>
+            <button class="pill" data-category="Arcade">Arcade</button>
             <button class="pill" data-category="Retro">Retro</button>
             <button class="pill" data-category="Action">Action</button>
           </div>
@@ -117,74 +120,167 @@
 
       <!-- Games Grid Container -->
       <div class="games-grid" id="games-grid">
-        <!-- Rendered dynamically by app.js -->
+        <!-- Rendered dynamically by app.js (Includes Memory Matrix and "Add More Games" card) -->
       </div>
     </section>
 
-    <!-- Why Contribute / Platform Highlights -->
-    <section class="features-section" id="features">
+    <!-- INNOVATIVE FEATURE 1: Random Game Idea Generator & Claim Vault -->
+    <section class="ideas-section" id="ideas-generator">
       <div class="section-header center">
-        <span class="section-tag">FOR CONTRIBUTORS</span>
-        <h2 class="section-title">Why Build in ArcadeVerse?</h2>
-        <p class="section-subtitle">Designed specifically for NSOC contributors to build meaningful mini-games without overhead.</p>
+        <span class="section-tag">INSPIRATION VAULT</span>
+        <h2 class="section-title">Stuck On What To Build?</h2>
+        <p class="section-subtitle">Roll a game concept tailored for beginner & intermediate Vanilla JS contributors!</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📁</div>
-          <h3>Isolated Directory Structure</h3>
-          <p>Every game lives in its dedicated subfolder inside <code>games/&lt;your-game&gt;/</code>. No risk of merge conflicts with fellow participants.</p>
+      <div class="idea-roulette-container">
+        <div class="idea-card-display" id="idea-card-display">
+          <div class="idea-icon" id="idea-icon">🛸</div>
+          <div class="idea-content">
+            <span class="idea-category-badge" id="idea-category">Action / Retro</span>
+            <h3 id="idea-title">Space Invaders 2026</h3>
+            <p id="idea-description">Classic arcade space defense. Control your ship with arrow keys and shoot down descending pixel waves!</p>
+            <div class="idea-tech-tags" id="idea-tech-tags">
+              <span>HTML5 Canvas</span>
+              <span>Collision Logic</span>
+              <span>Sound Effects</span>
+            </div>
+          </div>
+          <div class="idea-action">
+            <button class="btn btn-secondary btn-sm" id="claim-idea-btn">📋 Claim This Idea</button>
+          </div>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">👥</div>
-          <h3>Multiple Variants Welcomed</h3>
-          <p>Want to build your own variant of Snake or Tetris? Simply use <code>snake-(your-handle)</code> so everyone's version shines!</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Zero Framework Overhead</h3>
-          <p>Pure Vanilla HTML, CSS, JavaScript & Canvas APIs. Master core web skills that top engineering teams value most.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🎖️</div>
-          <h3>Verified Recognition</h3>
-          <p>Every approved PR is spotlighted in the Hall of Fame and the dynamic contributor leaderboard with git handles.</p>
+        <div class="idea-controls">
+          <button class="btn btn-primary btn-glow" id="roll-idea-btn">🎲 Spin Another Idea</button>
+          <a href="#code-generator" class="btn btn-glass">⚡ Generate My Code Config</a>
         </div>
       </div>
     </section>
 
-    <!-- How to contribute step-by-step -->
-    <section class="guide-section">
-      <div class="guide-card">
-        <div class="guide-header">
-          <span class="step-badge">Quick Workflow</span>
-          <h2>How to Contribute in 4 Easy Steps</h2>
+    <!-- INNOVATIVE FEATURE 2: In-Browser Live Game Sandbox / Tester -->
+    <section class="sandbox-section" id="sandbox">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">DEV TOOL</span>
+          <h2 class="section-title">Live Game Tester Sandbox</h2>
+          <p class="section-subtitle">Test your HTML/CSS/JS game directly inside ArcadeVerse before opening a GitHub PR!</p>
         </div>
-        <div class="steps-flow">
-          <div class="step-item">
-            <div class="step-num">1</div>
-            <h4>Fork & Clone</h4>
-            <p>Fork the repository, clone it locally, and checkout a feature branch:</p>
-            <code>git checkout -b feature/my-new-game</code>
+        <button class="btn btn-primary btn-sm btn-glow" id="run-sandbox-btn">▶ Run In Sandbox</button>
+      </div>
+
+      <div class="sandbox-container">
+        <div class="sandbox-editors">
+          <div class="editor-tabs">
+            <button class="tab-btn active" data-tab="html">HTML</button>
+            <button class="tab-btn" data-tab="css">CSS</button>
+            <button class="tab-btn" data-tab="js">JavaScript</button>
           </div>
-          <div class="step-item">
-            <div class="step-num">2</div>
-            <h4>Build Your Game</h4>
-            <p>Create <code>games/&lt;game-name&gt;/</code> with <code>index.html</code>, <code>style.css</code>, and <code>game.js</code>.</p>
+          <div class="editor-pane active" id="pane-html">
+            <textarea id="sandbox-html-code" spellcheck="false" placeholder="<!-- Your game HTML here -->">
+<div class="mini-game-wrap">
+  <h2>🎯 Click the Neon Target!</h2>
+  <div id="target" style="width:50px;height:50px;background:#00f2fe;border-radius:50%;margin:40px auto;cursor:pointer;box-shadow:0 0 15px #00f2fe;"></div>
+  <p id="score-text" style="color:#ffaa00;font-weight:bold;">Score: 0</p>
+</div></textarea>
           </div>
-          <div class="step-item">
-            <div class="step-num">3</div>
-            <h4>Register in Registry</h4>
-            <p>Add your game entry to <code>assets/js/games-registry.js</code> and sign <code>CONTRIBUTORS.md</code>.</p>
+          <div class="editor-pane" id="pane-css">
+            <textarea id="sandbox-css-code" spellcheck="false" placeholder="/* Your game CSS here */">
+body {
+  background: #080912;
+  color: #fff;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.mini-game-wrap {
+  background: rgba(255,255,255,0.05);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,242,254,0.3);
+}</textarea>
           </div>
-          <div class="step-item">
-            <div class="step-num">4</div>
-            <h4>Submit PR</h4>
-            <p>Commit, push to your fork, and open a Pull Request to NSOC <code>main</code> branch!</p>
+          <div class="editor-pane" id="pane-js">
+            <textarea id="sandbox-js-code" spellcheck="false" placeholder="// Your game JS logic here">
+let score = 0;
+const target = document.getElementById('target');
+const scoreText = document.getElementById('score-text');
+
+target.addEventListener('click', () => {
+  score += 10;
+  scoreText.textContent = 'Score: ' + score;
+  target.style.transform = 'scale(1.2)';
+  setTimeout(() => target.style.transform = 'scale(1)', 150);
+});</textarea>
           </div>
+        </div>
+
+        <div class="sandbox-preview">
+          <div class="preview-header">
+            <span>📺 Live Preview</span>
+            <span class="preview-badge">Instant Render</span>
+          </div>
+          <iframe id="sandbox-preview-frame" sandbox="allow-scripts" frameborder="0"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- INNOVATIVE FEATURE 3: PR Helper & Config Generator -->
+    <section class="generator-section" id="code-generator">
+      <div class="section-header center">
+        <span class="section-tag">PULL REQUEST HELPER</span>
+        <h2 class="section-title">Automated PR Registry Generator</h2>
+        <p class="section-subtitle">Fill in your game info to instantly generate your <code>games-registry.js</code> and <code>CONTRIBUTORS.md</code> snippet!</p>
+      </div>
+
+      <div class="generator-card">
+        <div class="generator-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your GitHub Username</label>
+              <input type="text" id="gen-github" placeholder="e.g. johndoe">
+            </div>
+            <div class="form-group">
+              <label>Your Full / Display Name</label>
+              <input type="text" id="gen-name" placeholder="e.g. John Doe">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Game Title</label>
+              <input type="text" id="gen-title" placeholder="e.g. Neon Pinball">
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="gen-category">
+                <option value="Arcade">Arcade</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Retro">Retro</option>
+                <option value="Action">Action</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Emoji Icon</label>
+              <input type="text" id="gen-icon" placeholder="e.g. 🎯 or 🛸">
+            </div>
+            <div class="form-group">
+              <label>Short Description (1 sentence)</label>
+              <input type="text" id="gen-desc" placeholder="e.g. Dodge cosmic asteroids and collect fuel cells!">
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-glow" id="generate-snippet-btn">⚡ Generate PR Snippet</button>
+        </div>
+
+        <div class="snippet-output-box">
+          <div class="snippet-header">
+            <span>📄 Generated Code for <code>games-registry.js</code></span>
+            <button class="btn-copy-code" id="copy-snippet-btn">📋 Copy Code</button>
+          </div>
+          <pre><code id="snippet-code-display">// Fill out the form above and click "Generate PR Snippet" to get your instant snippet!</code></pre>
         </div>
       </div>
     </section>
@@ -211,9 +307,9 @@
     <div class="modal-window">
       <div class="modal-topbar">
         <div class="modal-game-info">
-          <span class="badge" id="modal-game-badge">Arcade</span>
-          <h3 id="modal-game-title">Game Title</h3>
-          <span class="author-tag" id="modal-game-author">By @author</span>
+          <span class="badge" id="modal-game-badge">Puzzle</span>
+          <h3 id="modal-game-title">Quantum Memory Matrix</h3>
+          <span class="author-tag" id="modal-game-author">By @Debasmita</span>
         </div>
         <div class="modal-controls">
           <button class="btn btn-sm btn-icon" id="fullscreen-btn" title="Toggle Fullscreen">
@@ -237,6 +333,52 @@
     </div>
   </div>
 
+  <!-- Interactive Submission Guide Modal -->
+  <div class="game-modal" id="submit-guide-modal" role="dialog" aria-hidden="true">
+    <div class="modal-overlay" id="submit-modal-overlay"></div>
+    <div class="modal-window submit-modal-content">
+      <div class="modal-topbar">
+        <h3>🚀 Add Your Game to ArcadeVerse</h3>
+        <button class="btn btn-sm btn-close" id="close-submit-modal-btn">✕</button>
+      </div>
+      <div class="modal-body-scroll">
+        <p class="modal-intro">Follow these 4 simple steps to have your game featured in our live arcade catalog:</p>
+        
+        <div class="guide-steps-vertical">
+          <div class="step-card">
+            <span class="step-badge">Step 1</span>
+            <h4>Fork & Create Branch</h4>
+            <code>git checkout -b game/my-cool-game</code>
+          </div>
+
+          <div class="step-card">
+            <span class="step-badge">Step 2</span>
+            <h4>Create Your Game Directory in <code>games/</code></h4>
+            <p>Put your game inside <code>games/&lt;your-game&gt;/</code> (or <code>games/&lt;your-game&gt;-&lt;your-name&gt;/</code> if multiple people build similar games):</p>
+            <code>games/my-cool-game/index.html<br>games/my-cool-game/style.css<br>games/my-cool-game/game.js</code>
+          </div>
+
+          <div class="step-card">
+            <span class="step-badge">Step 3</span>
+            <h4>Use our Built-in PR Snippet Generator</h4>
+            <p>Scroll down to the <strong>Automated PR Generator</strong> section, fill in your details, and paste the generated snippet into <code>assets/js/games-registry.js</code>.</p>
+          </div>
+
+          <div class="step-card">
+            <span class="step-badge">Step 4</span>
+            <h4>Commit & Open PR!</h4>
+            <code>git add .<br>git commit -m "feat(game): add my-cool-game by @username"<br>git push origin game/my-cool-game</code>
+          </div>
+        </div>
+
+        <div class="modal-footer-cta">
+          <a href="CONTRIBUTING.md" target="_blank" class="btn btn-primary btn-glow">Read Full CONTRIBUTING.md</a>
+          <button class="btn btn-secondary" id="scroll-to-pr-gen-btn">Take Me to PR Generator</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
@@ -252,7 +394,8 @@
         <h4>Project Links</h4>
         <ul class="footer-list">
           <li><a href="#games">Explore All Games</a></li>
-          <li><a href="#contributors">Contributors Wall</a></li>
+          <li><a href="#sandbox">Live Game Sandbox</a></li>
+          <li><a href="#code-generator">PR Snippet Generator</a></li>
           <li><a href="CONTRIBUTORS.md" target="_blank">Contributors Register</a></li>
           <li><a href="CONTRIBUTING.md" target="_blank">Contribution Guidelines</a></li>
         </ul>
