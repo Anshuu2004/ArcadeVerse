@@ -11,25 +11,83 @@ Welcome to **ArcadeVerse**! As part of **NSOC Winter Edition 2026**, this projec
 
 ---
 
+## 💻 How to Run the Project Locally
+
+Because ArcadeVerse is built with zero heavyweight dependencies, you do not need to install `npm` packages or configure complex build tools. You can launch and test the platform locally using any of the following methods:
+
+### Method 1: Using Python's Built-in HTTP Server (Recommended)
+If you have Python installed, open your terminal inside the project root directory and run:
+
+**Python 3:**
+```bash
+python -m http.server 8000
+```
+
+**Python 2 (if applicable):**
+```bash
+python -m SimpleHTTPServer 8000
+```
+Then open your browser and navigate to:
+👉 `http://localhost:8000`
+
+---
+
+### Method 2: Using Node.js `npx serve` or `live-server`
+If you have Node.js installed, you can launch a local static server instantly without installing global dependencies:
+
+```bash
+# Using npx serve:
+npx -y serve .
+
+# Or using live-server (auto-reloads on file changes):
+npx -y live-server --port=5500
+```
+Then visit the URL displayed in your terminal (usually `http://localhost:3000` or `http://localhost:5500`).
+
+---
+
+### Method 3: Using VS Code Live Server Extension
+1. Install the **Live Server** extension (by Ritwick Dey) in VS Code.
+2. Right-click on `index.html`.
+3. Select **"Open with Live Server"**.
+
+---
+
+### Method 4: Direct Browser Launch
+You can also directly double-click the `index.html` file or run:
+- **Windows (Command Prompt / PowerShell):**
+  ```powershell
+  start index.html
+  ```
+- **macOS:**
+  ```bash
+  open index.html
+  ```
+- **Linux:**
+  ```bash
+  xdg-open index.html
+  ```
+
+---
+
 ## 📂 Architecture & Directory Isolation
 To guarantee **zero merge conflicts** and enable simultaneous contributions from hundreds of developers:
 ```text
 ArcadeVerse/
 │
-├── index.html                 # Main Arcade Hub
-├── CONTRIBUTING.md            # You are here!
-├── CONTRIBUTORS.md            # Contributor directory & Hall of Fame registry
+├── index.html                 # Main Arcade Hub (Sandbox, Ideas, PR Generator)
+├── CONTRIBUTING.md            # Contributor & Run Guidelines
+├── CONTRIBUTORS.md            # Contributor directory & Hall of Fame
+├── README.md                  # Project overview & NSOC details
 │
 ├── assets/
 │   ├── css/style.css          # Main hub styling
 │   └── js/
-│       ├── app.js             # Hub launcher engine & filter
+│       ├── app.js             # Hub launcher engine & sandbox engine
 │       └── games-registry.js  # Registry where your game gets listed
 │
 └── games/                     # 🎮 ALL COMMUNITY GAMES LIVE HERE
-    ├── cyber-snake/           # Example game 1
-    ├── galaxy-brick-breaker/  # Example game 2
-    ├── memory-matrix/         # Example game 3
+    ├── memory-matrix/         # Reference starter game
     └── <your-game-folder>/    # YOUR NEW GAME FOLDER
         ├── index.html
         ├── style.css
@@ -53,7 +111,7 @@ ArcadeVerse/
    ```
 
 ### Step 2: Create a Feature Branch
-Always create an isolated branch for your game or bug fix:
+Always create an isolated branch for your game or enhancement:
 ```bash
 git checkout -b game/my-awesome-game
 ```
@@ -67,16 +125,18 @@ git checkout -b game/my-awesome-game
    > If someone already built a game of that category (e.g. `snake`), you can still build your version! Simply append your handle or unique variation name:
    > - `games/snake-rahul/`
    > - `games/snake-3d-anita/`
-   > - `games/tetris-neon/`
+   > - `games/pong-alex/`
 
 2. Inside your folder, include:
    - `index.html`
    - `style.css`
-   - `game.js` (or inline if small)
-   - Any local assets/images/audio in an `assets/` subfolder inside your game folder.
+   - `game.js`
+   - Any local assets in an `assets/` subfolder inside your game directory.
+
+> 💡 **Tip**: You can test your HTML, CSS, and JS code in real-time using the **Live Game Tester Sandbox** section on the ArcadeVerse homepage!
 
 ### Step 4: Register in `assets/js/games-registry.js`
-Open `assets/js/games-registry.js` and append your game configuration to `GAMES_REGISTRY`:
+Open `assets/js/games-registry.js` or use our homepage **Automated PR Generator** to add your game entry:
 ```javascript
 {
   id: "my-awesome-game",
@@ -112,16 +172,16 @@ git push origin game/my-awesome-game
 ---
 
 ## 💡 Ideas for New Games
-Looking for game concepts? Here are some top choices that are easy to build with HTML5 Canvas / DOM:
-- **Flappy Bird Clone** (`flappy-cyber`)
-- **2048 Game** (`quantum-2048`)
-- **Pong (PvP or vs AI)** (`neon-pong`)
-- **Tower Blocks / Stacker** (`cyber-stacker`)
-- **Space Invaders** (`galaxy-invaders`)
-- **Whack-a-Mole** (`whack-a-bug`)
-- **Wordle / Word Guessing** (`cryptic-words`)
-- **Doodle Jump / Infinite Jumper** (`astro-jump`)
-- **Minesweeper** (`quantum-minesweeper`)
-- **Simon Says / Audio Sequence** (`synth-says`)
+Looking for game concepts? Visit the **Idea Roulette & Vault** on the homepage or pick one from below:
+- **Flappy Cyber Jet** (`games/flappy-cyber/`)
+- **Quantum 2048** (`games/quantum-2048/`)
+- **Neon Cyber Pong (PvP / AI)** (`games/neon-pong/`)
+- **Cyber Tower Stacker** (`games/cyber-stacker/`)
+- **Space Invaders 2026** (`games/galaxy-invaders/`)
+- **Whack-A-Bug Developer** (`games/whack-a-bug/`)
+- **Cryptic Wordle Hack** (`games/cryptic-words/`)
+- **Astro Infinite Jumper** (`games/astro-jump/`)
+- **Quantum Minesweeper** (`games/quantum-minesweeper/`)
+- **Synth-Wave Simon Says** (`games/synth-says/`)
 
 Happy Coding & Welcome to NSOC '26! 🎉
