@@ -145,12 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render full catalog
+  // Render full catalog as disabled trial/reference concepts
   if (catalogGrid) {
     catalogGrid.innerHTML = "";
     IDEA_VAULT.forEach((idea) => {
       const card = document.createElement("div");
-      card.className = "idea-catalog-card";
+      card.className = "idea-catalog-card trial-card";
       card.innerHTML = `
         <div class="idea-cat-header">
           <span class="idea-icon-sm">${idea.icon}</span>
@@ -162,18 +162,15 @@ document.addEventListener("DOMContentLoaded", () => {
           ${idea.tags.map(t => `<span>${t}</span>`).join("")}
         </div>
         <div class="idea-features-box">
-          <strong>Key Features:</strong>
+          <strong>Key Features (Reference Blueprint):</strong>
           <ul>
             ${idea.features.map(f => `<li>${f}</li>`).join("")}
           </ul>
         </div>
-        <button class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 1rem;">Claim & Build This</button>
+        <button class="btn btn-secondary btn-sm btn-disabled-concept" disabled title="This is a reference blueprint for trial purposes only.">
+          🔒 Example Concept (Disabled)
+        </button>
       `;
-
-      card.querySelector("button").addEventListener("click", () => {
-        localStorage.setItem("claimed_idea", JSON.stringify(idea));
-        window.location.href = "submit.html";
-      });
 
       catalogGrid.appendChild(card);
     });

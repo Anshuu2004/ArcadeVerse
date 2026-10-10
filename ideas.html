@@ -65,19 +65,22 @@
 
       <div class="idea-controls">
         <button class="btn btn-secondary" id="roll-idea-btn">🎲 Spin Another Idea</button>
-        <a href="sandbox.html" class="btn btn-glass">🧪 Test In Sandbox</a>
+        <a href="submit.html" class="btn btn-glass">⚡ Open PR Helper</a>
       </div>
     </div>
 
-    <!-- Complete Grid of all ideas -->
+    <!-- Complete Grid of all ideas (Trial / Example Mode - Disabled) -->
     <div class="section-header">
       <div>
-        <h2 class="section-title" style="font-size: 1.6rem;">Browse All Concepts by Category</h2>
-        <p class="section-subtitle">Select any concept to view detailed technical specifications</p>
+        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+          <h2 class="section-title" style="font-size: 1.6rem; margin: 0;">Browse All Concepts by Category</h2>
+          <span class="sample-tag-badge">🔒 SAMPLE / TRIAL EXAMPLES ONLY</span>
+        </div>
+        <p class="section-subtitle">These catalog cards are reference examples and mock blueprints for contributors. Action buttons are disabled.</p>
       </div>
     </div>
 
-    <div class="ideas-catalog-grid" id="ideas-catalog-grid">
+    <div class="ideas-catalog-grid disabled-catalog" id="ideas-catalog-grid">
       <!-- Injected by ideas.js -->
     </div>
   </main>

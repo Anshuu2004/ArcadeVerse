@@ -1609,6 +1609,44 @@ body {
   margin-bottom: 0.2rem;
 }
 
+/* Disabled Trial / Example Blueprint Styling */
+.sample-tag-badge {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.disabled-catalog .trial-card {
+  opacity: 0.75;
+  border-color: rgba(255, 255, 255, 0.06);
+  background: rgba(19, 23, 34, 0.65);
+  position: relative;
+}
+
+.disabled-catalog .trial-card:hover {
+  transform: none;
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow: none;
+}
+
+.btn-disabled-concept {
+  width: 100%;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+  color: var(--text-muted) !important;
+  cursor: not-allowed !important;
+  pointer-events: none;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
 /* Admin Spotlight Banner (Leaderboard) */
 .admin-spotlight-banner {
   background: var(--bg-surface);
