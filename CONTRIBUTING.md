@@ -1,6 +1,6 @@
 # 🌟 ArcadeVerse — Contribution & Contributor Hub (NSOC '26)
 
-> ### 👑 **PROJECT ADMIN:** **Debasmita** ([@debasmita-admin](https://github.com))  
+> ### 👑 **PROJECT ADMIN:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))  
 > ### ❄️ **EVENT:** **NSOC (Winter Edition 2026)**  
 > ### ⚡ **TECH STACK:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**  
 
@@ -58,14 +58,14 @@ To prevent **merge conflicts** when dozens of contributors work at the same time
 ```text
 ArcadeVerse/
 │
-├── index.html                 # 🎮 Central Arcade Station (Sandbox, Ideas, PR Generator)
+├── index.html                 # 🎮 Central Arcade Station (Games Catalog, Ideas, PR Generator)
 ├── CONTRIBUTING.md            # 📖 Full Contributor Guide, Run Commands & Hall of Fame
 ├── README.md                  # 🌟 Project Overview & NSOC Badges
 │
 ├── assets/
-│   ├── css/style.css          # Cyberpunk Theme Stylesheet
+│   ├── css/style.css          # Theme Stylesheet
 │   └── js/
-│       ├── app.js             # Platform Engine & Sandbox Logic
+│       ├── app.js             # Platform Engine & Filter Logic
 │       └── games-registry.js  # Registry where your game gets listed
 │
 └── games/                     # 🕹️ ALL COMMUNITY GAMES LIVE HERE
@@ -85,9 +85,9 @@ ArcadeVerse/
 ### 📌 **STEP 1: FORK & CLONE**
 Fork the repository on GitHub, then run in your terminal:
 ```bash
-git clone https://github.com/<your-username>/NSOC.git
-cd NSOC
-git remote add upstream https://github.com/debasmita-admin/NSOC.git
+git clone https://github.com/<your-username>/ArcadeVerse.git
+cd ArcadeVerse
+git remote add upstream https://github.com/DebasmitaBose0/ArcadeVerse.git
 ```
 
 ---

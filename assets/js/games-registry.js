@@ -16,8 +16,8 @@ const GAMES_REGISTRY = [
     category: "Puzzle",
     icon: "🧩",
     description: "Cyberpunk card flipping memory matrix test. Match cyber glyphs under timed pressure.",
-    author: "Debasmita",
-    github: "debasmita-admin",
+    author: "Debasmita Bose",
+    github: "DebasmitaBose0",
     role: "Project Admin",
     path: "games/memory-matrix/index.html",
     tags: ["Cards", "Mind", "Timed"],
@@ -28,10 +28,10 @@ const GAMES_REGISTRY = [
 
 const CONTRIBUTORS_REGISTRY = [
   {
-    name: "Debasmita",
-    github: "debasmita-admin",
+    name: "Debasmita Bose",
+    github: "DebasmitaBose0",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
-    contributions: ["Quantum Memory Matrix", "Arcade Core Engine & Contributor Sandbox"]
+    contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
   }
 ];

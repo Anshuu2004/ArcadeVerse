@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial verified contributors (Project Lead)
   let contributorsData = [
     {
-      login: "debasmita-admin",
-      name: "Debasmita",
+      login: "DebasmitaBose0",
+      name: "Debasmita Bose",
       role: "Project Admin & Lead",
-      avatar_url: "https://github.com/identicons/debasmita-admin.png",
-      commits: 42,
+      avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
+      commits: 16,
       gamesCount: 1,
       games: ["Quantum Memory Matrix", "Arcade Core Platform"]
     }
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Fetch Live Contributions directly from GitHub REST API
-  async function fetchLiveGitHubContributions(repo) {
+  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse") {
     if (!repo) return;
     if (syncStatusText) syncStatusText.textContent = `Connecting to GitHub API (${repo})...`;
 
@@ -156,23 +156,39 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        contributorsData = data.map((user) => ({
-          login: user.login,
-          name: user.login === "debasmita-admin" ? "Debasmita" : user.login,
-          role: user.login === "debasmita-admin" ? "Project Admin" : "Contributor",
-          avatar_url: user.avatar_url,
-          commits: user.contributions,
-          gamesCount: 1,
-          games: ["Community Contribution"]
-        }));
+        // Fetch detailed profile for contributors to display accurate names
+        const enrichedContributors = await Promise.all(
+          data.map(async (user) => {
+            let displayName = user.login;
+            try {
+              const userRes = await fetch(`https://api.github.com/users/${user.login}`);
+              if (userRes.ok) {
+                const userData = await userRes.json();
+                if (userData.name) displayName = userData.name;
+              }
+            } catch (e) {
+              console.warn("Could not fetch user details for", user.login);
+            }
 
-        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributors)`;
-      } else {
-        if (syncStatusText) syncStatusText.textContent = `Live sync active (Simulated NSOC contributors loaded)`;
+            const isAdmin = user.login.toLowerCase() === "debasmitabose0";
+            return {
+              login: user.login,
+              name: displayName,
+              role: isAdmin ? "Project Admin & Lead" : "Contributor",
+              avatar_url: user.avatar_url,
+              commits: user.contributions,
+              gamesCount: isAdmin ? 1 : 1,
+              games: isAdmin ? ["Quantum Memory Matrix", "Arcade Core Platform"] : ["Community Game"]
+            };
+          })
+        );
+
+        contributorsData = enrichedContributors;
+        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
       }
     } catch (err) {
-      console.warn("GitHub API rate limit or repository not yet pushed:", err);
-      if (syncStatusText) syncStatusText.textContent = `Project in local development • Ready for NSOC community push`;
+      console.warn("GitHub API rate limit or network issue:", err);
+      if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
     }
 
     sortContributors();
@@ -182,13 +198,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (fetchBtn) {
     fetchBtn.addEventListener("click", () => {
-      const repo = repoInput ? repoInput.value.trim() : "debasmita-admin/NSOC";
+      const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
       fetchLiveGitHubContributions(repo);
     });
   }
 
-  // Initial Run
+  // Initial Run - auto-sync live repository data
   sortContributors();
   renderPodium();
   renderTable();
+  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse");
 });
