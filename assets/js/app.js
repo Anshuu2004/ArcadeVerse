@@ -76,20 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("click", () => openGameModal(game));
       gamesGrid.appendChild(card);
     });
-
-    // Add More Games Card -> Links directly to GitHub Contributor Guide
-    const addCard = document.createElement("a");
-    addCard.href = "https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md";
-    addCard.target = "_blank";
-    addCard.className = "add-game-card";
-    addCard.style.textDecoration = "none";
-    addCard.innerHTML = `
-      <div class="add-game-icon">➕</div>
-      <h3>Add Your Game Here</h3>
-      <p>Have an awesome game idea? Build it with pure HTML, CSS, JS and get featured in the Arcade Catalog!</p>
-      <span class="btn btn-secondary btn-sm">Contribute via GitHub PR</span>
-    `;
-    gamesGrid.appendChild(addCard);
   }
 
   // Modal Handlers
