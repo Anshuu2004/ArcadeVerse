@@ -138,17 +138,18 @@ To prevent **merge conflicts** when dozens of contributors work at the same time
 ```text
 ArcadeVerse/
 │
-├── index.html                           # 🎮 Central Arcade Station (Games Catalog, Ideas, PR Generator)
+├── index.html                           # 🎮 Central Arcade Station (Games Catalog, Ideas, Hall of Fame)
 ├── CONTRIBUTING.md                      # 📖 Full Contributor Guide & NSOC Guidelines
 ├── README.md                            # 🌟 Project Overview & NSOC Badges
-├── leaderboard.html                     # 🏆 Live Hall of Fame Leaderboard
-├── ideas.html                           # 💡 Ideas Vault (20+ Claimable Concepts)
-├── submit.html                          # ⚡ PR Snippet & Terminal Helper
+├── LICENSE                              # 📜 Open Source MIT License & Terms
+├── leaderboard.html                     # 🏆 Live Hall of Fame Leaderboard & Point Engine
+├── ideas.html                           # 💡 Ideas Vault (Reference Concepts)
 │
 ├── assets/
 │   ├── css/style.css                    # Theme Stylesheet
 │   └── js/
 │       ├── app.js                       # Platform Engine & Filter Logic
+│       ├── ideas.js                     # Idea Vault Roulette Engine
 │       ├── leaderboard.js               # Live GitHub API Sync Engine
 │       └── games-registry.js            # Registry where your game gets listed
 │
@@ -200,7 +201,7 @@ Inside your folder, create pure web files:
 ---
 
 ### 📌 **STEP 4: REGISTER IN `assets/js/games-registry.js`**
-Open `assets/js/games-registry.js` (or use the **PR Helper** on [submit.html](submit.html)) and register your game:
+Open `assets/js/games-registry.js` and add your entry directly to the `GAMES_REGISTRY` array:
 
 ```javascript
 {

@@ -29,7 +29,7 @@
 - 📁 **Isolated Directory Pattern (`games/game-name_contributor-name/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
 - 🕹️ **Multi-Game Diversity:** Multiple contributors can build different versions of the same game idea without collision.
 - 💡 **Interactive Ideas Vault ([ideas.html](ideas.html)):** 20+ ready-to-claim game concepts with technical requirements.
-- ⚡ **Automated PR Snippet Generator ([submit.html](submit.html)):** One-click code generation for `games-registry.js` and terminal git push commands.
+- 🛠️ **Frictionless Manual Contribution:** Contributors simply add their game in `games/` and add one entry into `assets/js/games-registry.js`.
 - 🏆 **Live GitHub Hall of Fame ([leaderboard.html](leaderboard.html)):** Real-time contribution scoring, podium champions, and custom rank badges fetched directly from the GitHub REST API!
 
 ---
@@ -87,7 +87,7 @@ Simply open your project folder in File Explorer and **double-click `index.html`
 1. 📖 **Read the Guidelines:** Review the complete [CONTRIBUTING.md](CONTRIBUTING.md) for official NSOC pillars and point systems.
 2. ⚠️ **Strict Folder Naming:** You **MUST** place your game under `games/game-name_contributor-name/` (e.g., `games/cyber-pong_rohit/`).
 3. 🚫 **Adhere to Code of Conduct:** Violating rules (plagiarism, spam commits, broken AI code dumps, frameworks, non-compliant folder names) **will result in immediate PR cancellation and disqualification**.
-4. ⚡ **Generate PR Snippet:** Use [submit.html](submit.html) to generate your registry snippet and git push commands.
+4. 📝 **Manual Game Registration:** Add your game metadata directly to the `GAMES_REGISTRY` array in `assets/js/games-registry.js`.
 5. 🎖️ **Earn Contributor Badges:** Unlock official titles on our live [Hall of Fame Leaderboard](leaderboard.html) (`🚀 Project Contributor`, `🕹️ Arcade Developer`, `⚡ Hyper Game Developer`, `💎 Elite Contributor`).
 
 ---

@@ -136,15 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (claimIdeaBtn) {
-    claimIdeaBtn.addEventListener("click", () => {
-      const item = IDEA_VAULT[currentIndex];
-      // Save to localStorage for submit.html
-      localStorage.setItem("claimed_idea", JSON.stringify(item));
-      window.location.href = "submit.html";
-    });
-  }
-
   // Render full catalog as disabled trial/reference concepts
   if (catalogGrid) {
     catalogGrid.innerHTML = "";

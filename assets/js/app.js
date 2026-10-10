@@ -77,9 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
       gamesGrid.appendChild(card);
     });
 
-    // Add More Games Card -> Links directly to submit.html
+    // Add More Games Card -> Links directly to GitHub Contributor Guide
     const addCard = document.createElement("a");
-    addCard.href = "submit.html";
+    addCard.href = "https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md";
+    addCard.target = "_blank";
     addCard.className = "add-game-card";
     addCard.style.textDecoration = "none";
     addCard.innerHTML = `
