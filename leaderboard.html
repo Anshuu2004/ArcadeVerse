@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hall of Fame Leaderboard | ArcadeVerse (NSOC '26)</title>
+  <title>Hall of Fame & Live Leaderboard | ArcadeVerse (NSOC '26)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -40,31 +40,65 @@
 
   <main class="page-container">
     <div class="section-header center">
-      <span class="section-tag">RECOGNITION</span>
+      <span class="section-tag">LIVE GITHUB RANKINGS</span>
       <h1 class="section-title">Hall of Fame & Leaderboard</h1>
-      <p class="section-subtitle">Honoring the developers and maintainers powering ArcadeVerse in NSOC Winter Edition 2026.</p>
+      <p class="section-subtitle">Real-time contribution rankings calculated from verified commits, PR merges, and games registered in NSOC '26.</p>
     </div>
 
-    <!-- Admin Spotlight Banner -->
+    <!-- Admin Spotlight Card -->
     <div class="admin-spotlight-banner">
       <div class="admin-badge-circle">👑</div>
-      <div>
-        <span class="role-badge">PROJECT LEAD & MAINTAINER</span>
+      <div style="flex-grow: 1;">
+        <span class="role-badge">PROJECT LEAD & LEAD ARCHITECT</span>
         <h2>Debasmita</h2>
-        <p>Architect of ArcadeVerse core engine, Quantum Memory Matrix starter template, and NSOC '26 contributor onboarding framework.</p>
+        <p>Architect of ArcadeVerse core platform, Quantum Memory Matrix starter game, and NSOC '26 contributor framework.</p>
+      </div>
+      <div class="admin-stats-badge">
+        <span class="score-title">ADMIN RANK</span>
+        <span class="score-num">#1</span>
       </div>
     </div>
 
-    <!-- Contributors Grid -->
-    <div class="section-header">
-      <div>
-        <h2 class="section-title" style="font-size: 1.6rem;">All Active Contributors</h2>
-        <p class="section-subtitle">Real-time synced from the project registry</p>
+    <!-- GitHub Sync & Live Filter Controls -->
+    <div class="leaderboard-toolbar">
+      <div class="sync-status-box">
+        <span class="sync-dot"></span>
+        <span id="sync-status-text">GitHub Live Contributions Synced</span>
+      </div>
+      <div class="repo-meta-box">
+        <input type="text" id="repo-input" placeholder="owner/repo (e.g. debasmita-admin/NSOC)" value="debasmita-admin/NSOC">
+        <button class="btn btn-secondary btn-sm" id="fetch-github-btn">🔄 Refresh Stats</button>
       </div>
     </div>
 
-    <div class="contributors-grid" id="contributors-grid">
-      <!-- Injected from games-registry.js -->
+    <!-- Top 3 Podium (Rank 1, 2, 3) -->
+    <div class="podium-container" id="podium-container">
+      <!-- Injected by leaderboard.js -->
+    </div>
+
+    <!-- Comprehensive Leaderboard Table -->
+    <div class="leaderboard-table-card">
+      <div class="table-header">
+        <h3>🏅 Verified Contributors Standing</h3>
+        <span class="ranking-metric-hint">Ranked by Contribution Score (Commits & PRs)</span>
+      </div>
+      <div class="table-responsive">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Rank</th>
+              <th>Contributor</th>
+              <th>GitHub Handle</th>
+              <th style="text-align: center;">Verified Games</th>
+              <th style="text-align: center;">Commits</th>
+              <th style="text-align: right;">Contribution Score</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-table-body">
+            <!-- Rendered by leaderboard.js -->
+          </tbody>
+        </table>
+      </div>
     </div>
   </main>
 
