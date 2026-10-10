@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=1e3a8a,2563eb,3b82f6,6366f1,a855f7&height=180&section=header&text=ArcadeVerse%20%E2%9A%A1&fontSize=42&fontAlignY=38&desc=The%20Open-Source%20Community%20Arcade%20Station%20%E2%80%A2%20NSOC%20%2726&descAlignY=58&descSize=18&fontColor=ffffff" width="100%" alt="ArcadeVerse Header Wave" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=1e3a8a,2563eb,38bdf8,60a5fa&height=180&section=header&text=ArcadeVerse&fontSize=42&fontAlignY=38&desc=The%20Open-Source%20Community%20Arcade%20Station%20%E2%80%A2%20NSOC%20%2726&descAlignY=58&descSize=18&fontColor=ffffff" width="100%" alt="ArcadeVerse Header Wave" />
 
   <p align="center">
     <b>🎮 Play Web Games • 🧪 Build Conflict-Free Mini-Games • 🏆 Climb the Live Hall of Fame</b>
@@ -103,7 +103,7 @@ All community contributions are protected and governed by the official [LICENSE]
 ---
 
 <div align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=a855f7,6366f1,3b82f6,2563eb,1e3a8a&height=120&section=footer" width="100%" alt="ArcadeVerse Footer Wave" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=60a5fa,38bdf8,2563eb,1e3a8a&height=120&section=footer" width="100%" alt="ArcadeVerse Footer Wave" />
 
   <p align="center">
     Designed & Engineered with ❤️ by <b><a href="https://github.com/DebasmitaBose0">Debasmita Bose</a></b> for <b>NSOC Winter Edition 2026</b> ❄️<br>
