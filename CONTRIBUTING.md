@@ -24,6 +24,32 @@ ArcadeVerse is proudly built and maintained under the official ethos of **NSOC (
 
 ---
 
+# 🎖️ **CONTRIBUTOR TIERS, ROLES & HALL OF FAME BADGES**
+
+Every contributor in ArcadeVerse earns official recognition titles displayed live on our **Hall of Fame & Leaderboard** based on their verified commits and contributions:
+
+### 🏆 **1. Repository & Commit Milestones:**
+| Tier Title | Commits Requirement | Description | Badge on Profile |
+| :--- | :---: | :--- | :---: |
+| **🚀 Project Contributor** | **5+ Commits** | Contributed initial verified pull requests, bug fixes, or minor features. | `🚀 Project Contributor` |
+| **🌟 Novice Contributor** | **10+ Commits** | Consistent open-source contributions across the codebase. | `🌟 Novice Contributor` |
+| **💎 Elite Contributor** | **20+ Commits** | Major architectural refinements, optimizations, and active reviews. | `💎 Elite Contributor` |
+| **🏆 Master Contributor** | **50+ Commits** | Outstanding leadership and top-tier open-source impact. | `🏆 Master Contributor` |
+
+---
+
+### 🕹️ **2. Dedicated `games/` Folder Developer Tiers:**
+Contributors who build, polish, and submit playable arcade games earn dedicated specialized titles:
+
+| Developer Title | Requirement Criteria | Description | Badge on Profile |
+| :--- | :---: | :--- | :---: |
+| **🕹️ Arcade Developer** | **15+ Commits** (or 1 verified game) | Authored and polished a playable game in `games/game-name_contributor-name/`. | `🕹️ Arcade Developer` |
+| **⚡ Hyper Game Developer** | **30+ Commits** (or 2+ verified games) | Authored multiple high-performance web arcade games with custom canvas/physics. | `⚡ Hyper Game Developer` |
+
+> 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
+
+---
+
 # ⚠️ **CRITICAL REQUIREMENT: STRICT FOLDER NAMING CONVENTION**
 
 > [!CAUTION]

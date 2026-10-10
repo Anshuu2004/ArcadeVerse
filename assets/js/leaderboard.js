@@ -24,6 +24,73 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
+  // Dynamic Contributor Role & Tier Badge Engine:
+  // Evaluates contributor roles based on overall commits and dedicated game contributions
+  function determineContributorRole(user) {
+    if (user.login && user.login.toLowerCase() === "debasmitabose0") {
+      return {
+        role: "Project Admin & Lead",
+        tagClass: "role-admin",
+        badge: "👑 Project Admin & Lead"
+      };
+    }
+
+    const totalCommits = user.contributions || user.commits || 0;
+    const gamesCount = user.gamesCount || 0;
+
+    // Game folder focused developer tiers (calculated based on game count and activity)
+    if (gamesCount >= 2 || totalCommits >= 30) {
+      return {
+        role: "Hyper Game Developer",
+        tagClass: "role-hyper",
+        badge: "⚡ Hyper Game Developer"
+      };
+    }
+    if (gamesCount >= 1 && totalCommits >= 15) {
+      return {
+        role: "Arcade Developer",
+        tagClass: "role-arcade",
+        badge: "🕹️ Arcade Developer"
+      };
+    }
+
+    // Repository-wide commit milestone tiers
+    if (totalCommits >= 50) {
+      return {
+        role: "Master Contributor",
+        tagClass: "role-master",
+        badge: "🏆 Master Contributor"
+      };
+    }
+    if (totalCommits >= 20) {
+      return {
+        role: "Elite Contributor",
+        tagClass: "role-elite",
+        badge: "💎 Elite Contributor"
+      };
+    }
+    if (totalCommits >= 10) {
+      return {
+        role: "Novice Contributor",
+        tagClass: "role-novice",
+        badge: "🌟 Novice Contributor"
+      };
+    }
+    if (totalCommits >= 5) {
+      return {
+        role: "Project Contributor",
+        tagClass: "role-project",
+        badge: "🚀 Project Contributor"
+      };
+    }
+
+    return {
+      role: "Active Contributor",
+      tagClass: "role-active",
+      badge: "🌱 Active Contributor"
+    };
+  }
+
   // Advanced Multidimensional Point Formula:
   // - Commits: 10 pts per commit
   // - Verified Game: 100 pts per integrated game
@@ -76,12 +143,14 @@ document.addEventListener("DOMContentLoaded", () => {
     displayOrder.forEach((item) => {
       const score = calculateScore(item);
       const filesCount = item.filesCount || (item.gamesCount * 3);
+      const roleMeta = determineContributorRole(item);
       const card = document.createElement("div");
       card.className = `podium-card ${item.height}`;
       card.innerHTML = `
         <div class="podium-badge">${item.badge}</div>
         <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
+        <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
         <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
@@ -105,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const rank = index + 1;
       const score = calculateScore(item);
       const filesCount = item.filesCount || (item.gamesCount * 3);
+      const roleMeta = determineContributorRole(item);
       let rankBadge = `#${rank}`;
       if (rank === 1) rankBadge = "🥇 #1";
       else if (rank === 2) rankBadge = "🥈 #2";
@@ -118,7 +188,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <img src="${item.avatar_url}" alt="${item.name}" class="table-user-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
             <div>
               <strong class="user-display-name">${item.name}</strong>
-              <div class="user-role-label">${item.role || "Contributor"}</div>
+              <div class="user-role-label">
+                <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
+              </div>
             </div>
           </div>
         </td>
@@ -179,10 +251,17 @@ document.addEventListener("DOMContentLoaded", () => {
             // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
             const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
 
+            const roleMeta = determineContributorRole({
+              login: user.login,
+              contributions: user.contributions,
+              gamesCount: gamesCount
+            });
+
             return {
               login: user.login,
               name: displayName,
-              role: isAdmin ? "Project Admin & Lead" : "Contributor",
+              role: roleMeta.role,
+              roleClass: roleMeta.tagClass,
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
