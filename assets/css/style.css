@@ -2075,9 +2075,77 @@ body {
   margin: 0 auto;
   border-top: 1px solid var(--border-subtle);
   padding-top: 2rem;
-  text-align: center;
   color: var(--text-muted);
   font-size: 0.85rem;
+}
+
+.footer-bottom-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+}
+
+.footer-bottom-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-links a:hover {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
+.footer-bottom-links span {
+  color: var(--border-medium);
+}
+
+/* Star on GitHub CTA Button */
+.btn-star-repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(234, 179, 8, 0.08));
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-smooth);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.1);
+}
+
+.btn-star-repo:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(234, 179, 8, 0.16));
+  border-color: rgba(245, 158, 11, 0.6);
+  color: #fef08a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(245, 158, 11, 0.2);
+}
+
+.btn-star-repo .star-icon {
+  font-size: 1.05rem;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+}
+
+.btn-star-repo .star-badge {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #fef3c7;
 }
 
 /* Point System & Work Scoring Section */

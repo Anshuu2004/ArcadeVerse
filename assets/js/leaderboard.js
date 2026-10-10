@@ -18,9 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Debasmita Bose",
       role: "Project Admin & Lead",
       avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
-      commits: 16,
-      gamesCount: 1,
-      games: ["Quantum Memory Matrix", "Arcade Core Platform"]
+      commits: 19,
+      gamesCount: 2,
+      games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
     }
   ];
 

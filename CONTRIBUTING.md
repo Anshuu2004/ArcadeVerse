@@ -241,7 +241,7 @@ All merged contributors are permanently honored below and synced in [leaderboard
 
 | # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
 | :---: | :--- | :--- | :--- | :--- |
-| 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & ArcadeCore** | `games/memory-matrix/` |
+| 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & Cyber Neon Pong** | `games/memory-matrix/`, `games/gamesbydb/` |
 | 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
 
 ---

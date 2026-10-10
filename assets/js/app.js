@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="add-game-icon">➕</div>
       <h3>Add Your Game Here</h3>
       <p>Have an awesome game idea? Build it with pure HTML, CSS, JS and get featured in the Arcade Catalog!</p>
-      <span class="btn btn-secondary btn-sm">Submit via GitHub PR</span>
+      <span class="btn btn-secondary btn-sm">Contribute via GitHub PR</span>
     `;
     gamesGrid.appendChild(addCard);
   }
