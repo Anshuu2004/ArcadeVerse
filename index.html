@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ArcadeVerse | Open Source Mini-Games Arcade (NSOC '26)</title>
+  <meta name="description" content="ArcadeVerse is an open-source web arcade platform built with pure HTML, CSS, and JS. Contributed by the open-source community for NSOC Winter Edition 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="dark-theme">
+  <!-- Glowing Background Mesh / Grid -->
+  <div class="cyber-grid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header / Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="pixel-badge">👾</span>
+        <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        <span class="nsoc-tag">NSOC '26</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#games" class="nav-item">🎮 Explore Games</a>
+        <a href="#features" class="nav-item">⚡ Highlights</a>
+        <a href="#contributors" class="nav-item">🏆 Hall of Fame</a>
+        <a href="CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="https://github.com" target="_blank" class="btn btn-secondary btn-icon" id="github-repo-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Star on GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span> NSOC Winter Edition 2026 Flagship Open-Source Arcade
+        </div>
+        <h1 class="hero-title">
+          Build, Play & Conquer in the <br>
+          <span class="gradient-text glitch-effect">Ultimate Web Arcade</span>
+        </h1>
+        <p class="hero-subtitle">
+          A high-voltage, community-driven game station. No complex frameworks, zero dependencies — built completely with pure <strong>HTML5, CSS3, & Modern Vanilla JS</strong>. Add your own game, claim your spot in the Hall of Fame!
+        </p>
+        
+        <div class="hero-cta-group">
+          <a href="#games" class="btn btn-primary btn-glow">
+            <span>🎮 Browse Games</span>
+          </a>
+          <a href="CONTRIBUTING.md" target="_blank" class="btn btn-glass">
+            <span>🚀 Submit Your Game</span>
+          </a>
+        </div>
+
+        <div class="quick-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="total-games-count">0</span>
+            <span class="stat-label">Playable Games</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-card">
+            <span class="stat-number" id="total-contributors-count">0</span>
+            <span class="stat-label">Contributors</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-card">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Open Source</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Games Showcase Section -->
+    <section class="games-section" id="games">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">CATALOG</span>
+          <h2 class="section-title">Play Live Games</h2>
+          <p class="section-subtitle">Click any game card to instantly launch and play inside our arcade launcher!</p>
+        </div>
+
+        <!-- Filter & Search Controls -->
+        <div class="filter-controls">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="game-search-input" placeholder="Search by game or contributor...">
+          </div>
+
+          <div class="category-pills" id="category-pills">
+            <button class="pill active" data-category="all">All</button>
+            <button class="pill" data-category="Arcade">Arcade</button>
+            <button class="pill" data-category="Puzzle">Puzzle</button>
+            <button class="pill" data-category="Retro">Retro</button>
+            <button class="pill" data-category="Action">Action</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Games Grid Container -->
+      <div class="games-grid" id="games-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- Why Contribute / Platform Highlights -->
+    <section class="features-section" id="features">
+      <div class="section-header center">
+        <span class="section-tag">FOR CONTRIBUTORS</span>
+        <h2 class="section-title">Why Build in ArcadeVerse?</h2>
+        <p class="section-subtitle">Designed specifically for NSOC contributors to build meaningful mini-games without overhead.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h3>Isolated Directory Structure</h3>
+          <p>Every game lives in its dedicated subfolder inside <code>games/&lt;your-game&gt;/</code>. No risk of merge conflicts with fellow participants.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3>Multiple Variants Welcomed</h3>
+          <p>Want to build your own variant of Snake or Tetris? Simply use <code>snake-(your-handle)</code> so everyone's version shines!</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Zero Framework Overhead</h3>
+          <p>Pure Vanilla HTML, CSS, JavaScript & Canvas APIs. Master core web skills that top engineering teams value most.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎖️</div>
+          <h3>Verified Recognition</h3>
+          <p>Every approved PR is spotlighted in the Hall of Fame and the dynamic contributor leaderboard with git handles.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- How to contribute step-by-step -->
+    <section class="guide-section">
+      <div class="guide-card">
+        <div class="guide-header">
+          <span class="step-badge">Quick Workflow</span>
+          <h2>How to Contribute in 4 Easy Steps</h2>
+        </div>
+        <div class="steps-flow">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <h4>Fork & Clone</h4>
+            <p>Fork the repository, clone it locally, and checkout a feature branch:</p>
+            <code>git checkout -b feature/my-new-game</code>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <h4>Build Your Game</h4>
+            <p>Create <code>games/&lt;game-name&gt;/</code> with <code>index.html</code>, <code>style.css</code>, and <code>game.js</code>.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <h4>Register in Registry</h4>
+            <p>Add your game entry to <code>assets/js/games-registry.js</code> and sign <code>CONTRIBUTORS.md</code>.</p>
+          </div>
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <h4>Submit PR</h4>
+            <p>Commit, push to your fork, and open a Pull Request to NSOC <code>main</code> branch!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contributors & Hall of Fame -->
+    <section class="contributors-section" id="contributors">
+      <div class="section-header">
+        <div>
+          <span class="section-tag">COMMUNITY</span>
+          <h2 class="section-title">Hall of Fame (NSOC '26)</h2>
+          <p class="section-subtitle">Meet the visionary developers powering ArcadeVerse.</p>
+        </div>
+      </div>
+
+      <div class="contributors-grid" id="contributors-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Modal / Fullscreen Play Launcher -->
+  <div class="game-modal" id="game-modal" role="dialog" aria-hidden="true">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-window">
+      <div class="modal-topbar">
+        <div class="modal-game-info">
+          <span class="badge" id="modal-game-badge">Arcade</span>
+          <h3 id="modal-game-title">Game Title</h3>
+          <span class="author-tag" id="modal-game-author">By @author</span>
+        </div>
+        <div class="modal-controls">
+          <button class="btn btn-sm btn-icon" id="fullscreen-btn" title="Toggle Fullscreen">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+            </svg>
+          </button>
+          <a href="#" target="_blank" class="btn btn-sm btn-icon" id="new-tab-btn" title="Open in New Tab">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <line x1="10" y1="14" x2="21" y2="3"></line>
+            </svg>
+          </a>
+          <button class="btn btn-sm btn-close" id="close-modal-btn" title="Close Game">✕</button>
+        </div>
+      </div>
+      <div class="modal-frame-wrapper">
+        <iframe id="game-iframe" src="" title="Game Frame" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="logo">
+          <span class="pixel-badge">👾</span>
+          <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        </div>
+        <p class="footer-desc">An open-source flagship gaming initiative for NSOC Winter Edition 2026. Designed for seamless, conflict-free open source collaboration.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Project Links</h4>
+        <ul class="footer-list">
+          <li><a href="#games">Explore All Games</a></li>
+          <li><a href="#contributors">Contributors Wall</a></li>
+          <li><a href="CONTRIBUTORS.md" target="_blank">Contributors Register</a></li>
+          <li><a href="CONTRIBUTING.md" target="_blank">Contribution Guidelines</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Project Administration</h4>
+        <div class="admin-badge-card">
+          <span class="admin-title">👑 Project Admin</span>
+          <strong class="admin-name">Debasmita</strong>
+          <span class="admin-event">NSOC Winter Edition 2026</span>
+          <span class="status-indicator"><span class="status-dot"></span> Accepting Pull Requests</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 ArcadeVerse • Open Source under MIT License • NSOC 2026</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/games-registry.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

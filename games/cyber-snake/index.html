@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Snake Neo</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="game-container">
+    <div class="top-bar">
+      <div class="brand">🐍 CYBER SNAKE NEO</div>
+      <div class="scores">
+        <div class="score-box">SCORE: <span id="current-score">0</span></div>
+        <div class="score-box high">HIGH: <span id="high-score">0</span></div>
+      </div>
+    </div>
+
+    <div class="canvas-wrapper">
+      <canvas id="snakeCanvas" width="400" height="400"></canvas>
+      <div id="game-overlay" class="overlay">
+        <div class="overlay-card">
+          <h2 id="overlay-title">READY TO SLITHER?</h2>
+          <p id="overlay-msg">Use Arrow Keys or WASD to navigate.</p>
+          <button id="start-btn" class="glow-button">START GAME</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- On screen controls for mobile/touch -->
+    <div class="mobile-controls">
+      <div class="d-pad">
+        <button class="d-btn up" id="ctrl-up">▲</button>
+        <div class="d-row">
+          <button class="d-btn left" id="ctrl-left">◀</button>
+          <button class="d-btn down" id="ctrl-down">▼</button>
+          <button class="d-btn right" id="ctrl-right">▶</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-tips">
+      Tip: Neon orbs multiply your velocity. Avoid self-collision & energy boundaries!
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
