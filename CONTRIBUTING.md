@@ -2,53 +2,19 @@
 
 > ### 👑 **PROJECT ADMIN:** **Debasmita** ([@debasmita-admin](https://github.com))  
 > ### ❄️ **EVENT:** **NSOC (Winter Edition 2026)**  
-> ### ⚡ **TECH STACK:** **Pure Vanilla HTML5 + CSS3 + Modern JavaScript (Zero Frameworks, Zero Bundlers)**  
+> ### ⚡ **TECH STACK:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**  
 
 ---
 
 # 💻 **HOW TO RUN THIS PROJECT LOCALLY**
 
-Because ArcadeVerse has **ZERO heavyweight dependencies**, you do not need `npm install` or complex build configurations. Pick any of the following commands to run the project instantly:
+This project is built **purely on native web technologies (HTML, CSS, JS)**. There is **no backend, no Python app, and no heavy dependencies** needed!
 
 ---
 
-## 🚀 **METHOD 1: PYTHON HTTP SERVER (RECOMMENDED)**
+## 🚀 **METHOD 1: INSTANT BROWSER LAUNCH (NO SERVER NEEDED)**
 
-Open your terminal inside the project root folder and execute:
-
-### 🔹 **Python 3:**
-```bash
-python -m http.server 8000
-```
-
-### 🔹 **Python 2:**
-```bash
-python -m SimpleHTTPServer 8000
-```
-👉 **Open your browser and navigate to:** **`http://localhost:8000`**
-
----
-
-## ⚡ **METHOD 2: NODE.JS / NPX (INSTANT ZERO-INSTALL)**
-
-If you have Node.js installed, run either of these one-liners:
-
-### 🔹 **Using `npx serve`:**
-```bash
-npx -y serve .
-```
-
-### 🔹 **Using `live-server` (Auto-reloads when you edit code):**
-```bash
-npx -y live-server --port=5500
-```
-👉 **Open your browser and navigate to:** **`http://localhost:5500`**
-
----
-
-## 🖥️ **METHOD 3: TERMINAL DIRECT LAUNCH COMMANDS**
-
-Open `index.html` directly into your default web browser with one command:
+Directly open `index.html` in your default browser using your terminal:
 
 ### 🔹 **Windows (PowerShell / Command Prompt):**
 ```powershell
@@ -67,10 +33,20 @@ xdg-open index.html
 
 ---
 
-## 🛠️ **METHOD 4: VS CODE LIVE SERVER EXTENSION**
+## ⚡ **METHOD 2: VS CODE LIVE SERVER EXTENSION**
+If you are developing in VS Code:
 1. Open the project folder in **VS Code**.
 2. Right-click on **`index.html`**.
 3. Click **"Open with Live Server"**.
+
+---
+
+## 🌐 **METHOD 3: NODE STATIC WEB SERVER (OPTIONAL)**
+If you already have Node installed and want auto-reload:
+```bash
+npx -y live-server --port=5500
+```
+👉 Open: **`http://localhost:5500`**
 
 ---
 
@@ -92,7 +68,7 @@ ArcadeVerse/
 │       └── games-registry.js  # Registry where your game gets listed
 │
 └── games/                     # 🕹️ ALL COMMUNITY GAMES LIVE HERE
-    ├── memory-matrix/         # Reference starter game
+    ├── memory-matrix/         # Reference starter game (HTML/CSS/JS)
     └── <your-game-folder>/    # 🚀 YOUR NEW GAME FOLDER GOES HERE!
         ├── index.html
         ├── style.css
@@ -137,7 +113,7 @@ mkdir games/<my-awesome-game>
 > - `games/pong-alex/`
 > *This ensures zero git conflicts and gives everyone full credit!*
 
-Inside your game folder, create:
+Inside your game folder, create pure web files:
 - `index.html`
 - `style.css`
 - `game.js`
@@ -192,7 +168,7 @@ All merged contributors are permanently honored below:
 
 ---
 
-# 💡 **GAME IDEAS READY TO CLAIM**
+# 💡 **GAME IDEAS READY TO CLAIM (PURE HTML, CSS & JS)**
 
 Need inspiration? Visit the **Idea Roulette** on the ArcadeVerse homepage or claim any of these concepts:
 - 🚀 **Flappy Cyber Jet** (`games/flappy-cyber/`)

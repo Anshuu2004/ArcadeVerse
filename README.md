@@ -2,7 +2,7 @@
 ### ❄️ **NSOC (Winter Edition 2026) Official Flagship Gaming Project**
 
 [![NSOC Winter 2026](https://img.shields.io/badge/NSOC-Winter%202026-blueviolet?style=for-the-badge&logo=github)](https://github.com)
-[![Tech Stack](https://img.shields.io/badge/Tech-HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS-00f2fe?style=for-the-badge&logo=javascript)](https://github.com)
+[![Tech Stack](https://img.shields.io/badge/Tech-100%25%20HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS-00f2fe?style=for-the-badge&logo=javascript)](https://github.com)
 [![Open Source](https://img.shields.io/badge/PRs-Welcome-ff007f?style=for-the-badge)](CONTRIBUTING.md)
 [![License](https://img.shields.io/badge/License-MIT-00e676?style=for-the-badge)](LICENSE)
 
@@ -11,13 +11,14 @@
 > ## 👑 **PROJECT ADMINISTRATION & LEADERSHIP**
 > - **Project Admin:** **Debasmita** ([@debasmita-admin](https://github.com))
 > - **Program:** **National Summer/Winter Open Source Contest (NSOC '26)**
-> - **Primary Objective:** Build a frictionless, community-driven web arcade using **zero heavy frameworks** (pure HTML, CSS, & Vanilla JS) where contributors can showcase their mini-games without git conflicts!
+> - **Tech Stack:** **100% Pure HTML, CSS, & Vanilla JavaScript** (No Python, No Node backend, No Frameworks, No Bundlers)
+> - **Primary Objective:** Build a frictionless, community-driven web arcade where contributors can showcase their mini-games without git conflicts!
 
 ---
 
 # ⚡ **KEY HIGHLIGHTS & ARCHITECTURE**
 
-- 🚀 **Zero Build Tools & Zero NPM Installations:** Runs 100% natively in any web browser.
+- 🚀 **100% Native Web Standards:** Pure HTML5, CSS3, & Modern Vanilla JS. Runs instantly in any web browser without any installation!
 - 📁 **Isolated Directory Pattern (`games/<your-game>/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
 - 👥 **Duplicate Game Support:** Multiple contributors can build their own variations of classic games (e.g. `games/snake-(your-name)/`).
 - 🧪 **Built-in Live Game Sandbox:** Test HTML/CSS/JS game code live in the browser before pushing PRs!
@@ -29,35 +30,13 @@
 
 # 💻 **HOW TO RUN THIS PROJECT LOCALLY**
 
-Run this project on your local machine using any of these simple commands:
+This project has **no Python application and no backend dependencies**. You can run it instantly using any of the following web methods:
 
 ---
 
-### 🔹 **METHOD 1: PYTHON HTTP SERVER (RECOMMENDED)**
-```bash
-# Python 3
-python -m http.server 8000
+### 🔹 **METHOD 1: INSTANT BROWSER LAUNCH (RECOMMENDED)**
+Run this single command in your terminal to open the platform in your browser immediately:
 
-# Python 2
-python -m SimpleHTTPServer 8000
-```
-👉 **Open in browser:** **`http://localhost:8000`**
-
----
-
-### 🔹 **METHOD 2: NODE.JS / NPX (INSTANT ZERO-INSTALL)**
-```bash
-# Using npx serve:
-npx -y serve .
-
-# Using live-server (auto-reloads on file changes):
-npx -y live-server --port=5500
-```
-👉 **Open in browser:** **`http://localhost:5500`**
-
----
-
-### 🔹 **METHOD 3: DIRECT TERMINAL LAUNCH**
 - **Windows (PowerShell / Command Prompt):**
   ```powershell
   start index.html
@@ -73,17 +52,23 @@ npx -y live-server --port=5500
 
 ---
 
-### 🔹 **METHOD 4: VS CODE LIVE SERVER**
-Right-click on **`index.html`** in VS Code and select **"Open with Live Server"**.
+### 🔹 **METHOD 2: VS CODE LIVE SERVER**
+1. Open the project in **VS Code**.
+2. Right-click on **`index.html`**.
+3. Select **"Open with Live Server"**.
+
+---
+
+### 🔹 **METHOD 3: DOUBLE-CLICK `index.html`**
+Simply open your project folder in File Explorer and **double-click `index.html`**! It opens right away in Chrome, Edge, Brave, or Firefox.
 
 ---
 
 # 🕹️ **STARTER REFERENCE GAME INCLUDED**
 
 - 🧩 **Quantum Memory Matrix** (`games/memory-matrix/`):
-  - A cyberpunk 3D CSS flip-card memory decryption puzzle.
-  - Features real-time move counters, pair matching detection, and completion timers.
-  - Serves as the golden reference implementation for all upcoming contributor games!
+  - Pure HTML, CSS & Vanilla JS 3D card flip puzzle.
+  - Serves as the clean reference template for all upcoming contributor games!
 
 ---
 
@@ -113,7 +98,7 @@ Detailed instructions are available in [CONTRIBUTING.md](CONTRIBUTING.md):
 
 ---
 
-# 💡 **TOP GAME IDEAS WAITING TO BE BUILT**
+# 💡 **TOP GAME IDEAS WAITING TO BE BUILT (PURE HTML, CSS, JS)**
 
 Contributors can claim any of these concepts directly:
 - 🚀 **Flappy Cyber Jet** (`games/flappy-cyber/`)
