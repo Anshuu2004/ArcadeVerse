@@ -2159,6 +2159,68 @@ body {
   white-space: nowrap;
 }
 
+/* Tier Breakdown Box & Table Styles */
+.tier-breakdown-box {
+  margin-top: 2.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.tier-box-header {
+  margin-bottom: 1.4rem;
+}
+
+.tier-box-header h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 0.3rem;
+}
+
+.tier-box-header p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.tier-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tier-table th {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.85rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.tier-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+
+.tier-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tier-cat-pill {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .podium-meta-tags {
   display: flex;
   flex-wrap: wrap;
