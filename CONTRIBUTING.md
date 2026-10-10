@@ -6,6 +6,45 @@
 
 ---
 
+# 🎯 **OFFICIAL NSOC PROGRAM PILLARS & GUIDELINES**
+
+ArcadeVerse is proudly built and maintained under the official ethos of **NSOC (Winter Edition 2026)**:
+
+> ### 📌 **1. Submit your open source project for the program**
+> ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an accessible, scalable, and conflict-free foundation where developers worldwide can build and showcase their creations.
+>
+> ### 📌 **2. Curate issues fit for contributors of all levels**
+> From beginners writing their first HTML5 canvas loop or CSS animation to intermediate developers designing full game mechanics (puzzles, retro platformers, physics simulators), we curate well-documented issues and ready-to-claim specifications in our **Ideas Vault**.
+>
+> ### 📌 **3. Review PRs and mentor contributors through your codebase**
+> Our maintainer team actively reviews Pull Requests, offers constructive code reviews, provides debugging guidance, and helps contributors refine their web engineering skills following clean vanilla standards.
+>
+> ### 📌 **4. Get meaningful contributions — and give someone their first real merge**
+> Every contribution here is real, meaningful, and permanent. Whether it's your 100th open-source PR or your very first git merge, we celebrate your work in our live **Hall of Fame Leaderboard**!
+
+---
+
+# ⚠️ **CRITICAL REQUIREMENT: STRICT FOLDER NAMING CONVENTION**
+
+> [!CAUTION]
+> ### 🚨 **MANDATORY FOLDER NOTATION: `games/game-name_contributor-name/`**
+> To eliminate any ambiguity, prevent collisions between similar games, and ensure accurate tracking in our **Live Leaderboard & Hall of Fame**, every contributor **MUST STRICTLY** submit their contribution inside a folder following this exact syntax:
+> 
+> ```text
+> games/game-name_contributor-name/
+> ```
+> 
+> ### 💡 **Examples:**
+> - ✅ `games/cyber-pong_rohit/`
+> - ✅ `games/quantum-2048_sneha/`
+> - ✅ `games/flappy-jet_arjun/`
+> - ❌ `games/pong/` *(Will NOT be accepted — ambiguous & collision prone)*
+> - ❌ `games/my-game/` *(Will NOT be accepted)*
+> 
+> **Pull Requests not following the `game-name_contributor-name` notation will NOT be accepted and will be asked to rename.**
+
+---
+
 # 💻 **HOW TO RUN THIS PROJECT LOCALLY**
 
 This project is built **purely on native web technologies (HTML, CSS, JS)**. There is **no backend, no Python app, and no heavy dependencies** needed!
@@ -58,19 +97,23 @@ To prevent **merge conflicts** when dozens of contributors work at the same time
 ```text
 ArcadeVerse/
 │
-├── index.html                 # 🎮 Central Arcade Station (Games Catalog, Ideas, PR Generator)
-├── CONTRIBUTING.md            # 📖 Full Contributor Guide, Run Commands & Hall of Fame
-├── README.md                  # 🌟 Project Overview & NSOC Badges
+├── index.html                           # 🎮 Central Arcade Station (Games Catalog, Ideas, PR Generator)
+├── CONTRIBUTING.md                      # 📖 Full Contributor Guide & NSOC Guidelines
+├── README.md                            # 🌟 Project Overview & NSOC Badges
+├── leaderboard.html                     # 🏆 Live Hall of Fame Leaderboard
+├── ideas.html                           # 💡 Ideas Vault (20+ Claimable Concepts)
+├── submit.html                          # ⚡ PR Snippet & Terminal Helper
 │
 ├── assets/
-│   ├── css/style.css          # Theme Stylesheet
+│   ├── css/style.css                    # Theme Stylesheet
 │   └── js/
-│       ├── app.js             # Platform Engine & Filter Logic
-│       └── games-registry.js  # Registry where your game gets listed
+│       ├── app.js                       # Platform Engine & Filter Logic
+│       ├── leaderboard.js               # Live GitHub API Sync Engine
+│       └── games-registry.js            # Registry where your game gets listed
 │
-└── games/                     # 🕹️ ALL COMMUNITY GAMES LIVE HERE
-    ├── memory-matrix/         # Reference starter game (HTML/CSS/JS)
-    └── <your-game-folder>/    # 🚀 YOUR NEW GAME FOLDER GOES HERE!
+└── games/                               # 🕹️ ALL COMMUNITY GAMES LIVE HERE
+    ├── memory-matrix/                   # Starter game by Project Lead
+    └── <game-name_contributor-name>/    # 🚀 YOUR ISOLATED GAME FOLDER (STRICT NOTATION)
         ├── index.html
         ├── style.css
         └── game.js
@@ -93,94 +136,86 @@ git remote add upstream https://github.com/DebasmitaBose0/ArcadeVerse.git
 ---
 
 ### 📌 **STEP 2: CREATE A FEATURE BRANCH**
-**Never push directly to `main`!** Create a dedicated branch:
+**Never push directly to `main`!** Create a dedicated branch matching your game notation:
 ```bash
-git checkout -b game/my-awesome-game
+git checkout -b game/game-name_contributor-name
 ```
 
 ---
 
 ### 📌 **STEP 3: CREATE YOUR GAME FOLDER**
-Create your game's directory inside `games/`:
+Create your game's directory inside `games/` strictly following the notation:
 ```bash
-mkdir games/<my-awesome-game>
+mkdir games/game-name_contributor-name
 ```
 
-> ### ⚠️ **CRITICAL RULE FOR MULTIPLE CONTRIBUTORS BUILDING THE SAME GAME:**
-> If another contributor has already created a game of the same category (e.g. `snake` or `pong`), you are still **100% WELCOME** to create your own unique version!  
-> **Just append your name/handle to the folder name:**
-> - `games/snake-rahul/`
-> - `games/snake-anita/`
-> - `games/pong-alex/`
-> *This ensures zero git conflicts and gives everyone full credit!*
-
-Inside your game folder, create pure web files:
+Inside your folder, create pure web files:
 - `index.html`
 - `style.css`
 - `game.js`
 
-> 🧪 **Pro-Tip:** You can test your code live using the **In-Browser Sandbox** on the ArcadeVerse homepage before committing!
+> 🧪 **Tip:** No external CDNs or heavy frameworks. Pure Vanilla HTML/CSS/JS only!
 
 ---
 
 ### 📌 **STEP 4: REGISTER IN `assets/js/games-registry.js`**
-Open `assets/js/games-registry.js` (or use the **PR Snippet Generator** on the homepage) and add your entry:
+Open `assets/js/games-registry.js` (or use the **PR Helper** on [submit.html](submit.html)) and register your game:
 
 ```javascript
 {
-  id: "my-awesome-game",
-  title: "My Awesome Game",
+  id: "game-name_contributor-name",
+  title: "Your Game Title",
   category: "Arcade", // Arcade | Retro | Puzzle | Action
   icon: "🕹️",
-  description: "A fast-paced neon arcade game where you dodge energy obstacles.",
-  author: "YourName",
+  description: "A fast-paced neon arcade game where you dodge obstacles.",
+  author: "Your Name",
   github: "your-github-username",
   role: "Contributor",
-  path: "games/my-awesome-game/index.html",
+  path: "games/game-name_contributor-name/index.html",
   tags: ["Arcade", "NSOC26"]
 }
 ```
 
 ---
 
-### 📌 **STEP 5: ADD YOUR NAME TO THE HALL OF FAME TABLE**
-Scroll down to the **🏆 COMMUNITY CONTRIBUTORS HALL OF FAME** table below and add your row!
+### 📌 **STEP 5: ADD YOUR NAME TO THE CONTRIBUTORS TABLE**
+Add your row to the table in this file below!
 
 ---
 
 ### 📌 **STEP 6: COMMIT, PUSH & OPEN PULL REQUEST**
 ```bash
 git add .
-git commit -m "feat(game): add <my-awesome-game> by @<your-username>"
-git push origin game/my-awesome-game
+git commit -m "feat(game): add <game-name> by @<your-username>"
+git push origin game/game-name_contributor-name
 ```
-Now go to the repository on GitHub and click **"Compare & Pull Request"** targeting the **`main`** branch!
+Now go to GitHub and click **"Compare & Pull Request"** targeting the **`main`** branch!
 
 ---
 
 # 🏆 **COMMUNITY CONTRIBUTORS HALL OF FAME**
 
-All merged contributors are permanently honored below:
+All merged contributors are permanently honored below and synced in [leaderboard.html](leaderboard.html):
 
-| # | Contributor Name | GitHub Handle | Game / Component Name | Folder Path |
+| # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
 | :---: | :--- | :--- | :--- | :--- |
-| 👑 | **Debasmita (Project Admin)** | [@debasmita-admin](https://github.com) | **Quantum Memory Matrix & ArcadeCore** | `games/memory-matrix/` |
-| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/<your-game>/` |
+| 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & ArcadeCore** | `games/memory-matrix/` |
+| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
 
 ---
 
 # 💡 **GAME IDEAS READY TO CLAIM (PURE HTML, CSS & JS)**
 
-Need inspiration? Visit the **Idea Roulette** on the ArcadeVerse homepage or claim any of these concepts:
-- 🚀 **Flappy Cyber Jet** (`games/flappy-cyber/`)
-- 🔢 **Quantum 2048** (`games/quantum-2048/`)
-- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/neon-pong/`)
-- 🏢 **Cyber Tower Stacker** (`games/cyber-stacker/`)
-- 🛸 **Space Invaders 2026** (`games/galaxy-invaders/`)
-- 🐛 **Whack-A-Bug Developer** (`games/whack-a-bug/`)
-- 🔤 **Cryptic Wordle Hack** (`games/cryptic-words/`)
-- 🦘 **Astro Infinite Jumper** (`games/astro-jump/`)
-- 💣 **Quantum Minesweeper** (`games/quantum-minesweeper/`)
-- 🎹 **Synth-Wave Simon Says** (`games/synth-says/`)
+Visit the **Ideas Vault** on [ideas.html](ideas.html) or claim any of these concepts:
+- 🚀 **Flappy Cyber Jet** (`games/flappy-jet_contributor/`)
+- 🔢 **Quantum 2048** (`games/quantum-2048_contributor/`)
+- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/cyber-pong_contributor/`)
+- 🏢 **Cyber Tower Stacker** (`games/tower-stacker_contributor/`)
+- 🛸 **Space Invaders 2026** (`games/space-invaders_contributor/`)
+- 🐛 **Whack-A-Bug Developer** (`games/whack-bug_contributor/`)
+- 🔤 **Cryptic Wordle Hack** (`games/wordle-hack_contributor/`)
+- 🦘 **Astro Infinite Jumper** (`games/astro-jumper_contributor/`)
+- 💣 **Quantum Minesweeper** (`games/minesweeper_contributor/`)
+- 🎹 **Synth-Wave Simon Says** (`games/simon-says_contributor/`)
 
 Happy Coding & Welcome to NSOC '26! 🎉

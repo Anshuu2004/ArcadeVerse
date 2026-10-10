@@ -110,14 +110,14 @@
         <span class="step-badge">Step 1</span>
         <h4>Fork & Branch</h4>
         <p>Fork the repository to your account, clone locally, and checkout a branch:</p>
-        <code>git checkout -b game/my-awesome-game</code>
+        <code>git checkout -b game/game-name_contributor-name</code>
       </div>
 
       <div class="step-card">
         <span class="step-badge">Step 2</span>
-        <h4>Create Your Game Subfolder in <code>games/</code></h4>
-        <p>If another contributor already built a similar game, add your name: <code>games/game-title-(your-name)/</code></p>
-        <code>games/my-awesome-game/index.html<br>games/my-awesome-game/style.css<br>games/my-awesome-game/game.js</code>
+        <h4>Create Your Game Subfolder in <code>games/</code> (Strict Notation)</h4>
+        <p>Must strictly follow the pattern: <code>games/game-name_contributor-name/</code> to prevent collisions.</p>
+        <code>games/game-name_contributor-name/index.html<br>games/game-name_contributor-name/style.css<br>games/game-name_contributor-name/game.js</code>
       </div>
 
       <div class="step-card">
@@ -129,7 +129,7 @@
       <div class="step-card">
         <span class="step-badge">Step 4</span>
         <h4>Commit, Push & Open PR</h4>
-        <code>git add .<br>git commit -m "feat(game): add my-awesome-game by @username"<br>git push origin game/my-awesome-game</code>
+        <code>git add .<br>git commit -m "feat(game): add game-name by @contributor-name"<br>git push origin game/game-name_contributor-name</code>
       </div>
     </div>
   </main>

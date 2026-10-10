@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 1. ADD THIS TO assets/js/games-registry.js (inside GAMES_REGISTRY array):
 // ==========================================
 {
-  id: "${id}-${github}",
+  id: "${id}_${github}",
   title: "${title}",
   category: "${cat}",
   icon: "${icon}",
@@ -48,22 +48,22 @@ document.addEventListener("DOMContentLoaded", () => {
   author: "${name}",
   github: "${github}",
   role: "Contributor",
-  path: "games/${id}-${github}/index.html",
+  path: "games/${id}_${github}/index.html",
   tags: ["${cat}", "NSOC26"]
 }
 
 // ==========================================
 // 2. ADD THIS ROW TO CONTRIBUTORS TABLE IN CONTRIBUTING.md:
 // ==========================================
-| * | ${name} | [@${github}](https://github.com/${github}) | ${title} | \`games/${id}-${github}/\` |
+| * | ${name} | [@${github}](https://github.com/${github}) | ${title} | \`games/${id}_${github}/\` |
 
 // ==========================================
 // 3. TERMINAL GIT PUSH COMMANDS:
 // ==========================================
-git checkout -b game/${id}-${github}
+git checkout -b game/${id}_${github}
 git add .
 git commit -m "feat(game): add ${title} by @${github}"
-git push origin game/${id}-${github}`;
+git push origin game/${id}_${github}`;
 
     snippetCodeDisplay.textContent = snippet;
   }
