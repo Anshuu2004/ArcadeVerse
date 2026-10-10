@@ -1,94 +1,99 @@
-# 🤝 ArcadeVerse Contribution Guidelines (NSOC '26)
+# 🌟 ArcadeVerse — Contribution & Contributor Hub (NSOC '26)
 
-Welcome to **ArcadeVerse**! As part of **NSOC Winter Edition 2026**, this project is built to invite developers of all skill levels to contribute engaging mini-games built with pure **HTML5, CSS3, and JavaScript**.
-
----
-
-## 👑 Project Administration
-- **Project Admin**: Debasmita (@debasmita-admin)
-- **Event**: NSOC (Winter Edition 2026)
-- **Tech Stack Constraint**: Pure Vanilla Web (HTML, CSS, JS). No heavyweight JS frameworks (React, Angular, Vue) or bundlers needed!
+> ### 👑 **PROJECT ADMIN:** **Debasmita** ([@debasmita-admin](https://github.com))  
+> ### ❄️ **EVENT:** **NSOC (Winter Edition 2026)**  
+> ### ⚡ **TECH STACK:** **Pure Vanilla HTML5 + CSS3 + Modern JavaScript (Zero Frameworks, Zero Bundlers)**  
 
 ---
 
-## 💻 How to Run the Project Locally
+# 💻 **HOW TO RUN THIS PROJECT LOCALLY**
 
-Because ArcadeVerse is built with zero heavyweight dependencies, you do not need to install `npm` packages or configure complex build tools. You can launch and test the platform locally using any of the following methods:
+Because ArcadeVerse has **ZERO heavyweight dependencies**, you do not need `npm install` or complex build configurations. Pick any of the following commands to run the project instantly:
 
-### Method 1: Using Python's Built-in HTTP Server (Recommended)
-If you have Python installed, open your terminal inside the project root directory and run:
+---
 
-**Python 3:**
+## 🚀 **METHOD 1: PYTHON HTTP SERVER (RECOMMENDED)**
+
+Open your terminal inside the project root folder and execute:
+
+### 🔹 **Python 3:**
 ```bash
 python -m http.server 8000
 ```
 
-**Python 2 (if applicable):**
+### 🔹 **Python 2:**
 ```bash
 python -m SimpleHTTPServer 8000
 ```
-Then open your browser and navigate to:
-👉 `http://localhost:8000`
+👉 **Open your browser and navigate to:** **`http://localhost:8000`**
 
 ---
 
-### Method 2: Using Node.js `npx serve` or `live-server`
-If you have Node.js installed, you can launch a local static server instantly without installing global dependencies:
+## ⚡ **METHOD 2: NODE.JS / NPX (INSTANT ZERO-INSTALL)**
 
+If you have Node.js installed, run either of these one-liners:
+
+### 🔹 **Using `npx serve`:**
 ```bash
-# Using npx serve:
 npx -y serve .
+```
 
-# Or using live-server (auto-reloads on file changes):
+### 🔹 **Using `live-server` (Auto-reloads when you edit code):**
+```bash
 npx -y live-server --port=5500
 ```
-Then visit the URL displayed in your terminal (usually `http://localhost:3000` or `http://localhost:5500`).
+👉 **Open your browser and navigate to:** **`http://localhost:5500`**
 
 ---
 
-### Method 3: Using VS Code Live Server Extension
-1. Install the **Live Server** extension (by Ritwick Dey) in VS Code.
-2. Right-click on `index.html`.
-3. Select **"Open with Live Server"**.
+## 🖥️ **METHOD 3: TERMINAL DIRECT LAUNCH COMMANDS**
+
+Open `index.html` directly into your default web browser with one command:
+
+### 🔹 **Windows (PowerShell / Command Prompt):**
+```powershell
+start index.html
+```
+
+### 🔹 **macOS:**
+```bash
+open index.html
+```
+
+### 🔹 **Linux:**
+```bash
+xdg-open index.html
+```
 
 ---
 
-### Method 4: Direct Browser Launch
-You can also directly double-click the `index.html` file or run:
-- **Windows (Command Prompt / PowerShell):**
-  ```powershell
-  start index.html
-  ```
-- **macOS:**
-  ```bash
-  open index.html
-  ```
-- **Linux:**
-  ```bash
-  xdg-open index.html
-  ```
+## 🛠️ **METHOD 4: VS CODE LIVE SERVER EXTENSION**
+1. Open the project folder in **VS Code**.
+2. Right-click on **`index.html`**.
+3. Click **"Open with Live Server"**.
 
 ---
 
-## 📂 Architecture & Directory Isolation
-To guarantee **zero merge conflicts** and enable simultaneous contributions from hundreds of developers:
+# 📂 **DIRECTORY ARCHITECTURE & ISOLATION**
+
+To prevent **merge conflicts** when dozens of contributors work at the same time, every game lives in its own isolated subfolder:
+
 ```text
 ArcadeVerse/
 │
-├── index.html                 # Main Arcade Hub (Sandbox, Ideas, PR Generator)
-├── CONTRIBUTING.md            # Contributor & Run Guidelines
-├── CONTRIBUTORS.md            # Contributor directory & Hall of Fame
-├── README.md                  # Project overview & NSOC details
+├── index.html                 # 🎮 Central Arcade Station (Sandbox, Ideas, PR Generator)
+├── CONTRIBUTING.md            # 📖 Full Contributor Guide, Run Commands & Hall of Fame
+├── README.md                  # 🌟 Project Overview & NSOC Badges
 │
 ├── assets/
-│   ├── css/style.css          # Main hub styling
+│   ├── css/style.css          # Cyberpunk Theme Stylesheet
 │   └── js/
-│       ├── app.js             # Hub launcher engine & sandbox engine
+│       ├── app.js             # Platform Engine & Sandbox Logic
 │       └── games-registry.js  # Registry where your game gets listed
 │
-└── games/                     # 🎮 ALL COMMUNITY GAMES LIVE HERE
+└── games/                     # 🕹️ ALL COMMUNITY GAMES LIVE HERE
     ├── memory-matrix/         # Reference starter game
-    └── <your-game-folder>/    # YOUR NEW GAME FOLDER
+    └── <your-game-folder>/    # 🚀 YOUR NEW GAME FOLDER GOES HERE!
         ├── index.html
         ├── style.css
         └── game.js
@@ -96,92 +101,109 @@ ArcadeVerse/
 
 ---
 
-## 🚀 How to Contribute: Step-by-Step
+# 🚀 **HOW TO CONTRIBUTE: STEP-BY-STEP WORKFLOW**
 
-### Step 1: Fork & Clone
-1. Fork the repository to your own GitHub account.
-2. Clone your fork locally:
-   ```bash
-   git clone https://github.com/<your-username>/NSOC.git
-   cd NSOC
-   ```
-3. Set the upstream remote:
-   ```bash
-   git remote add upstream https://github.com/debasmita-admin/NSOC.git
-   ```
+---
 
-### Step 2: Create a Feature Branch
-Always create an isolated branch for your game or enhancement:
+### 📌 **STEP 1: FORK & CLONE**
+Fork the repository on GitHub, then run in your terminal:
+```bash
+git clone https://github.com/<your-username>/NSOC.git
+cd NSOC
+git remote add upstream https://github.com/debasmita-admin/NSOC.git
+```
+
+---
+
+### 📌 **STEP 2: CREATE A FEATURE BRANCH**
+**Never push directly to `main`!** Create a dedicated branch:
 ```bash
 git checkout -b game/my-awesome-game
 ```
 
-### Step 3: Build Your Game
-1. Create a dedicated folder inside `games/`:
-   ```bash
-   mkdir games/<my-awesome-game>
-   ```
-   > ⚠️ **Important Multi-Contributor Rule**:
-   > If someone already built a game of that category (e.g. `snake`), you can still build your version! Simply append your handle or unique variation name:
-   > - `games/snake-rahul/`
-   > - `games/snake-3d-anita/`
-   > - `games/pong-alex/`
+---
 
-2. Inside your folder, include:
-   - `index.html`
-   - `style.css`
-   - `game.js`
-   - Any local assets in an `assets/` subfolder inside your game directory.
+### 📌 **STEP 3: CREATE YOUR GAME FOLDER**
+Create your game's directory inside `games/`:
+```bash
+mkdir games/<my-awesome-game>
+```
 
-> 💡 **Tip**: You can test your HTML, CSS, and JS code in real-time using the **Live Game Tester Sandbox** section on the ArcadeVerse homepage!
+> ### ⚠️ **CRITICAL RULE FOR MULTIPLE CONTRIBUTORS BUILDING THE SAME GAME:**
+> If another contributor has already created a game of the same category (e.g. `snake` or `pong`), you are still **100% WELCOME** to create your own unique version!  
+> **Just append your name/handle to the folder name:**
+> - `games/snake-rahul/`
+> - `games/snake-anita/`
+> - `games/pong-alex/`
+> *This ensures zero git conflicts and gives everyone full credit!*
 
-### Step 4: Register in `assets/js/games-registry.js`
-Open `assets/js/games-registry.js` or use our homepage **Automated PR Generator** to add your game entry:
+Inside your game folder, create:
+- `index.html`
+- `style.css`
+- `game.js`
+
+> 🧪 **Pro-Tip:** You can test your code live using the **In-Browser Sandbox** on the ArcadeVerse homepage before committing!
+
+---
+
+### 📌 **STEP 4: REGISTER IN `assets/js/games-registry.js`**
+Open `assets/js/games-registry.js` (or use the **PR Snippet Generator** on the homepage) and add your entry:
+
 ```javascript
 {
   id: "my-awesome-game",
   title: "My Awesome Game",
   category: "Arcade", // Arcade | Retro | Puzzle | Action
   icon: "🕹️",
-  description: "A fun fast-paced arcade game where you dodge obstacles.",
+  description: "A fast-paced neon arcade game where you dodge energy obstacles.",
   author: "YourName",
   github: "your-github-username",
   role: "Contributor",
   path: "games/my-awesome-game/index.html",
-  tags: ["Casual", "Fast", "Neon"]
+  tags: ["Arcade", "NSOC26"]
 }
 ```
 
-### Step 5: Sign `CONTRIBUTORS.md`
-Add your details to the table in [CONTRIBUTORS.md](file:///c:/Users/Debasmita/Desktop/NSOC/CONTRIBUTORS.md).
+---
 
-### Step 6: Commit and Push
+### 📌 **STEP 5: ADD YOUR NAME TO THE HALL OF FAME TABLE**
+Scroll down to the **🏆 COMMUNITY CONTRIBUTORS HALL OF FAME** table below and add your row!
+
+---
+
+### 📌 **STEP 6: COMMIT, PUSH & OPEN PULL REQUEST**
 ```bash
 git add .
 git commit -m "feat(game): add <my-awesome-game> by @<your-username>"
 git push origin game/my-awesome-game
 ```
-
-### Step 7: Open a Pull Request (PR)
-- Go to the original repository.
-- Click **New Pull Request**.
-- Base branch: `main` ⬅ Compare branch: `game/my-awesome-game`.
-- Provide a short screenshot or description in the PR template.
-- Our project admin **Debasmita** will review and merge!
+Now go to the repository on GitHub and click **"Compare & Pull Request"** targeting the **`main`** branch!
 
 ---
 
-## 💡 Ideas for New Games
-Looking for game concepts? Visit the **Idea Roulette & Vault** on the homepage or pick one from below:
-- **Flappy Cyber Jet** (`games/flappy-cyber/`)
-- **Quantum 2048** (`games/quantum-2048/`)
-- **Neon Cyber Pong (PvP / AI)** (`games/neon-pong/`)
-- **Cyber Tower Stacker** (`games/cyber-stacker/`)
-- **Space Invaders 2026** (`games/galaxy-invaders/`)
-- **Whack-A-Bug Developer** (`games/whack-a-bug/`)
-- **Cryptic Wordle Hack** (`games/cryptic-words/`)
-- **Astro Infinite Jumper** (`games/astro-jump/`)
-- **Quantum Minesweeper** (`games/quantum-minesweeper/`)
-- **Synth-Wave Simon Says** (`games/synth-says/`)
+# 🏆 **COMMUNITY CONTRIBUTORS HALL OF FAME**
+
+All merged contributors are permanently honored below:
+
+| # | Contributor Name | GitHub Handle | Game / Component Name | Folder Path |
+| :---: | :--- | :--- | :--- | :--- |
+| 👑 | **Debasmita (Project Admin)** | [@debasmita-admin](https://github.com) | **Quantum Memory Matrix & ArcadeCore** | `games/memory-matrix/` |
+| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/<your-game>/` |
+
+---
+
+# 💡 **GAME IDEAS READY TO CLAIM**
+
+Need inspiration? Visit the **Idea Roulette** on the ArcadeVerse homepage or claim any of these concepts:
+- 🚀 **Flappy Cyber Jet** (`games/flappy-cyber/`)
+- 🔢 **Quantum 2048** (`games/quantum-2048/`)
+- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/neon-pong/`)
+- 🏢 **Cyber Tower Stacker** (`games/cyber-stacker/`)
+- 🛸 **Space Invaders 2026** (`games/galaxy-invaders/`)
+- 🐛 **Whack-A-Bug Developer** (`games/whack-a-bug/`)
+- 🔤 **Cryptic Wordle Hack** (`games/cryptic-words/`)
+- 🦘 **Astro Infinite Jumper** (`games/astro-jump/`)
+- 💣 **Quantum Minesweeper** (`games/quantum-minesweeper/`)
+- 🎹 **Synth-Wave Simon Says** (`games/synth-says/`)
 
 Happy Coding & Welcome to NSOC '26! 🎉

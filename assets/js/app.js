@@ -404,7 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
   tags: ["${cat}", "NSOC26"]
 }
 
-// 2. Add your entry to CONTRIBUTORS.md:
+// 2. Add your entry to the Hall of Fame table in CONTRIBUTING.md:
 | * | ${name} | [@${github}](https://github.com/${github}) | ${title} | \`games/${id}-${github}/\` |`;
 
     snippetCodeDisplay.textContent = snippet;
