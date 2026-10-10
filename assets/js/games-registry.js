@@ -23,6 +23,20 @@ const GAMES_REGISTRY = [
     tags: ["Cards", "Mind", "Timed"],
     stars: 24,
     featured: true
+  },
+  {
+    id: "gamesbydb",
+    title: "Cyber Neon Pong",
+    category: "Arcade",
+    icon: "🏓",
+    description: "Classic retro pong arena with neon glow and dynamic canvas AI paddle physics.",
+    author: "Debasmita Bose",
+    github: "DebasmitaBose0",
+    role: "Project Admin & Contributor",
+    path: "games/gamesbydb/index.html",
+    tags: ["Arcade", "Retro", "Paddle"],
+    stars: 32,
+    featured: true
   }
 ];
 

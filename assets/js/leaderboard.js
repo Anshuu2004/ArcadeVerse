@@ -171,14 +171,21 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
+            // Count registered games from GAMES_REGISTRY
+            let userGames = [];
+            if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+              userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
+            }
+            const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
+
             return {
               login: user.login,
               name: displayName,
               role: isAdmin ? "Project Admin & Lead" : "Contributor",
               avatar_url: user.avatar_url,
               commits: user.contributions,
-              gamesCount: isAdmin ? 1 : 1,
-              games: isAdmin ? ["Quantum Memory Matrix", "Arcade Core Platform"] : ["Community Game"]
+              gamesCount: gamesCount,
+              games: userGames.length > 0 ? userGames.map(g => g.title) : ["Quantum Memory Matrix", "Cyber Neon Pong"]
             };
           })
         );
