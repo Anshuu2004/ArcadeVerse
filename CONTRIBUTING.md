@@ -1,14 +1,14 @@
-# 🌟 ArcadeVerse — Contribution & Contributor Hub (NSOC '26)
+# 🌟 ArcadeVerse — Contribution & Contributor Hub (Nexus Spring Of Code – Winter Edition 2026)
 
 > ### 👑 **PROJECT ADMIN:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))  
-> ### ❄️ **EVENT:** **NSOC (Winter Edition 2026)**  
+> ### ❄️ **EVENT:** **Nexus Spring Of Code – Winter Edition 2026**  
 > ### ⚡ **TECH STACK:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**  
 
 ---
 
-# 🎯 **OFFICIAL NSOC PROGRAM PILLARS & GUIDELINES**
+# 🎯 **OFFICIAL PROGRAM PILLARS & GUIDELINES**
 
-ArcadeVerse is proudly built and maintained under the official ethos of **NSOC (Winter Edition 2026)**:
+ArcadeVerse is proudly built and maintained under the official ethos of **Nexus Spring Of Code – Winter Edition 2026**:
 
 > ### 📌 **1. Submit your open source project for the program**
 > ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an accessible, scalable, and conflict-free foundation where developers worldwide can build and showcase their creations.
@@ -30,7 +30,7 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 
 ### 🏆 **1. Repository & Commit Milestones:**
 | Tier Title | Commits Requirement | Description | Badge on Profile |
-| :--- | :---: | :--- | :---: |
+| :--- | :---: | :--- | :--- |
 | **🚀 Project Contributor** | **5+ Commits** | Contributed initial verified pull requests, bug fixes, or minor features. | `🚀 Project Contributor` |
 | **🌟 Novice Contributor** | **10+ Commits** | Consistent open-source contributions across the codebase. | `🌟 Novice Contributor` |
 | **💎 Elite Contributor** | **20+ Commits** | Major architectural refinements, optimizations, and active reviews. | `💎 Elite Contributor` |
@@ -42,7 +42,7 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 Contributors who build, polish, and submit playable arcade games earn dedicated specialized titles:
 
 | Developer Title | Requirement Criteria | Description | Badge on Profile |
-| :--- | :---: | :--- | :---: |
+| :--- | :---: | :--- | :--- |
 | **🕹️ Arcade Developer** | **15+ Commits** (or 1 verified game) | Authored and polished a playable game in `games/game-name_contributor-name/`. | `🕹️ Arcade Developer` |
 | **⚡ Hyper Game Developer** | **30+ Commits** (or 2+ verified games) | Authored multiple high-performance web arcade games with custom canvas/physics. | `⚡ Hyper Game Developer` |
 
@@ -54,7 +54,7 @@ Contributors who build, polish, and submit playable arcade games earn dedicated 
 
 > [!CAUTION]
 > ### 🚨 **ZERO TOLERANCE POLICY — VIOLATIONS WILL RESULT IN IMMEDIATE PR CANCELLATION**
-> To preserve the security, academic integrity, and quality of NSOC (Winter Edition 2026), all contributors **must strictly comply** with the following rules. Failure or refusal to adhere to these terms **will lead to immediate Pull Request closure, disqualification from the leaderboard, and potential reporting to NSOC coordinators**:
+> To preserve the security, academic integrity, and quality of **Nexus Spring Of Code – Winter Edition 2026**, all contributors **must strictly comply** with the following rules. Failure or refusal to adhere to these terms **will lead to immediate Pull Request closure, disqualification from the leaderboard, and potential reporting to program coordinators**:
 >
 > 1. **❌ NO Non-Compliant Directory Paths:** Any contribution placed outside `games/game-name_contributor-name/` (or attempting to edit another contributor's game directory) will be **immediately closed**.
 > 2. **❌ NO Plagiarism, AI Hallucinations or Stolen Code:** Copying whole copyrighted projects or submitting unverified, broken AI dump code without manual testing is prohibited. Submissions must run smoothly in Vanilla JS.
@@ -260,4 +260,4 @@ Visit the **Ideas Vault** on [ideas.html](ideas.html) or claim any of these conc
 - 💣 **Quantum Minesweeper** (`games/minesweeper_contributor/`)
 - 🎹 **Synth-Wave Simon Says** (`games/simon-says_contributor/`)
 
-Happy Coding & Welcome to NSOC '26! 🎉
+Happy Coding & Welcome to **Nexus Spring Of Code – Winter Edition 2026**! 🎉
