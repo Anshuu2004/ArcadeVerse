@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hall of Fame Leaderboard | ArcadeVerse (NSOC '26)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="pixel-badge">👾</span>
+        <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        <span class="nsoc-tag">NSOC '26</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">🎮 Explore Games</a>
+        <a href="ideas.html" class="nav-item">💡 Ideas Vault</a>
+        <a href="sandbox.html" class="nav-item">🧪 Live Sandbox</a>
+        <a href="submit.html" class="nav-item">⚡ Submit & PR Helper</a>
+        <a href="leaderboard.html" class="nav-item active">🏆 Hall of Fame</a>
+        <a href="CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="submit.html" class="btn btn-primary btn-sm">➕ Add Your Game</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="section-header center">
+      <span class="section-tag">RECOGNITION</span>
+      <h1 class="section-title">Hall of Fame & Leaderboard</h1>
+      <p class="section-subtitle">Honoring the developers and maintainers powering ArcadeVerse in NSOC Winter Edition 2026.</p>
+    </div>
+
+    <!-- Admin Spotlight Banner -->
+    <div class="admin-spotlight-banner">
+      <div class="admin-badge-circle">👑</div>
+      <div>
+        <span class="role-badge">PROJECT LEAD & MAINTAINER</span>
+        <h2>Debasmita</h2>
+        <p>Architect of ArcadeVerse core engine, Quantum Memory Matrix starter template, and NSOC '26 contributor onboarding framework.</p>
+      </div>
+    </div>
+
+    <!-- Contributors Grid -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title" style="font-size: 1.6rem;">All Active Contributors</h2>
+        <p class="section-subtitle">Real-time synced from the project registry</p>
+      </div>
+    </div>
+
+    <div class="contributors-grid" id="contributors-grid">
+      <!-- Injected from games-registry.js -->
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2026 ArcadeVerse • Open Source under MIT License • NSOC Winter Edition 2026</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/games-registry.js"></script>
+  <script src="assets/js/leaderboard.js"></script>
+  <script>
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) navbar.classList.add("scrolled");
+      else navbar.classList.remove("scrolled");
+    }, { passive: true });
+  </script>
+</body>
+</html>

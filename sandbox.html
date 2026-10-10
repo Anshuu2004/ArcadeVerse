@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Developer Sandbox | ArcadeVerse (NSOC '26)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="pixel-badge">👾</span>
+        <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        <span class="nsoc-tag">NSOC '26</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">🎮 Explore Games</a>
+        <a href="ideas.html" class="nav-item">💡 Ideas Vault</a>
+        <a href="sandbox.html" class="nav-item active">🧪 Live Sandbox</a>
+        <a href="submit.html" class="nav-item">⚡ Submit & PR Helper</a>
+        <a href="leaderboard.html" class="nav-item">🏆 Hall of Fame</a>
+        <a href="CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="submit.html" class="btn btn-primary btn-sm">➕ Add Your Game</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="section-header">
+      <div>
+        <span class="section-tag">DEV TOOL</span>
+        <h1 class="section-title">In-Browser Game Sandbox</h1>
+        <p class="section-subtitle">Write, test, and instantly debug your mini-game before creating local files or git commits.</p>
+      </div>
+      <div style="display: flex; gap: 0.8rem;">
+        <button class="btn btn-secondary btn-sm" id="load-template-btn">📦 Load Canvas Template</button>
+        <button class="btn btn-primary btn-sm" id="run-sandbox-btn">▶ Run Game</button>
+      </div>
+    </div>
+
+    <div class="sandbox-container">
+      <div class="sandbox-editors">
+        <div class="editor-tabs">
+          <button class="tab-btn active" data-tab="html">HTML</button>
+          <button class="tab-btn" data-tab="css">CSS</button>
+          <button class="tab-btn" data-tab="js">JavaScript</button>
+        </div>
+        <div class="editor-pane active" id="pane-html">
+          <textarea id="sandbox-html-code" spellcheck="false" placeholder="<!-- Your game HTML here -->">
+<div class="mini-game-wrap">
+  <h2>🎯 Click the Target!</h2>
+  <div id="target" style="width:60px;height:60px;background:#3b82f6;border-radius:50%;margin:40px auto;cursor:pointer;transition:transform 0.15s ease;"></div>
+  <p id="score-text" style="color:#f59e0b;font-weight:700;font-size:1.1rem;">Score: 0</p>
+</div></textarea>
+        </div>
+        <div class="editor-pane" id="pane-css">
+          <textarea id="sandbox-css-code" spellcheck="false" placeholder="/* Your game CSS here */">
+body {
+  background: #0c0e14;
+  color: #fff;
+  font-family: sans-serif;
+  text-align: center;
+  padding: 30px;
+}
+.mini-game-wrap {
+  background: #161b28;
+  padding: 30px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: inline-block;
+  min-width: 280px;
+}</textarea>
+        </div>
+        <div class="editor-pane" id="pane-js">
+          <textarea id="sandbox-js-code" spellcheck="false" placeholder="// Your game JS logic here">
+let score = 0;
+const target = document.getElementById('target');
+const scoreText = document.getElementById('score-text');
+
+target.addEventListener('click', () => {
+  score += 10;
+  scoreText.textContent = 'Score: ' + score;
+  target.style.transform = 'scale(1.25)';
+  setTimeout(() => target.style.transform = 'scale(1)', 150);
+});</textarea>
+        </div>
+      </div>
+
+      <div class="sandbox-preview">
+        <div class="preview-header">
+          <span>📺 Live Sandbox Output</span>
+          <span class="preview-badge">Instant Render</span>
+        </div>
+        <iframe id="sandbox-preview-frame" sandbox="allow-scripts" frameborder="0"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2026 ArcadeVerse • Open Source under MIT License • NSOC Winter Edition 2026</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/sandbox.js"></script>
+  <script>
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) navbar.classList.add("scrolled");
+      else navbar.classList.remove("scrolled");
+    }, { passive: true });
+  </script>
+</body>
+</html>

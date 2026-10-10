@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Game & PR Helper | ArcadeVerse (NSOC '26)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="cyber-grid"></div>
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <!-- Header -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="pixel-badge">👾</span>
+        <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        <span class="nsoc-tag">NSOC '26</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">🎮 Explore Games</a>
+        <a href="ideas.html" class="nav-item">💡 Ideas Vault</a>
+        <a href="sandbox.html" class="nav-item">🧪 Live Sandbox</a>
+        <a href="submit.html" class="nav-item active">⚡ Submit & PR Helper</a>
+        <a href="leaderboard.html" class="nav-item">🏆 Hall of Fame</a>
+        <a href="CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="submit.html" class="btn btn-primary btn-sm">➕ Add Your Game</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="section-header center">
+      <span class="section-tag">OPEN SOURCE ASSISTANT</span>
+      <h1 class="section-title">Automated Pull Request Helper</h1>
+      <p class="section-subtitle">Fill in your game parameters below to get instant copy-paste code snippets and git terminal commands!</p>
+    </div>
+
+    <!-- Generator Card -->
+    <div class="generator-card" style="margin-bottom: 3.5rem;">
+      <div class="generator-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your GitHub Username</label>
+            <input type="text" id="gen-github" placeholder="e.g. debasmita-dev">
+          </div>
+          <div class="form-group">
+            <label>Your Display Name</label>
+            <input type="text" id="gen-name" placeholder="e.g. Debasmita">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Game Title</label>
+            <input type="text" id="gen-title" placeholder="e.g. Space Defender">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="gen-category">
+              <option value="Arcade">Arcade</option>
+              <option value="Puzzle">Puzzle</option>
+              <option value="Retro">Retro</option>
+              <option value="Action">Action</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Emoji Icon</label>
+            <input type="text" id="gen-icon" placeholder="e.g. 🚀 or 🎯">
+          </div>
+          <div class="form-group">
+            <label>Short Description (1 sentence)</label>
+            <input type="text" id="gen-desc" placeholder="e.g. Fast-paced cosmic shooter with canvas particles.">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="generate-snippet-btn">⚡ Generate PR Snippet & Terminal Commands</button>
+      </div>
+
+      <div class="snippet-output-box">
+        <div class="snippet-header">
+          <span>📄 Generated Configuration Snippet</span>
+          <button class="btn-copy-code" id="copy-snippet-btn">📋 Copy Code</button>
+        </div>
+        <pre><code id="snippet-code-display">// Fill out the form on the left and click Generate!</code></pre>
+      </div>
+    </div>
+
+    <!-- Step by Step instructions checklist -->
+    <div class="section-header">
+      <div>
+        <h2 class="section-title" style="font-size: 1.6rem;">4-Step Submission Workflow</h2>
+        <p class="section-subtitle">Follow these guidelines for an instant merge from project admins</p>
+      </div>
+    </div>
+
+    <div class="guide-steps-vertical" style="margin-bottom: 4rem;">
+      <div class="step-card">
+        <span class="step-badge">Step 1</span>
+        <h4>Fork & Branch</h4>
+        <p>Fork the repository to your account, clone locally, and checkout a branch:</p>
+        <code>git checkout -b game/my-awesome-game</code>
+      </div>
+
+      <div class="step-card">
+        <span class="step-badge">Step 2</span>
+        <h4>Create Your Game Subfolder in <code>games/</code></h4>
+        <p>If another contributor already built a similar game, add your name: <code>games/game-title-(your-name)/</code></p>
+        <code>games/my-awesome-game/index.html<br>games/my-awesome-game/style.css<br>games/my-awesome-game/game.js</code>
+      </div>
+
+      <div class="step-card">
+        <span class="step-badge">Step 3</span>
+        <h4>Paste Snippet into <code>assets/js/games-registry.js</code></h4>
+        <p>Use the code generated above and append it to the <code>GAMES_REGISTRY</code> array, then sign your row in <code>CONTRIBUTING.md</code>.</p>
+      </div>
+
+      <div class="step-card">
+        <span class="step-badge">Step 4</span>
+        <h4>Commit, Push & Open PR</h4>
+        <code>git add .<br>git commit -m "feat(game): add my-awesome-game by @username"<br>git push origin game/my-awesome-game</code>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>© 2026 ArcadeVerse • Open Source under MIT License • NSOC Winter Edition 2026</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/submit.js"></script>
+  <script>
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) navbar.classList.add("scrolled");
+      else navbar.classList.remove("scrolled");
+    }, { passive: true });
+  </script>
+</body>
+</html>
