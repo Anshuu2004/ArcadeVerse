@@ -1,41 +1,45 @@
-# 👾 **ArcadeVerse — The Ultimate Open-Source Web Arcade Platform**
-### ❄️ **NSOC (Winter Edition 2026) Official Flagship Gaming Project**
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=1e3a8a,2563eb,3b82f6,6366f1,a855f7&height=180&section=header&text=ArcadeVerse%20%E2%9A%A1&fontSize=42&fontAlignY=38&desc=The%20Open-Source%20Community%20Arcade%20Station%20%E2%80%A2%20NSOC%20%2726&descAlignY=58&descSize=18&fontColor=ffffff" width="100%" alt="ArcadeVerse Header Wave" />
 
-[![NSOC Winter 2026](https://img.shields.io/badge/NSOC-Winter%202026-blueviolet?style=for-the-badge&logo=github)](https://github.com)
-[![Tech Stack](https://img.shields.io/badge/Tech-100%25%20HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS-00f2fe?style=for-the-badge&logo=javascript)](https://github.com)
-[![Open Source](https://img.shields.io/badge/PRs-Welcome-ff007f?style=for-the-badge)](CONTRIBUTING.md)
-[![License](https://img.shields.io/badge/License-MIT-00e676?style=for-the-badge)](LICENSE)
+  <p align="center">
+    <b>🎮 Play Web Games • 🧪 Build Conflict-Free Mini-Games • 🏆 Climb the Live Hall of Fame</b>
+  </p>
+
+  <p align="center">
+    <a href="https://github.com/DebasmitaBose0/ArcadeVerse"><img src="https://img.shields.io/badge/NSOC-Winter%202026-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="NSOC 2026"></a>
+    <a href="https://github.com/DebasmitaBose0/ArcadeVerse"><img src="https://img.shields.io/badge/Tech-100%25%20Vanilla%20HTML%20%7C%20CSS%20%7C%20JS-3b82f6?style=for-the-badge&logo=javascript" alt="Tech Stack"></a>
+    <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-Welcome%20%F0%9F%9A%80-10b981?style=for-the-badge" alt="PRs Welcome"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-f59e0b?style=for-the-badge&logo=open-source-initiative&logoColor=white" alt="License"></a>
+  </p>
+</div>
 
 ---
 
-> ## 👑 **PROJECT ADMINISTRATION & LEADERSHIP**
-> - **Project Admin:** **Debasmita** ([@debasmita-admin](https://github.com))
-> - **Program:** **National Summer/Winter Open Source Contest (NSOC '26)**
-> - **Tech Stack:** **100% Pure HTML, CSS, & Vanilla JavaScript** (No Python, No Node backend, No Frameworks, No Bundlers)
-> - **Primary Objective:** Build a frictionless, community-driven web arcade where contributors can showcase their mini-games without git conflicts!
+### 👑 **PROJECT LEADERSHIP & PROGRAM ETHOS**
+> - 👩‍💻 **Project Admin & Lead Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))
+> - ❄️ **Event & Program:** **National Summer/Winter Open Source Contest (NSOC Winter Edition 2026)**
+> - ⚡ **Native Tech Stack:** **100% Pure HTML5 + CSS3 + Vanilla JavaScript** (Zero frameworks, zero Python backends, zero bundlers)
+> - 🎯 **Program Vision:** A collision-free, beginner-friendly yet high-performance web arcade station giving contributors their first real, permanent open-source merge!
 
 ---
 
-# ⚡ **KEY HIGHLIGHTS & ARCHITECTURE**
+## ⚡ **KEY HIGHLIGHTS & ARCHITECTURAL ADVANTAGES**
 
 - 🚀 **100% Native Web Standards:** Pure HTML5, CSS3, & Modern Vanilla JS. Runs instantly in any web browser without any installation!
-- 📁 **Isolated Directory Pattern (`games/<your-game>/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
-- 👥 **Duplicate Game Support:** Multiple contributors can build their own variations of classic games (e.g. `games/snake-(your-name)/`).
-- 🧪 **Built-in Live Game Sandbox:** Test HTML/CSS/JS game code live in the browser before pushing PRs!
-- 🎲 **Interactive Idea Roulette:** 20+ ready-to-claim game concepts with tech tags for participants.
-- ⚡ **Automated PR Snippet Generator:** One-click code generation for `games-registry.js` and contributor registration.
-- 🏆 **Community Hall of Fame:** Every merged contributor gets featured dynamically on the main dashboard and documentation!
+- 📁 **Isolated Directory Pattern (`games/game-name_contributor-name/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
+- 🕹️ **Multi-Game Diversity:** Multiple contributors can build different versions of the same game idea without collision.
+- 💡 **Interactive Ideas Vault ([ideas.html](ideas.html)):** 20+ ready-to-claim game concepts with technical requirements.
+- ⚡ **Automated PR Snippet Generator ([submit.html](submit.html)):** One-click code generation for `games-registry.js` and terminal git push commands.
+- 🏆 **Live GitHub Hall of Fame ([leaderboard.html](leaderboard.html)):** Real-time contribution scoring, podium champions, and custom rank badges fetched directly from the GitHub REST API!
 
 ---
 
-# 💻 **HOW TO RUN THIS PROJECT LOCALLY**
+## 💻 **HOW TO RUN THIS PROJECT LOCALLY**
 
-This project has **no Python application and no backend dependencies**. You can run it instantly using any of the following web methods:
-
----
+This project has **no backend servers, no build steps, and no Python app**. You can run it instantly using any of the following methods:
 
 ### 🔹 **METHOD 1: INSTANT BROWSER LAUNCH (RECOMMENDED)**
-Run this single command in your terminal to open the platform in your browser immediately:
+Run this single command in your terminal to open the platform in Google Chrome immediately:
 
 - **Windows (PowerShell / Command Prompt):**
   ```powershell
@@ -53,8 +57,8 @@ Run this single command in your terminal to open the platform in your browser im
 
 ---
 
-### 🔹 **METHOD 2: VS CODE LIVE SERVER**
-1. Open the project in **VS Code**.
+### 🔹 **METHOD 2: VS CODE LIVE SERVER EXTENSION**
+1. Open the project folder in **VS Code**.
 2. Right-click on **`index.html`**.
 3. Select **"Open with Live Server"**.
 
@@ -65,62 +69,44 @@ Simply open your project folder in File Explorer and **double-click `index.html`
 
 ---
 
-# 🕹️ **STARTER REFERENCE GAME INCLUDED**
+## 🕹️ **STARTER REFERENCE GAMES INCLUDED**
 
 - 🧩 **Quantum Memory Matrix** (`games/memory-matrix/`):
   - Pure HTML, CSS & Vanilla JS 3D card flip puzzle.
-  - Serves as the clean reference template for all upcoming contributor games!
+- 🏓 **Cyber Neon Pong** (`games/gamesbydb/`):
+  - Pure canvas AI paddle game demonstrating smooth 60fps rendering and dynamic physics.
 
 ---
 
-# 🚀 **HOW TO CONTRIBUTE (STEP-BY-STEP QUICK GUIDE)**
+## 📖 **CONTRIBUTOR GUIDELINES & WORKFLOW**
 
-Detailed instructions are available in [CONTRIBUTING.md](CONTRIBUTING.md):
+> [!IMPORTANT]
+> **All contributors are strictly required to read our comprehensive [CONTRIBUTING.md](CONTRIBUTING.md) guide before submitting a Pull Request!**
 
-1. **Fork & Clone:**
-   ```bash
-   git clone https://github.com/<your-username>/NSOC.git
-   cd NSOC
-   ```
-2. **Create Feature Branch:**
-   ```bash
-   git checkout -b game/my-awesome-game
-   ```
-3. **Add Your Game:**
-   Create your folder inside `games/<game-name>/` (or `games/<game-name>-<your-name>/`) with `index.html`, `style.css`, and `game.js`.
-4. **Register:**
-   Add your entry into `assets/js/games-registry.js` and add your name to the **Hall of Fame** table in [CONTRIBUTING.md](CONTRIBUTING.md).
-5. **Push & Open PR:**
-   ```bash
-   git add .
-   git commit -m "feat(game): add <game-name> by @<your-username>"
-   git push origin game/my-awesome-game
-   ```
+### 📌 **Quick Checklist for Contributors:**
+1. 📖 **Read the Guidelines:** Review the complete [CONTRIBUTING.md](CONTRIBUTING.md) for official NSOC pillars and point systems.
+2. ⚠️ **Strict Folder Naming:** You **MUST** place your game under `games/game-name_contributor-name/` (e.g., `games/cyber-pong_rohit/`).
+3. 🚫 **Adhere to Code of Conduct:** Violating rules (plagiarism, spam commits, broken AI code dumps, frameworks, non-compliant folder names) **will result in immediate PR cancellation and disqualification**.
+4. ⚡ **Generate PR Snippet:** Use [submit.html](submit.html) to generate your registry snippet and git push commands.
+5. 🎖️ **Earn Contributor Badges:** Unlock official titles on our live [Hall of Fame Leaderboard](leaderboard.html) (`🚀 Project Contributor`, `🕹️ Arcade Developer`, `⚡ Hyper Game Developer`, `💎 Elite Contributor`).
 
 ---
 
-# 💡 **TOP GAME IDEAS WAITING TO BE BUILT (PURE HTML, CSS, JS)**
+## 📄 **OPEN SOURCE LICENSE & CONTRIBUTION AGREEMENT**
 
-Contributors can claim any of these concepts directly:
-- 🚀 **Flappy Cyber Jet** (`games/flappy-cyber/`)
-- 🔢 **Quantum 2048** (`games/quantum-2048/`)
-- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/neon-pong/`)
-- 🏢 **Cyber Tower Stacker** (`games/cyber-stacker/`)
-- 🛸 **Space Invaders 2026** (`games/galaxy-invaders/`)
-- 🐛 **Whack-A-Bug Developer** (`games/whack-a-bug/`)
-- 🔤 **Cryptic Wordle Hack** (`games/cryptic-words/`)
-- 🦘 **Astro Infinite Jumper** (`games/astro-jump/`)
-- 💣 **Quantum Minesweeper** (`games/quantum-minesweeper/`)
-- 🎹 **Synth-Wave Simon Says** (`games/synth-says/`)
+This project is licensed under the permissive **MIT License**.  
+All community contributions are protected and governed by the official [LICENSE](LICENSE) terms.
+
+- Full License & Intellectual Integrity Policy: **[View LICENSE](LICENSE)**  
+- Contributor Rules & Disqualification Policies: **[View CONTRIBUTING.md](CONTRIBUTING.md)**  
 
 ---
 
-# 🏆 **HALL OF FAME & CONTRIBUTORS**
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=a855f7,6366f1,3b82f6,2563eb,1e3a8a&height=120&section=footer" width="100%" alt="ArcadeVerse Footer Wave" />
 
-Check out the full list of authors and contributors in [CONTRIBUTING.md#community-contributors-hall-of-fame](CONTRIBUTING.md#community-contributors-hall-of-fame).
-
----
-
-# 📄 **LICENSE**
-This project is open-source under the [MIT License](LICENSE).  
-Maintained with ❤️ by **Debasmita** for **NSOC Winter Edition 2026**.
+  <p align="center">
+    Designed & Engineered with ❤️ by <b><a href="https://github.com/DebasmitaBose0">Debasmita Bose</a></b> for <b>NSOC Winter Edition 2026</b> ❄️<br>
+    <i>Empowering open-source contributors with their first real merge!</i> 🚀
+  </p>
+</div>

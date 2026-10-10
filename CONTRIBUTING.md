@@ -50,6 +50,21 @@ Contributors who build, polish, and submit playable arcade games earn dedicated 
 
 ---
 
+# 🚫 **STRICT CONTRIBUTOR CODE OF CONDUCT & GROUNDS FOR PR REJECTION**
+
+> [!CAUTION]
+> ### 🚨 **ZERO TOLERANCE POLICY — VIOLATIONS WILL RESULT IN IMMEDIATE PR CANCELLATION**
+> To preserve the security, academic integrity, and quality of NSOC (Winter Edition 2026), all contributors **must strictly comply** with the following rules. Failure or refusal to adhere to these terms **will lead to immediate Pull Request closure, disqualification from the leaderboard, and potential reporting to NSOC coordinators**:
+>
+> 1. **❌ NO Non-Compliant Directory Paths:** Any contribution placed outside `games/game-name_contributor-name/` (or attempting to edit another contributor's game directory) will be **immediately closed**.
+> 2. **❌ NO Plagiarism, AI Hallucinations or Stolen Code:** Copying whole copyrighted projects or submitting unverified, broken AI dump code without manual testing is prohibited. Submissions must run smoothly in Vanilla JS.
+> 3. **❌ NO Malicious Payloads, Telemetry, or Heavy Bundlers:** Injecting cryptominers, malicious iframes, unauthorized tracking scripts, node_modules, webpack builds, or minified unreadable binaries will result in a **permanent ban from the repo**.
+> 4. **❌ NO Spam or Meaningless Micro-Commits:** Padding commit numbers with empty whitespace edits, punctuation changes in readmes, or fake typo fixes to game the point system will lead to **point resets and PR rejection**.
+> 5. **❌ NO Framework Fatigue / Heavy Dependencies:** React, Vue, Angular, jQuery, or Python backends are **NOT allowed**. Pure Vanilla HTML5, CSS3, and JavaScript are strictly enforced.
+> 6. **📜 Acceptance of Open Source License:** All contributions are submitted under the terms of the project's [MIT License](LICENSE). You must grant full perpetual open-source rights to the community.
+
+---
+
 # ⚠️ **CRITICAL REQUIREMENT: STRICT FOLDER NAMING CONVENTION**
 
 > [!CAUTION]
