@@ -39,8 +39,9 @@ Run this single command in your terminal to open the platform in your browser im
 
 - **Windows (PowerShell / Command Prompt):**
   ```powershell
-  start index.html
+  start chrome "$PWD\index.html"
   ```
+  *(Alternative default browser: `start index.html`)*
 - **macOS:**
   ```bash
   open index.html

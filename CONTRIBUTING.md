@@ -18,8 +18,9 @@ Directly open `index.html` in your default browser using your terminal:
 
 ### 🔹 **Windows (PowerShell / Command Prompt):**
 ```powershell
-start index.html
+start chrome "$PWD\index.html"
 ```
+*(Alternative default browser: `start index.html`)*
 
 ### 🔹 **macOS:**
 ```bash
