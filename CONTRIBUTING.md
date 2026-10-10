@@ -48,6 +48,94 @@ Contributors who build, polish, and submit playable arcade games earn dedicated 
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 
+# 🛠️ **SCOPE OF CONTRIBUTIONS & WHAT YOU CAN CONTRIBUTE**
+
+Contributions across the project and broader platform may include:
+- 🐛 **Bug fixes** (game bugs, UI glitches, responsive layout fixes, audio sync)
+- ✨ **Feature development** (new mini-games, AI gameplay, score records, new modes)
+- 📖 **Documentation** (clarifying guides, step-by-step tutorials, code comments)
+- 🎨 **UI/UX improvements** (sleek CSS transitions, accessibility, clean typography)
+- 🧪 **Testing** (edge-case physics testing, keyboard/touch input verification, browser testing)
+- ⚡ **Code optimization** (requestAnimationFrame optimization, lightweight asset handling)
+- 🌐 **Website improvements** (portal enhancements, responsive improvements, audio effects)
+- 🔧 **Project maintenance** (registry cleanup, file structure hygiene, broken link audit)
+- 🚀 **Other approved open-source contributions**
+
+---
+
+# 👥 **TEAM PARTICIPATION & COLLABORATION POLICY**
+
+> [!NOTE]
+> - 👤 **Individual Evaluation:** Participants **do not need to form teams to participate**. Contributions are evaluated **individually** based on the participant's contribution, code quality, and active participation.
+> - 🤝 **Open Collaboration:** Participants may freely collaborate, brainstorm, and exchange debugging advice with other contributors and maintainers during the program.
+> - 🎓 **Inter-Institution Unity:** Inter-college and inter-specialization collaboration is allowed where applicable.
+
+---
+
+# 📋 **ISSUE ASSIGNMENT & CONTRIBUTION WORKFLOW**
+
+> ### 📌 **Issue Assignment / Contribution**
+> Participants work on **approved issues** and follow the contribution guidelines of the respective repository before opening code changes.
+>
+> ### 📌 **Pull Request Submission**
+> Participants submit their work through standard **GitHub Pull Requests**. Ensure you link the corresponding issue and provide a clear description of your changes.
+>
+> ### 📌 **Review & Evaluation**
+> Maintainers and contributors review the Pull Requests based on:
+> - **Code quality** and clean Vanilla structure
+> - **Correctness** of the solution
+> - **Relevance** to the issue and program scope
+> - **Documentation** and comments
+> - **Strict adherence** to project guidelines
+
+---
+
+# 📊 **HOW CONTRIBUTIONS ARE EVALUATED**
+
+> [!IMPORTANT]
+> ### ⚖️ **Evaluation Criteria**
+> Contributions in **Nexus Spring Of Code – Winter Edition 2026** may be evaluated based on:
+> 1. 🌟 **Quality of code** (Clean, readable, formatted Vanilla standards)
+> 2. 🎯 **Correctness of the solution** (Bug-free, functional, runs across browsers)
+> 3. 🧩 **Complexity and relevance of the contribution**
+> 4. 🚀 **Successful Pull Requests** (Clean commits, merge-ready without conflicts)
+> 5. 🔍 **Issue resolution** (Actually solving the reported problem)
+> 6. 📖 **Documentation quality** (Well-written specs, clear PR summaries)
+> 7. 💬 **Code review performance** (Promptly addressing review suggestions)
+> 8. ⏱️ **Consistency of participation** throughout the program duration
+> 9. 📐 **Adherence to repository guidelines** (Proper directory naming, no disallowed libraries)
+> 10. 🤝 **Collaboration and communication** within community channels
+> 11. 🌍 **Overall contribution to the open-source ecosystem**
+>
+> **⚠️ CRITICAL REMINDER:** Simply submitting a Pull Request does **NOT** automatically guarantee acceptance or recognition. Contributions must be **meaningful, valid, and accepted** according to the applicable project guidelines.
+
+---
+
+# 📜 **OFFICIAL RULES & REGULATIONS**
+
+> [!CAUTION]
+> ### 🚨 **STRICT PROGRAM RULES — KEEP THESE ALL IN MIND**
+> All contributors participating in **Nexus Spring Of Code – Winter Edition 2026** must strictly comply with the following regulations:
+>
+> 1. 📝 **Accurate Information:** Participants must provide accurate information during registration.
+> 2. 👤 **Own GitHub Account:** Each participant must use their **own personal GitHub account** for all contributions.
+> 3. 🤝 **Code of Conduct:** Participants must follow the Code of Conduct and contribution guidelines of NSoC and individual repositories.
+> 4. 💡 **Originality of Work:** All contributions must be **original and legitimately created** by the participant.
+> 5. 🚫 **Zero Plagiarism & No Spam:** Plagiarism, copied code without appropriate attribution, fake contributions, spam Pull Requests, meaningless commits, or artificially generated activity intended to manipulate rankings are **strictly prohibited**.
+> 6. 🛑 **No Artificial Count Padding:** Participants must not create unnecessary issues or Pull Requests solely for increasing their contribution count.
+> 7. 🛡️ **Safety & Security:** Participants must not intentionally introduce bugs, vulnerabilities, malicious code, tracking telemetry, or harmful changes into any project.
+> 8. 💖 **Mutual Respect:** Participants must respect project maintainers, mentors, organizers, and fellow contributors at all times.
+> 9. ⚖️ **Fair Play:** Any attempt to manipulate the leaderboard, contribution statistics, reviews, or evaluation process **may result in immediate disqualification**.
+> 10. 📌 **Follow Repo Rules:** Participants must follow the specific contribution rules of each repository before submitting a Pull Request.
+> 11. 👑 **Maintainer Authority:** Maintainers have the full authority to reject contributions that do not meet project standards or guidelines.
+> 12. ✅ **Meaningful Quality Only:** Only valid and meaningful contributions will be considered for evaluation and recognition.
+> 13. 👥 **Collaborate Honestly:** Participants may collaborate and discuss solutions, but submitting someone else's work as their own is **strictly prohibited**.
+> 14. 🔍 **Organizer Verification Rights:** The organizers reserve the right to review, verify, accept, reject, or invalidate contributions that violate the program rules.
+> 15. 🗓️ **Program Modifications:** The organizers reserve the right to modify the schedule, rules, projects, or evaluation process if required.
+> 16. 🚪 **Removal for Unethical Behavior:** Any participant found engaging in fraudulent, abusive, or unethical activity may be removed from the program without prior notice.
+> 17. 🏅 **Eligibility Criteria:** Certificates, swags, prizes, and other recognition are subject to the official eligibility criteria announced by the organizers.
+> 18. 🏛️ **Final Authority:** The **final decision** regarding contribution validity, rankings, recognition, and disqualification will rest solely with the organizing team.
+
 ---
 
 # 🚫 **STRICT CONTRIBUTOR CODE OF CONDUCT & GROUNDS FOR PR REJECTION**
