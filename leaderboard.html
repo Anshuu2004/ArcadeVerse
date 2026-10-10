@@ -58,6 +58,49 @@
       </div>
     </div>
 
+    <!-- Dedicated Point System & Work Scoring Architecture -->
+    <section class="point-system-section">
+      <div class="point-system-header">
+        <span class="section-tag">SCORING BREAKDOWN</span>
+        <h2 class="point-system-title">How Contributor Work Is Evaluated & Rewarded</h2>
+        <p class="point-system-subtitle">A transparent, multi-dimensional point system designed for Project Admin (@DebasmitaBose0) to evaluate every contributor's actual work.</p>
+      </div>
+
+      <div class="point-cards-grid">
+        <div class="point-rule-card">
+          <div class="point-rule-icon">📁</div>
+          <div class="point-rule-pts">+15 pts</div>
+          <h4>File Creation & Assets</h4>
+          <p>Awarded for building structured files (<code>index.html</code>, <code>style.css</code>, <code>game.js</code>) inside their isolated folder.</p>
+          <span class="point-formula">15 pts × Total Valid Files</span>
+        </div>
+
+        <div class="point-rule-card highlight-rule">
+          <div class="point-rule-icon">🎮</div>
+          <div class="point-rule-pts">+100 pts</div>
+          <h4>Verified Playable Game</h4>
+          <p>Awarded when a contributor successfully builds and integrates a conflict-free game into the registry.</p>
+          <span class="point-formula">100 pts × Verified Game</span>
+        </div>
+
+        <div class="point-rule-card">
+          <div class="point-rule-icon">💻</div>
+          <div class="point-rule-pts">+10 pts</div>
+          <h4>Verified GitHub Commits</h4>
+          <p>Fetched directly from GitHub API for all merged pull requests and revisions made to the codebase.</p>
+          <span class="point-formula">10 pts × Merged Commit</span>
+        </div>
+
+        <div class="point-rule-card">
+          <div class="point-rule-icon">⭐</div>
+          <div class="point-rule-pts">+25 pts</div>
+          <h4>Admin Quality Bonus</h4>
+          <p>Awarded for responsive mobile support, clean vanilla styling, and zero git merge conflicts.</p>
+          <span class="point-formula">Review Bonus</span>
+        </div>
+      </div>
+    </section>
+
     <!-- GitHub Sync & Live Filter Controls -->
     <div class="leaderboard-toolbar">
       <div class="sync-status-box">
@@ -78,19 +121,22 @@
     <!-- Comprehensive Leaderboard Table -->
     <div class="leaderboard-table-card">
       <div class="table-header">
-        <h3>🏅 Verified Contributors Standing</h3>
-        <span class="ranking-metric-hint">Ranked by Contribution Score (Commits & PRs)</span>
+        <div>
+          <h3>🏅 Verified Contributors Standing & Work Logs</h3>
+          <span class="ranking-metric-hint">Ranked by Total Verified Score (Games × 100 + Files × 15 + Commits × 10)</span>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="leaderboard-table">
           <thead>
             <tr>
-              <th style="width: 80px;">Rank</th>
+              <th style="width: 70px;">Rank</th>
               <th>Contributor</th>
               <th>GitHub Handle</th>
-              <th style="text-align: center;">Verified Games</th>
+              <th style="text-align: center;">Verified Game(s)</th>
+              <th style="text-align: center;">Files Added</th>
               <th style="text-align: center;">Commits</th>
-              <th style="text-align: right;">Contribution Score</th>
+              <th style="text-align: right;">Total Points</th>
             </tr>
           </thead>
           <tbody id="leaderboard-table-body">

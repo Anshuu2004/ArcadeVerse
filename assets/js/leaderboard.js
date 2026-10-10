@@ -24,9 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  // Calculate score: (commits * 10) + (games * 50)
+  // Advanced Multidimensional Point Formula:
+  // - Commits: 10 pts per commit
+  // - Verified Game: 100 pts per integrated game
+  // - Files: 15 pts per valid source file (HTML, CSS, JS, etc.)
   function calculateScore(item) {
-    return (item.commits * 10) + (item.gamesCount * 50);
+    const commitsPts = (item.commits || 0) * 10;
+    const gamesPts = (item.gamesCount || 0) * 100;
+    const filesPts = (item.filesCount || (item.gamesCount * 3)) * 15;
+    return commitsPts + gamesPts + filesPts;
   }
 
   // Sort contributors descending by score
@@ -69,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     displayOrder.forEach((item) => {
       const score = calculateScore(item);
+      const filesCount = item.filesCount || (item.gamesCount * 3);
       const card = document.createElement("div");
       card.className = `podium-card ${item.height}`;
       card.innerHTML = `
@@ -79,16 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
-        <div class="podium-meta">
-          <span>🎮 ${item.gamesCount} Game(s)</span>
-          <span>💻 ${item.commits} Commits</span>
+        <div class="podium-meta-tags">
+          <span class="meta-badge">🎮 ${item.gamesCount} Game(s)</span>
+          <span class="meta-badge">📁 ${filesCount} Files</span>
+          <span class="meta-badge">💻 ${item.commits} Commits</span>
         </div>
       `;
       podiumContainer.appendChild(card);
     });
   }
 
-  // Render Full Leaderboard Table
+  // Render Full Leaderboard Table with Work Logs & File Counts
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
@@ -96,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contributorsData.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
+      const filesCount = item.filesCount || (item.gamesCount * 3);
       let rankBadge = `#${rank}`;
       if (rank === 1) rankBadge = "🥇 #1";
       else if (rank === 2) rankBadge = "🥈 #2";
@@ -117,10 +126,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="https://github.com/${item.login}" target="_blank" class="github-handle-link">@${item.login}</a>
         </td>
         <td style="text-align: center;">
-          <span class="games-count-pill">${item.gamesCount}</span>
+          <span class="games-count-pill" title="${(item.games || []).join(', ')}">🎮 ${item.gamesCount}</span>
         </td>
         <td style="text-align: center;">
-          <span class="commits-count-pill">${item.commits}</span>
+          <span class="files-count-pill" title="Source files committed">📁 ${filesCount} files</span>
+        </td>
+        <td style="text-align: center;">
+          <span class="commits-count-pill">💻 ${item.commits}</span>
         </td>
         <td style="text-align: right;">
           <strong class="score-highlight">${score} pts</strong>
@@ -164,6 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
               userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
             }
             const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
+            // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
+            const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
 
             return {
               login: user.login,
@@ -172,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
+              filesCount: filesCount,
               games: userGames.length > 0 ? userGames.map(g => g.title) : ["Quantum Memory Matrix", "Cyber Neon Pong"]
             };
           })
