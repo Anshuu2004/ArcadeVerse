@@ -1,7 +1,11 @@
 /**
  * Hall of Fame Live GitHub Contributors & Ranking Engine
  * Fetches real contributor stats from GitHub API (or seamlessly merges with games-registry)
- * Calculates contribution scores, renders the Top 3 Podium, and displays sorted rankings.
+ * Features:
+ * - 15-minute TTL localStorage caching to eliminate GitHub API 403 Rate Limits
+ * - Real-time Contributor & Game Search Filtering
+ * - Tier Filter Pills (All, Admins, Arcade Devs, Milestone Contributors)
+ * - Platform Metrics Summary Calculations (Points, Games, Devs)
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,8 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const repoInput = document.getElementById("repo-input");
   const fetchBtn = document.getElementById("fetch-github-btn");
   const syncStatusText = document.getElementById("sync-status-text");
+  const searchInput = document.getElementById("contributor-search-input");
+  const tierPills = document.querySelectorAll("#leaderboard-tier-pills .pill");
 
-  // Initial verified contributors (Project Lead)
+  const metricTotalPoints = document.getElementById("metric-total-points");
+  const metricTotalGames = document.getElementById("metric-total-games");
+  const metricTotalContributors = document.getElementById("metric-total-contributors");
+
+  const CACHE_KEY = "arcadeverse_leaderboard_cache_v1";
+  const CACHE_TTL = 15 * 60 * 1000; // 15 minutes TTL
+
+  let searchQuery = "";
+  let currentTier = "all";
+
+  // Default verified base roster
   let contributorsData = [
     {
       login: "DebasmitaBose0",
@@ -24,77 +40,78 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates contributor roles based on overall commits and dedicated game contributions
+  // Dynamic Contributor Role & Tier Badge Engine
   function determineContributorRole(user) {
     if (user.login && user.login.toLowerCase() === "debasmitabose0") {
       return {
         role: "Project Admin & Lead",
         tagClass: "role-admin",
-        badge: "👑 Project Admin & Lead"
+        badge: "👑 Project Admin & Lead",
+        category: "admin"
       };
     }
 
     const totalCommits = user.contributions || user.commits || 0;
     const gamesCount = user.gamesCount || 0;
 
-    // Game folder focused developer tiers (calculated based on game count and activity)
     if (gamesCount >= 2 || totalCommits >= 30) {
       return {
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
-        badge: "⚡ Hyper Game Developer"
+        badge: "⚡ Hyper Game Developer",
+        category: "arcade"
       };
     }
     if (gamesCount >= 1 && totalCommits >= 15) {
       return {
         role: "Arcade Developer",
         tagClass: "role-arcade",
-        badge: "🕹️ Arcade Developer"
+        badge: "🕹️ Arcade Developer",
+        category: "arcade"
       };
     }
-
-    // Repository-wide commit milestone tiers
     if (totalCommits >= 50) {
       return {
         role: "Master Contributor",
         tagClass: "role-master",
-        badge: "🏆 Master Contributor"
+        badge: "🏆 Master Contributor",
+        category: "milestone"
       };
     }
     if (totalCommits >= 20) {
       return {
         role: "Elite Contributor",
         tagClass: "role-elite",
-        badge: "💎 Elite Contributor"
+        badge: "💎 Elite Contributor",
+        category: "milestone"
       };
     }
     if (totalCommits >= 10) {
       return {
         role: "Novice Contributor",
         tagClass: "role-novice",
-        badge: "🌟 Novice Contributor"
+        badge: "🌟 Novice Contributor",
+        category: "milestone"
       };
     }
     if (totalCommits >= 5) {
       return {
         role: "Project Contributor",
         tagClass: "role-project",
-        badge: "🚀 Project Contributor"
+        badge: "🚀 Project Contributor",
+        category: "milestone"
       };
     }
 
     return {
       role: "Active Contributor",
       tagClass: "role-active",
-      badge: "🌱 Active Contributor"
+      badge: "🌱 Active Contributor",
+      category: "active"
     };
   }
 
-  // Advanced Multidimensional Point Formula:
-  // - Commits: 10 pts per commit
-  // - Verified Game: 100 pts per integrated game
-  // - Files: 15 pts per valid source file (HTML, CSS, JS, etc.)
+  // Multidimensional Point Formula
   function calculateScore(item) {
     const commitsPts = (item.commits || 0) * 10;
     const gamesPts = (item.gamesCount || 0) * 100;
@@ -102,24 +119,33 @@ document.addEventListener("DOMContentLoaded", () => {
     return commitsPts + gamesPts + filesPts;
   }
 
-  // Sort contributors descending by score
   function sortContributors() {
     contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
   }
 
-  // Render Podium for Verified Contributors Only (No Dummies)
+  function updateMetricsSummary() {
+    let totalPoints = 0;
+    let totalGames = 0;
+
+    contributorsData.forEach((item) => {
+      totalPoints += calculateScore(item);
+      totalGames += (item.gamesCount || 0);
+    });
+
+    if (metricTotalPoints) metricTotalPoints.textContent = `${totalPoints}+`;
+    if (metricTotalGames) metricTotalGames.textContent = totalGames;
+    if (metricTotalContributors) metricTotalContributors.textContent = contributorsData.length;
+  }
+
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
 
-    if (contributorsData.length === 0) return;
-
-    // Filter to only real contributors
     const realContributors = contributorsData.filter(c => !c.isPlaceholder);
+    if (realContributors.length === 0) return;
 
     let displayOrder = [];
     if (realContributors.length === 1) {
-      // Only 1 contributor (Project Lead) -> display center solo champion podium
       displayOrder = [{
         ...realContributors[0],
         rank: 1,
@@ -132,7 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
       ];
     } else {
-      // 3 or more contributors
       displayOrder = [
         { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
         { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
@@ -151,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
         <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
-        <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
+        <a href="https://github.com/${item.login}" target="_blank" rel="noopener noreferrer" class="podium-handle">@${item.login}</a>
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
@@ -165,16 +190,44 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render Full Leaderboard Table with Work Logs & File Counts
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
 
-    contributorsData.forEach((item, index) => {
+    const filtered = contributorsData.filter((item) => {
+      const roleMeta = determineContributorRole(item);
+      const matchesSearch = 
+        item.name.toLowerCase().includes(searchQuery) ||
+        item.login.toLowerCase().includes(searchQuery) ||
+        (item.games && item.games.some(g => g.toLowerCase().includes(searchQuery)));
+
+      let matchesTier = true;
+      if (currentTier === "admin") matchesTier = roleMeta.category === "admin";
+      else if (currentTier === "arcade") matchesTier = roleMeta.category === "arcade";
+      else if (currentTier === "milestone") matchesTier = roleMeta.category === "milestone";
+
+      return matchesSearch && matchesTier;
+    });
+
+    if (filtered.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+            <strong>No contributors found matching "${searchQuery}"</strong>
+            <p style="font-size: 0.85rem; margin-top: 0.3rem;">Try clearing your search query or switching tier filters.</p>
+          </td>
+        </tr>
+      `;
+      return;
+    }
+
+    filtered.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
       const filesCount = item.filesCount || (item.gamesCount * 3);
       const roleMeta = determineContributorRole(item);
+
       let rankBadge = `#${rank}`;
       if (rank === 1) rankBadge = "🥇 #1";
       else if (rank === 2) rankBadge = "🥈 #2";
@@ -195,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </td>
         <td>
-          <a href="https://github.com/${item.login}" target="_blank" class="github-handle-link">@${item.login}</a>
+          <a href="https://github.com/${item.login}" target="_blank" rel="noopener noreferrer" class="github-handle-link">@${item.login}</a>
         </td>
         <td style="text-align: center;">
           <span class="games-count-pill" title="${(item.games || []).join(', ')}">🎮 ${item.gamesCount}</span>
@@ -214,20 +267,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Fetch Live Contributions directly from GitHub REST API
-  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse") {
+  // Live GitHub Contributions with LocalStorage TTL Cache
+  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse", forceRefresh = false) {
     if (!repo) return;
+
+    // Check LocalStorage Cache first
+    if (!forceRefresh) {
+      try {
+        const cachedRaw = localStorage.getItem(`${CACHE_KEY}_${repo}`);
+        if (cachedRaw) {
+          const cached = JSON.parse(cachedRaw);
+          const isFresh = (Date.now() - cached.timestamp) < CACHE_TTL;
+          if (isFresh && Array.isArray(cached.data) && cached.data.length > 0) {
+            contributorsData = cached.data;
+            if (syncStatusText) {
+              const minutesAgo = Math.max(1, Math.round((Date.now() - cached.timestamp) / 60000));
+              syncStatusText.textContent = `Cached GitHub data (${minutesAgo}m ago • ${contributorsData.length} verified)`;
+            }
+            sortContributors();
+            updateMetricsSummary();
+            renderPodium();
+            renderTable();
+            return;
+          }
+        }
+      } catch (cacheErr) {
+        console.warn("Could not read leaderboard cache:", cacheErr);
+      }
+    }
+
     if (syncStatusText) syncStatusText.textContent = `Connecting to GitHub API (${repo})...`;
 
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/contributors`);
+      if (response.status === 403) {
+        throw new Error("GitHub rate limit reached (60/hr). Using cached/fallback data.");
+      }
       if (!response.ok) {
         throw new Error(`GitHub returned status: ${response.status}`);
       }
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        // Fetch detailed profile for contributors to display accurate names
         const enrichedContributors = await Promise.all(
           data.map(async (user) => {
             let displayName = user.login;
@@ -238,17 +319,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (userData.name) displayName = userData.name;
               }
             } catch (e) {
-              console.warn("Could not fetch user details for", user.login);
+              // Ignore single user fetch error
             }
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
-            // Count registered games from GAMES_REGISTRY
             let userGames = [];
             if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
               userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
             }
             const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
-            // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
             const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
 
             const roleMeta = determineContributorRole({
@@ -272,28 +351,63 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         contributorsData = enrichedContributors;
-        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+
+        // Save fresh data to LocalStorage Cache
+        try {
+          localStorage.setItem(`${CACHE_KEY}_${repo}`, JSON.stringify({
+            timestamp: Date.now(),
+            data: contributorsData
+          }));
+        } catch (e) {
+          console.warn("Could not write to localStorage cache:", e);
+        }
+
+        if (syncStatusText) {
+          syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+        }
       }
     } catch (err) {
-      console.warn("GitHub API rate limit or network issue:", err);
-      if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
+      console.warn("GitHub API notice:", err.message);
+      if (syncStatusText) {
+        syncStatusText.textContent = `Offline/Cached state: ${repo} (Rate limit safe)`;
+      }
     }
 
     sortContributors();
+    updateMetricsSummary();
     renderPodium();
     renderTable();
   }
 
-  if (fetchBtn) {
-    fetchBtn.addEventListener("click", () => {
-      const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
-      fetchLiveGitHubContributions(repo);
+  // Filter Search
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderTable();
     });
   }
 
-  // Initial Run - auto-sync live repository data
+  // Tier Filter Pills
+  tierPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      tierPills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+      currentTier = pill.getAttribute("data-tier");
+      renderTable();
+    });
+  });
+
+  if (fetchBtn) {
+    fetchBtn.addEventListener("click", () => {
+      const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
+      fetchLiveGitHubContributions(repo, true);
+    });
+  }
+
+  // Initial Run
   sortContributors();
+  updateMetricsSummary();
   renderPodium();
   renderTable();
-  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse");
+  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse", false);
 });

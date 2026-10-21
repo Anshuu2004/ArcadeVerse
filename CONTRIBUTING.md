@@ -39,6 +39,8 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 | **⚡ Hyper Game Developer** | 2+ verified games | Authored multiple high-performance web arcade games |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
+>
+> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 15-minute TTL. Contributors can use real-time developer search and tier filter pills directly in [leaderboard.html](leaderboard.html).
 
 ---
 
