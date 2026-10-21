@@ -1800,12 +1800,12 @@ body {
   border-color: var(--border-medium);
 }
 
-/* Top 3 Podium Cards - Glittering Gold, Silver, Bronze */
+/* Top 3 Podium Cards - Static Base with Corner Gradient on Hover */
 .podium-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 2.4rem 1.8rem 1.8rem;
+  padding: 2.3rem 1.8rem 1.8rem;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -1813,151 +1813,126 @@ body {
   position: relative;
   width: 290px;
   box-shadow: var(--shadow-md);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
-.podium-card:hover {
-  transform: translateY(-8px);
-}
-
-/* 1st Place Golden Glitter Card */
+/* 1st Place (Gold) - Static base, corner gradient on hover */
 .podium-1, .podium-gold {
-  background: radial-gradient(ellipse at 50% -10%, rgba(255, 215, 0, 0.28) 0%, rgba(245, 158, 11, 0.08) 60%, var(--bg-surface) 100%);
-  border: 2px solid #ffd700;
-  box-shadow: 0 0 35px rgba(255, 215, 0, 0.35), 0 16px 45px rgba(0, 0, 0, 0.5);
-  animation: goldGlitterPulse 3.5s ease-in-out infinite alternate;
-  transform: translateY(-16px);
-}
-
-.podium-gold::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 235, 150, 0.22) 45%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 235, 150, 0.22) 55%,
-    transparent 80%
-  );
-  transform: rotate(25deg);
-  animation: shimmerSweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  pointer-events: none;
+  border: 1px solid rgba(234, 179, 8, 0.45);
+  transform: translateY(-12px);
 }
 
 .podium-1:hover, .podium-gold:hover {
-  transform: translateY(-24px) scale(1.02);
-  box-shadow: 0 0 50px rgba(255, 215, 0, 0.65), 0 20px 55px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.16) 0%, rgba(18, 24, 38, 0.98) 70%);
+  border-color: rgba(234, 179, 8, 0.85);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 25px rgba(234, 179, 8, 0.2);
+  transform: translateY(-18px);
 }
 
 .solo-podium {
   width: 350px;
   padding: 2.8rem 2.2rem 2.2rem;
-  border-color: #ffd700;
 }
 
-/* 2nd Place Silver Glitter Card */
+/* 2nd Place (Silver) - Static base, corner gradient on hover */
 .podium-2, .podium-silver {
-  background: radial-gradient(ellipse at 50% -10%, rgba(226, 232, 240, 0.26) 0%, rgba(148, 163, 184, 0.08) 60%, var(--bg-surface) 100%);
-  border: 2px solid #cbd5e1;
-  box-shadow: 0 0 28px rgba(203, 213, 225, 0.3), 0 14px 40px rgba(0, 0, 0, 0.5);
-  animation: silverGlitterPulse 4s ease-in-out infinite alternate;
-}
-
-.podium-silver::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.2) 45%,
-    rgba(255, 255, 255, 0.55) 50%,
-    rgba(255, 255, 255, 0.2) 55%,
-    transparent 80%
-  );
-  transform: rotate(25deg);
-  animation: shimmerSweep 5s cubic-bezier(0.4, 0, 0.2, 1) infinite 1.2s;
-  pointer-events: none;
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .podium-2:hover, .podium-silver:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 0 40px rgba(226, 232, 240, 0.55), 0 18px 48px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at top right, rgba(203, 213, 225, 0.16) 0%, rgba(18, 24, 38, 0.98) 70%);
+  border-color: rgba(203, 213, 225, 0.8);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(203, 213, 225, 0.15);
+  transform: translateY(-6px);
 }
 
-/* 3rd Place Bronze Glitter Card */
+/* 3rd Place (Bronze) - Static base, corner gradient on hover */
 .podium-3, .podium-bronze {
-  background: radial-gradient(ellipse at 50% -10%, rgba(217, 119, 6, 0.26) 0%, rgba(180, 83, 9, 0.08) 60%, var(--bg-surface) 100%);
-  border: 2px solid #d97706;
-  box-shadow: 0 0 28px rgba(217, 119, 6, 0.3), 0 14px 40px rgba(0, 0, 0, 0.5);
-  animation: bronzeGlitterPulse 4.5s ease-in-out infinite alternate;
-}
-
-.podium-bronze::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(251, 191, 36, 0.2) 45%,
-    rgba(255, 235, 175, 0.55) 50%,
-    rgba(251, 191, 36, 0.2) 55%,
-    transparent 80%
-  );
-  transform: rotate(25deg);
-  animation: shimmerSweep 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite 2.4s;
-  pointer-events: none;
+  border: 1px solid rgba(217, 119, 6, 0.4);
 }
 
 .podium-3:hover, .podium-bronze:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 0 40px rgba(245, 158, 11, 0.55), 0 18px 48px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at top right, rgba(217, 119, 6, 0.16) 0%, rgba(18, 24, 38, 0.98) 70%);
+  border-color: rgba(217, 119, 6, 0.8);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 119, 6, 0.15);
+  transform: translateY(-6px);
 }
 
-/* Shimmer & Pulse Keyframes */
-@keyframes shimmerSweep {
-  0% { transform: translateX(-150%) rotate(25deg); }
-  100% { transform: translateX(150%) rotate(25deg); }
+/* Open/Claimable Podium Spot (when community spots are still open) */
+.podium-open {
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.015);
+  opacity: 0.85;
 }
 
-@keyframes goldGlitterPulse {
-  0% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.35), 0 12px 35px rgba(0, 0, 0, 0.5); border-color: #ffd700; }
-  50% { box-shadow: 0 0 48px rgba(255, 215, 0, 0.7), 0 16px 50px rgba(0, 0, 0, 0.6); border-color: #ffe066; }
-  100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.35), 0 12px 35px rgba(0, 0, 0, 0.5); border-color: #ffd700; }
+.podium-open:hover {
+  background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.12) 0%, rgba(18, 24, 38, 0.98) 70%);
+  border-color: rgba(56, 189, 248, 0.5);
+  opacity: 1;
+  transform: translateY(-6px);
 }
 
-@keyframes silverGlitterPulse {
-  0% { box-shadow: 0 0 20px rgba(203, 213, 225, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5); border-color: #94a3b8; }
-  50% { box-shadow: 0 0 38px rgba(226, 232, 240, 0.6), 0 14px 40px rgba(0, 0, 0, 0.6); border-color: #f1f5f9; }
-  100% { box-shadow: 0 0 20px rgba(203, 213, 225, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5); border-color: #94a3b8; }
+.podium-open-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+  color: var(--text-muted);
 }
 
-@keyframes bronzeGlitterPulse {
-  0% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5); border-color: #b45309; }
-  50% { box-shadow: 0 0 38px rgba(245, 158, 11, 0.6), 0 14px 40px rgba(0, 0, 0, 0.6); border-color: #fcd34d; }
-  100% { box-shadow: 0 0 20px rgba(217, 119, 6, 0.25), 0 10px 30px rgba(0, 0, 0, 0.5); border-color: #b45309; }
+.podium-open-icon .lucide {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-/* Glittering Rank Badges on Cards */
+.podium-open-title {
+  font-size: 1.1rem;
+  font-family: var(--font-display);
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.podium-open-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 1.2rem;
+}
+
+.claim-spot-btn {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.claim-spot-btn:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+/* Rank Badges on Cards - Clean static appearance */
 .podium-badge {
   position: absolute;
   top: -14px;
   background: #0f121b;
   border: 1px solid var(--border-medium);
-  padding: 0.3rem 0.95rem;
+  padding: 0.28rem 0.95rem;
   border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 700;
@@ -1969,58 +1944,52 @@ body {
 }
 
 .podium-badge-gold {
-  background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #ffe066 100%) !important;
-  color: #0b0f19 !important;
-  border: 1px solid #fff5b8 !important;
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.7) !important;
-  font-weight: 800 !important;
+  background: #0f121b !important;
+  color: #fbbf24 !important;
+  border: 1px solid rgba(234, 179, 8, 0.6) !important;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.25) !important;
 }
 
 .podium-badge-silver {
-  background: linear-gradient(135deg, #ffffff 0%, #94a3b8 50%, #f1f5f9 100%) !important;
-  color: #0b0f19 !important;
-  border: 1px solid #ffffff !important;
-  box-shadow: 0 0 18px rgba(226, 232, 240, 0.7) !important;
-  font-weight: 800 !important;
+  background: #0f121b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(148, 163, 184, 0.6) !important;
+  box-shadow: 0 0 12px rgba(203, 213, 225, 0.2) !important;
 }
 
 .podium-badge-bronze {
-  background: linear-gradient(135deg, #f59e0b 0%, #92400e 50%, #fbbf24 100%) !important;
-  color: #ffffff !important;
-  border: 1px solid #fcd34d !important;
-  box-shadow: 0 0 18px rgba(217, 119, 6, 0.7) !important;
-  font-weight: 800 !important;
+  background: #0f121b !important;
+  color: #f59e0b !important;
+  border: 1px solid rgba(217, 119, 6, 0.6) !important;
+  box-shadow: 0 0 12px rgba(217, 119, 6, 0.25) !important;
 }
 
 .podium-badge .lucide {
-  width: 0.95rem;
-  height: 0.95rem;
+  width: 0.92rem;
+  height: 0.92rem;
 }
 
 .podium-avatar {
   width: 68px;
   height: 68px;
   border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   margin-bottom: 0.8rem;
   background: #1e2436;
 }
 
 .podium-1 .podium-avatar {
-  border-color: #ffd700;
-  box-shadow: 0 0 18px rgba(255, 215, 0, 0.5);
+  border-color: #fbbf24;
   width: 78px;
   height: 78px;
 }
 
 .podium-2 .podium-avatar {
   border-color: #cbd5e1;
-  box-shadow: 0 0 15px rgba(203, 213, 225, 0.4);
 }
 
 .podium-3 .podium-avatar {
   border-color: #d97706;
-  box-shadow: 0 0 15px rgba(217, 119, 6, 0.4);
 }
 
 .podium-name {
@@ -2847,17 +2816,25 @@ body {
   padding: 1.6rem 1.4rem;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .point-rule-card:hover {
   transform: translateY(-4px);
-  border-color: var(--border-medium);
+  border-color: rgba(56, 189, 248, 0.45);
+  background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.12) 0%, var(--bg-surface-elevated) 65%);
 }
 
 .point-rule-card.highlight-rule {
-  border-color: rgba(59, 130, 246, 0.4);
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), var(--bg-surface-elevated));
+  border-color: rgba(234, 179, 8, 0.35);
+  background: var(--bg-surface-elevated);
+}
+
+.point-rule-card.highlight-rule:hover {
+  border-color: rgba(234, 179, 8, 0.7);
+  background: radial-gradient(circle at top right, rgba(234, 179, 8, 0.14) 0%, var(--bg-surface-elevated) 65%);
 }
 
 .point-rule-icon {

@@ -1,8 +1,13 @@
 /**
  * Hall of Fame Live GitHub Contributors & Ranking Engine
  * Fetches real contributor stats from GitHub API (or seamlessly merges with games-registry)
- * Calculates contribution scores, renders the Top 3 Podium with Glittering Gold/Silver/Bronze cards,
- * differentiates Admin vs Contributors, awards dual-category badges, and provides direct GitHub Activity links.
+ * 
+ * Architecture:
+ * - Admin (Project Lead) has a dedicated separate rank card at the top.
+ * - Podium and Leaderboard Table display ONLY Community Contributors.
+ * - Cards are static by default, with an elegant corner gradient radiating on hover.
+ * - Dual-category highest badges: Displays highest Game Dedicated badge and highest Milestone badge.
+ * - Direct GitHub Activity column with clickable links for Issues and PRs.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,24 +16,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const repoInput = document.getElementById("repo-input");
   const fetchBtn = document.getElementById("fetch-github-btn");
   const syncStatusText = document.getElementById("sync-status-text");
-  const filterTabs = document.querySelectorAll(".leaderboard-filter-tab");
+  const adminMetaInfo = document.getElementById("admin-meta-info");
 
-  let currentFilter = "all"; // "all" | "community" | "admin"
-
-  // Initial verified contributors (Project Lead)
+  // Initial verified contributors from repository
   let contributorsData = [
     {
       login: "DebasmitaBose0",
       name: "Debasmita Bose",
       role: "Project Admin & Lead",
       avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
-      commits: 19,
+      commits: 37,
       gamesCount: 2,
       mechanicsBonus: 2,
       platformPRs: 2,
       qualityPRs: 0,
       bonusPts: 0,
       games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
+    },
+    {
+      login: "joitapaul",
+      name: "Joita Paul",
+      role: "Active Contributor",
+      avatar_url: "https://avatars.githubusercontent.com/u/104523098?v=4",
+      commits: 1,
+      gamesCount: 0,
+      mechanicsBonus: 0,
+      platformPRs: 0,
+      qualityPRs: 1,
+      bonusPts: 0,
+      games: []
     }
   ];
 
@@ -45,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const bonus = item.bonusPts || 0;
 
     const calculated = gamePts + mechanicsPts + platformPts + qualityPts + bonus;
-    // Fallback for new GitHub contributors not yet registered in CONTRIBUTORS_REGISTRY
+    // Fallback for new GitHub contributors who submitted PRs/commits
     if (calculated === 0 && item.commits > 0) {
-      return Math.min(item.commits * 10, 50);
+      return Math.min(item.commits * 15, 60);
     }
     return calculated;
   }
@@ -61,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const badges = [];
     const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
 
-    // 1. Leadership Badge
+    // 1. Leadership Badge (Only for Project Lead)
     if (isAdmin) {
       badges.push({
         role: "Project Admin & Lead",
@@ -155,12 +171,14 @@ document.addEventListener("DOMContentLoaded", () => {
     return badges;
   }
 
-  // Sort contributors descending by score
-  function sortContributors() {
-    contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
+  // Get Community Contributors (Excludes Admin who has their separate dedicated rank)
+  function getCommunityContributors() {
+    return contributorsData
+      .filter(item => item.login && item.login.toLowerCase() !== "debasmitabose0")
+      .sort((a, b) => calculateScore(b) - calculateScore(a));
   }
 
-  // Format work breakdown label
+  // Format effort & work breakdown label
   function getWorkBreakdown(item) {
     const games = item.gamesCount || 0;
     const feat = item.platformPRs || 0;
@@ -168,67 +186,70 @@ document.addEventListener("DOMContentLoaded", () => {
     return `Games: ${games} • Feat: ${feat} • Fix: ${fix}`;
   }
 
-  // Render Podium with Glittering Gold, Silver, and Bronze cards
+  // Render Top 3 Community Contributors Podium
+  // Static cards with corner gradient radiating on hover
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
 
-    if (contributorsData.length === 0) return;
+    const communityContributors = getCommunityContributors();
 
-    // Filter to only real contributors
-    const realContributors = contributorsData.filter(c => !c.isPlaceholder);
+    // Podium configuration for positions: 2nd on left, 1st in center, 3rd on right
+    const podiumSlots = [
+      { rank: 2, badgeType: "silver", badgeLabel: "2nd Contributor", badgeIcon: "medal", cardClass: "podium-2 podium-silver", user: communityContributors[1] || null },
+      { rank: 1, badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown", cardClass: "podium-1 podium-gold", user: communityContributors[0] || null },
+      { rank: 3, badgeType: "bronze", badgeLabel: "3rd Contributor", badgeIcon: "medal", cardClass: "podium-3 podium-bronze", user: communityContributors[2] || null }
+    ];
 
-    let displayOrder = [];
-    if (realContributors.length === 1) {
-      // 1 Contributor -> Center golden solo champion podium
-      displayOrder = [{
-        ...realContributors[0],
-        rank: 1,
-        badgeType: "gold",
-        badgeLabel: "1st Champion",
-        badgeIcon: "crown",
-        cardClass: "podium-1 podium-gold solo-podium"
-      }];
-    } else if (realContributors.length === 2) {
-      displayOrder = [
-        { ...realContributors[0], rank: 1, badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown", cardClass: "podium-1 podium-gold" },
-        { ...realContributors[1], rank: 2, badgeType: "silver", badgeLabel: "2nd Place", badgeIcon: "medal", cardClass: "podium-2 podium-silver" }
-      ];
-    } else {
-      // Standard 3-position podium: 2nd on left, 1st in center, 3rd on right
-      displayOrder = [
-        { ...realContributors[1], rank: 2, badgeType: "silver", badgeLabel: "2nd Place", badgeIcon: "medal", cardClass: "podium-2 podium-silver" },
-        { ...realContributors[0], rank: 1, badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown", cardClass: "podium-1 podium-gold" },
-        { ...realContributors[2], rank: 3, badgeType: "bronze", badgeLabel: "3rd Place", badgeIcon: "medal", cardClass: "podium-3 podium-bronze" }
-      ];
-    }
-
-    displayOrder.forEach((item) => {
-      const score = calculateScore(item);
-      const badges = getContributorBadges(item);
+    podiumSlots.forEach(slot => {
       const card = document.createElement("div");
-      card.className = `podium-card ${item.cardClass}`;
-      card.innerHTML = `
-        <div class="podium-badge podium-badge-${item.badgeType}">
-          <i data-lucide="${item.badgeIcon}"></i> ${item.badgeLabel}
-        </div>
-        <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
-        <h3 class="podium-name">${item.name}</h3>
-        <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
-        
-        <div class="podium-badges-container">
-          ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
-        </div>
 
-        <div class="podium-score-pill">
-          <strong>${score}</strong> pts
-        </div>
-        <div class="podium-meta-tags">
-          <span class="meta-badge"><i data-lucide="gamepad-2"></i> ${item.gamesCount} Game(s)</span>
-          <span class="meta-badge"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
-          <span class="meta-badge"><i data-lucide="git-commit"></i> ${item.commits} Commits</span>
-        </div>
-      `;
+      if (slot.user) {
+        // Active Contributor Card
+        const item = slot.user;
+        const score = calculateScore(item);
+        const badges = getContributorBadges(item);
+
+        card.className = `podium-card ${slot.cardClass}`;
+        card.innerHTML = `
+          <div class="podium-badge podium-badge-${slot.badgeType}">
+            <i data-lucide="${slot.badgeIcon}"></i> ${slot.badgeLabel}
+          </div>
+          <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
+          <h3 class="podium-name">${item.name}</h3>
+          <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
+          
+          <div class="podium-badges-container">
+            ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
+          </div>
+
+          <div class="podium-score-pill">
+            <strong>${score}</strong> pts
+          </div>
+          <div class="podium-meta-tags">
+            <span class="meta-badge"><i data-lucide="gamepad-2"></i> ${item.gamesCount} Game(s)</span>
+            <span class="meta-badge"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
+            <span class="meta-badge"><i data-lucide="git-commit"></i> ${item.commits} Commits</span>
+          </div>
+        `;
+      } else {
+        // Open / Claimable Podium Spot
+        card.className = "podium-card podium-open";
+        card.innerHTML = `
+          <div class="podium-badge">
+            <i data-lucide="award"></i> Rank #${slot.rank} Open
+          </div>
+          <div class="podium-open-icon">
+            <i data-lucide="trophy"></i>
+          </div>
+          <h3 class="podium-open-title">Open Contributor Spot</h3>
+          <p class="podium-open-desc">Rank #${slot.rank} is open! Build a game or contribute features to claim your place on the podium.</p>
+          <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="claim-spot-btn">
+            <i data-lucide="plus-circle"></i> Claim Rank #${slot.rank}
+          </a>
+        `;
+      }
+
       podiumContainer.appendChild(card);
     });
 
@@ -237,24 +258,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render Full Leaderboard Table with Work Logs & Activity Links
+  // Render Full Contributor Standings Table (Exclusively Community Contributors)
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
 
-    // Filter contributors based on selected tab
-    const filteredContributors = contributorsData.filter(item => {
-      const isAdmin = item.login && item.login.toLowerCase() === "debasmitabose0";
-      if (currentFilter === "community") return !isAdmin;
-      if (currentFilter === "admin") return isAdmin;
-      return true;
-    });
+    const communityContributors = getCommunityContributors();
 
-    if (filteredContributors.length === 0) {
+    if (communityContributors.length === 0) {
       const emptyTr = document.createElement("tr");
       emptyTr.innerHTML = `
         <td colspan="9" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
-          <i data-lucide="info" style="margin-right: 0.4rem;"></i> No contributors found in this category.
+          <i data-lucide="sparkles" style="margin-right: 0.4rem;"></i> Awaiting first community PR merges! Be the first contributor to claim Rank #1.
         </td>
       `;
       tableBody.appendChild(emptyTr);
@@ -262,16 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    filteredContributors.forEach((item, index) => {
+    communityContributors.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
       const badges = getContributorBadges(item);
-      const isAdmin = item.login && item.login.toLowerCase() === "debasmitabose0";
 
       let rankBadgeHtml = `<span class="rank-tag">#${rank}</span>`;
-      if (isAdmin && currentFilter === "all") {
-        rankBadgeHtml = `<span class="rank-tag rank-admin" title="Project Maintainer & Lead Architect"><i data-lucide="shield-check"></i> ADMIN</span>`;
-      } else if (rank === 1) {
+      if (rank === 1) {
         rankBadgeHtml = `<span class="rank-tag rank-1"><i data-lucide="trophy"></i> #1</span>`;
       } else if (rank === 2) {
         rankBadgeHtml = `<span class="rank-tag rank-2"><i data-lucide="medal"></i> #2</span>`;
@@ -280,8 +292,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const tr = document.createElement("tr");
-      if (isAdmin) tr.className = "admin-row";
-
       tr.innerHTML = `
         <td>${rankBadgeHtml}</td>
         <td>
@@ -332,16 +342,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Filter Tab Controls
-  if (filterTabs) {
-    filterTabs.forEach(tab => {
-      tab.addEventListener("click", () => {
-        filterTabs.forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
-        currentFilter = tab.getAttribute("data-filter") || "all";
-        renderTable();
-      });
-    });
+  // Update Dedicated Admin Card at the top with live metadata
+  function updateAdminSpotlight(adminUser) {
+    if (!adminUser || !adminMetaInfo) return;
+    const score = calculateScore(adminUser);
+    adminMetaInfo.textContent = `${adminUser.commits} Commits • ${adminUser.gamesCount} Games • ${score} pts`;
   }
 
   // Fetch Live Contributions directly from GitHub REST API
@@ -357,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        // Fetch detailed profile for contributors to display accurate names
+        // Enrich profiles to resolve display names and cross-reference games/PRs
         const enrichedContributors = await Promise.all(
           data.map(async (user) => {
             let displayName = user.login;
@@ -388,10 +393,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const mechanicsBonus = registryEntry ? (registryEntry.mechanicsBonus || 0) : (isAdmin ? 2 : 0);
             const platformPRs = registryEntry ? (registryEntry.platformPRs || 0) : (isAdmin ? 2 : 0);
-            const qualityPRs = registryEntry ? (registryEntry.qualityPRs || 0) : 0;
+            const qualityPRs = registryEntry ? (registryEntry.qualityPRs || 0) : (isAdmin ? 0 : 1);
             const bonusPts = registryEntry ? (registryEntry.bonusPts || 0) : 0;
 
-            const contributorObj = {
+            return {
               login: user.login,
               name: registryEntry ? registryEntry.name : displayName,
               avatar_url: user.avatar_url,
@@ -403,20 +408,23 @@ document.addEventListener("DOMContentLoaded", () => {
               bonusPts: bonusPts,
               games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
             };
-
-            return contributorObj;
           })
         );
 
         contributorsData = enrichedContributors;
-        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+
+        const adminUser = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
+        if (adminUser) updateAdminSpotlight(adminUser);
+
+        const communityCount = contributorsData.filter(c => c.login.toLowerCase() !== "debasmitabose0").length;
+        if (syncStatusText) syncStatusText.textContent = `GitHub Live Sync: 1 Admin Lead • ${communityCount} Community Contributor(s) active`;
       }
     } catch (err) {
       console.warn("GitHub API rate limit or network issue:", err);
       if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
     }
 
-    sortContributors();
+    // Render Clean Contributor Views
     renderPodium();
     renderTable();
   }
@@ -428,8 +436,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initial Run - auto-sync live repository data
-  sortContributors();
+  // Initial Run
+  const initialAdmin = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
+  if (initialAdmin) updateAdminSpotlight(initialAdmin);
   renderPodium();
   renderTable();
   fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse");

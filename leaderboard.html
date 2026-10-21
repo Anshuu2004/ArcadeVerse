@@ -47,17 +47,23 @@
       <p class="section-subtitle">Real-time contribution rankings calculated from verified commits, PR merges, and games registered in NSOC '26.</p>
     </div>
 
-    <!-- Admin Spotlight Card -->
+    <!-- Dedicated Admin & Project Architect Rank (Separate from Community Contributor Ranks) -->
     <div class="admin-spotlight-banner">
       <div class="admin-badge-circle"><i data-lucide="crown"></i></div>
       <div style="flex-grow: 1;">
-        <span class="role-badge">PROJECT LEAD & LEAD ARCHITECT</span>
-        <h2>Debasmita Bose</h2>
+        <span class="role-badge"><i data-lucide="shield-check"></i> PROJECT LEAD & LEAD ARCHITECT</span>
+        <h2>Debasmita Bose <a href="https://github.com/DebasmitaBose0" target="_blank" class="admin-github-link">@DebasmitaBose0</a></h2>
         <p>Architect of ArcadeVerse core platform, Quantum Memory Matrix starter game, and NSOC '26 contributor framework.</p>
+        <div class="admin-badges-row" style="margin-top: 0.6rem; display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          <span class="role-pill-badge role-admin"><i data-lucide="shield-check"></i> Project Admin & Lead</span>
+          <span class="role-pill-badge role-arcade"><i data-lucide="gamepad-2"></i> Arcade Developer</span>
+          <span class="role-pill-badge role-elite"><i data-lucide="gem"></i> Elite Contributor</span>
+        </div>
       </div>
       <div class="admin-stats-badge">
-        <span class="score-title">ADMIN RANK</span>
-        <span class="score-num">#1</span>
+        <span class="score-title">PERMANENT LEAD</span>
+        <span class="score-num"><i data-lucide="crown"></i> ADMIN</span>
+        <span class="admin-sub-stat" id="admin-meta-info" style="display: block; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">37 Commits • 2 Games</span>
       </div>
     </div>
 
@@ -246,17 +252,12 @@
       <!-- Injected by leaderboard.js -->
     </div>
 
-    <!-- Comprehensive Leaderboard Table -->
+    <!-- Community Contributors Leaderboard Table -->
     <div class="leaderboard-table-card">
       <div class="table-header">
         <div>
-          <h3><i data-lucide="medal"></i> Verified Contributors Standing & Work Logs</h3>
+          <h3><i data-lucide="medal"></i> Verified Community Contributors Standing</h3>
           <span class="ranking-metric-hint">Ranked by In-App Arcade Score • Evaluated from Verified Games (+100), Mechanics (+30), Platform (+25), and Quality (+15)</span>
-        </div>
-        <div class="leaderboard-filter-tabs" id="leaderboard-filter-tabs">
-          <button class="leaderboard-filter-tab active" data-filter="all"><i data-lucide="users"></i> All Rankings</button>
-          <button class="leaderboard-filter-tab" data-filter="community"><i data-lucide="award"></i> Community Contributors</button>
-          <button class="leaderboard-filter-tab" data-filter="admin"><i data-lucide="shield-check"></i> Project Maintainers</button>
         </div>
       </div>
       <div class="table-responsive">
