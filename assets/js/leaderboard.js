@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates dedicated game titles (1, 2, 3-4, 5+) and repository point milestones (25, 60, 125, 250)
+  // Evaluates dedicated game titles (1, 2-4, 5-9, 10+) and repository point milestones (25, 100, 250, 500)
   function determineContributorRole(user) {
     if (user.login && user.login.toLowerCase() === "debasmitabose0") {
       return {
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const score = calculateScore(user);
 
     // 1. Dedicated Game Developer Tiers (Earned ONLY by creating games!)
-    if (gamesCount >= 5) {
+    if (gamesCount >= 10) {
       return {
         role: "Master Game Architect",
         tagClass: "role-master-architect",
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "crown"
       };
     }
-    if (gamesCount >= 3) {
+    if (gamesCount >= 5) {
       return {
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "zap"
       };
     }
-    if (gamesCount === 2) {
+    if (gamesCount >= 2) {
       return {
         role: "Arcade Developer",
         tagClass: "role-arcade",
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 2. Repository-wide Arcade Score Milestone Tiers
-    if (score >= 250) {
+    if (score >= 500) {
       return {
         role: "Master Contributor",
         tagClass: "role-master",
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "trophy"
       };
     }
-    if (score >= 125) {
+    if (score >= 250) {
       return {
         role: "Elite Contributor",
         tagClass: "role-elite",
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "gem"
       };
     }
-    if (score >= 60) {
+    if (score >= 100) {
       return {
         role: "Novice Contributor",
         tagClass: "role-novice",
