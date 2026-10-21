@@ -76,11 +76,13 @@ Points are assigned strictly by the **Level label** that the Project Admin puts 
 # 🚀 **STEP-BY-STEP: YOUR FIRST MERGED PR**
 
 1. **Create an issue.** Find a bug or pick an open issue, raise it, and **wait for assignment**.
-2. **Strict 3-Day Deadline:** Once an issue is assigned to you, you **MUST submit your Pull Request within 3 days (72 hours)**. Inactive assignments past 3 days will be unassigned and reassigned to other contributors!
+2. **Issue Assignment & Submission Timeline (5-Day Target / 7-Day Auto-Unassign):**
+   - **Target Deadline (5 Days):** Once an issue is assigned to you, you should submit your Pull Request within **5 days (120 hours)**. If there is no progress or PR submitted by day 5, a warning/check-in will be issued.
+   - **Official NSoC Inactivity Policy (7 Days):** As per official NSoC rules, if an assigned contributor remains inactive with no PR submitted after **7 days**, the issue will automatically be unassigned and reassigned to another contributor waiting in line.
 3. **Fork and clone.** Fork the repo, clone it, and add the upstream remote.
 4. **Create a separate branch.** Never work directly on `main`! Create a dedicated branch per issue — e.g. `fix/issue-123` or `feat/game-name`.
 5. **Code and commit.** Follow this guide, keep changes inside your dedicated folder, test thoroughly, and write clear commit messages.
-6. **Open the PR.** Push, open a PR within the 3-day window, add `Closes #123` and a short summary. Include `nsoc26`.
+6. **Open the PR.** Push, open a PR within the 5-day window, add `Closes #123` and a short summary. Include `nsoc26`.
 7. **Review and merge.** Address feedback promptly. The Project Admin merges, adds labels, and your points hit the leaderboard.
 
 **Quick commands:**
@@ -90,7 +92,7 @@ git commit -m "Fix #123: <short description>"
 git push origin fix/issue-123
 ```
 
-**Flow:** Find Issue → Wait for Assignment → Fork & Clone → Create Separate Branch → Code (Submit within 3 Days) → Test → Commit → Push → Open PR → Review → Merge ✅
+**Flow:** Find Issue → Wait for Assignment → Fork & Clone → Create Separate Branch → Code (Submit within 5 Days) → Test → Commit → Push → Open PR → Review → Merge ✅
 
 ---
 
