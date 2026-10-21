@@ -7,6 +7,8 @@
  * 1. Place your game inside `games/<your-game-name>/` (or `games/<game-name>-<your-name>/`)
  * 2. Add an entry to the `GAMES_REGISTRY` list below.
  * 3. Add your details to `CONTRIBUTORS_REGISTRY` and `CONTRIBUTORS.md`.
+ *
+ * Valid categories: Arcade | Puzzle | Action | Retro | Strategy | Rhythm
  */
 
 const GAMES_REGISTRY = [
