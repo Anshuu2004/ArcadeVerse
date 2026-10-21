@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   // Calculate ArcadeVerse Score:
-  // - Verified Game: 100 pts per integrated game in games/
+  // - Verified Game: 100 pts per integrated game in the 'games' folder
   // - Mechanics & Physics Bonus: 30 pts per advanced game
   // - Platform Feature & UI: 25 pts per core feature PR
   // - Quality & Bug Fixes: 15 pts per bug fix / maintenance PR
@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
   //    - Hyper Game Developer (5–9 Verified Games • 500–999 pts)
   //    - Arcade Developer (2–4 Verified Games • 200–499 pts)
   //    - Arcade Explorer (1 Verified Game • 100–199 pts)
-  // 3. Platform & Core Engineering Category:
+  // 3. Platform & Core Engineering Category (except the 'games' folder, in the codebase modification):
   //    - Master Core Architect (10+ Merged PRs • 300+ pts)
   //    - Elite Contributor (6–9 Merged PRs • 150–299 pts)
   //    - Platform Contributor (3–5 Merged PRs • 50–149 pts)
