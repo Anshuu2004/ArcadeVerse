@@ -4,6 +4,7 @@
  * - Interactive Idea Roulette Spinner
  * - Full 20+ idea catalog with search/filter
  * - "Claim" bridge to PR Helper
+ * - Pure Lucide Icons (zero raw emojis)
  */
 
 const IDEA_VAULT = [
@@ -11,7 +12,7 @@ const IDEA_VAULT = [
     id: "flappy-cyber",
     title: "Flappy Cyber Jet",
     category: "Action",
-    icon: "🚀",
+    lucideIcon: "rocket",
     difficulty: "Beginner",
     description: "Endless side-scrolling obstacle avoider. Control vertical thrusters with spacebar or screen taps.",
     tags: ["HTML5 Canvas", "Gravity Physics", "High Score LocalStorage"],
@@ -21,7 +22,7 @@ const IDEA_VAULT = [
     id: "quantum-2048",
     title: "Quantum 2048",
     category: "Puzzle",
-    icon: "🔢",
+    lucideIcon: "hash",
     difficulty: "Intermediate",
     description: "Slide and fuse elements on a 4x4 grid to unlock the ultimate quantum 2048 molecule.",
     tags: ["CSS Grid", "Matrix Slide Logic", "Smooth Transitions"],
@@ -31,7 +32,7 @@ const IDEA_VAULT = [
     id: "neon-pong",
     title: "Cyber Pong (PvP & AI)",
     category: "Retro",
-    icon: "🏓",
+    lucideIcon: "gamepad-2",
     difficulty: "Beginner",
     description: "Dual-paddle glowing pong with adjustable computer AI bot difficulty and 2-player local mode.",
     tags: ["Canvas 2D", "Collision Physics", "Bot AI Logic"],
@@ -41,7 +42,7 @@ const IDEA_VAULT = [
     id: "space-invaders",
     title: "Space Invaders 2026",
     category: "Action",
-    icon: "🛸",
+    lucideIcon: "crosshair",
     difficulty: "Intermediate",
     description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
     tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
@@ -51,7 +52,7 @@ const IDEA_VAULT = [
     id: "cyber-stacker",
     title: "Cyber Tower Stacker",
     category: "Arcade",
-    icon: "🏢",
+    lucideIcon: "layers",
     difficulty: "Beginner",
     description: "Stack swinging blocks with precision timing. Unaligned edges are sliced off as the tower grows!",
     tags: ["Timing Reflex", "Precision Slicing", "Canvas"],
@@ -61,7 +62,7 @@ const IDEA_VAULT = [
     id: "whack-a-bug",
     title: "Whack-A-Bug Developer",
     category: "Arcade",
-    icon: "🐛",
+    lucideIcon: "bug",
     difficulty: "Beginner",
     description: "Whack unexpected production bugs emerging from server racks before CPU temperature reaches 100°C!",
     tags: ["DOM Events", "Timer Intervals", "Audio Cues"],
@@ -71,7 +72,7 @@ const IDEA_VAULT = [
     id: "cryptic-wordle",
     title: "Cryptic Wordle Hack",
     category: "Puzzle",
-    icon: "🔤",
+    lucideIcon: "type",
     difficulty: "Intermediate",
     description: "Guess the secret 5-letter tech keyword in 6 tries with green and amber feedback clues.",
     tags: ["String Algorithms", "Virtual Keyboard GUI", "State Machine"],
@@ -81,7 +82,7 @@ const IDEA_VAULT = [
     id: "astro-jump",
     title: "Astro Infinite Jumper",
     category: "Arcade",
-    icon: "🦘",
+    lucideIcon: "arrow-up-circle",
     difficulty: "Intermediate",
     description: "Bounce continuously upward across floating space platforms, collecting jetpacks and dodging black holes.",
     tags: ["Vertical Camera Scroll", "Jump Velocity", "Procedural Platforms"],
@@ -91,7 +92,7 @@ const IDEA_VAULT = [
     id: "quantum-minesweeper",
     title: "Quantum Minesweeper",
     category: "Puzzle",
-    icon: "💣",
+    lucideIcon: "bomb",
     difficulty: "Intermediate",
     description: "Classic minefield sweeper with modern flat aesthetic. Flag danger tiles and calculate risk tiles.",
     tags: ["Recursive Flood Fill", "Right-Click Handling", "Grid Engine"],
@@ -101,7 +102,7 @@ const IDEA_VAULT = [
     id: "synth-says",
     title: "Synth-Wave Simon Says",
     category: "Retro",
-    icon: "🎹",
+    lucideIcon: "music",
     difficulty: "Beginner",
     description: "Watch and listen to synthesizer sound sequences, then repeat the exact musical pattern under timer.",
     tags: ["Web Audio API", "Array Queues", "Memory Challenge"],
@@ -117,16 +118,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const ideaDescription = document.getElementById("idea-description");
   const ideaTechTags = document.getElementById("idea-tech-tags");
   const rollIdeaBtn = document.getElementById("roll-idea-btn");
-  const claimIdeaBtn = document.getElementById("claim-idea-btn");
   const catalogGrid = document.getElementById("ideas-catalog-grid");
 
   function displayRouletteIdea(index) {
     const item = IDEA_VAULT[index];
-    ideaTitle.textContent = item.title;
-    ideaCategory.textContent = `${item.category} • ${item.difficulty}`;
-    ideaIcon.textContent = item.icon;
-    ideaDescription.textContent = item.description;
-    ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    if (!item) return;
+    if (ideaTitle) ideaTitle.textContent = item.title;
+    if (ideaCategory) ideaCategory.textContent = `${item.category} • ${item.difficulty}`;
+    if (ideaIcon) ideaIcon.innerHTML = `<i data-lucide="${item.lucideIcon || 'gamepad-2'}"></i>`;
+    if (ideaDescription) ideaDescription.textContent = item.description;
+    if (ideaTechTags) ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
   if (rollIdeaBtn) {
@@ -136,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render full catalog as disabled trial/reference concepts
+  // Render full catalog as reference concepts
   if (catalogGrid) {
     catalogGrid.innerHTML = "";
     IDEA_VAULT.forEach((idea) => {
@@ -144,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.className = "idea-catalog-card trial-card";
       card.innerHTML = `
         <div class="idea-cat-header">
-          <span class="idea-icon-sm">${idea.icon}</span>
+          <span class="idea-icon-sm"><i data-lucide="${idea.lucideIcon || 'gamepad-2'}"></i></span>
           <span class="difficulty-badge ${idea.difficulty.toLowerCase()}">${idea.difficulty}</span>
         </div>
         <h3>${idea.title}</h3>
@@ -159,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </ul>
         </div>
         <button class="btn btn-secondary btn-sm btn-disabled-concept" disabled title="This is a reference blueprint for trial purposes only.">
-          🔒 Example Concept (Disabled)
+          <i data-lucide="lock"></i> Example Concept (Disabled)
         </button>
       `;
 
@@ -169,4 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial display
   displayRouletteIdea(currentIndex);
+  if (window.lucide) {
+    lucide.createIcons();
+  }
 });

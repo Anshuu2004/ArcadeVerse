@@ -64,9 +64,52 @@
     <!-- Dedicated Point System & Work Scoring Architecture -->
     <section class="point-system-section">
       <div class="point-system-header">
-        <span class="section-tag">POINT & TIER SCORING SYSTEM</span>
+        <span class="section-tag"><i data-lucide="calculator"></i> SCORING & TIER ARCHITECTURE</span>
         <h2 class="point-system-title">How Contributor Work Is Evaluated & Rewarded</h2>
         <p class="point-system-subtitle">A multi-dimensional arcade scoring system designed to reward complete playable games, advanced game mechanics, platform features, and quality contributions.</p>
+      </div>
+
+      <!-- Scoring Distinction Notice: In-App Points vs Official NSoC Program Points -->
+      <div class="scoring-notice-banner">
+        <div class="notice-icon"><i data-lucide="scale"></i></div>
+        <div class="notice-content">
+          <h4>Notice: In-Application Arcade Score vs. Official NSoC '26 Program Points</h4>
+          <p>
+            <strong>In-Application Points:</strong> The points and badges shown across ArcadeVerse (+100, +30, +25, +15) are <em>gamified in-app arcade points</em> designed to rank contributors on the ArcadeVerse Hall of Fame, celebrate playable game creators, and grant dynamic developer badges.
+          </p>
+          <p>
+            <strong>Official NSoC '26 Program Points:</strong> Official Nexus Spring of Code winter edition points are <em>completely separate</em>. Official evaluation follows NSoC level labels on your merged GitHub Pull Requests (<strong>Level 1: 3 pts</strong>, <strong>Level 2: 5 pts</strong>, and <strong>Level 3: 10 pts</strong>) tracked by program mentors.
+          </p>
+        </div>
+      </div>
+
+      <!-- Architecture Explainer: How the Application Fetches & Calculates These Scores -->
+      <div class="engine-explainer-card">
+        <div class="engine-explainer-header">
+          <span class="section-tag"><i data-lucide="cpu"></i> DATA ENGINE ARCHITECTURE</span>
+          <h3>How the Application Fetches & Calculates Contributor Scores</h3>
+          <p>ArcadeVerse operates client-side with real-time verification and zero third-party databases. Here is how metrics are fetched and computed:</p>
+        </div>
+        <div class="engine-steps-grid">
+          <div class="engine-step-card">
+            <div class="step-num">01</div>
+            <div class="step-icon"><i data-lucide="github"></i></div>
+            <h4>Live GitHub REST API</h4>
+            <p>Queries <code>/repos/DebasmitaBose0/ArcadeVerse/contributors</code> to fetch verified merged contributors, commit counts, and profile avatars in real time.</p>
+          </div>
+          <div class="engine-step-card">
+            <div class="step-num">02</div>
+            <div class="step-icon"><i data-lucide="folder-check"></i></div>
+            <h4>Games & PR Registry Audit</h4>
+            <p>Cross-references <code>GAMES_REGISTRY</code> to verify playable games in <code>games/</code> and inspects tags for dynamic canvas mechanics, physics, and AI.</p>
+          </div>
+          <div class="engine-step-card">
+            <div class="step-num">03</div>
+            <div class="step-icon"><i data-lucide="award"></i></div>
+            <h4>Multi-Tier Badges Engine</h4>
+            <p>Computes the total score and automatically awards highest badges across both <em>Games Dedicated</em> and <em>Milestones</em> categories simultaneously.</p>
+          </div>
+        </div>
       </div>
 
       <div class="point-cards-grid">
@@ -106,7 +149,7 @@
       <!-- Live Ranks, Scores & Contributor Labels Table -->
       <div class="tier-breakdown-box">
         <div class="tier-box-header">
-          <h3>🎖️ Official Contributor Rank Badges & Recognition Labels</h3>
+          <h3><i data-lucide="award"></i> Official Contributor Rank Badges & Recognition Labels</h3>
           <p>Automatic status assigned on the podium and table based on verified contribution metrics:</p>
         </div>
         <div class="table-responsive">
@@ -207,21 +250,28 @@
     <div class="leaderboard-table-card">
       <div class="table-header">
         <div>
-          <h3>🏅 Verified Contributors Standing & Work Logs</h3>
-          <span class="ranking-metric-hint">Ranked by Verified NSoC Points (Level 1: 3pts, Level 2: 5pts, Level 3 / Games: 10pts)</span>
+          <h3><i data-lucide="medal"></i> Verified Contributors Standing & Work Logs</h3>
+          <span class="ranking-metric-hint">Ranked by In-App Arcade Score • Evaluated from Verified Games (+100), Mechanics (+30), Platform (+25), and Quality (+15)</span>
+        </div>
+        <div class="leaderboard-filter-tabs" id="leaderboard-filter-tabs">
+          <button class="leaderboard-filter-tab active" data-filter="all"><i data-lucide="users"></i> All Rankings</button>
+          <button class="leaderboard-filter-tab" data-filter="community"><i data-lucide="award"></i> Community Contributors</button>
+          <button class="leaderboard-filter-tab" data-filter="admin"><i data-lucide="shield-check"></i> Project Maintainers</button>
         </div>
       </div>
       <div class="table-responsive">
         <table class="leaderboard-table">
           <thead>
             <tr>
-              <th style="width: 70px;">Rank</th>
+              <th style="width: 80px;">Rank</th>
               <th>Contributor</th>
+              <th>Earned Badges</th>
               <th>GitHub Handle</th>
               <th style="text-align: center;">Verified Game(s)</th>
-              <th style="text-align: center;">Contribution Breakdown</th>
+              <th style="text-align: center;">Effort / Requirement</th>
               <th style="text-align: center;">Commits</th>
-              <th style="text-align: right;">Total Points</th>
+              <th style="text-align: center;">GitHub Activity</th>
+              <th style="text-align: right;">Arcade Points</th>
             </tr>
           </thead>
           <tbody id="leaderboard-table-body">

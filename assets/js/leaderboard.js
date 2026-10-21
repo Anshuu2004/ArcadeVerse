@@ -1,7 +1,8 @@
 /**
  * Hall of Fame Live GitHub Contributors & Ranking Engine
  * Fetches real contributor stats from GitHub API (or seamlessly merges with games-registry)
- * Calculates contribution scores, renders the Top 3 Podium, and displays sorted rankings.
+ * Calculates contribution scores, renders the Top 3 Podium with Glittering Gold/Silver/Bronze cards,
+ * differentiates Admin vs Contributors, awards dual-category badges, and provides direct GitHub Activity links.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const repoInput = document.getElementById("repo-input");
   const fetchBtn = document.getElementById("fetch-github-btn");
   const syncStatusText = document.getElementById("sync-status-text");
+  const filterTabs = document.querySelectorAll(".leaderboard-filter-tab");
+
+  let currentFilter = "all"; // "all" | "community" | "admin"
 
   // Initial verified contributors (Project Lead)
   let contributorsData = [
@@ -48,95 +52,107 @@ document.addEventListener("DOMContentLoaded", () => {
     return calculated;
   }
 
-  // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates dedicated game titles (1, 2-4, 5-9, 10+) and repository point milestones (25, 100, 250, 500)
-  function determineContributorRole(user) {
-    if (user.login && user.login.toLowerCase() === "debasmitabose0") {
-      return {
+  // Contributor Badges Engine:
+  // Evaluates and returns an array of the HIGHEST badges for EACH category:
+  // 1. Leadership Category (Project Admin & Lead)
+  // 2. Games Dedicated Category (Master Game Architect, Hyper Game Developer, Arcade Developer, Arcade Explorer)
+  // 3. General Milestones Category (Master, Elite, Novice, Project, Active Contributor)
+  function getContributorBadges(user) {
+    const badges = [];
+    const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
+
+    // 1. Leadership Badge
+    if (isAdmin) {
+      badges.push({
         role: "Project Admin & Lead",
         tagClass: "role-admin",
-        badge: "👑 Project Admin & Lead",
-        lucideIcon: "crown"
-      };
+        label: "Project Admin & Lead",
+        lucideIcon: "shield-check",
+        category: "Leadership"
+      });
     }
 
+    // 2. Dedicated Game Developer Tier (Earned ONLY by creating games!)
     const gamesCount = user.gamesCount || 0;
-    const score = calculateScore(user);
-
-    // 1. Dedicated Game Developer Tiers (Earned ONLY by creating games!)
     if (gamesCount >= 10) {
-      return {
+      badges.push({
         role: "Master Game Architect",
         tagClass: "role-master-architect",
-        badge: "👑 Master Game Architect",
-        lucideIcon: "crown"
-      };
-    }
-    if (gamesCount >= 5) {
-      return {
+        label: "Master Game Architect",
+        lucideIcon: "crown",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount >= 5) {
+      badges.push({
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
-        badge: "⚡ Hyper Game Developer",
-        lucideIcon: "zap"
-      };
-    }
-    if (gamesCount >= 2) {
-      return {
+        label: "Hyper Game Developer",
+        lucideIcon: "zap",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount >= 2) {
+      badges.push({
         role: "Arcade Developer",
         tagClass: "role-arcade",
-        badge: "🎮 Arcade Developer",
-        lucideIcon: "gamepad-2"
-      };
-    }
-    if (gamesCount === 1) {
-      return {
+        label: "Arcade Developer",
+        lucideIcon: "gamepad-2",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount === 1) {
+      badges.push({
         role: "Arcade Explorer",
         tagClass: "role-explorer",
-        badge: "🕹️ Arcade Explorer",
-        lucideIcon: "compass"
-      };
+        label: "Arcade Explorer",
+        lucideIcon: "compass",
+        category: "Games Dedicated"
+      });
     }
 
-    // 2. Repository-wide Arcade Score Milestone Tiers
+    // 3. Repository-wide Arcade Score Milestone Tiers
+    const score = calculateScore(user);
     if (score >= 500) {
-      return {
+      badges.push({
         role: "Master Contributor",
         tagClass: "role-master",
-        badge: "🏆 Master Contributor",
-        lucideIcon: "trophy"
-      };
-    }
-    if (score >= 250) {
-      return {
+        label: "Master Contributor",
+        lucideIcon: "trophy",
+        category: "General Milestones"
+      });
+    } else if (score >= 250) {
+      badges.push({
         role: "Elite Contributor",
         tagClass: "role-elite",
-        badge: "💎 Elite Contributor",
-        lucideIcon: "gem"
-      };
-    }
-    if (score >= 100) {
-      return {
+        label: "Elite Contributor",
+        lucideIcon: "gem",
+        category: "General Milestones"
+      });
+    } else if (score >= 100) {
+      badges.push({
         role: "Novice Contributor",
         tagClass: "role-novice",
-        badge: "🌟 Novice Contributor",
-        lucideIcon: "sparkles"
-      };
-    }
-    if (score >= 25) {
-      return {
+        label: "Novice Contributor",
+        lucideIcon: "sparkles",
+        category: "General Milestones"
+      });
+    } else if (score >= 25) {
+      badges.push({
         role: "Project Contributor",
         tagClass: "role-project",
-        badge: "🚀 Project Contributor",
-        lucideIcon: "rocket"
-      };
+        label: "Project Contributor",
+        lucideIcon: "rocket",
+        category: "General Milestones"
+      });
+    } else {
+      badges.push({
+        role: "Active Contributor",
+        tagClass: "role-active",
+        label: "Active Contributor",
+        lucideIcon: "sprout",
+        category: "Getting Started"
+      });
     }
 
-    return {
-      role: "Active Contributor",
-      tagClass: "role-active",
-      badge: "🌱 Active Contributor",
-      lucideIcon: "sprout"
-    };
+    return badges;
   }
 
   // Sort contributors descending by score
@@ -152,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return `Games: ${games} • Feat: ${feat} • Fix: ${fix}`;
   }
 
-  // Render Podium for Verified Contributors Only (No Dummies)
+  // Render Podium with Glittering Gold, Silver, and Bronze cards
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
@@ -164,38 +180,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let displayOrder = [];
     if (realContributors.length === 1) {
-      // Only 1 contributor (Project Lead) -> display center solo champion podium
+      // 1 Contributor -> Center golden solo champion podium
       displayOrder = [{
         ...realContributors[0],
         rank: 1,
-        badge: "👑 #1 Project Lead & Champion",
-        height: "podium-1 solo-podium"
+        badgeType: "gold",
+        badgeLabel: "1st Champion",
+        badgeIcon: "crown",
+        cardClass: "podium-1 podium-gold solo-podium"
       }];
     } else if (realContributors.length === 2) {
       displayOrder = [
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
+        { ...realContributors[0], rank: 1, badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown", cardClass: "podium-1 podium-gold" },
+        { ...realContributors[1], rank: 2, badgeType: "silver", badgeLabel: "2nd Place", badgeIcon: "medal", cardClass: "podium-2 podium-silver" }
       ];
     } else {
-      // 3 or more contributors
+      // Standard 3-position podium: 2nd on left, 1st in center, 3rd on right
       displayOrder = [
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" }
+        { ...realContributors[1], rank: 2, badgeType: "silver", badgeLabel: "2nd Place", badgeIcon: "medal", cardClass: "podium-2 podium-silver" },
+        { ...realContributors[0], rank: 1, badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown", cardClass: "podium-1 podium-gold" },
+        { ...realContributors[2], rank: 3, badgeType: "bronze", badgeLabel: "3rd Place", badgeIcon: "medal", cardClass: "podium-3 podium-bronze" }
       ];
     }
 
     displayOrder.forEach((item) => {
       const score = calculateScore(item);
-      const roleMeta = determineContributorRole(item);
+      const badges = getContributorBadges(item);
       const card = document.createElement("div");
-      card.className = `podium-card ${item.height}`;
+      card.className = `podium-card ${item.cardClass}`;
       card.innerHTML = `
-        <div class="podium-badge">${item.badge}</div>
+        <div class="podium-badge podium-badge-${item.badgeType}">
+          <i data-lucide="${item.badgeIcon}"></i> ${item.badgeLabel}
+        </div>
         <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
-        <span class="role-pill-badge ${roleMeta.tagClass}"><i data-lucide="${roleMeta.lucideIcon || 'award'}"></i> ${roleMeta.badge}</span>
         <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
+        
+        <div class="podium-badges-container">
+          ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
+        </div>
+
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
@@ -213,32 +237,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Render Full Leaderboard Table with Work Logs
+  // Render Full Leaderboard Table with Work Logs & Activity Links
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
 
-    contributorsData.forEach((item, index) => {
+    // Filter contributors based on selected tab
+    const filteredContributors = contributorsData.filter(item => {
+      const isAdmin = item.login && item.login.toLowerCase() === "debasmitabose0";
+      if (currentFilter === "community") return !isAdmin;
+      if (currentFilter === "admin") return isAdmin;
+      return true;
+    });
+
+    if (filteredContributors.length === 0) {
+      const emptyTr = document.createElement("tr");
+      emptyTr.innerHTML = `
+        <td colspan="9" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+          <i data-lucide="info" style="margin-right: 0.4rem;"></i> No contributors found in this category.
+        </td>
+      `;
+      tableBody.appendChild(emptyTr);
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    filteredContributors.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
-      const roleMeta = determineContributorRole(item);
-      let rankBadge = `#${rank}`;
-      if (rank === 1) rankBadge = "🥇 #1";
-      else if (rank === 2) rankBadge = "🥈 #2";
-      else if (rank === 3) rankBadge = "🥉 #3";
+      const badges = getContributorBadges(item);
+      const isAdmin = item.login && item.login.toLowerCase() === "debasmitabose0";
+
+      let rankBadgeHtml = `<span class="rank-tag">#${rank}</span>`;
+      if (isAdmin && currentFilter === "all") {
+        rankBadgeHtml = `<span class="rank-tag rank-admin" title="Project Maintainer & Lead Architect"><i data-lucide="shield-check"></i> ADMIN</span>`;
+      } else if (rank === 1) {
+        rankBadgeHtml = `<span class="rank-tag rank-1"><i data-lucide="trophy"></i> #1</span>`;
+      } else if (rank === 2) {
+        rankBadgeHtml = `<span class="rank-tag rank-2"><i data-lucide="medal"></i> #2</span>`;
+      } else if (rank === 3) {
+        rankBadgeHtml = `<span class="rank-tag rank-3"><i data-lucide="medal"></i> #3</span>`;
+      }
 
       const tr = document.createElement("tr");
+      if (isAdmin) tr.className = "admin-row";
+
       tr.innerHTML = `
-        <td><span class="rank-tag rank-${rank}">${rankBadge}</span></td>
+        <td>${rankBadgeHtml}</td>
         <td>
           <div class="table-user-cell">
             <img src="${item.avatar_url}" alt="${item.name}" class="table-user-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
             <div>
               <strong class="user-display-name">${item.name}</strong>
-              <div class="user-role-label">
-                <span class="role-pill-badge ${roleMeta.tagClass}"><i data-lucide="${roleMeta.lucideIcon || 'award'}"></i> ${roleMeta.badge}</span>
-              </div>
+              <span class="user-handle-sub">@${item.login}</span>
             </div>
+          </div>
+        </td>
+        <td>
+          <div class="contributor-badges-wrap">
+            ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
           </div>
         </td>
         <td>
@@ -248,10 +305,20 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="games-count-pill" title="${(item.games || []).join(', ')}"><i data-lucide="gamepad-2"></i> ${item.gamesCount}</span>
         </td>
         <td style="text-align: center;">
-          <span class="files-count-pill" title="NSoC PR Breakdown"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
+          <span class="files-count-pill" title="Effort: Games ${item.gamesCount}, Features ${item.platformPRs || 0}, Quality ${item.qualityPRs || 0}"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
         </td>
         <td style="text-align: center;">
           <span class="commits-count-pill"><i data-lucide="git-commit"></i> ${item.commits}</span>
+        </td>
+        <td style="text-align: center;">
+          <div class="activity-links-group">
+            <a href="https://github.com/DebasmitaBose0/ArcadeVerse/issues?q=author%3A${item.login}" target="_blank" rel="noopener noreferrer" class="activity-link-btn" title="View Issues authored by @${item.login}">
+              <i data-lucide="circle-dot"></i> Issues
+            </a>
+            <a href="https://github.com/DebasmitaBose0/ArcadeVerse/pulls?q=author%3A${item.login}" target="_blank" rel="noopener noreferrer" class="activity-link-btn" title="View Pull Requests by @${item.login}">
+              <i data-lucide="git-pull-request"></i> PRs
+            </a>
+          </div>
         </td>
         <td style="text-align: right;">
           <strong class="score-highlight">${score} pts</strong>
@@ -263,6 +330,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.lucide) {
       lucide.createIcons();
     }
+  }
+
+  // Filter Tab Controls
+  if (filterTabs) {
+    filterTabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        filterTabs.forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        currentFilter = tab.getAttribute("data-filter") || "all";
+        renderTable();
+      });
+    });
   }
 
   // Fetch Live Contributions directly from GitHub REST API
@@ -294,7 +373,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
             
-            // Check if contributor exists in CONTRIBUTORS_REGISTRY for verified PR levels
+            // Check if contributor exists in CONTRIBUTORS_REGISTRY
             let registryEntry = null;
             if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
               registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
@@ -324,10 +403,6 @@ document.addEventListener("DOMContentLoaded", () => {
               bonusPts: bonusPts,
               games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
             };
-
-            const roleMeta = determineContributorRole(contributorObj);
-            contributorObj.role = roleMeta.role;
-            contributorObj.roleClass = roleMeta.tagClass;
 
             return contributorObj;
           })
