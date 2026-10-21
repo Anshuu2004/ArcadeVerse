@@ -1673,6 +1673,46 @@ body {
   flex-shrink: 0;
 }
 
+.admin-avatar-wrap {
+  position: relative;
+  width: 78px;
+  height: 78px;
+  flex-shrink: 0;
+}
+
+.admin-avatar-img {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 2.5px solid #fbbf24;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.45);
+  object-fit: cover;
+  background: #1e2436;
+  display: block;
+}
+
+.admin-crown-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #0f121b;
+  border: 1.5px solid #fbbf24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+
+.admin-crown-badge .lucide {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke: #fbbf24;
+}
+
 .role-badge {
   font-size: 0.72rem;
   font-weight: 800;
@@ -1716,6 +1756,152 @@ body {
   font-weight: 800;
   font-family: var(--font-display);
   color: #fbbf24;
+}
+
+/* ===================================================
+   LEADERBOARD SWITCHER (CONTRIBUTOR vs ADMIN)
+   =================================================== */
+.leaderboard-switcher-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+
+.switch-toggle-pill {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-medium);
+  border-radius: 999px;
+  padding: 0.35rem;
+  gap: 0.4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.switch-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.switch-btn .lucide {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.switch-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.switch-btn.active {
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.4);
+}
+
+/* Admin Overview Card & Architecture */
+.admin-overview-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: 2.2rem;
+  margin-bottom: 3.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.admin-overview-card h3 {
+  font-size: 1.25rem;
+  font-family: var(--font-display);
+  color: #fff;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.admin-contributions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.admin-work-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  transition: all 0.25s ease;
+}
+
+.admin-work-card:hover {
+  background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.12) 0%, rgba(18, 24, 38, 0.98) 70%);
+  border-color: rgba(245, 158, 11, 0.45);
+  transform: translateY(-3px);
+}
+
+.admin-work-card h4 {
+  font-size: 1.05rem;
+  color: #fbbf24;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-work-card p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Contributor Podium Stat Pill & Status Verified Badge */
+.podium-stat-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.podium-stat-pill .lucide {
+  width: 0.88rem;
+  height: 0.88rem;
+  stroke: #38bdf8;
+}
+
+.status-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+}
+
+.status-verified-pill .lucide {
+  width: 0.82rem;
+  height: 0.82rem;
+  stroke: #34d399;
 }
 
 /* GitHub Sync Toolbar */
@@ -1775,49 +1961,30 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  gap: 1.8rem;
+  gap: 2rem;
+  margin-top: 1.5rem;
   margin-bottom: 4rem;
   flex-wrap: wrap;
 }
 
+/* Top 3 Podium Cards - Static Base with Radial Corner Gradient on Hover */
 .podium-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 2.2rem 1.8rem 1.8rem;
+  padding: 2.4rem 1.8rem 1.8rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  width: 280px;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.25s ease;
-}
-
-.podium-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-medium);
-}
-
-/* Top 3 Podium Cards - Static Base with Corner Gradient on Hover */
-.podium-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xl);
-  padding: 2.3rem 1.8rem 1.8rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 290px;
+  width: 300px;
   box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow: visible; /* Prevents top badge and child items from getting clipped! */
 }
 
-/* 1st Place (Gold) - Static base, corner gradient on hover */
+/* 1st Place (Gold) - Static base, gold corner gradient on hover */
 .podium-1, .podium-gold {
   border: 1px solid rgba(234, 179, 8, 0.45);
   transform: translateY(-12px);
@@ -1830,12 +1997,19 @@ body {
   transform: translateY(-18px);
 }
 
+/* Solo Contributor Podium Card */
 .solo-podium {
-  width: 350px;
+  width: 360px;
+  max-width: 95%;
   padding: 2.8rem 2.2rem 2.2rem;
+  transform: translateY(0);
 }
 
-/* 2nd Place (Silver) - Static base, corner gradient on hover */
+.solo-podium:hover {
+  transform: translateY(-6px);
+}
+
+/* 2nd Place (Silver) - Static base, silver corner gradient on hover */
 .podium-2, .podium-silver {
   border: 1px solid rgba(148, 163, 184, 0.35);
 }
@@ -1847,7 +2021,7 @@ body {
   transform: translateY(-6px);
 }
 
-/* 3rd Place (Bronze) - Static base, corner gradient on hover */
+/* 3rd Place (Bronze) - Static base, bronze corner gradient on hover */
 .podium-3, .podium-bronze {
   border: 1px solid rgba(217, 119, 6, 0.4);
 }
@@ -1859,71 +2033,33 @@ body {
   transform: translateY(-6px);
 }
 
-/* Open/Claimable Podium Spot (when community spots are still open) */
-.podium-open {
-  border: 1px dashed rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.015);
-  opacity: 0.85;
-}
-
-.podium-open:hover {
-  background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.12) 0%, rgba(18, 24, 38, 0.98) 70%);
-  border-color: rgba(56, 189, 248, 0.5);
-  opacity: 1;
-  transform: translateY(-6px);
-}
-
-.podium-open-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px dashed rgba(255, 255, 255, 0.18);
-  display: flex;
+/* Clean Podium GitHub Profile Link */
+.podium-gh-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 0.9rem;
-  color: var(--text-muted);
-}
-
-.podium-open-icon .lucide {
-  width: 1.5rem;
-  height: 1.5rem;
-}
-
-.podium-open-title {
-  font-size: 1.1rem;
-  font-family: var(--font-display);
-  color: #fff;
-  margin-bottom: 0.35rem;
-}
-
-.podium-open-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.45;
-  margin-bottom: 1.2rem;
-}
-
-.claim-spot-btn {
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
-  padding: 0.4rem 1rem;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.45rem 1.1rem;
   border-radius: 999px;
   font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
   transition: all 0.2s ease;
+  margin-top: 0.6rem;
 }
 
-.claim-spot-btn:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: #38bdf8;
-  transform: translateY(-1px);
+.podium-gh-btn:hover {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.podium-gh-btn .lucide {
+  width: 0.9rem;
+  height: 0.9rem;
 }
 
 /* Rank Badges on Cards - Clean static appearance */
@@ -2534,17 +2670,31 @@ body {
 
 .engine-steps-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.4rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .engine-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .engine-steps-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .engine-step-card {
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
+  padding: 1.4rem 1.25rem;
   position: relative;
   transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .engine-step-card:hover {
@@ -2555,17 +2705,17 @@ body {
 
 .engine-step-card .step-num {
   font-family: var(--font-code);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.12);
   position: absolute;
   top: 1rem;
-  right: 1.2rem;
+  right: 1.1rem;
 }
 
 .engine-step-card .step-icon {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.25);
@@ -2573,32 +2723,222 @@ body {
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  color: #38bdf8;
+  flex-shrink: 0;
 }
 
 .engine-step-card .step-icon .lucide {
   stroke: #38bdf8;
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 .engine-step-card h4 {
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: #fff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
+  font-family: var(--font-display);
 }
 
 .engine-step-card p {
-  font-size: 0.84rem;
+  font-size: 0.83rem;
   color: var(--text-secondary);
   line-height: 1.5;
+  margin: 0;
 }
 
 .engine-step-card code {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.15rem 0.4rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.15rem 0.35rem;
   border-radius: 4px;
   color: #38bdf8;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+
+/* Points Matrix Under Badges Table */
+.points-matrix-wrapper {
+  margin-top: 2.2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.points-matrix-header {
+  margin-bottom: 1.4rem;
+}
+
+.points-matrix-header h4 {
+  font-size: 1.15rem;
+  color: #fff;
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.points-matrix-header h4 .lucide {
+  stroke: #fbbf24;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.points-matrix-header p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.points-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+@media (max-width: 1024px) {
+  .points-matrix-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .points-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.point-rule-card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.25rem;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.point-rule-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.point-rule-card.point-rule-game:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.point-rule-card.point-rule-mechanics:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+}
+
+.point-rule-card.point-rule-feature:hover {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.point-rule-card.point-rule-fix:hover {
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
+.point-rule-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.point-badge-pill {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.point-rule-game .point-badge-pill {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+
+.point-rule-mechanics .point-badge-pill {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+}
+
+.point-rule-feature .point-badge-pill {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #60a5fa;
+}
+
+.point-rule-fix .point-badge-pill {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.point-badge-pill .lucide {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.point-rule-multiplier {
+  font-size: 0.74rem;
+  font-family: var(--font-code);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.point-rule-body h5 {
+  font-size: 0.98rem;
+  color: #fff;
+  font-family: var(--font-display);
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.point-rule-body h5 .lucide {
+  width: 1rem;
+  height: 1rem;
+  stroke: var(--cyan);
+}
+
+.point-rule-mechanics .point-rule-body h5 .lucide {
+  stroke: #c084fc;
+}
+
+.point-rule-feature .point-rule-body h5 .lucide {
+  stroke: #60a5fa;
+}
+
+.point-rule-fix .point-rule-body h5 .lucide {
+  stroke: #34d399;
+}
+
+.point-rule-body p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.point-rule-body code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.12rem 0.35rem;
+  border-radius: 3px;
+  color: #38bdf8;
+  font-size: 0.76rem;
 }
 
 .footer-bottom {
@@ -2786,7 +3126,7 @@ body {
 .point-system-header {
   text-align: center;
   max-width: 780px;
-  margin: 0 auto 2.2rem;
+  margin: 0 auto 1.8rem;
 }
 
 .point-system-title {
@@ -2805,8 +3145,9 @@ body {
 
 .point-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.4rem;
+  margin: 2.2rem 0;
 }
 
 .point-rule-card {
@@ -2842,6 +3183,18 @@ body {
   margin-bottom: 0.8rem;
 }
 
+.point-rule-icon .lucide {
+  width: 2.2rem;
+  height: 2.2rem;
+  stroke: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+}
+
+.highlight-rule .point-rule-icon .lucide {
+  stroke: #f59e0b;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+}
+
 .point-rule-pts {
   font-family: var(--font-display);
   font-size: 1.5rem;
@@ -2866,13 +3219,6 @@ body {
   line-height: 1.5;
   flex-grow: 1;
   margin-bottom: 1rem;
-}
-
-.point-rule-card code {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 0.15rem 0.35rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
 }
 
 .point-formula {
