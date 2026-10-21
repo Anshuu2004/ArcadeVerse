@@ -76,11 +76,12 @@ Points are assigned strictly by the **Level label** that the Project Admin puts 
 # 🚀 **STEP-BY-STEP: YOUR FIRST MERGED PR**
 
 1. **Create an issue.** Find a bug or pick an open issue, raise it, and **wait for assignment**.
-2. **Fork and clone.** Fork the repo, clone it, and add the upstream remote.
-3. **Create a branch.** One branch per issue — e.g. `fix/issue-123`.
-4. **Code and commit.** Follow this guide, test your work, write a clear commit message.
-5. **Open the PR.** Push, open a PR, add `Closes #123` and a short summary. Include `nsoc26`.
-6. **Review and merge.** Address feedback. The Project Admin merges, adds labels, and your points hit the leaderboard.
+2. **Strict 3-Day Deadline:** Once an issue is assigned to you, you **MUST submit your Pull Request within 3 days (72 hours)**. Inactive assignments past 3 days will be unassigned and reassigned to other contributors!
+3. **Fork and clone.** Fork the repo, clone it, and add the upstream remote.
+4. **Create a separate branch.** Never work directly on `main`! Create a dedicated branch per issue — e.g. `fix/issue-123` or `feat/game-name`.
+5. **Code and commit.** Follow this guide, keep changes inside your dedicated folder, test thoroughly, and write clear commit messages.
+6. **Open the PR.** Push, open a PR within the 3-day window, add `Closes #123` and a short summary. Include `nsoc26`.
+7. **Review and merge.** Address feedback promptly. The Project Admin merges, adds labels, and your points hit the leaderboard.
 
 **Quick commands:**
 ```bash
@@ -89,15 +90,32 @@ git commit -m "Fix #123: <short description>"
 git push origin fix/issue-123
 ```
 
-**Flow:** Find Issue → Wait for Assignment → Fork → Clone → Branch → Code → Test → Commit → Push → Open PR → Review → Merge ✅
+**Flow:** Find Issue → Wait for Assignment → Fork & Clone → Create Separate Branch → Code (Submit within 3 Days) → Test → Commit → Push → Open PR → Review → Merge ✅
 
 ---
 
-# ⚠️ **CRITICAL: STRICT FOLDER NAMING CONVENTION**
+# ⚠️ **CRITICAL: STRICT FOLDER NAMING & DIRECTORY RULES**
 
 > [!CAUTION]
-> ### 🚨 **MANDATORY FOLDER NOTATION: `games/game-name_contributor-name/`**
-> Every game submission **MUST** be placed inside a folder following this exact syntax:
+> ### 🚨 **1. NO FILES IN ROOT / HOME DIRECTORY**
+> **Do NOT create, add, or dump loose files directly in the repository root / home directory.**
+> Any PR that introduces files directly in the root directory will be **rejected immediately**.
+>
+> ---
+>
+> ### 🚨 **2. ALL SITE CHANGES, UI IMPROVEMENTS, ENHANCEMENTS & BUG FIXES**
+> For **ANY** type of contribution — including feature enhancements, bug fixes, UI/UX improvements, or any modifications across the site:
+> - You **MUST** create a dedicated folder under `ArcadeVerse/` following this format:
+>   ```text
+>   <folder-name>-<your-name>/
+>   ```
+> - Keep all your respective assets, components, stylesheets, scripts, and documentation inside that dedicated folder.
+> - **Example:** `navbar-redesign-rohit/`, `leaderboard-ui-sneha/`, `dark-mode-toggle-arjun/`
+>
+> ---
+>
+> ### 🚨 **3. GAME SUBMISSIONS: `games/game-name_contributor-name/`**
+> Every game submission **MUST** be placed inside a dedicated subfolder in `games/` following this exact syntax:
 >
 > ```text
 > games/game-name_contributor-name/
@@ -110,7 +128,7 @@ git push origin fix/issue-123
 > - ❌ `games/pong/` *(ambiguous & collision-prone — will NOT be accepted)*
 > - ❌ `games/my-game/` *(will NOT be accepted)*
 >
-> **Pull Requests not following this notation will be closed and asked to rename.**
+> **Pull Requests not following these folder conventions will be closed and asked to reorganize.**
 
 ---
 
@@ -237,8 +255,9 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 
 - Read this contributing guide **before** you start coding.
 - **Wait for assignment** before you start working on an issue.
+- **Strict 3-day turnaround:** Submit your Pull Request within **3 days (72 hours)** of getting assigned. After 3 days of inactivity, the issue will be reassigned without prior notice.
+- **Always use a separate branch:** Create a dedicated branch for every issue. Never push or PR directly from `main`.
 - Keep PRs **small, focused, and linked** to a single issue.
-- Create a **separate branch** for each issue.
 - Respond to review feedback **promptly**.
 - Be **respectful and professional** with admins and fellow contributors.
 - You may work on **2 or more issues** — there is no upper limit.
@@ -250,11 +269,14 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
+> - ❌ **Loose files in the home/root directory** — creating or dumping any files directly in the root directory
+> - ❌ **Non-compliant folder paths** — all enhancements/UI/bug fixes must be inside `<folder-name>-<your-name>/` (and game submissions inside `games/<game-name>_<contributor-name>/`)
+> - ❌ **Missing the 3-day assignment deadline** — holding onto an issue for more than 3 days without opening a PR
+> - ❌ **Working directly on the `main` branch** — contributions must come from a separate feature/fix branch
 > - ❌ **Fake PRs** or meaningless contributions
 > - ❌ **Bulk PRs** submitted all at once
 > - ❌ **AI-generated spam** — unverified, broken AI dump code without manual testing
 > - ❌ **PRs without an assigned issue** — these will be closed immediately
-> - ❌ **Non-compliant folder paths** — outside `games/game-name_contributor-name/`
 > - ❌ **Frameworks or heavy dependencies** — React, Vue, Angular, jQuery, Python backends are NOT allowed
 > - ❌ **Malicious code** — cryptominers, tracking scripts, harmful iframes
 > - ❌ **Tiny changes presented as bigger work** — a 10–20 line edit will not be accepted as Level 2/3
@@ -276,15 +298,18 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 
 Before submitting, make sure every box is checked:
 
-- [ ] The issue is assigned to me
+- [ ] The issue was officially assigned to me
+- [ ] I am submitting this PR **within 3 days** of getting assigned
+- [ ] I created and worked on a **separate branch** (not `main`)
 - [ ] I have read this contributing guide
 - [ ] My change is meaningful, tested, and written by me
-- [ ] I used a separate branch for this issue
+- [ ] **No files were created directly in the home/root directory**
+- [ ] All site updates, enhancements, or bug fixes are organized inside `<folder-name>-<your-name>/`
+- [ ] Games are strictly inside `games/game-name_contributor-name/` *(for game submissions)*
+- [ ] Entry added to `assets/js/games-registry.js` *(for game submissions)*
 - [ ] The PR says `Closes #issue-number` with a short summary
 - [ ] The PR includes the `nsoc26` tag
 - [ ] I am not submitting multiple PRs at once
-- [ ] Folder strictly follows `games/game-name_contributor-name/` *(for game submissions)*
-- [ ] Entry added to `assets/js/games-registry.js` *(for game submissions)*
 
 ---
 
