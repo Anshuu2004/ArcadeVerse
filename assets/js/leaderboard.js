@@ -96,15 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evaluates and returns an array of the HIGHEST badges for EACH category:
   // 1. Leadership Category (Project Admin & Lead)
   // 2. Games Dedicated Category (45-Day NSoC Program Scaling):
-  //    - Master Game Architect (10+ Verified Games • 1000+ pts)
-  //    - Hyper Game Developer (5–9 Verified Games • 500–999 pts)
-  //    - Arcade Developer (2–4 Verified Games • 200–499 pts)
-  //    - Arcade Explorer (1 Verified Game • 100–199 pts)
+  //    - Master Game Architect (15+ Verified Games • 1500+ pts)
+  //    - Hyper Game Developer (8–14 Verified Games • 800–1499 pts)
+  //    - Arcade Developer (4–7 Verified Games • 400–799 pts)
+  //    - Arcade Explorer (1–3 Verified Games • 100–399 pts)
   // 3. Platform & Core Engineering Category (except the 'games' folder, in the codebase modification):
-  //    - Master Core Architect (10+ Merged PRs • 300+ pts)
-  //    - Elite Contributor (6–9 Merged PRs • 150–299 pts)
-  //    - Platform Contributor (3–5 Merged PRs • 50–149 pts)
-  //    - Active Contributor (1–2 Merged PRs • 15–49 pts)
+  //    - Master Core Architect (30+ Merged PRs • 750+ pts)
+  //    - Elite Contributor (10–29 Merged PRs • 250–749 pts)
+  //    - Platform Contributor (5–9 Merged PRs • 100–249 pts)
+  //    - Active Contributor (1–4 Merged PRs • 15–99 pts)
   function getContributorBadges(user) {
     const badges = [];
     const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
@@ -120,9 +120,9 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 10+ Master, 5–9 Hyper, 2–4 Arcade Dev, 1 Explorer)
+    // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 15+ Master, 8–14 Hyper, 4–7 Arcade Dev, 1–3 Explorer)
     const gamesCount = user.gamesCount || 0;
-    if (gamesCount >= 10) {
+    if (gamesCount >= 15) {
       badges.push({
         role: "Master Game Architect",
         tagClass: "role-master-architect",
@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "crown",
         category: "Games Dedicated"
       });
-    } else if (gamesCount >= 5) {
+    } else if (gamesCount >= 8) {
       badges.push({
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "zap",
         category: "Games Dedicated"
       });
-    } else if (gamesCount >= 2) {
+    } else if (gamesCount >= 4) {
       badges.push({
         role: "Arcade Developer",
         tagClass: "role-arcade",
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "gamepad-2",
         category: "Games Dedicated"
       });
-    } else if (gamesCount === 1) {
+    } else if (gamesCount >= 1) {
       badges.push({
         role: "Arcade Explorer",
         tagClass: "role-explorer",
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const commitsCount = user.commits || 0;
     const platformPoints = ((user.platformPRs || 0) * 25) + ((user.qualityPRs || 0) * 15) + (user.bonusPts || 0);
 
-    if (commitsCount >= 10 || platformPoints >= 300) {
+    if (commitsCount >= 30 || platformPoints >= 750) {
       badges.push({
         role: "Master Core Architect",
         tagClass: "role-master",
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "shield-check",
         category: "Platform & Core"
       });
-    } else if (commitsCount >= 6 || platformPoints >= 150) {
+    } else if (commitsCount >= 10 || platformPoints >= 250) {
       badges.push({
         role: "Elite Contributor",
         tagClass: "role-elite",
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "gem",
         category: "Platform & Core"
       });
-    } else if (commitsCount >= 3 || platformPoints >= 50) {
+    } else if (commitsCount >= 5 || platformPoints >= 100) {
       badges.push({
         role: "Platform Contributor",
         tagClass: "role-platform",
