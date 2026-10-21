@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="cyber-grid"></div>
@@ -18,20 +20,22 @@
   <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <span class="pixel-badge">👾</span>
+        <span class="pixel-badge"><i data-lucide="bot"></i></span>
         <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
         <span class="nsoc-tag">NSOC '26</span>
       </a>
 
       <nav class="nav-links">
-        <a href="index.html" class="nav-item">🎮 Explore Games</a>
-        <a href="ideas.html" class="nav-item">💡 Ideas Vault</a>
-        <a href="leaderboard.html" class="nav-item active">🏆 Hall of Fame</a>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+        <a href="index.html" class="nav-item"><i data-lucide="gamepad-2"></i> Explore Games</a>
+        <a href="ideas.html" class="nav-item"><i data-lucide="lightbulb"></i> Ideas Vault</a>
+        <a href="leaderboard.html" class="nav-item active"><i data-lucide="trophy"></i> Hall of Fame</a>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link"><i data-lucide="book-open"></i> Contributor Guide</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View repository on GitHub">⭐ GitHub</a>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View repository on GitHub">
+          <span><i data-lucide="star"></i> GitHub</span>
+        </a>
       </div>
     </div>
   </header>
@@ -45,7 +49,7 @@
 
     <!-- Admin Spotlight Card -->
     <div class="admin-spotlight-banner">
-      <div class="admin-badge-circle">👑</div>
+      <div class="admin-badge-circle"><i data-lucide="crown"></i></div>
       <div style="flex-grow: 1;">
         <span class="role-badge">PROJECT LEAD & LEAD ARCHITECT</span>
         <h2>Debasmita Bose</h2>
@@ -62,39 +66,39 @@
       <div class="point-system-header">
         <span class="section-tag">POINT & TIER SCORING SYSTEM</span>
         <h2 class="point-system-title">How Contributor Work Is Evaluated & Rewarded</h2>
-        <p class="point-system-subtitle">A transparent, multi-dimensional point system designed for Project Admin (@DebasmitaBose0) to evaluate every contributor's actual work with official rank tier badges.</p>
+        <p class="point-system-subtitle">A transparent scoring system strictly aligned with official NSoC Winter Edition 2026 Level 1 (3 pts), Level 2 (5 pts), and Level 3 (10 pts) guidelines.</p>
       </div>
 
       <div class="point-cards-grid">
         <div class="point-rule-card">
-          <div class="point-rule-icon">📁</div>
-          <div class="point-rule-pts">+15 pts</div>
-          <h4>File Creation & Assets</h4>
-          <p>Awarded for building structured files (<code>index.html</code>, <code>style.css</code>, <code>game.js</code>) inside their isolated folder.</p>
-          <span class="point-formula">15 pts × Valid Files</span>
+          <div class="point-rule-icon"><i data-lucide="file-text"></i></div>
+          <div class="point-rule-pts">+3 pts</div>
+          <h4>Level 1 Contribution</h4>
+          <p>Awarded for documentation, typo fixes, guides, code comments, and minor bug fixes.</p>
+          <span class="point-formula">3 pts × Level 1 PR</span>
+        </div>
+
+        <div class="point-rule-card">
+          <div class="point-rule-icon"><i data-lucide="layout"></i></div>
+          <div class="point-rule-pts">+5 pts</div>
+          <h4>Level 2 Contribution</h4>
+          <p>Awarded for UI/UX improvements, responsive layouts, CSS components, and navigation redesigns.</p>
+          <span class="point-formula">5 pts × Level 2 PR</span>
         </div>
 
         <div class="point-rule-card highlight-rule">
-          <div class="point-rule-icon">🎮</div>
-          <div class="point-rule-pts">+100 pts</div>
-          <h4>Verified Playable Game</h4>
-          <p>Awarded when a contributor successfully builds and integrates a conflict-free game into the registry.</p>
-          <span class="point-formula">100 pts × Verified Game</span>
-        </div>
-
-        <div class="point-rule-card">
-          <div class="point-rule-icon">💻</div>
+          <div class="point-rule-icon"><i data-lucide="gamepad-2"></i></div>
           <div class="point-rule-pts">+10 pts</div>
-          <h4>Verified GitHub Commits</h4>
-          <p>Fetched directly from GitHub API for all merged pull requests and revisions made to the codebase.</p>
-          <span class="point-formula">10 pts × Merged Commit</span>
+          <h4>Level 3 Playable Game</h4>
+          <p>Awarded for building and integrating a complete playable game into <code>games/</code> or core platform logic.</p>
+          <span class="point-formula">10 pts × Level 3 PR / Game</span>
         </div>
 
         <div class="point-rule-card">
-          <div class="point-rule-icon">⭐</div>
-          <div class="point-rule-pts">+25 pts</div>
+          <div class="point-rule-icon"><i data-lucide="award"></i></div>
+          <div class="point-rule-pts">+5 pts</div>
           <h4>Admin Quality Bonus</h4>
-          <p>Awarded for responsive mobile support, clean vanilla styling, and zero git merge conflicts.</p>
+          <p>Awarded for responsive mobile touch controls, sound effects, clean vanilla styling, and zero merge conflicts.</p>
           <span class="point-formula">Review Bonus</span>
         </div>
       </div>
@@ -111,57 +115,69 @@
               <tr>
                 <th>Contributor Label & Badge</th>
                 <th>Category</th>
-                <th>Effort / Commits Required</th>
+                <th>Effort / Requirement</th>
                 <th>Reward & Privileges</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="role-pill-badge role-admin">👑 Project Admin & Lead</span></td>
+                <td><span class="role-pill-badge role-admin"><i data-lucide="crown"></i> Project Admin & Lead</span></td>
                 <td><span class="tier-cat-pill">Leadership</span></td>
                 <td>Permanent Project Architect</td>
                 <td>Project Lead, PR merge approval & codebase governance</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-hyper">⚡ Hyper Game Developer</span></td>
+                <td><span class="role-pill-badge role-master-architect"><i data-lucide="crown"></i> Master Game Architect</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>30+ Commits</strong> or <strong>2+ Verified Games</strong></td>
-                <td>Featured Game Highlight on Homepage + Hall of Fame Podium</td>
+                <td><strong>6+ Verified Games</strong></td>
+                <td>Master Game Architect Badge + Featured on Platform</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-arcade">🕹️ Arcade Developer</span></td>
+                <td><span class="role-pill-badge role-hyper"><i data-lucide="zap"></i> Hyper Game Developer</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>15+ Commits</strong> or <strong>1 Verified Game</strong></td>
-                <td>Verified Game badge + Arcade Player Modal showcase</td>
+                <td><strong>4–5 Verified Games</strong></td>
+                <td>Featured Game Highlight on Homepage + Hall of Fame Podium Spotlight</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-master">🏆 Master Contributor</span></td>
+                <td><span class="role-pill-badge role-arcade"><i data-lucide="gamepad-2"></i> Arcade Developer</span></td>
+                <td><span class="tier-cat-pill">Games Dedicated</span></td>
+                <td><strong>2–3 Verified Games</strong></td>
+                <td>Verified Game Developer badge + Arcade Player Modal showcase</td>
+              </tr>
+              <tr>
+                <td><span class="role-pill-badge role-explorer"><i data-lucide="compass"></i> Arcade Explorer</span></td>
+                <td><span class="tier-cat-pill">Games Dedicated</span></td>
+                <td><strong>1 Verified Game</strong></td>
+                <td>Playable Game Badge + Arcade Player Modal showcase</td>
+              </tr>
+              <tr>
+                <td><span class="role-pill-badge role-master"><i data-lucide="trophy"></i> Master Contributor</span></td>
                 <td><span class="tier-cat-pill">General Milestones</span></td>
-                <td><strong>50+ Commits</strong> across repository</td>
+                <td><strong>100+ Points</strong> across repository</td>
                 <td>Top Leaderboard Standing + NSOC Elite Endorsement</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-elite">💎 Elite Contributor</span></td>
+                <td><span class="role-pill-badge role-elite"><i data-lucide="gem"></i> Elite Contributor</span></td>
                 <td><span class="tier-cat-pill">General Milestones</span></td>
-                <td><strong>20+ Commits</strong> across repository</td>
+                <td><strong>50+ Points</strong> across repository</td>
                 <td>Permanent Hall of Fame feature badge</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-novice">🌟 Novice Contributor</span></td>
+                <td><span class="role-pill-badge role-novice"><i data-lucide="sparkles"></i> Novice Contributor</span></td>
                 <td><span class="tier-cat-pill">General Milestones</span></td>
-                <td><strong>10+ Commits</strong> across repository</td>
+                <td><strong>25+ Points</strong> across repository</td>
                 <td>Recognized Contributor tag in leaderboard</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-project">🚀 Project Contributor</span></td>
+                <td><span class="role-pill-badge role-project"><i data-lucide="rocket"></i> Project Contributor</span></td>
                 <td><span class="tier-cat-pill">General Milestones</span></td>
-                <td><strong>5+ Commits</strong> across repository</td>
+                <td><strong>10+ Points</strong> across repository</td>
                 <td>Initial merged PR recognition badge</td>
               </tr>
               <tr>
-                <td><span class="role-pill-badge role-active">🌱 Active Contributor</span></td>
+                <td><span class="role-pill-badge role-active"><i data-lucide="sprout"></i> Active Contributor</span></td>
                 <td><span class="tier-cat-pill">Getting Started</span></td>
-                <td>First Pull Request Merged</td>
+                <td><strong>First Merged PR (3–5 pts)</strong></td>
                 <td>Listed in verified NSOC '26 contributors registry</td>
               </tr>
             </tbody>
@@ -178,7 +194,7 @@
       </div>
       <div class="repo-meta-box">
         <input type="text" id="repo-input" placeholder="owner/repo (e.g. DebasmitaBose0/ArcadeVerse)" value="DebasmitaBose0/ArcadeVerse">
-        <button class="btn btn-secondary btn-sm" id="fetch-github-btn">🔄 Refresh Stats</button>
+        <button class="btn btn-secondary btn-sm" id="fetch-github-btn"><i data-lucide="refresh-cw"></i> Refresh Stats</button>
       </div>
     </div>
 
@@ -192,7 +208,7 @@
       <div class="table-header">
         <div>
           <h3>🏅 Verified Contributors Standing & Work Logs</h3>
-          <span class="ranking-metric-hint">Ranked by Total Verified Score (Games × 100 + Files × 15 + Commits × 10)</span>
+          <span class="ranking-metric-hint">Ranked by Verified NSoC Points (Level 1: 3pts, Level 2: 5pts, Level 3 / Games: 10pts)</span>
         </div>
       </div>
       <div class="table-responsive">
@@ -203,7 +219,7 @@
               <th>Contributor</th>
               <th>GitHub Handle</th>
               <th style="text-align: center;">Verified Game(s)</th>
-              <th style="text-align: center;">Files Added</th>
+              <th style="text-align: center;">Work Breakdown</th>
               <th style="text-align: center;">Commits</th>
               <th style="text-align: right;">Total Points</th>
             </tr>
@@ -221,13 +237,13 @@
     <div class="footer-container">
       <div class="footer-col">
         <div class="logo">
-          <span class="pixel-badge">👾</span>
+          <span class="pixel-badge"><i data-lucide="bot"></i></span>
           <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
         </div>
         <p class="footer-desc">An open-source flagship gaming initiative for NSOC Winter Edition 2026. Designed for seamless, conflict-free manual open source contributions.</p>
         <div class="footer-cta-wrapper" style="margin-top: 1.4rem;">
           <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-github-highlight" title="Star and view ArcadeVerse on GitHub">
-            <span class="github-star-icon">⭐</span>
+            <span class="github-star-icon"><i data-lucide="star"></i></span>
             <span class="github-btn-text">GitHub</span>
           </a>
         </div>
@@ -236,11 +252,11 @@
       <div class="footer-col">
         <h4>Explore Platform</h4>
         <ul class="footer-list">
-          <li><a href="index.html">🎮 Explore All Games</a></li>
-          <li><a href="ideas.html">💡 Ideas Vault</a></li>
-          <li><a href="leaderboard.html">🏆 Hall of Fame</a></li>
-          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">📖 Contributor Guidelines</a></li>
-          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">📜 MIT License</a></li>
+          <li><a href="index.html"><i data-lucide="gamepad-2"></i> Explore All Games</a></li>
+          <li><a href="ideas.html"><i data-lucide="lightbulb"></i> Ideas Vault</a></li>
+          <li><a href="leaderboard.html"><i data-lucide="trophy"></i> Hall of Fame</a></li>
+          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer"><i data-lucide="book-open"></i> Contributor Guidelines</a></li>
+          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i> MIT License</a></li>
         </ul>
       </div>
 
@@ -277,6 +293,9 @@
       if (window.scrollY > 40) navbar.classList.add("scrolled");
       else navbar.classList.remove("scrolled");
     }, { passive: true });
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   </script>
 </body>
 </html>

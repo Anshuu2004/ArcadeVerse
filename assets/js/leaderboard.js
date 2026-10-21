@@ -20,91 +20,132 @@ document.addEventListener("DOMContentLoaded", () => {
       avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
       commits: 19,
       gamesCount: 2,
+      level1PRs: 0,
+      level2PRs: 2,
+      level3PRs: 0,
+      bonusPts: 0,
       games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
     }
   ];
 
+  // Calculate NSoC-compliant score (Level 1: 3pts, Level 2: 5pts, Level 3 / Games: 10pts)
+  function calculateScore(item) {
+    const l1 = (item.level1PRs || 0) * 3;
+    const l2 = (item.level2PRs || 0) * 5;
+    const gamesPts = (item.gamesCount || 0) * 10;
+    const l3Other = (item.level3PRs || 0) * 10;
+    const bonus = item.bonusPts || 0;
+
+    const calculated = l1 + l2 + gamesPts + l3Other + bonus;
+    // Fallback if item has only raw commits and no verified PR entry yet
+    if (calculated === 0 && item.commits > 0) {
+      return Math.min(item.commits * 3, 15); // baseline active contributor score
+    }
+    return calculated;
+  }
+
   // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates contributor roles based on overall commits and dedicated game contributions
+  // Evaluates dedicated game titles (1, 2-3, 4-5, 6+) and repository point milestones (10, 25, 50, 100)
   function determineContributorRole(user) {
     if (user.login && user.login.toLowerCase() === "debasmitabose0") {
       return {
         role: "Project Admin & Lead",
         tagClass: "role-admin",
-        badge: "👑 Project Admin & Lead"
+        badge: "👑 Project Admin & Lead",
+        lucideIcon: "crown"
       };
     }
 
-    const totalCommits = user.contributions || user.commits || 0;
     const gamesCount = user.gamesCount || 0;
+    const score = calculateScore(user);
 
-    // Game folder focused developer tiers (calculated based on game count and activity)
-    if (gamesCount >= 2 || totalCommits >= 30) {
+    // 1. Dedicated Game Developer Tiers (Only earned by building games!)
+    if (gamesCount >= 6) {
+      return {
+        role: "Master Game Architect",
+        tagClass: "role-master-architect",
+        badge: "👑 Master Game Architect",
+        lucideIcon: "crown"
+      };
+    }
+    if (gamesCount >= 4) {
       return {
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
-        badge: "⚡ Hyper Game Developer"
+        badge: "⚡ Hyper Game Developer",
+        lucideIcon: "zap"
       };
     }
-    if (gamesCount >= 1 && totalCommits >= 15) {
+    if (gamesCount >= 2) {
       return {
         role: "Arcade Developer",
         tagClass: "role-arcade",
-        badge: "🕹️ Arcade Developer"
+        badge: "🎮 Arcade Developer",
+        lucideIcon: "gamepad-2"
+      };
+    }
+    if (gamesCount === 1) {
+      return {
+        role: "Arcade Explorer",
+        tagClass: "role-explorer",
+        badge: "🕹️ Arcade Explorer",
+        lucideIcon: "compass"
       };
     }
 
-    // Repository-wide commit milestone tiers
-    if (totalCommits >= 50) {
+    // 2. Repository-wide NSoC Point Milestone Tiers
+    if (score >= 100) {
       return {
         role: "Master Contributor",
         tagClass: "role-master",
-        badge: "🏆 Master Contributor"
+        badge: "🏆 Master Contributor",
+        lucideIcon: "trophy"
       };
     }
-    if (totalCommits >= 20) {
+    if (score >= 50) {
       return {
         role: "Elite Contributor",
         tagClass: "role-elite",
-        badge: "💎 Elite Contributor"
+        badge: "💎 Elite Contributor",
+        lucideIcon: "gem"
       };
     }
-    if (totalCommits >= 10) {
+    if (score >= 25) {
       return {
         role: "Novice Contributor",
         tagClass: "role-novice",
-        badge: "🌟 Novice Contributor"
+        badge: "🌟 Novice Contributor",
+        lucideIcon: "sparkles"
       };
     }
-    if (totalCommits >= 5) {
+    if (score >= 10) {
       return {
         role: "Project Contributor",
         tagClass: "role-project",
-        badge: "🚀 Project Contributor"
+        badge: "🚀 Project Contributor",
+        lucideIcon: "rocket"
       };
     }
 
     return {
       role: "Active Contributor",
       tagClass: "role-active",
-      badge: "🌱 Active Contributor"
+      badge: "🌱 Active Contributor",
+      lucideIcon: "sprout"
     };
-  }
-
-  // Advanced Multidimensional Point Formula:
-  // - Commits: 10 pts per commit
-  // - Verified Game: 100 pts per integrated game
-  // - Files: 15 pts per valid source file (HTML, CSS, JS, etc.)
-  function calculateScore(item) {
-    const commitsPts = (item.commits || 0) * 10;
-    const gamesPts = (item.gamesCount || 0) * 100;
-    const filesPts = (item.filesCount || (item.gamesCount * 3)) * 15;
-    return commitsPts + gamesPts + filesPts;
   }
 
   // Sort contributors descending by score
   function sortContributors() {
     contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
+  }
+
+  // Format work breakdown label
+  function getWorkBreakdown(item) {
+    const l1 = item.level1PRs || 0;
+    const l2 = item.level2PRs || 0;
+    const l3 = (item.gamesCount || 0) + (item.level3PRs || 0);
+    return `L1: ${l1} • L2: ${l2} • L3: ${l3}`;
   }
 
   // Render Podium for Verified Contributors Only (No Dummies)
@@ -142,7 +183,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     displayOrder.forEach((item) => {
       const score = calculateScore(item);
-      const filesCount = item.filesCount || (item.gamesCount * 3);
       const roleMeta = determineContributorRole(item);
       const card = document.createElement("div");
       card.className = `podium-card ${item.height}`;
@@ -150,22 +190,26 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="podium-badge">${item.badge}</div>
         <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
-        <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
+        <span class="role-pill-badge ${roleMeta.tagClass}"><i data-lucide="${roleMeta.lucideIcon || 'award'}"></i> ${roleMeta.badge}</span>
         <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
         <div class="podium-meta-tags">
-          <span class="meta-badge">🎮 ${item.gamesCount} Game(s)</span>
-          <span class="meta-badge">📁 ${filesCount} Files</span>
-          <span class="meta-badge">💻 ${item.commits} Commits</span>
+          <span class="meta-badge"><i data-lucide="gamepad-2"></i> ${item.gamesCount} Game(s)</span>
+          <span class="meta-badge"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
+          <span class="meta-badge"><i data-lucide="git-commit"></i> ${item.commits} Commits</span>
         </div>
       `;
       podiumContainer.appendChild(card);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
-  // Render Full Leaderboard Table with Work Logs & File Counts
+  // Render Full Leaderboard Table with Work Logs
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
@@ -173,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
     contributorsData.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
-      const filesCount = item.filesCount || (item.gamesCount * 3);
       const roleMeta = determineContributorRole(item);
       let rankBadge = `#${rank}`;
       if (rank === 1) rankBadge = "🥇 #1";
@@ -189,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div>
               <strong class="user-display-name">${item.name}</strong>
               <div class="user-role-label">
-                <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
+                <span class="role-pill-badge ${roleMeta.tagClass}"><i data-lucide="${roleMeta.lucideIcon || 'award'}"></i> ${roleMeta.badge}</span>
               </div>
             </div>
           </div>
@@ -198,13 +241,13 @@ document.addEventListener("DOMContentLoaded", () => {
           <a href="https://github.com/${item.login}" target="_blank" class="github-handle-link">@${item.login}</a>
         </td>
         <td style="text-align: center;">
-          <span class="games-count-pill" title="${(item.games || []).join(', ')}">🎮 ${item.gamesCount}</span>
+          <span class="games-count-pill" title="${(item.games || []).join(', ')}"><i data-lucide="gamepad-2"></i> ${item.gamesCount}</span>
         </td>
         <td style="text-align: center;">
-          <span class="files-count-pill" title="Source files committed">📁 ${filesCount} files</span>
+          <span class="files-count-pill" title="NSoC PR Breakdown"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
         </td>
         <td style="text-align: center;">
-          <span class="commits-count-pill">💻 ${item.commits}</span>
+          <span class="commits-count-pill"><i data-lucide="git-commit"></i> ${item.commits}</span>
         </td>
         <td style="text-align: right;">
           <strong class="score-highlight">${score} pts</strong>
@@ -212,6 +255,10 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tableBody.appendChild(tr);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
   // Fetch Live Contributions directly from GitHub REST API
@@ -242,32 +289,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
+            
+            // Check if contributor exists in CONTRIBUTORS_REGISTRY for verified PR levels
+            let registryEntry = null;
+            if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
+              registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
+            }
+
             // Count registered games from GAMES_REGISTRY
             let userGames = [];
             if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
               userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
             }
-            const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
-            // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
-            const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
+            const gamesCount = userGames.length > 0 ? userGames.length : (registryEntry ? registryEntry.gamesCount : (isAdmin ? 2 : 0));
 
-            const roleMeta = determineContributorRole({
-              login: user.login,
-              contributions: user.contributions,
-              gamesCount: gamesCount
-            });
+            const level1PRs = registryEntry ? (registryEntry.level1PRs || 0) : 0;
+            const level2PRs = registryEntry ? (registryEntry.level2PRs || 0) : (isAdmin ? 2 : 0);
+            const level3PRs = registryEntry ? (registryEntry.level3PRs || 0) : 0;
+            const bonusPts = registryEntry ? (registryEntry.bonusPts || 0) : 0;
 
-            return {
+            const contributorObj = {
               login: user.login,
-              name: displayName,
-              role: roleMeta.role,
-              roleClass: roleMeta.tagClass,
+              name: registryEntry ? registryEntry.name : displayName,
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
-              filesCount: filesCount,
-              games: userGames.length > 0 ? userGames.map(g => g.title) : ["Quantum Memory Matrix", "Cyber Neon Pong"]
+              level1PRs: level1PRs,
+              level2PRs: level2PRs,
+              level3PRs: level3PRs,
+              bonusPts: bonusPts,
+              games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
             };
+
+            const roleMeta = determineContributorRole(contributorObj);
+            contributorObj.role = roleMeta.role;
+            contributorObj.roleClass = roleMeta.tagClass;
+
+            return contributorObj;
           })
         );
 

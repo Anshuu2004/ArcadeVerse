@@ -24,19 +24,22 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 
 | Tier Title | Points Required | Description |
 | :--- | :---: | :--- |
-| **🚀 Project Contributor** | **10+ Points** | Getting started — verified PRs, bug fixes, or small features |
+| **🌱 Active Contributor** | **First Merged PR (3–5 pts)** | Getting started — first verified contribution |
+| **🚀 Project Contributor** | **10+ Points** | Verified PRs, bug fixes, UI components, or first game |
 | **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
-| **💎 Elite Contributor** | **50+ Points** | Major features, complex game mechanics, and active reviews |
+| **💎 Elite Contributor** | **50+ Points** | Major features, multiple games, and active reviews |
 | **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
 
-> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin.
+> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin. Each verified game integrated into `games/` counts as a Level 3 contribution (10 pts).
 
 ### 🕹️ **Dedicated `games/` Developer Tiers**
 
 | Developer Title | Requirement | Description |
 | :--- | :---: | :--- |
-| **🕹️ Arcade Developer** | 1 verified game | Authored and polished a playable game in `games/game-name_contributor-name/` |
-| **⚡ Hyper Game Developer** | 2+ verified games | Authored multiple high-performance web arcade games |
+| **🕹️ Arcade Explorer** | 1 verified game | Authored and polished their first playable game in `games/game-name_contributor-name/` |
+| **🎮 Arcade Developer** | 2–3 verified games | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | 4–5 verified games | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | 6+ verified games | Master arcade author with top-tier game mechanics |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 

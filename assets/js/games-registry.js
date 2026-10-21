@@ -17,6 +17,7 @@ const GAMES_REGISTRY = [
     title: "Quantum Memory Matrix",
     category: "Puzzle",
     icon: "🧩",
+    lucideIcon: "puzzle",
     description: "Cyberpunk card flipping memory matrix test. Match cyber glyphs under timed pressure.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -31,6 +32,7 @@ const GAMES_REGISTRY = [
     title: "Cyber Neon Pong",
     category: "Arcade",
     icon: "🏓",
+    lucideIcon: "gamepad-2",
     description: "Classic retro pong arena with neon glow and dynamic canvas AI paddle physics.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -48,6 +50,11 @@ const CONTRIBUTORS_REGISTRY = [
     github: "DebasmitaBose0",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
-    contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
+    gamesCount: 2,
+    level1PRs: 0,
+    level2PRs: 2,
+    level3PRs: 2,
+    bonusPts: 0,
+    contributions: ["Quantum Memory Matrix", "Cyber Neon Pong", "Arcade Core Engine"]
   }
 ];

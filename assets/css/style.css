@@ -2001,6 +2001,13 @@ body {
   color: #fbbf24;
 }
 
+.role-master-architect {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.6);
+  color: #fde047;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+}
+
 .role-hyper {
   background: rgba(236, 72, 153, 0.15);
   border-color: rgba(236, 72, 153, 0.45);
@@ -2011,6 +2018,12 @@ body {
   background: rgba(139, 92, 246, 0.15);
   border-color: rgba(139, 92, 246, 0.45);
   color: #a78bfa;
+}
+
+.role-explorer {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(14, 165, 233, 0.45);
+  color: #38bdf8;
 }
 
 .role-master {
@@ -2041,6 +2054,61 @@ body {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.18);
   color: var(--text-secondary);
+}
+
+/* Lucide Icons Neon Styling */
+.lucide {
+  width: 1.15rem;
+  height: 1.15rem;
+  stroke-width: 2.2px;
+  vertical-align: -0.18em;
+  display: inline-block;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.nav-item .lucide,
+.btn .lucide {
+  margin-right: 0.4rem;
+  stroke: var(--cyan, #38bdf8);
+}
+
+.nav-item:hover .lucide,
+.btn:hover .lucide {
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
+  transform: scale(1.1);
+}
+
+.role-pill-badge .lucide {
+  width: 0.85rem;
+  height: 0.85rem;
+  vertical-align: -0.12em;
+  margin-right: 0.25rem;
+}
+
+.point-rule-icon .lucide {
+  width: 2.2rem;
+  height: 2.2rem;
+  stroke: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+}
+
+.highlight-rule .point-rule-icon .lucide {
+  stroke: #f59e0b;
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+}
+
+.game-icon .lucide {
+  width: 2.5rem;
+  height: 2.5rem;
+  stroke: #60a5fa;
+  filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.5));
+}
+
+.admin-badge-circle .lucide {
+  width: 2rem;
+  height: 2rem;
+  stroke: #fbbf24;
+  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
 }
 
 .github-handle-link {
