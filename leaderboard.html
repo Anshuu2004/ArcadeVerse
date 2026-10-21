@@ -201,114 +201,76 @@
         </div>
       </div>
 
-      <!-- Official Contributor Rank Badges & Recognition Labels Table with Point Systems (In-App Only) -->
+      <!-- Official Contributor Rank Badges & Recognition Labels Table (Balanced 2-Track System) -->
       <div class="tier-breakdown-box">
         <div class="tier-box-header">
           <h3><i data-lucide="award"></i> Official Contributor Rank Badges & Recognition Labels</h3>
-          <p>Strictly for in-app contributor arcade points earned during the 45-day NSOC '26 program. Badges unlock automatically on the podium and standings based on verified milestones:</p>
+          <p>Two dedicated recognition tracks for the 45-day NSOC '26 program. In-app points and rank badges are automatically awarded for verified contributions:</p>
         </div>
         <div class="table-responsive">
           <table class="tier-table">
             <thead>
               <tr>
                 <th>Contributor Label & Badge</th>
-                <th>Category</th>
+                <th>Recognition Track</th>
                 <th>Effort / Requirement (In-App Point System Criteria)</th>
                 <th>Reward & Privileges</th>
               </tr>
             </thead>
             <tbody>
+              <!-- Dedicated Game Creators Track -->
               <tr>
                 <td><span class="role-pill-badge role-master-architect"><i data-lucide="crown"></i> Master Game Architect</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>10+ Verified Games</strong> • <code>1000+ Arcade Points</code></td>
+                <td><strong>10+ Verified Games</strong> • <code>1000+ Arcade Points</code> (100 pts/game + mechanics bonus)</td>
                 <td>Ultimate Arcade Creator badge + Top Hall of Fame Spotlight</td>
               </tr>
               <tr>
                 <td><span class="role-pill-badge role-hyper"><i data-lucide="zap"></i> Hyper Game Developer</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>5–9 Verified Games</strong> • <code>500–999 Arcade Points</code></td>
+                <td><strong>5–9 Verified Games</strong> • <code>500–999 Arcade Points</code> (100 pts/game + mechanics bonus)</td>
                 <td>Elite Game Developer badge + Hall of Fame Podium Spotlight</td>
               </tr>
               <tr>
                 <td><span class="role-pill-badge role-arcade"><i data-lucide="gamepad-2"></i> Arcade Developer</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>2–4 Verified Games</strong> • <code>200–499 Arcade Points</code></td>
+                <td><strong>2–4 Verified Games</strong> • <code>200–499 Arcade Points</code> (100 pts/game baseline)</td>
                 <td>Verified Game Developer badge + Arcade Showcase</td>
               </tr>
               <tr>
                 <td><span class="role-pill-badge role-explorer"><i data-lucide="compass"></i> Arcade Explorer</span></td>
                 <td><span class="tier-cat-pill">Games Dedicated</span></td>
-                <td><strong>1 Verified Game</strong> • <code>100–199 Arcade Points</code></td>
+                <td><strong>1 Verified Game</strong> • <code>100–199 Arcade Points</code> (First playable game in <code>games/</code>)</td>
                 <td>Playable Game Badge + Arcade Player Modal showcase</td>
+              </tr>
+
+              <!-- Platform & Core Engineering Track -->
+              <tr>
+                <td><span class="role-pill-badge role-master"><i data-lucide="shield-check"></i> Master Core Architect</span></td>
+                <td><span class="tier-cat-pill" style="color: #fb7185; border-color: rgba(244,63,94,0.3); background: rgba(244,63,94,0.1);">Platform & Core</span></td>
+                <td><strong>10+ Merged PRs</strong> • <code>300+ Arcade Points</code> (Major platform architecture & engines)</td>
+                <td>Master Core Architect badge + Hall of Fame Podium Spotlight</td>
               </tr>
               <tr>
                 <td><span class="role-pill-badge role-elite"><i data-lucide="gem"></i> Elite Contributor</span></td>
-                <td><span class="tier-cat-pill">General Milestones</span></td>
-                <td><strong>10+ Merged Commits / PRs</strong> • <code>150+ Arcade Points</code></td>
-                <td>Permanent Hall of Fame feature badge</td>
+                <td><span class="tier-cat-pill" style="color: #38bdf8; border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.1);">Platform & Core</span></td>
+                <td><strong>6–9 Merged PRs</strong> • <code>150–299 Arcade Points</code> (Core features, tools, maintenance)</td>
+                <td>Elite Contributor badge + Permanent Hall of Fame feature</td>
+              </tr>
+              <tr>
+                <td><span class="role-pill-badge role-platform"><i data-lucide="code-2"></i> Platform Contributor</span></td>
+                <td><span class="tier-cat-pill" style="color: #60a5fa; border-color: rgba(59,130,246,0.3); background: rgba(59,130,246,0.1);">Platform & Core</span></td>
+                <td><strong>3–5 Merged PRs</strong> • <code>50–149 Arcade Points</code> (UI components, search/filter engines)</td>
+                <td>Platform Contributor badge + Feature Author Spotlight</td>
               </tr>
               <tr>
                 <td><span class="role-pill-badge role-active"><i data-lucide="sprout"></i> Active Contributor</span></td>
-                <td><span class="tier-cat-pill">Getting Started</span></td>
-                <td><strong>First Merged PR / Commit</strong> • <code>15+ Arcade Points</code></td>
+                <td><span class="tier-cat-pill" style="color: #34d399; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">Getting Started</span></td>
+                <td><strong>1–2 Merged PRs</strong> • <code>15–49 Arcade Points</code> (Bug fixes: 15 pts, UI enhancements: 25 pts)</td>
                 <td>Listed in verified NSOC '26 contributors registry</td>
               </tr>
             </tbody>
           </table>
-        </div>
-
-        <!-- Point Systems Under Official Contributor Rank Badges & Recognition Labels -->
-        <div class="points-matrix-wrapper">
-          <div class="points-matrix-header">
-            <h4><i data-lucide="coins"></i> In-App Arcade Scoring & Multiplier Rules</h4>
-            <p>Every contribution is audited client-side and scored according to verified work and added to your Hall of Fame standings:</p>
-          </div>
-          <div class="points-matrix-grid">
-            <div class="point-rule-card point-rule-game">
-              <div class="point-rule-top">
-                <span class="point-badge-pill"><i data-lucide="gamepad-2"></i> +100 pts</span>
-                <span class="point-rule-multiplier">100 pts × Verified Game</span>
-              </div>
-              <div class="point-rule-body">
-                <h5>Verified Playable Game</h5>
-                <p>Awarded when a contributor builds and integrates a conflict-free game into <code>games/</code> and registers in the arcade index.</p>
-              </div>
-            </div>
-
-            <div class="point-rule-card point-rule-mechanics">
-              <div class="point-rule-top">
-                <span class="point-badge-pill"><i data-lucide="cpu"></i> +30 pts</span>
-                <span class="point-rule-multiplier">+30 pts × Mechanics Bonus</span>
-              </div>
-              <div class="point-rule-body">
-                <h5>Mechanics & Physics Bonus</h5>
-                <p>Awarded for dynamic canvas rendering, custom physics engines, AI opponents, audio FX, or particle visual systems.</p>
-              </div>
-            </div>
-
-            <div class="point-rule-card point-rule-feature">
-              <div class="point-rule-top">
-                <span class="point-badge-pill"><i data-lucide="layout"></i> +25 pts</span>
-                <span class="point-rule-multiplier">25 pts × Feature PR</span>
-              </div>
-              <div class="point-rule-body">
-                <h5>Platform Feature & UI Work</h5>
-                <p>Awarded for portal enhancements, filter engines, search index vaults, dark-mode styling, or mobile navigation improvements.</p>
-              </div>
-            </div>
-
-            <div class="point-rule-card point-rule-fix">
-              <div class="point-rule-top">
-                <span class="point-badge-pill"><i data-lucide="wrench"></i> +15 pts</span>
-                <span class="point-rule-multiplier">15 pts × Fix / Polish PR</span>
-              </div>
-              <div class="point-rule-body">
-                <h5>Quality & Bug Fix Bonus</h5>
-                <p>Awarded for responsive mobile touch controls, bug fixes, clean vanilla code styling, and zero merge conflicts.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

@@ -96,13 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Evaluates and returns an array of the HIGHEST badges for EACH category:
   // 1. Leadership Category (Project Admin & Lead)
   // 2. Games Dedicated Category (45-Day NSoC Program Scaling):
-  //    - Master Game Architect (10+ Verified Games)
-  //    - Hyper Game Developer (5–9 Verified Games)
-  //    - Arcade Developer (2–4 Verified Games)
-  //    - Arcade Explorer (1 Verified Game)
-  // 3. General Milestones Category:
-  //    - Elite Contributor (10+ Merged Commits / PRs)
-  //    - Active Contributor (Verified Merged Contribution)
+  //    - Master Game Architect (10+ Verified Games • 1000+ pts)
+  //    - Hyper Game Developer (5–9 Verified Games • 500–999 pts)
+  //    - Arcade Developer (2–4 Verified Games • 200–499 pts)
+  //    - Arcade Explorer (1 Verified Game • 100–199 pts)
+  // 3. Platform & Core Engineering Category:
+  //    - Master Core Architect (10+ Merged PRs • 300+ pts)
+  //    - Elite Contributor (6–9 Merged PRs • 150–299 pts)
+  //    - Platform Contributor (3–5 Merged PRs • 50–149 pts)
+  //    - Active Contributor (1–2 Merged PRs • 15–49 pts)
   function getContributorBadges(user) {
     const badges = [];
     const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-  // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 10+ Master, 5–9 Hyper, 2–4 Arcade Dev, 1 Explorer)
+    // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 10+ Master, 5–9 Hyper, 2–4 Arcade Dev, 1 Explorer)
     const gamesCount = user.gamesCount || 0;
     if (gamesCount >= 10) {
       badges.push({
@@ -154,16 +156,33 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 3. General Milestone Tiers (Based on verified contributions/commits and points)
+    // 3. Platform & Core Engineering Track (Based on PRs, commits, and platform/fix points)
     const commitsCount = user.commits || 0;
-    const score = calculateScore(user);
-    if (commitsCount >= 10 || score >= 150) {
+    const platformPoints = ((user.platformPRs || 0) * 25) + ((user.qualityPRs || 0) * 15) + (user.bonusPts || 0);
+
+    if (commitsCount >= 10 || platformPoints >= 300) {
+      badges.push({
+        role: "Master Core Architect",
+        tagClass: "role-master",
+        label: "Master Core Architect",
+        lucideIcon: "shield-check",
+        category: "Platform & Core"
+      });
+    } else if (commitsCount >= 6 || platformPoints >= 150) {
       badges.push({
         role: "Elite Contributor",
         tagClass: "role-elite",
         label: "Elite Contributor",
         lucideIcon: "gem",
-        category: "General Milestones"
+        category: "Platform & Core"
+      });
+    } else if (commitsCount >= 3 || platformPoints >= 50) {
+      badges.push({
+        role: "Platform Contributor",
+        tagClass: "role-platform",
+        label: "Platform Contributor",
+        lucideIcon: "code-2",
+        category: "Platform & Core"
       });
     } else {
       badges.push({
