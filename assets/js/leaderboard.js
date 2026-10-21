@@ -20,32 +20,36 @@ document.addEventListener("DOMContentLoaded", () => {
       avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
       commits: 19,
       gamesCount: 2,
-      level1PRs: 0,
-      level2PRs: 2,
-      level3PRs: 0,
+      mechanicsBonus: 2,
+      platformPRs: 2,
+      qualityPRs: 0,
       bonusPts: 0,
       games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
     }
   ];
 
-  // Calculate NSoC-compliant score (Level 1: 3pts, Level 2: 5pts, Level 3 / Games: 10pts)
+  // Calculate ArcadeVerse Score:
+  // - Verified Game: 100 pts per integrated game in games/
+  // - Mechanics & Physics Bonus: 30 pts per advanced game
+  // - Platform Feature & UI: 25 pts per core feature PR
+  // - Quality & Bug Fixes: 15 pts per bug fix / maintenance PR
   function calculateScore(item) {
-    const l1 = (item.level1PRs || 0) * 3;
-    const l2 = (item.level2PRs || 0) * 5;
-    const gamesPts = (item.gamesCount || 0) * 10;
-    const l3Other = (item.level3PRs || 0) * 10;
+    const gamePts = (item.gamesCount || 0) * 100;
+    const mechanicsPts = (item.mechanicsBonus || 0) * 30;
+    const platformPts = (item.platformPRs || 0) * 25;
+    const qualityPts = (item.qualityPRs || 0) * 15;
     const bonus = item.bonusPts || 0;
 
-    const calculated = l1 + l2 + gamesPts + l3Other + bonus;
-    // Fallback if item has only raw commits and no verified PR entry yet
+    const calculated = gamePts + mechanicsPts + platformPts + qualityPts + bonus;
+    // Fallback for new GitHub contributors not yet registered in CONTRIBUTORS_REGISTRY
     if (calculated === 0 && item.commits > 0) {
-      return Math.min(item.commits * 3, 15); // baseline active contributor score
+      return Math.min(item.commits * 10, 50);
     }
     return calculated;
   }
 
   // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates dedicated game titles (1, 2-3, 4-5, 6+) and repository point milestones (10, 25, 50, 100)
+  // Evaluates dedicated game titles (1, 2, 3-4, 5+) and repository point milestones (25, 60, 125, 250)
   function determineContributorRole(user) {
     if (user.login && user.login.toLowerCase() === "debasmitabose0") {
       return {
@@ -59,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const gamesCount = user.gamesCount || 0;
     const score = calculateScore(user);
 
-    // 1. Dedicated Game Developer Tiers (Only earned by building games!)
-    if (gamesCount >= 6) {
+    // 1. Dedicated Game Developer Tiers (Earned ONLY by creating games!)
+    if (gamesCount >= 5) {
       return {
         role: "Master Game Architect",
         tagClass: "role-master-architect",
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "crown"
       };
     }
-    if (gamesCount >= 4) {
+    if (gamesCount >= 3) {
       return {
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
@@ -76,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "zap"
       };
     }
-    if (gamesCount >= 2) {
+    if (gamesCount === 2) {
       return {
         role: "Arcade Developer",
         tagClass: "role-arcade",
@@ -93,8 +97,8 @@ document.addEventListener("DOMContentLoaded", () => {
       };
     }
 
-    // 2. Repository-wide NSoC Point Milestone Tiers
-    if (score >= 100) {
+    // 2. Repository-wide Arcade Score Milestone Tiers
+    if (score >= 250) {
       return {
         role: "Master Contributor",
         tagClass: "role-master",
@@ -102,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "trophy"
       };
     }
-    if (score >= 50) {
+    if (score >= 125) {
       return {
         role: "Elite Contributor",
         tagClass: "role-elite",
@@ -110,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "gem"
       };
     }
-    if (score >= 25) {
+    if (score >= 60) {
       return {
         role: "Novice Contributor",
         tagClass: "role-novice",
@@ -118,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "sparkles"
       };
     }
-    if (score >= 10) {
+    if (score >= 25) {
       return {
         role: "Project Contributor",
         tagClass: "role-project",
@@ -142,10 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Format work breakdown label
   function getWorkBreakdown(item) {
-    const l1 = item.level1PRs || 0;
-    const l2 = item.level2PRs || 0;
-    const l3 = (item.gamesCount || 0) + (item.level3PRs || 0);
-    return `L1: ${l1} • L2: ${l2} • L3: ${l3}`;
+    const games = item.gamesCount || 0;
+    const feat = item.platformPRs || 0;
+    const fix = item.qualityPRs || 0;
+    return `Games: ${games} • Feat: ${feat} • Fix: ${fix}`;
   }
 
   // Render Podium for Verified Contributors Only (No Dummies)
@@ -303,9 +307,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             const gamesCount = userGames.length > 0 ? userGames.length : (registryEntry ? registryEntry.gamesCount : (isAdmin ? 2 : 0));
 
-            const level1PRs = registryEntry ? (registryEntry.level1PRs || 0) : 0;
-            const level2PRs = registryEntry ? (registryEntry.level2PRs || 0) : (isAdmin ? 2 : 0);
-            const level3PRs = registryEntry ? (registryEntry.level3PRs || 0) : 0;
+            const mechanicsBonus = registryEntry ? (registryEntry.mechanicsBonus || 0) : (isAdmin ? 2 : 0);
+            const platformPRs = registryEntry ? (registryEntry.platformPRs || 0) : (isAdmin ? 2 : 0);
+            const qualityPRs = registryEntry ? (registryEntry.qualityPRs || 0) : 0;
             const bonusPts = registryEntry ? (registryEntry.bonusPts || 0) : 0;
 
             const contributorObj = {
@@ -314,9 +318,9 @@ document.addEventListener("DOMContentLoaded", () => {
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
-              level1PRs: level1PRs,
-              level2PRs: level2PRs,
-              level3PRs: level3PRs,
+              mechanicsBonus: mechanicsBonus,
+              platformPRs: platformPRs,
+              qualityPRs: qualityPRs,
               bonusPts: bonusPts,
               games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
             };

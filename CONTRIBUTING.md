@@ -37,9 +37,9 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 | Developer Title | Requirement | Description |
 | :--- | :---: | :--- |
 | **🕹️ Arcade Explorer** | 1 verified game | Authored and polished their first playable game in `games/game-name_contributor-name/` |
-| **🎮 Arcade Developer** | 2–3 verified games | Authored multiple polished games across arcade categories |
-| **⚡ Hyper Game Developer** | 4–5 verified games | Authored diverse, high-performance web arcade games |
-| **👑 Master Game Architect** | 6+ verified games | Master arcade author with top-tier game mechanics |
+| **🎮 Arcade Developer** | 2 verified games | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | 3–4 verified games | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | 5+ verified games | Master arcade author with top-tier game mechanics |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 

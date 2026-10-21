@@ -51,9 +51,9 @@ const CONTRIBUTORS_REGISTRY = [
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
     gamesCount: 2,
-    level1PRs: 0,
-    level2PRs: 2,
-    level3PRs: 2,
+    mechanicsBonus: 2,
+    platformPRs: 2,
+    qualityPRs: 0,
     bonusPts: 0,
     contributions: ["Quantum Memory Matrix", "Cyber Neon Pong", "Arcade Core Engine"]
   }
