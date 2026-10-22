@@ -56,6 +56,20 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "cryptic-wordle_babin",
+    title: "Cryptic Wordle Hack",
+    category: "Puzzle",
+    lucideIcon: "type",
+    description: "Guess the secret 5-letter tech keyword in 6 tries with real-time green and amber matrix feedback clues.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/cryptic-wordle_babin/index.html",
+    tags: ["Puzzle", "Word", "Cyber", "Logic"],
+    stars: 34,
+    featured: true
+  },
+  {
     id: "neon-asteroid-escape_joitapaul",
     title: "Neon Asteroid Escape",
     category: "Arcade",
