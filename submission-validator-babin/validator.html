@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contributor Pre-Flight Validator | ArcadeVerse (NSOC '26)</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="validator.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="cyber-grid"></div>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <span class="pixel-badge">👾</span>
+        <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
+        <span class="nsoc-tag">NSOC '26</span>
+      </a>
+      <nav class="nav-links">
+        <a href="../index.html" class="nav-item">🎮 Explore Games</a>
+        <a href="../ideas.html" class="nav-item">💡 Ideas Vault</a>
+        <a href="../leaderboard.html" class="nav-item">🏆 Hall of Fame</a>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <div class="section-header center">
+      <span class="section-tag">PRE-FLIGHT VALIDATION ENGINE</span>
+      <h1 class="section-title">Game Submission & Registry Generator</h1>
+      <p class="section-subtitle">Prevent common PR rejections! Validate your folder naming, test file requirements, and generate compliant JSON for <code>games-registry.js</code>.</p>
+    </div>
+
+    <div class="validator-layout">
+      <!-- Input Form -->
+      <div class="validator-card form-card">
+        <h3>📝 Game Metadata Input</h3>
+        <p class="form-hint">Enter your game details below to check compliance with NSoC '26 rules:</p>
+
+        <form id="validator-form">
+          <div class="form-group">
+            <label for="val-title">Game Title</label>
+            <input type="text" id="val-title" placeholder="e.g. Cyber Neon Pong" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="val-author">Author Name</label>
+              <input type="text" id="val-author" placeholder="e.g. Rohit Sharma" required>
+            </div>
+            <div class="form-group">
+              <label for="val-github">GitHub Username</label>
+              <input type="text" id="val-github" placeholder="e.g. rohit123" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="val-category">Category</label>
+              <select id="val-category">
+                <option value="Arcade">Arcade</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Action">Action</option>
+                <option value="Retro">Retro</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Rhythm">Rhythm</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="val-icon">Game Emoji Icon</label>
+              <input type="text" id="val-icon" placeholder="e.g. 🕹️" value="🕹️" maxlength="4">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="val-desc">Short Description (max 120 chars)</label>
+            <textarea id="val-desc" rows="2" placeholder="Brief overview of gameplay mechanics and technology..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="val-tags">Tags (comma-separated)</label>
+            <input type="text" id="val-tags" placeholder="e.g. Canvas, Retro, Physics">
+          </div>
+        </form>
+      </div>
+
+      <!-- Live Compliance & Generator Output -->
+      <div class="validator-card output-card">
+        <h3>🔍 Compliance & Pre-Flight Checklist</h3>
+        <div class="checklist-box" id="checklist-box">
+          <div class="check-item" id="chk-folder">
+            <span class="chk-icon">⏳</span>
+            <div class="chk-text">
+              <strong>Isolated Folder Path</strong>
+              <code id="out-folder-path">games/game-name_contributor/</code>
+            </div>
+          </div>
+          <div class="check-item" id="chk-id">
+            <span class="chk-icon">⏳</span>
+            <div class="chk-text">
+              <strong>Registry Identifier (id)</strong>
+              <code id="out-id-slug">--</code>
+            </div>
+          </div>
+          <div class="check-item" id="chk-files">
+            <span class="chk-icon">⏳</span>
+            <div class="chk-text">
+              <strong>Mandatory Source Files</strong>
+              <span>Requires: <code>index.html</code>, <code>style.css</code>, <code>game.js</code></span>
+            </div>
+          </div>
+          <div class="check-item" id="chk-root">
+            <span class="chk-icon">✓</span>
+            <div class="chk-text">
+              <strong>Zero Root Files Rule</strong>
+              <span>Never put files directly into the repository root</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Generated JSON Code Snippet -->
+        <div class="code-snippet-box">
+          <div class="code-header">
+            <span>📋 games-registry.js Snippet</span>
+            <button id="copy-json-btn" class="btn btn-secondary btn-sm">Copy JSON</button>
+          </div>
+          <pre><code id="json-output">// Fill form to generate JSON</code></pre>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>© 2026 ArcadeVerse • Pre-Flight Submission Tool by <strong>@Babin123456</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="validator.js"></script>
+</body>
+</html>
