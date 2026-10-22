@@ -6,6 +6,7 @@
   <title>Flappy Cyber Jet | ArcadeVerse</title>
   <meta name="description" content="Pilot a futuristic cyber jet through neon obstacles, dodge collisions, and beat your high score in Flappy Cyber Jet.">
   <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="fcj-app" id="fcj-app">
@@ -16,10 +17,10 @@
       <header class="fcj-hud" id="fcj-hud" aria-label="Game heads up display">
         <div class="fcj-hud-left">
           <button id="fcj-btn-sound" class="fcj-icon-btn" type="button" aria-label="Toggle sound" title="Toggle sound (M)">
-            <span class="fcj-sound-icon" id="fcj-sound-icon">🔊</span>
+            <span class="fcj-sound-icon" id="fcj-sound-icon"><i data-lucide="volume-2"></i></span>
           </button>
           <button id="fcj-btn-pause" class="fcj-icon-btn" type="button" aria-label="Pause game" title="Pause game (P / ESC)">
-            <span class="fcj-pause-icon" id="fcj-pause-icon">⏸</span>
+            <span class="fcj-pause-icon" id="fcj-pause-icon"><i data-lucide="pause"></i></span>
           </button>
         </div>
 
@@ -100,7 +101,7 @@
 
           <!-- Launch Button -->
           <button id="fcj-btn-start" class="fcj-btn fcj-btn-primary" type="button">
-            <span class="fcj-btn-icon">🚀</span>
+            <span class="fcj-btn-icon"><i data-lucide="rocket"></i></span>
             <span class="fcj-btn-text">LAUNCH JET</span>
           </button>
 
@@ -149,11 +150,11 @@
 
           <div class="fcj-btn-group">
             <button id="fcj-btn-resume" class="fcj-btn fcj-btn-primary" type="button">
-              <span class="fcj-btn-icon">▶</span>
+              <span class="fcj-btn-icon"><i data-lucide="play"></i></span>
               <span class="fcj-btn-text">RESUME</span>
             </button>
             <button id="fcj-btn-pause-restart" class="fcj-btn fcj-btn-secondary" type="button">
-              <span class="fcj-btn-icon">↺</span>
+              <span class="fcj-btn-icon"><i data-lucide="rotate-ccw"></i></span>
               <span class="fcj-btn-text">RESTART</span>
             </button>
           </div>
@@ -168,7 +169,7 @@
 
           <!-- New Record Badge (Hidden unless new record) -->
           <div class="fcj-record-badge fcj-hidden" id="fcj-new-record-badge">
-            ✨ NEW BEST RECORD! ✨
+            <i data-lucide="sparkles"></i> NEW BEST RECORD! <i data-lucide="sparkles"></i>
           </div>
 
           <!-- Final Score Cards -->
@@ -185,11 +186,11 @@
 
           <div class="fcj-btn-group">
             <button id="fcj-btn-restart" class="fcj-btn fcj-btn-primary" type="button">
-              <span class="fcj-btn-icon">↺</span>
+              <span class="fcj-btn-icon"><i data-lucide="rotate-ccw"></i></span>
               <span class="fcj-btn-text">PLAY AGAIN</span>
             </button>
             <button id="fcj-btn-menu" class="fcj-btn fcj-btn-secondary" type="button">
-              <span class="fcj-btn-icon">🏠</span>
+              <span class="fcj-btn-icon"><i data-lucide="home"></i></span>
               <span class="fcj-btn-text">MAIN MENU</span>
             </button>
           </div>
@@ -202,5 +203,10 @@
   </div>
 
   <script src="game.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>

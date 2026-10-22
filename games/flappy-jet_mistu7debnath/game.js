@@ -1009,11 +1009,14 @@
 
     updateSoundButtonUI() {
       if (this.sound.isMuted) {
-        this.soundIcon.textContent = '🔇';
+        this.soundIcon.innerHTML = '<i data-lucide="volume-x"></i>';
         this.btnSound.setAttribute('aria-label', 'Unmute sound');
       } else {
-        this.soundIcon.textContent = '🔊';
+        this.soundIcon.innerHTML = '<i data-lucide="volume-2"></i>';
         this.btnSound.setAttribute('aria-label', 'Mute sound');
+      }
+      if (window.lucide) {
+        lucide.createIcons();
       }
     }
 

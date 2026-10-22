@@ -141,7 +141,12 @@ class Quantum2048 {
     if (this.soundBtn) {
       this.soundBtn.addEventListener("click", () => {
         this.soundEnabled = !this.soundEnabled;
-        this.soundIcon.textContent = this.soundEnabled ? "🔊 Sound ON" : "🔇 Muted";
+        this.soundIcon.innerHTML = this.soundEnabled 
+          ? '<i data-lucide="volume-2"></i> Sound ON' 
+          : '<i data-lucide="volume-x"></i> Muted';
+        if (window.lucide) {
+          lucide.createIcons();
+        }
       });
     }
   }

@@ -58,10 +58,13 @@
       color: #64748b;
     }
   </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <div class="game-header">
-    <div class="game-title">🏓 Cyber Neon Pong</div>
+    <div class="game-title" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+      <i data-lucide="gamepad-2"></i> Cyber Neon Pong
+    </div>
     <div class="author-badge">Created by @DebasmitaBose0</div>
   </div>
 
@@ -75,5 +78,10 @@
   <p class="instructions">Control your paddle using your <strong>Mouse</strong> (move up & down)</p>
 
   <script src="game.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>

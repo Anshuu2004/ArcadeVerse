@@ -58,18 +58,22 @@ This Code of Conduct applies within all community spaces (GitHub issues, Pull Re
 Community leaders will follow these Community Impact Guidelines in determining the consequences for any action deemed in violation of this Code of Conduct:
 
 ### 1. Correction
+
 - **Community Impact:** Use of inappropriate language or other behavior deemed unprofessional or unwelcome in the community.
 - **Consequence:** A private, written warning from community leaders, providing clarity around the nature of the violation and an explanation of why the behavior was inappropriate. A public apology may be requested.
 
 ### 2. Warning
+
 - **Community Impact:** A violation through a single incident or series of actions (e.g. submitting broken AI spam, opening duplicate unassigned PRs, or arguing aggressively in code reviews).
 - **Consequence:** A formal written warning with consequences for continued behavior. Points earned from the offending contribution may be normalized or deducted.
 
 ### 3. Temporary Suspension
+
 - **Community Impact:** A serious violation of community standards, including sustained disruptive behavior, repeated plagiarism, or persistent disrespect toward maintainers.
 - **Consequence:** A temporary ban from opening issues, PRs, or participating in repository discussions for a specified period of time.
 
 ### 4. Permanent Ban & Event Disqualification
+
 - **Community Impact:** Demonstrating a pattern of violation, including sustained harassment of an individual, malicious code submission (cryptominers, malware, hidden tracking scripts), intentional cheating, or blatant intellectual property theft.
 - **Consequence:** A permanent ban from any sort of public interaction within the ArcadeVerse project. The incident will be officially referred to the **Nexus Spring Of Code – Winter Edition 2026** organizing committee for **immediate disqualification from the program**.
 

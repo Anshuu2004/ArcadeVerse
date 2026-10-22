@@ -1,12 +1,12 @@
 # 🌟 ArcadeVerse — Contribution & Contributor Hub (Nexus Spring Of Code – Winter Edition 2026)
 
-> ### 👑 **PROJECT ADMIN:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))
-> ### ❄️ **EVENT:** **Nexus Spring Of Code – Winter Edition 2026**
-> ### ⚡ **TECH STACK:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**
+> - 👑 **Project Admin:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0))
+> - ❄️ **Event:** **Nexus Spring Of Code – Winter Edition 2026**
+> - ⚡ **Tech Stack:** **100% Pure Vanilla HTML5 + CSS3 + Modern JavaScript (NO Python, NO Frameworks, NO Bundlers)**
 
 ---
 
-# 🎯 **ABOUT ARCADEVERSE**
+## 🎯 About ArcadeVerse
 
 ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an accessible, scalable, and conflict-free foundation where developers worldwide can build and showcase their creations.
 
@@ -16,42 +16,40 @@ ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an access
 
 ---
 
-# 🎖️ **OFFICIAL CONTRIBUTOR RECOGNITION & HALL OF FAME BADGES**
+## 🎖️ Official Contributor Recognition & Hall of Fame Badges
 
 ArcadeVerse features a **Balanced 2-Track Contributor Recognition System** scaled specifically for the 45-day **Nexus Spring Of Code – Winter Edition 2026** timeline. Badges are computed dynamically and showcased live on our [Hall of Fame & Leaderboard](leaderboard.html).
 
-### 🕹️ **Track 1: Dedicated Game Creators Track** `(in the 'games' folder)`
-
-| Tier Title | Points Required | Description |
-| :--- | :---: | :--- |
-| **🌱 Active Contributor** | **First Merged PR (3–5 pts)** | Getting started — first verified contribution |
-| **🚀 Project Contributor** | **10+ Points** | Verified PRs, bug fixes, UI components, or first game |
-| **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
-| **💎 Elite Contributor** | **50+ Points** | Major features, multiple games, and active reviews |
-| **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
-
-> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin. Each verified game integrated into `games/` counts as a Level 3 contribution (10 pts).
-
-### 💻 **Track 2: Platform & Core Engineering Track** `(except the 'games' folder, in the codebase modification)`
+### 🕹️ Track 1: Dedicated Game Creators Track `(in the 'games' folder)`
 
 | Developer Title | Requirement | Description |
 | :--- | :---: | :--- |
-| **🕹️ Arcade Explorer** | 1 verified game | Authored and polished their first playable game in `games/game-name_contributor-name/` |
-| **🎮 Arcade Developer** | 2–4 verified games | Authored multiple polished games across arcade categories |
-| **⚡ Hyper Game Developer** | 5–9 verified games | Authored diverse, high-performance web arcade games |
-| **👑 Master Game Architect** | 10+ verified games | Master arcade author with top-tier game mechanics |
+| **🕹️ Arcade Explorer** | **1–3 verified games** | Authored and integrated their first playable game in `games/game-name_contributor-name/` |
+| **🎮 Arcade Developer** | **4–7 verified games** | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | **8–14 verified games** | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | **15+ verified games** | Master arcade author with top-tier game mechanics |
+
+### 💻 Track 2: Platform & Universal Engineering Track `(Codebase & Core Modifications)`
+
+| Tier Title | In-App Points Required | Description |
+| :--- | :---: | :--- |
+| **🌱 Active Contributor** | **15–99 Points** | Getting started — first verified bug fix, touch control, or documentation PR |
+| **⚡ Platform Contributor** | **100–249 Points** | Consistent contributions — UI portals, search/filter engines, or game integration |
+| **💎 Elite Contributor** | **250–749 Points** | Major platform features, multiple games, and active commit development |
+| **🛡️ Master Core Architect** | **750+ Points** | Outstanding architectural leadership, core platform engines, and top-tier impact |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 >
-> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 15-minute TTL. Contributors can use real-time developer search and tier filter pills directly in [leaderboard.html](leaderboard.html).
+> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 30-minute TTL.
 
 ---
 
-# 💰 **DUAL POINT SYSTEMS: NSOC POINTS VS. IN-APP ARCADE POINTS**
+## 💰 Dual Point Systems: NSoC Points vs. In-App Arcade Points
 
-To keep contributions rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems:
+To keep contributions rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems that must not be confused:
 
-### 1. 🏛️ **Official Nexus Spring Of Code (NSoC '26) Program Points**
+### 1. 🏛️ Official Nexus Spring Of Code (NSoC '26) Program Points
+
 These are the official program points recorded on the central NSoC evaluation sheet. They are awarded strictly via GitHub PR **Level labels** assigned by the Project Admin upon merging:
 
 | PR Label | NSoC Points | Scope & Type of Work |
@@ -61,20 +59,26 @@ These are the official program points recorded on the central NSoC evaluation sh
 | `level3` | **10 points** | Verified playable games in the `'games' folder`, complex game physics, core architecture |
 
 > [!IMPORTANT]
+>
 > - The **`nsoc26` label is mandatory** on every PR.
 > - **Level labels are assigned exclusively by Project Admins** based on the verified complexity and impact of the merged code.
-> - A minor 10–20 line patch will not be upgraded to Level 2 or Level 3.
+> - A minor patch will not be upgraded to Level 2 or Level 3.
 
-### 2. ⚡ **In-App Gamified Arcade Points (Live Application Scoring)**
-These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges:
-- **Verified Playable Game:** `+100 pts` base per conflict-free game integrated into the `'games' folder`.
-- **Mechanics & Physics Bonus:** `+30 pts` for custom Canvas rendering, 60fps game loops, AI opponents, sound FX, or particle engines.
-- **Platform Feature & UI Work:** `+25 pts` per merged core feature PR (except the 'games' folder, in codebase modifications).
-- **Quality & Bug Fixes:** `+15 pts` baseline per merged bug fix, mobile touch control fix, or CSS enhancement.
+### 2. ⚡ In-App Gamified Arcade Points (Live Application Scoring)
+
+These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges. This universal formula scores all types of contributions:
+
+$$\mathbf{Arcade\ Score} = (\text{Games} \times 100) + (\text{Mechanics} \times 25) + (\text{Features} \times 50) + (\text{Fixes} \times 25) + (\mathbf{Commits} \times \mathbf{5})$$
+
+- 🎮 **Verified Standalone Game:** `+100 pts` base per playable game integrated in `games/`
+- ⚡ **Mechanics & Physics Bonus:** `+25 pts` for custom Canvas rendering, 60fps loops, sound FX, physics, or touch controls
+- 🚀 **Platform Feature PR:** `+50 pts` per merged feature/UI PR (portals, dev tools, engines, navigation)
+- 🛠️ **Quality & Bug Fix PR:** `+25 pts` per merged bug fix, responsive styling, or documentation enhancement
+- 📦 **Merged Git Commits:** `+5 pts` per verified commit (rewards sustained, iterative code development)
 
 ---
 
-# 🚀 **STEP-BY-STEP: YOUR FIRST MERGED PR**
+## 🚀 Step-by-Step: Your First Merged PR
 
 1. **Create an issue.** Find a bug or pick an open issue, raise it, and **wait for assignment**.
 2. **Issue Assignment & Submission Timeline (5-Day Target / 7-Day Auto-Unassign):**
@@ -87,6 +91,7 @@ These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) ra
 7. **Review and merge.** Address feedback promptly. The Project Admin merges, adds labels, and your points hit the leaderboard.
 
 **Quick commands:**
+
 ```bash
 git checkout -b fix/issue-123
 git commit -m "Fix #123: <short description>"
@@ -97,27 +102,34 @@ git push origin fix/issue-123
 
 ---
 
-# ⚠️ **CRITICAL: STRICT FOLDER NAMING & DIRECTORY RULES**
+## ⚠️ Critical: Strict Folder Naming & Directory Rules
 
 > [!CAUTION]
-> ### 🚨 **1. NO FILES IN ROOT / HOME DIRECTORY**
+>
+> **🚨 1. NO FILES IN ROOT / HOME DIRECTORY**
+>
 > **Do NOT create, add, or dump loose files directly in the repository root / home directory.**
 > Any PR that introduces files directly in the root directory will be **rejected immediately**.
 >
 > ---
 >
-> ### 🚨 **2. ALL SITE CHANGES, UI IMPROVEMENTS, ENHANCEMENTS & BUG FIXES**
+> **🚨 2. ALL SITE CHANGES, UI IMPROVEMENTS, ENHANCEMENTS & BUG FIXES**
+>
 > For **ANY** type of contribution — including feature enhancements, bug fixes, UI/UX improvements, or any modifications across the site:
+>
 > - You **MUST** create a dedicated folder under `ArcadeVerse/` following this format:
+>
 >   ```text
 >   <folder-name>-<your-name>/
 >   ```
+>
 > - Keep all your respective assets, components, stylesheets, scripts, and documentation inside that dedicated folder.
 > - **Example:** `navbar-redesign-rohit/`, `leaderboard-ui-sneha/`, `dark-mode-toggle-arjun/`
 >
 > ---
 >
-> ### 🚨 **3. GAME SUBMISSIONS: `games/game-name_contributor-name/`**
+> **🚨 3. GAME SUBMISSIONS: `games/game-name_contributor-name/`**
+>
 > Every game submission **MUST** be placed inside a dedicated subfolder in `games/` following this exact syntax:
 >
 > ```text
@@ -125,6 +137,7 @@ git push origin fix/issue-123
 > ```
 >
 > **Examples:**
+>
 > - ✅ `games/cyber-pong_rohit/`
 > - ✅ `games/quantum-2048_sneha/`
 > - ✅ `games/flappy-jet_arjun/`
@@ -138,38 +151,46 @@ git push origin fix/issue-123
 
 ---
 
-# 💻 **HOW TO RUN THIS PROJECT LOCALLY**
+## 💻 How to Run This Project Locally
 
 This project is **100% native web tech** — no backend, no Python app, no heavy dependencies!
 
 ### 🔹 Method 1: Instant Browser Launch (Recommended)
 
 **Windows:**
+
 ```powershell
 start chrome "$PWD\index.html"
 ```
+
 **macOS:**
+
 ```bash
 open index.html
 ```
+
 **Linux:**
+
 ```bash
 xdg-open index.html
 ```
 
 ### 🔹 Method 2: VS Code Live Server
+
 1. Open the project folder in **VS Code**
 2. Right-click `index.html` → **"Open with Live Server"**
 
 ### 🔹 Method 3: Node Static Server (Optional)
+
 ```bash
 npx -y live-server --port=5500
 ```
+
 Open: `http://localhost:5500`
 
 ---
 
-# 📂 **DIRECTORY ARCHITECTURE**
+## 📂 Directory Architecture
 
 ```text
 ArcadeVerse/
@@ -190,7 +211,10 @@ ArcadeVerse/
 │       └── games-registry.js            # Registry where your game gets listed
 │
 └── games/                               # 🕹️ ALL COMMUNITY GAMES LIVE HERE
-    ├── memory-matrix/                   # Starter game by Project Lead
+    ├── memory-matrix_debasmita/         # Starter puzzle game by Project Lead
+    ├── cyber-neon-pong_debasmita/       # Starter canvas pong by Project Lead
+    ├── flappy-jet_mistu7debnath/        # Cyber jet game by community
+    ├── quantum-2048_babin/              # Synthesis puzzle by community
     └── <game-name_contributor-name>/    # 🚀 YOUR ISOLATED GAME FOLDER
         ├── index.html
         ├── style.css
@@ -199,9 +223,10 @@ ArcadeVerse/
 
 ---
 
-# 📋 **HOW TO CONTRIBUTE: STEP-BY-STEP WORKFLOW**
+## 📋 How to Contribute: Step-by-Step Workflow
 
 ### 📌 STEP 1: FORK & CLONE
+
 ```bash
 git clone https://github.com/<your-username>/ArcadeVerse.git
 cd ArcadeVerse
@@ -209,16 +234,21 @@ git remote add upstream https://github.com/DebasmitaBose0/ArcadeVerse.git
 ```
 
 ### 📌 STEP 2: CREATE A FEATURE BRANCH
+
 **Never push directly to `main`!**
+
 ```bash
 git checkout -b game/game-name_your-username
 ```
 
 ### 📌 STEP 3: CREATE YOUR GAME FOLDER
+
 ```bash
 mkdir games/game-name_your-username
 ```
+
 Inside your folder, create:
+
 - `index.html`
 - `style.css`
 - `game.js`
@@ -227,23 +257,26 @@ Inside your folder, create:
 > 🎮 **MANDATORY IN-GAME GUIDELINES & CONTROLS:**
 > Every submitted game **MUST provide clear, visible in-game "How to Play / Game Guidelines"** (via a modal, start screen overlay, or instructions drawer).
 > This allows the **Project Admin (PA)** and community players to immediately understand:
+>
 > 1. **Controls:** Keyboard keys (e.g. WASD / Arrow keys / Spacebar), mouse clicks, or touch swipe gestures.
 > 2. **Game Objective & Rules:** What the player needs to accomplish to win or survive.
 > 3. **Scoring System:** How points/combos are earned and recorded.
 > 4. **Restart & Pause Controls:** How to restart or pause the game.
-> 
+>
 > *Submissions without clear in-game instructions or controls documentation will be asked to add them before approval.*
-
+>
 > 🧪 **Tip:** No external CDNs or frameworks. Pure Vanilla HTML/CSS/JS only!
 
 ### 📌 STEP 4: REGISTER IN `assets/js/games-registry.js`
+
 Add your entry to the `GAMES_REGISTRY` array:
+
 ```javascript
 {
   id: "game-name_your-username",
   title: "Your Game Title",
   category: "Arcade", // Valid: Arcade | Puzzle | Action | Retro | Strategy | Rhythm
-  icon: "🕹️",
+  lucideIcon: "gamepad-2", // Valid Lucide icon name (e.g. gamepad-2, puzzle, rocket, atom)
   difficulty: "Beginner", // Beginner | Intermediate | Advanced
   releaseDate: "2026-10-21",
   description: "Short description of your game.",
@@ -258,21 +291,25 @@ Add your entry to the `GAMES_REGISTRY` array:
 ```
 
 ### 📌 STEP 5: ADD YOUR NAME TO THE CONTRIBUTORS TABLE
+
 Add your row to the Hall of Fame table below!
 
 ### 📌 STEP 6: COMMIT, PUSH & OPEN PULL REQUEST
+
 ```bash
 git add .
 git commit -m "feat(game): add <game-name> by @<your-username>"
 git push origin game/game-name_your-username
 ```
+
 Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
+
 - Add `Closes #<issue-number>` in the PR description
 - Add the `nsoc26` label — **mandatory!**
 
 ---
 
-# 👤 **CONTRIBUTOR RESPONSIBILITIES**
+## 👤 Contributor Responsibilities
 
 - Read this contributing guide **before** you start coding.
 - **Wait for assignment** before you start working on an issue.
@@ -285,7 +322,7 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 
 ---
 
-# 🚫 **RULES — WHAT IS NOT ALLOWED**
+## 🚫 Rules — What is Not Allowed
 
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
@@ -305,18 +342,20 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 
 ---
 
-# 📜 **COMMUNITY HEALTH, CODE OF CONDUCT & SECURITY**
+## 📜 Community Health, Code of Conduct & Security
 
 ArcadeVerse is committed to providing a safe, welcoming, and inclusive community for all contributors:
+
 - **Code of Conduct:** All participants must abide by our [Code of Conduct](CODE_OF_CONDUCT.md). Harassment, disrespect, plagiarism, or manipulative behavior will lead to disqualification.
 - **Security Policy:** Review our [Security Policy](SECURITY.md) for vulnerability reporting guidelines and client-side web security best practices.
 - **License Agreement:** All contributions are subject to the permissive open-source terms of the [MIT License](LICENSE).
 
 ---
 
-# ⚖️ **ENFORCEMENT**
+## ⚖️ Enforcement
 
 > [!WARNING]
+>
 > - **First violation** (spam, low quality, improper practices): your points are normalized and deducted.
 > - **Repeat violation:** direct disqualification with no further warning. Severe violations may lead to a permanent ban.
 > - **Cheating** (self-controlled project manipulation, fake contributions, manipulating activity): **immediate permanent ban**. No warnings, no second chances, no appeals once evidence is verified.
@@ -324,7 +363,7 @@ ArcadeVerse is committed to providing a safe, welcoming, and inclusive community
 
 ---
 
-# ✅ **QUICK CHECKLIST — BEFORE YOU OPEN A PR**
+## ✅ Quick Checklist — Before You Open a PR
 
 Before submitting, make sure every box is checked:
 
@@ -344,4 +383,3 @@ Before submitting, make sure every box is checked:
 ---
 
 Happy Coding & Welcome to **Nexus Spring Of Code – Winter Edition 2026**! 🎉
-
