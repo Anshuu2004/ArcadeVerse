@@ -214,69 +214,151 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Fetch Live Contributions directly from GitHub REST API
-  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse") {
+  // Client-side Caching Configuration for GitHub API
+  const CACHE_TTL_MS = 20 * 60 * 1000; // 20 minutes Time-To-Live
+  const CACHE_KEY_PREFIX = "arcadeverse_contributors_cache_";
+
+  function getCachedContributors(repo) {
+    try {
+      const key = CACHE_KEY_PREFIX + repo.toLowerCase().replace(/[^a-z0-9]/g, "_");
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || !parsed.timestamp || !Array.isArray(parsed.contributors)) return null;
+      return parsed;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveCachedContributors(repo, contributors) {
+    try {
+      const key = CACHE_KEY_PREFIX + repo.toLowerCase().replace(/[^a-z0-9]/g, "_");
+      localStorage.setItem(key, JSON.stringify({
+        timestamp: Date.now(),
+        contributors: contributors
+      }));
+    } catch (e) {
+      console.warn("Could not save to localStorage cache:", e);
+    }
+  }
+
+  // Resolve display name synchronously without secondary API calls
+  function resolveDisplayName(login) {
+    if (!login) return "Contributor";
+    const lower = login.toLowerCase();
+
+    // Check CONTRIBUTORS_REGISTRY first
+    if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
+      const match = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === lower);
+      if (match && match.name) return match.name;
+    }
+
+    // Check GAMES_REGISTRY
+    if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+      const match = GAMES_REGISTRY.find(g => g.github && g.github.toLowerCase() === lower);
+      if (match && match.author) return match.author;
+    }
+
+    return login;
+  }
+
+  // Fetch Live Contributions directly from GitHub REST API with caching & zero secondary requests
+  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse", forceRefresh = false) {
     if (!repo) return;
+
+    // 1. Check local storage cache unless forceRefresh is explicitly requested
+    if (!forceRefresh) {
+      const cached = getCachedContributors(repo);
+      if (cached && (Date.now() - cached.timestamp < CACHE_TTL_MS)) {
+        contributorsData = cached.contributors;
+        const minsAgo = Math.floor((Date.now() - cached.timestamp) / 60000);
+        const timeStr = minsAgo === 0 ? "just now" : `${minsAgo}m ago`;
+        if (syncStatusText) {
+          syncStatusText.textContent = `Live data cached (${timeStr}) • ${contributorsData.length} contributor(s) verified`;
+        }
+        sortContributors();
+        renderPodium();
+        renderTable();
+        return;
+      }
+    }
+
     if (syncStatusText) syncStatusText.textContent = `Connecting to GitHub API (${repo})...`;
 
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/contributors`);
-      if (!response.ok) {
-        throw new Error(`GitHub returned status: ${response.status}`);
+
+      if (response.status === 403) {
+        throw new Error("RATE_LIMIT");
       }
+
+      if (!response.ok) {
+        throw new Error(`HTTP_${response.status}`);
+      }
+
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        // Fetch detailed profile for contributors to display accurate names
-        const enrichedContributors = await Promise.all(
-          data.map(async (user) => {
-            let displayName = user.login;
-            try {
-              const userRes = await fetch(`https://api.github.com/users/${user.login}`);
-              if (userRes.ok) {
-                const userData = await userRes.json();
-                if (userData.name) displayName = userData.name;
-              }
-            } catch (e) {
-              console.warn("Could not fetch user details for", user.login);
-            }
+        // Map contributors in O(1) time - ZERO secondary network requests!
+        const enrichedContributors = data.map((user) => {
+          const displayName = resolveDisplayName(user.login);
+          const isAdmin = user.login.toLowerCase() === "debasmitabose0";
 
-            const isAdmin = user.login.toLowerCase() === "debasmitabose0";
-            // Count registered games from GAMES_REGISTRY
-            let userGames = [];
-            if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
-              userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
-            }
-            const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
-            // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
-            const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
+          // Count registered games from GAMES_REGISTRY
+          let userGames = [];
+          if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+            userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
+          }
+          const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 0);
+          // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
+          const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
 
-            const roleMeta = determineContributorRole({
-              login: user.login,
-              contributions: user.contributions,
-              gamesCount: gamesCount
-            });
+          const roleMeta = determineContributorRole({
+            login: user.login,
+            contributions: user.contributions,
+            gamesCount: gamesCount
+          });
 
-            return {
-              login: user.login,
-              name: displayName,
-              role: roleMeta.role,
-              roleClass: roleMeta.tagClass,
-              avatar_url: user.avatar_url,
-              commits: user.contributions,
-              gamesCount: gamesCount,
-              filesCount: filesCount,
-              games: userGames.length > 0 ? userGames.map(g => g.title) : ["Quantum Memory Matrix", "Cyber Neon Pong"]
-            };
-          })
-        );
+          return {
+            login: user.login,
+            name: displayName,
+            role: roleMeta.role,
+            roleClass: roleMeta.tagClass,
+            avatar_url: user.avatar_url,
+            commits: user.contributions,
+            gamesCount: gamesCount,
+            filesCount: filesCount,
+            games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
+          };
+        });
 
         contributorsData = enrichedContributors;
-        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+        saveCachedContributors(repo, enrichedContributors);
+
+        if (syncStatusText) {
+          syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+        }
       }
     } catch (err) {
       console.warn("GitHub API rate limit or network issue:", err);
-      if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
+
+      // Check if we have stale cached data to serve as fallback
+      const cached = getCachedContributors(repo);
+      if (cached && Array.isArray(cached.contributors) && cached.contributors.length > 0) {
+        contributorsData = cached.contributors;
+        if (syncStatusText) {
+          syncStatusText.textContent = err.message === "RATE_LIMIT"
+            ? `⚠️ GitHub API rate limit reached (60/hr). Showing cached data (${cached.contributors.length} verified).`
+            : `⚠️ Network issue. Showing cached contributor data.`;
+        }
+      } else {
+        if (syncStatusText) {
+          syncStatusText.textContent = err.message === "RATE_LIMIT"
+            ? `⚠️ GitHub API rate limit reached (60/hr). Using verified local registry.`
+            : `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
+        }
+      }
     }
 
     sortContributors();
@@ -287,11 +369,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (fetchBtn) {
     fetchBtn.addEventListener("click", () => {
       const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
-      fetchLiveGitHubContributions(repo);
+      fetchBtn.disabled = true;
+      fetchBtn.textContent = "⏳ Syncing...";
+      fetchLiveGitHubContributions(repo, true).finally(() => {
+        setTimeout(() => {
+          fetchBtn.disabled = false;
+          fetchBtn.textContent = "🔄 Refresh Stats";
+        }, 1000);
+      });
     });
   }
 
-  // Initial Run - auto-sync live repository data
+  // Initial Run - auto-sync live repository data (uses cache if fresh)
   sortContributors();
   renderPodium();
   renderTable();
