@@ -56,6 +56,20 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "synth-says_babin",
+    title: "Synth-Wave Simon Says",
+    category: "Retro",
+    lucideIcon: "music",
+    description: "Watch and listen to synthwave audio sequences, then repeat the exact musical pattern under acceleration.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/synth-says_babin/index.html",
+    tags: ["Retro", "Memory", "Audio", "WebAudio"],
+    stars: 32,
+    featured: true
+  },
+  {
     id: "neon-asteroid-escape_joitapaul",
     title: "Neon Asteroid Escape",
     category: "Arcade",
