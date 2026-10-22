@@ -3,10 +3,20 @@
  * Features:
  * - Interactive Idea Roulette Spinner
  * - Full 20+ idea catalog with search/filter
- * - "Claim" bridge to PR Helper
+ * - Copy Blueprint to clipboard for instant PR planning
  */
 
 const IDEA_VAULT = [
+  {
+    id: "space-invaders",
+    title: "Space Invaders 2026",
+    category: "Action",
+    icon: "🛸",
+    difficulty: "Intermediate",
+    description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
+    tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
+    features: ["Multi-stage alien formations", "Destructible shield bunkers", "Mystery mothership spawn"]
+  },
   {
     id: "flappy-cyber",
     title: "Flappy Cyber Jet",
@@ -36,16 +46,6 @@ const IDEA_VAULT = [
     description: "Dual-paddle glowing pong with adjustable computer AI bot difficulty and 2-player local mode.",
     tags: ["Canvas 2D", "Collision Physics", "Bot AI Logic"],
     features: ["1P vs AI or 2P Local mode", "Velocity curve calculations", "Retro hit audio effects"]
-  },
-  {
-    id: "space-invaders",
-    title: "Space Invaders 2026",
-    category: "Action",
-    icon: "🛸",
-    difficulty: "Intermediate",
-    description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
-    tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
-    features: ["Multi-stage alien formations", "Destructible shield bunkers", "Mystery mothership spawn"]
   },
   {
     id: "cyber-stacker",
@@ -100,48 +100,130 @@ const IDEA_VAULT = [
   {
     id: "synth-says",
     title: "Synth-Wave Simon Says",
-    category: "Retro",
+    category: "Rhythm",
     icon: "🎹",
     difficulty: "Beginner",
     description: "Watch and listen to synthesizer sound sequences, then repeat the exact musical pattern under timer.",
     tags: ["Web Audio API", "Array Queues", "Memory Challenge"],
     features: ["Synthesizer tone generation", "High score memory", "Speed acceleration per round"]
+  },
+  {
+    id: "tactical-battleship",
+    title: "Tactical Fleet Commander",
+    category: "Strategy",
+    icon: "🚢",
+    difficulty: "Intermediate",
+    description: "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
+    tags: ["2D Grid Arrays", "Fog of War", "AI Turn Engine"],
+    features: ["Turn-based AI targeting", "Radar sweep bonus", "Fleet status health dashboard"]
+  },
+  {
+    id: "neon-rhythm-runner",
+    title: "Neon Beat Runner",
+    category: "Rhythm",
+    icon: "🎵",
+    difficulty: "Intermediate",
+    description: "Sync key presses with descending neon pulses synchronized to procedural web audio tempos.",
+    tags: ["Web Audio Clock", "Beat Timing", "Combo Multiplier"],
+    features: ["Dynamic BPM scaling", "Perfect/Good/Miss score ratings", "Combo streak visual aura"]
   }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
+  const ideaCardDisplay = document.getElementById("idea-card-display");
   const ideaTitle = document.getElementById("idea-title");
   const ideaCategory = document.getElementById("idea-category");
   const ideaIcon = document.getElementById("idea-icon");
   const ideaDescription = document.getElementById("idea-description");
   const ideaTechTags = document.getElementById("idea-tech-tags");
   const rollIdeaBtn = document.getElementById("roll-idea-btn");
-  const claimIdeaBtn = document.getElementById("claim-idea-btn");
+  const copyIdeaBtn = document.getElementById("copy-idea-btn");
   const catalogGrid = document.getElementById("ideas-catalog-grid");
+  const searchInput = document.getElementById("ideas-search-input");
+  const categoryPills = document.querySelectorAll("#ideas-category-pills .pill");
+
+  let currentCategory = "all";
+  let searchQuery = "";
 
   function displayRouletteIdea(index) {
     const item = IDEA_VAULT[index];
-    ideaTitle.textContent = item.title;
-    ideaCategory.textContent = `${item.category} • ${item.difficulty}`;
-    ideaIcon.textContent = item.icon;
-    ideaDescription.textContent = item.description;
-    ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    if (!item) return;
+
+    if (ideaCardDisplay) {
+      ideaCardDisplay.classList.add("anim-spin");
+      setTimeout(() => ideaCardDisplay.classList.remove("anim-spin"), 400);
+    }
+
+    if (ideaTitle) ideaTitle.textContent = item.title;
+    if (ideaCategory) ideaCategory.textContent = `${item.category} • ${item.difficulty}`;
+    if (ideaIcon) ideaIcon.textContent = item.icon;
+    if (ideaDescription) ideaDescription.textContent = item.description;
+    if (ideaTechTags) {
+      ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    }
   }
 
   if (rollIdeaBtn) {
     rollIdeaBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % IDEA_VAULT.length;
+      currentIndex = Math.floor(Math.random() * IDEA_VAULT.length);
       displayRouletteIdea(currentIndex);
     });
   }
 
-  // Render full catalog as disabled trial/reference concepts
-  if (catalogGrid) {
+  if (copyIdeaBtn) {
+    copyIdeaBtn.addEventListener("click", () => {
+      const item = IDEA_VAULT[currentIndex];
+      const blueprintText = `[ArcadeVerse Game Concept]
+Title: ${item.title}
+Category: ${item.category} (${item.difficulty})
+Description: ${item.description}
+Key Tech: ${item.tags.join(", ")}
+Target Folder: games/${item.id}_<your-username>/`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(blueprintText).then(() => {
+          const originalText = copyIdeaBtn.innerHTML;
+          copyIdeaBtn.innerHTML = "<span>✅ Blueprint Copied!</span>";
+          setTimeout(() => {
+            copyIdeaBtn.innerHTML = originalText;
+          }, 2000);
+        }).catch(() => {
+          prompt("Copy your game blueprint:", blueprintText);
+        });
+      } else {
+        prompt("Copy your game blueprint:", blueprintText);
+      }
+    });
+  }
+
+  function renderCatalog() {
+    if (!catalogGrid) return;
     catalogGrid.innerHTML = "";
-    IDEA_VAULT.forEach((idea) => {
+
+    const filtered = IDEA_VAULT.filter((idea) => {
+      const matchesCategory = currentCategory === "all" || idea.category.toLowerCase() === currentCategory.toLowerCase();
+      const matchesSearch = 
+        idea.title.toLowerCase().includes(searchQuery) ||
+        idea.description.toLowerCase().includes(searchQuery) ||
+        idea.tags.some(t => t.toLowerCase().includes(searchQuery));
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      catalogGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: var(--bg-surface); border: 1px dashed var(--border-medium); border-radius: var(--radius-lg);">
+          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.8rem;">🔍</span>
+          <h3 style="color: #fff; margin-bottom: 0.5rem;">No Game Ideas Match Your Search</h3>
+          <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.2rem;">Try searching for different keywords or clear the active category filter.</p>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach((idea) => {
       const card = document.createElement("div");
-      card.className = "idea-catalog-card trial-card";
+      card.className = "idea-catalog-card";
       card.innerHTML = `
         <div class="idea-cat-header">
           <span class="idea-icon-sm">${idea.icon}</span>
@@ -158,15 +240,36 @@ document.addEventListener("DOMContentLoaded", () => {
             ${idea.features.map(f => `<li>${f}</li>`).join("")}
           </ul>
         </div>
-        <button class="btn btn-secondary btn-sm btn-disabled-concept" disabled title="This is a reference blueprint for trial purposes only.">
-          🔒 Example Concept (Disabled)
-        </button>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 1.2rem; width: 100%; text-align: center; justify-content: center;">
+          <span>🚀 Claim Idea in CONTRIBUTING.md</span>
+        </a>
       `;
 
       catalogGrid.appendChild(card);
     });
   }
 
-  // Initial display
+  // Filter Search
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderCatalog();
+    });
+  }
+
+  // Category Pills
+  if (categoryPills) {
+    categoryPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        categoryPills.forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+        currentCategory = pill.getAttribute("data-category");
+        renderCatalog();
+      });
+    });
+  }
+
+  // Initial render
   displayRouletteIdea(currentIndex);
+  renderCatalog();
 });

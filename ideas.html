@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ideas Vault | ArcadeVerse (NSOC '26)</title>
+  <meta name="description" content="Discover 20+ open-source game concepts ready to build with pure Vanilla HTML5, CSS3, and JavaScript for NSOC Winter Edition 2026.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -27,41 +28,12 @@
         <a href="index.html" class="nav-item">🎮 Explore Games</a>
         <a href="ideas.html" class="nav-item active">💡 Ideas Vault</a>
         <a href="leaderboard.html" class="nav-item">🏆 Hall of Fame</a>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="nav-item badge-link">🤝 Contributor Guide</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View repository on GitHub">⭐ GitHub</a>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-          <span class="hamburger-line"></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Navigation Drawer / Dropdown -->
-    <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
-      <div class="mobile-nav-content">
-        <a href="index.html" class="mobile-nav-item">
-          <span class="mobile-nav-icon">🎮</span>
-          <span>Explore Games</span>
-        </a>
-        <a href="ideas.html" class="mobile-nav-item active">
-          <span class="mobile-nav-icon">💡</span>
-          <span>Ideas Vault</span>
-        </a>
-        <a href="leaderboard.html" class="mobile-nav-item">
-          <span class="mobile-nav-icon">🏆</span>
-          <span>Hall of Fame</span>
-        </a>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="mobile-nav-item mobile-badge-link">
-          <span class="mobile-nav-icon">🤝</span>
-          <span>Contributor Guide</span>
-        </a>
-        <div class="mobile-nav-divider"></div>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="mobile-github-btn">
-          <span>⭐ Star on GitHub</span>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View repository on GitHub">
+          <span>⭐ GitHub</span>
         </a>
       </div>
     </div>
@@ -71,17 +43,17 @@
     <div class="section-header center">
       <span class="section-tag">COMMUNITY INSPIRATION</span>
       <h1 class="section-title">Open Game Ideas Vault</h1>
-      <p class="section-subtitle">20+ carefully designed Vanilla HTML/CSS/JS game concepts waiting to be built by NSOC contributors!</p>
+      <p class="section-subtitle">20+ carefully designed Vanilla HTML/CSS/JS game concepts waiting to be claimed and built by NSOC contributors!</p>
     </div>
 
     <!-- Interactive Roulette Highlight -->
-    <div class="idea-roulette-container" style="margin-bottom: 4rem;">
+    <section class="idea-roulette-container" style="margin-bottom: 3.5rem;">
       <div class="idea-card-display" id="idea-card-display">
         <div class="idea-icon" id="idea-icon">🛸</div>
         <div class="idea-content">
           <span class="idea-category-badge" id="idea-category">Action / Retro</span>
-          <h3 id="idea-title">Space Invaders 2026</h3>
-          <p id="idea-description">Classic arcade space defense. Control your ship with arrow keys and shoot down descending pixel waves!</p>
+          <h2 id="idea-title" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff;">Space Invaders 2026</h2>
+          <p id="idea-description" style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 0.8rem;">Classic arcade space defense. Control your ship with arrow keys and shoot down descending pixel waves!</p>
           <div class="idea-tech-tags" id="idea-tech-tags">
             <span>HTML5 Canvas</span>
             <span>Collision Logic</span>
@@ -89,30 +61,58 @@
           </div>
         </div>
         <div class="idea-action">
-          <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" id="claim-idea-btn">📖 Manual Contribution Guide</a>
+          <button class="btn btn-primary btn-sm" id="copy-idea-btn" title="Copy idea blueprint to clipboard">
+            <span>📋 Copy Blueprint</span>
+          </button>
         </div>
       </div>
 
       <div class="idea-controls">
-        <button class="btn btn-secondary" id="roll-idea-btn">🎲 Spin Another Idea</button>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-glass">📖 Contributor Guidelines</a>
+        <button class="btn btn-secondary" id="roll-idea-btn">
+          <span>🎲 Spin Random Idea</span>
+        </button>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-glass">
+          <span>📖 Contributor Guidelines</span>
+        </a>
       </div>
-    </div>
+    </section>
 
-    <!-- Complete Grid of all ideas (Trial / Example Mode - Disabled) -->
-    <div class="section-header">
-      <div>
-        <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
-          <h2 class="section-title" style="font-size: 1.6rem; margin: 0;">Browse All Concepts by Category</h2>
-          <span class="sample-tag-badge">🔒 SAMPLE / TRIAL EXAMPLES ONLY</span>
+    <!-- Complete Grid of all ideas -->
+    <section class="catalog-section">
+      <div class="section-header" style="margin-bottom: 1.5rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; flex-wrap: wrap;">
+            <h2 class="section-title" style="font-size: 1.6rem; margin: 0;">Browse All Concepts by Category</h2>
+            <span class="sample-tag-badge">REFERENCE BLUEPRINTS</span>
+          </div>
+          <p class="section-subtitle">Choose any concept below, follow the folder naming guide (<code>games/&lt;game-name&gt;_&lt;your-name&gt;/</code>), and submit your PR!</p>
         </div>
-        <p class="section-subtitle">These catalog cards are reference examples and mock blueprints for contributors. Action buttons are disabled.</p>
-      </div>
-    </div>
 
-    <div class="ideas-catalog-grid disabled-catalog" id="ideas-catalog-grid">
-      <!-- Injected by ideas.js -->
-    </div>
+        <div class="filter-controls" style="margin-top: 1rem;">
+          <div class="search-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" id="ideas-search-input" placeholder="Search concept or tags...">
+          </div>
+
+          <div class="category-pills" id="ideas-category-pills">
+            <button class="pill active" data-category="all">All</button>
+            <button class="pill" data-category="Action">Action</button>
+            <button class="pill" data-category="Puzzle">Puzzle</button>
+            <button class="pill" data-category="Arcade">Arcade</button>
+            <button class="pill" data-category="Retro">Retro</button>
+            <button class="pill" data-category="Strategy">Strategy</button>
+            <button class="pill" data-category="Rhythm">Rhythm</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ideas-catalog-grid" id="ideas-catalog-grid">
+        <!-- Injected by ideas.js -->
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -168,7 +168,14 @@
     </div>
   </footer>
 
-  <script src="assets/js/navbar.js"></script>
   <script src="assets/js/ideas.js"></script>
+  <script>
+    // Smooth navbar squeeze on scroll
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) navbar.classList.add("scrolled");
+      else navbar.classList.remove("scrolled");
+    }, { passive: true });
+  </script>
 </body>
 </html>

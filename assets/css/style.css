@@ -1627,6 +1627,91 @@ body {
   transform: translateX(4px);
 }
 
+/* Ideas Roulette & Catalog */
+.idea-roulette-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.idea-card-display {
+  background: linear-gradient(135deg, rgba(26, 31, 46, 0.95), rgba(16, 20, 32, 0.95));
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.25s var(--ease-smooth), border-color 0.25s ease;
+}
+
+.idea-card-display:hover {
+  border-color: rgba(96, 165, 250, 0.6);
+}
+
+.idea-card-display.anim-spin {
+  animation: cardPulse 0.4s ease;
+}
+
+@keyframes cardPulse {
+  0% { transform: scale(0.98); opacity: 0.8; }
+  50% { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.idea-icon {
+  font-size: 3.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  width: 86px;
+  height: 86px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border-medium);
+}
+
+.idea-content {
+  flex-grow: 1;
+}
+
+.idea-category-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.idea-tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.idea-tech-tags span {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+}
+
+.idea-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* Ideas Catalog Grid */
 .ideas-catalog-grid {
   display: grid;
