@@ -56,6 +56,20 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "whack-a-bug_babin",
+    title: "Whack-A-Bug Panic",
+    category: "Arcade",
+    lucideIcon: "bug",
+    description: "Whack unexpected production bugs emerging from server racks before CPU temperature reaches 100°C!",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/whack-a-bug_babin/index.html",
+    tags: ["Arcade", "Reflex", "Action", "Developer"],
+    stars: 33,
+    featured: true
+  },
+  {
     id: "neon-asteroid-escape_joitapaul",
     title: "Neon Asteroid Escape",
     category: "Arcade",
