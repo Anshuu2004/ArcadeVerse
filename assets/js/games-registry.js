@@ -16,9 +16,7 @@ const GAMES_REGISTRY = [
     id: "memory-matrix",
     title: "Quantum Memory Matrix",
     category: "Puzzle",
-    icon: "🧩",
-    difficulty: "Beginner",
-    releaseDate: "2026-10-10",
+    lucideIcon: "puzzle",
     description: "Cyberpunk card flipping memory matrix test. Match cyber glyphs under timed pressure.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -32,9 +30,7 @@ const GAMES_REGISTRY = [
     id: "gamesbydb",
     title: "Cyber Neon Pong",
     category: "Arcade",
-    icon: "🏓",
-    difficulty: "Beginner",
-    releaseDate: "2026-10-12",
+    lucideIcon: "gamepad-2",
     description: "Classic retro pong arena with neon glow and dynamic canvas AI paddle physics.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -66,15 +62,11 @@ const CONTRIBUTORS_REGISTRY = [
     github: "DebasmitaBose0",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
-    commits: 19,
     gamesCount: 2,
-    contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
-  },
-  {
-    name: "Babin Bid",
-    github: "Babin123456",
-    avatarInitial: "B",
-    role: "Arcade Developer",
-    contributions: ["Quantum 2048"]
+    mechanicsBonus: 2,
+    platformPRs: 2,
+    qualityPRs: 0,
+    bonusPts: 0,
+    contributions: ["Quantum Memory Matrix", "Cyber Neon Pong", "Arcade Core Engine"]
   }
 ];

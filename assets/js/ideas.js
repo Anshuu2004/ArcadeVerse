@@ -3,7 +3,8 @@
  * Features:
  * - Interactive Idea Roulette Spinner
  * - Full 20+ idea catalog with search/filter
- * - Copy Blueprint to clipboard for instant PR planning
+ * - "Claim" bridge to PR Helper
+ * - Pure Lucide Icons (zero raw emojis)
  */
 
 const IDEA_VAULT = [
@@ -21,7 +22,7 @@ const IDEA_VAULT = [
     id: "flappy-cyber",
     title: "Flappy Cyber Jet",
     category: "Action",
-    icon: "🚀",
+    lucideIcon: "rocket",
     difficulty: "Beginner",
     description: "Endless side-scrolling obstacle avoider. Control vertical thrusters with spacebar or screen taps.",
     tags: ["HTML5 Canvas", "Gravity Physics", "High Score LocalStorage"],
@@ -31,7 +32,7 @@ const IDEA_VAULT = [
     id: "quantum-2048",
     title: "Quantum 2048",
     category: "Puzzle",
-    icon: "🔢",
+    lucideIcon: "hash",
     difficulty: "Intermediate",
     description: "Slide and fuse elements on a 4x4 grid to unlock the ultimate quantum 2048 molecule.",
     tags: ["CSS Grid", "Matrix Slide Logic", "Smooth Transitions"],
@@ -41,17 +42,27 @@ const IDEA_VAULT = [
     id: "neon-pong",
     title: "Cyber Pong (PvP & AI)",
     category: "Retro",
-    icon: "🏓",
+    lucideIcon: "gamepad-2",
     difficulty: "Beginner",
     description: "Dual-paddle glowing pong with adjustable computer AI bot difficulty and 2-player local mode.",
     tags: ["Canvas 2D", "Collision Physics", "Bot AI Logic"],
     features: ["1P vs AI or 2P Local mode", "Velocity curve calculations", "Retro hit audio effects"]
   },
   {
+    id: "space-invaders",
+    title: "Space Invaders 2026",
+    category: "Action",
+    lucideIcon: "crosshair",
+    difficulty: "Intermediate",
+    description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
+    tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
+    features: ["Multi-stage alien formations", "Destructible shield bunkers", "Mystery mothership spawn"]
+  },
+  {
     id: "cyber-stacker",
     title: "Cyber Tower Stacker",
     category: "Arcade",
-    icon: "🏢",
+    lucideIcon: "layers",
     difficulty: "Beginner",
     description: "Stack swinging blocks with precision timing. Unaligned edges are sliced off as the tower grows!",
     tags: ["Timing Reflex", "Precision Slicing", "Canvas"],
@@ -61,7 +72,7 @@ const IDEA_VAULT = [
     id: "whack-a-bug",
     title: "Whack-A-Bug Developer",
     category: "Arcade",
-    icon: "🐛",
+    lucideIcon: "bug",
     difficulty: "Beginner",
     description: "Whack unexpected production bugs emerging from server racks before CPU temperature reaches 100°C!",
     tags: ["DOM Events", "Timer Intervals", "Audio Cues"],
@@ -71,7 +82,7 @@ const IDEA_VAULT = [
     id: "cryptic-wordle",
     title: "Cryptic Wordle Hack",
     category: "Puzzle",
-    icon: "🔤",
+    lucideIcon: "type",
     difficulty: "Intermediate",
     description: "Guess the secret 5-letter tech keyword in 6 tries with green and amber feedback clues.",
     tags: ["String Algorithms", "Virtual Keyboard GUI", "State Machine"],
@@ -81,7 +92,7 @@ const IDEA_VAULT = [
     id: "astro-jump",
     title: "Astro Infinite Jumper",
     category: "Arcade",
-    icon: "🦘",
+    lucideIcon: "arrow-up-circle",
     difficulty: "Intermediate",
     description: "Bounce continuously upward across floating space platforms, collecting jetpacks and dodging black holes.",
     tags: ["Vertical Camera Scroll", "Jump Velocity", "Procedural Platforms"],
@@ -91,7 +102,7 @@ const IDEA_VAULT = [
     id: "quantum-minesweeper",
     title: "Quantum Minesweeper",
     category: "Puzzle",
-    icon: "💣",
+    lucideIcon: "bomb",
     difficulty: "Intermediate",
     description: "Classic minefield sweeper with modern flat aesthetic. Flag danger tiles and calculate risk tiles.",
     tags: ["Recursive Flood Fill", "Right-Click Handling", "Grid Engine"],
@@ -100,8 +111,8 @@ const IDEA_VAULT = [
   {
     id: "synth-says",
     title: "Synth-Wave Simon Says",
-    category: "Rhythm",
-    icon: "🎹",
+    category: "Retro",
+    lucideIcon: "music",
     difficulty: "Beginner",
     description: "Watch and listen to synthesizer sound sequences, then repeat the exact musical pattern under timer.",
     tags: ["Web Audio API", "Array Queues", "Memory Challenge"],
@@ -138,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const ideaDescription = document.getElementById("idea-description");
   const ideaTechTags = document.getElementById("idea-tech-tags");
   const rollIdeaBtn = document.getElementById("roll-idea-btn");
-  const copyIdeaBtn = document.getElementById("copy-idea-btn");
   const catalogGrid = document.getElementById("ideas-catalog-grid");
   const searchInput = document.getElementById("ideas-search-input");
   const categoryPills = document.querySelectorAll("#ideas-category-pills .pill");
@@ -149,18 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayRouletteIdea(index) {
     const item = IDEA_VAULT[index];
     if (!item) return;
-
-    if (ideaCardDisplay) {
-      ideaCardDisplay.classList.add("anim-spin");
-      setTimeout(() => ideaCardDisplay.classList.remove("anim-spin"), 400);
-    }
-
     if (ideaTitle) ideaTitle.textContent = item.title;
     if (ideaCategory) ideaCategory.textContent = `${item.category} • ${item.difficulty}`;
-    if (ideaIcon) ideaIcon.textContent = item.icon;
+    if (ideaIcon) ideaIcon.innerHTML = `<i data-lucide="${item.lucideIcon || 'gamepad-2'}"></i>`;
     if (ideaDescription) ideaDescription.textContent = item.description;
-    if (ideaTechTags) {
-      ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    if (ideaTechTags) ideaTechTags.innerHTML = item.tags.map(t => `<span>${t}</span>`).join("");
+    if (window.lucide) {
+      lucide.createIcons();
     }
   }
 
@@ -171,34 +176,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (copyIdeaBtn) {
-    copyIdeaBtn.addEventListener("click", () => {
-      const item = IDEA_VAULT[currentIndex];
-      const blueprintText = `[ArcadeVerse Game Concept]
-Title: ${item.title}
-Category: ${item.category} (${item.difficulty})
-Description: ${item.description}
-Key Tech: ${item.tags.join(", ")}
-Target Folder: games/${item.id}_<your-username>/`;
-
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(blueprintText).then(() => {
-          const originalText = copyIdeaBtn.innerHTML;
-          copyIdeaBtn.innerHTML = "<span>✅ Blueprint Copied!</span>";
-          setTimeout(() => {
-            copyIdeaBtn.innerHTML = originalText;
-          }, 2000);
-        }).catch(() => {
-          prompt("Copy your game blueprint:", blueprintText);
-        });
-      } else {
-        prompt("Copy your game blueprint:", blueprintText);
-      }
-    });
-  }
-
-  function renderCatalog() {
-    if (!catalogGrid) return;
+  // Render full catalog as reference concepts
+  if (catalogGrid) {
     catalogGrid.innerHTML = "";
 
     const filtered = IDEA_VAULT.filter((idea) => {
@@ -226,7 +205,7 @@ Target Folder: games/${item.id}_<your-username>/`;
       card.className = "idea-catalog-card";
       card.innerHTML = `
         <div class="idea-cat-header">
-          <span class="idea-icon-sm">${idea.icon}</span>
+          <span class="idea-icon-sm"><i data-lucide="${idea.lucideIcon || 'gamepad-2'}"></i></span>
           <span class="difficulty-badge ${idea.difficulty.toLowerCase()}">${idea.difficulty}</span>
         </div>
         <h3>${idea.title}</h3>
@@ -240,9 +219,9 @@ Target Folder: games/${item.id}_<your-username>/`;
             ${idea.features.map(f => `<li>${f}</li>`).join("")}
           </ul>
         </div>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: 1.2rem; width: 100%; text-align: center; justify-content: center;">
-          <span>🚀 Claim Idea in CONTRIBUTING.md</span>
-        </a>
+        <button class="btn btn-secondary btn-sm btn-disabled-concept" disabled title="This is a reference blueprint for trial purposes only.">
+          <i data-lucide="lock"></i> Example Concept (Disabled)
+        </button>
       `;
 
       catalogGrid.appendChild(card);
@@ -271,5 +250,7 @@ Target Folder: games/${item.id}_<your-username>/`;
 
   // Initial render
   displayRouletteIdea(currentIndex);
-  renderCatalog();
+  if (window.lucide) {
+    lucide.createIcons();
+  }
 });

@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
   <!-- Ambient background lighting -->
@@ -20,21 +22,21 @@
   <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="index.html" class="logo">
-        <span class="pixel-badge">👾</span>
+        <span class="pixel-badge"><i data-lucide="bot"></i></span>
         <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
         <span class="nsoc-tag">NSOC '26</span>
       </a>
 
       <nav class="nav-links">
-        <a href="index.html" class="nav-item active">🎮 Explore Games</a>
-        <a href="ideas.html" class="nav-item">💡 Ideas Vault</a>
-        <a href="leaderboard.html" class="nav-item">🏆 Hall of Fame</a>
-        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link">🤝 Contributor Guide</a>
+        <a href="index.html" class="nav-item active"><i data-lucide="gamepad-2"></i> Explore Games</a>
+        <a href="ideas.html" class="nav-item"><i data-lucide="lightbulb"></i> Ideas Vault</a>
+        <a href="leaderboard.html" class="nav-item"><i data-lucide="trophy"></i> Hall of Fame</a>
+        <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="nav-item badge-link"><i data-lucide="book-open"></i> Contributor Guide</a>
       </nav>
 
       <div class="nav-actions">
         <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="View repository on GitHub">
-          <span>⭐ GitHub</span>
+          <span><i data-lucide="star"></i> GitHub</span>
         </a>
         <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
           <span class="hamburger-line"></span>
@@ -89,13 +91,13 @@
         
         <div class="hero-cta-group">
           <a href="#games" class="btn btn-primary">
-            <span>🎮 Play Live Games</span>
+            <span><i data-lucide="play"></i> Play Live Games</span>
           </a>
           <a href="ideas.html" class="btn btn-secondary">
-            <span>💡 Discover Game Ideas</span>
+            <span><i data-lucide="lightbulb"></i> Discover Game Ideas</span>
           </a>
           <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="btn btn-glass">
-            <span>📖 Contributor Guide</span>
+            <span><i data-lucide="book-open"></i> Contributor Guide</span>
           </a>
         </div>
 
@@ -186,21 +188,21 @@
 
       <div class="tools-grid">
         <a href="ideas.html" class="tool-portal-card">
-          <div class="tool-icon">💡</div>
+          <div class="tool-icon"><i data-lucide="lightbulb"></i></div>
           <h3>Idea Roulette Vault</h3>
           <p>Don't know what to build? Spin through 20+ beginner and intermediate game concepts with detailed specs.</p>
           <span class="tool-link-text">Explore Ideas →</span>
         </a>
 
         <a href="leaderboard.html" class="tool-portal-card">
-          <div class="tool-icon">🏆</div>
+          <div class="tool-icon"><i data-lucide="trophy"></i></div>
           <h3>Hall of Fame Leaderboard</h3>
           <p>View all merged contributors, project admins, and recognition records under NSOC 2026.</p>
           <span class="tool-link-text">View Leaderboard →</span>
         </a>
 
         <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" class="tool-portal-card">
-          <div class="tool-icon">📖</div>
+          <div class="tool-icon"><i data-lucide="book-open"></i></div>
           <h3>Manual Contributor Guide</h3>
           <p>Read the official workflow, folder naming syntax, and git PR instructions on GitHub.</p>
           <span class="tool-link-text">Read Guidelines →</span>
@@ -238,7 +240,7 @@
               <line x1="10" y1="14" x2="21" y2="3"></line>
             </svg>
           </a>
-          <button class="btn btn-sm btn-close" id="close-modal-btn" title="Close Game">✕</button>
+          <button class="btn btn-sm btn-close" id="close-modal-btn" title="Close Game"><i data-lucide="x"></i></button>
         </div>
       </div>
       <div class="modal-frame-wrapper">
@@ -252,13 +254,13 @@
     <div class="footer-container">
       <div class="footer-col">
         <div class="logo">
-          <span class="pixel-badge">👾</span>
+          <span class="pixel-badge"><i data-lucide="bot"></i></span>
           <span class="logo-text">Arcade<span class="gradient-accent">Verse</span></span>
         </div>
         <p class="footer-desc">An open-source flagship gaming initiative for NSOC Winter Edition 2026. Designed for seamless, conflict-free manual open source contributions.</p>
         <div class="footer-cta-wrapper" style="margin-top: 1.4rem;">
           <a href="https://github.com/DebasmitaBose0/ArcadeVerse" target="_blank" rel="noopener noreferrer" class="btn btn-github-highlight" title="Star and view ArcadeVerse on GitHub">
-            <span class="github-star-icon">⭐</span>
+            <span class="github-star-icon"><i data-lucide="star"></i></span>
             <span class="github-btn-text">GitHub</span>
           </a>
         </div>
@@ -267,11 +269,11 @@
       <div class="footer-col">
         <h4>Explore Platform</h4>
         <ul class="footer-list">
-          <li><a href="index.html">🎮 Explore All Games</a></li>
-          <li><a href="ideas.html">💡 Ideas Vault</a></li>
-          <li><a href="leaderboard.html">🏆 Hall of Fame</a></li>
-          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">📖 Contributor Guidelines</a></li>
-          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">📜 MIT License</a></li>
+          <li><a href="index.html"><i data-lucide="gamepad-2"></i> Explore All Games</a></li>
+          <li><a href="ideas.html"><i data-lucide="lightbulb"></i> Ideas Vault</a></li>
+          <li><a href="leaderboard.html"><i data-lucide="trophy"></i> Hall of Fame</a></li>
+          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer"><i data-lucide="book-open"></i> Contributor Guidelines</a></li>
+          <li><a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/LICENSE" target="_blank" rel="noopener noreferrer"><i data-lucide="file-text"></i> MIT License</a></li>
         </ul>
       </div>
 
@@ -304,5 +306,10 @@
   <script src="assets/js/navbar.js"></script>
   <script src="assets/js/games-registry.js"></script>
   <script src="assets/js/app.js"></script>
+  <script>
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+  </script>
 </body>
 </html>

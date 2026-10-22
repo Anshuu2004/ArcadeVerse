@@ -99,10 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
     filtered.forEach((game) => {
       const card = document.createElement("div");
       card.className = "game-card";
+      const iconHtml = game.lucideIcon 
+        ? `<i data-lucide="${game.lucideIcon}"></i>` 
+        : (game.icon || `<i data-lucide="gamepad-2"></i>`);
+
       card.innerHTML = `
         <div class="game-card-preview">
           <span class="game-category-tag">${game.category}</span>
-          <div class="game-icon">${game.icon}</div>
+          <div class="game-icon">${iconHtml}</div>
         </div>
         <div class="game-card-body">
           <h3 class="game-card-title">${game.title}</h3>
@@ -114,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Dev: <strong>${game.author}</strong>
               </div>
             </div>
-            <button class="btn-play-trigger" data-id="${game.id}">Play Now ▶</button>
+            <button class="btn-play-trigger" data-id="${game.id}">Play Now <i data-lucide="play" style="width: 13px; height: 13px; vertical-align: middle; margin-left: 2px;"></i></button>
           </div>
         </div>
       `;
@@ -128,6 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
       card.addEventListener("click", () => openGameModal(game, card));
       gamesGrid.appendChild(card);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
   // Modal Handlers

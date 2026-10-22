@@ -22,21 +22,24 @@ ArcadeVerse features a **Balanced 2-Track Contributor Recognition System** scale
 
 ### 🕹️ **Track 1: Dedicated Game Creators Track** `(in the 'games' folder)`
 
-| Contributor Badge | Criteria (45-Day NSoC Scaling) | Rewards & Privileges |
-| :--- | :--- | :--- |
-| **👑 Master Game Architect** | **15+ Verified Games** • `1500+ Arcade Points` | Ultimate Arcade Creator badge + Top Hall of Fame Spotlight |
-| **⚡ Hyper Game Developer** | **8–14 Verified Games** • `800–1499 Arcade Points` | Elite Game Developer badge + Hall of Fame Podium Spotlight |
-| **🎮 Arcade Developer** | **4–7 Verified Games** • `400–799 Arcade Points` | Verified Game Developer badge + Arcade Showcase |
-| **🧭 Arcade Explorer** | **1–3 Verified Games** • `100–399 Arcade Points` | Playable Game Badge + Arcade Player Modal showcase |
+| Tier Title | Points Required | Description |
+| :--- | :---: | :--- |
+| **🌱 Active Contributor** | **First Merged PR (3–5 pts)** | Getting started — first verified contribution |
+| **🚀 Project Contributor** | **10+ Points** | Verified PRs, bug fixes, UI components, or first game |
+| **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
+| **💎 Elite Contributor** | **50+ Points** | Major features, multiple games, and active reviews |
+| **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
+
+> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin. Each verified game integrated into `games/` counts as a Level 3 contribution (10 pts).
 
 ### 💻 **Track 2: Platform & Core Engineering Track** `(except the 'games' folder, in the codebase modification)`
 
-| Contributor Badge | Criteria (45-Day NSoC Scaling) | Rewards & Privileges |
-| :--- | :--- | :--- |
-| **🛡️ Master Core Architect** | **30+ Merged PRs** • `750+ Arcade Points` | Master Core Architect badge + Hall of Fame Podium Spotlight |
-| **💎 Elite Contributor** | **10–29 Merged PRs** • `250–749 Arcade Points` | Elite Contributor badge + Permanent Hall of Fame feature |
-| **💻 Platform Contributor** | **5–9 Merged PRs** • `100–249 Arcade Points` | Platform Contributor badge + Feature Author Spotlight |
-| **🌱 Active Contributor** | **1–4 Merged PRs** • `15–99 Arcade Points` | Listed in verified NSOC '26 contributors registry |
+| Developer Title | Requirement | Description |
+| :--- | :---: | :--- |
+| **🕹️ Arcade Explorer** | 1 verified game | Authored and polished their first playable game in `games/game-name_contributor-name/` |
+| **🎮 Arcade Developer** | 2–4 verified games | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | 5–9 verified games | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | 10+ verified games | Master arcade author with top-tier game mechanics |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 >
