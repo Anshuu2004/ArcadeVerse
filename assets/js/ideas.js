@@ -1,9 +1,9 @@
 /**
  * Ideas Vault Page Engine
  * Features:
- * - Interactive Idea Roulette Spinner
- * - Full 20+ idea catalog with search/filter
- * - "Claim" bridge to PR Helper
+ * - Curated game concept specifications for community inspiration
+ * - Reference-only blueprints (zero click actions / no claim buttons)
+ * - Category filter and live keyword search
  * - Pure Lucide Icons (zero raw emojis)
  */
 
@@ -12,7 +12,7 @@ const IDEA_VAULT = [
     id: "space-invaders",
     title: "Space Invaders 2026",
     category: "Action",
-    icon: "🛸",
+    lucideIcon: "crosshair",
     difficulty: "Intermediate",
     description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
     tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
@@ -47,16 +47,6 @@ const IDEA_VAULT = [
     description: "Dual-paddle glowing pong with adjustable computer AI bot difficulty and 2-player local mode.",
     tags: ["Canvas 2D", "Collision Physics", "Bot AI Logic"],
     features: ["1P vs AI or 2P Local mode", "Velocity curve calculations", "Retro hit audio effects"]
-  },
-  {
-    id: "space-invaders",
-    title: "Space Invaders 2026",
-    category: "Action",
-    lucideIcon: "crosshair",
-    difficulty: "Intermediate",
-    description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
-    tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
-    features: ["Multi-stage alien formations", "Destructible shield bunkers", "Mystery mothership spawn"]
   },
   {
     id: "cyber-stacker",
@@ -122,7 +112,7 @@ const IDEA_VAULT = [
     id: "tactical-battleship",
     title: "Tactical Fleet Commander",
     category: "Strategy",
-    icon: "🚢",
+    lucideIcon: "anchor",
     difficulty: "Intermediate",
     description: "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
     tags: ["2D Grid Arrays", "Fog of War", "AI Turn Engine"],
@@ -132,7 +122,7 @@ const IDEA_VAULT = [
     id: "neon-rhythm-runner",
     title: "Neon Beat Runner",
     category: "Rhythm",
-    icon: "🎵",
+    lucideIcon: "music-2",
     difficulty: "Intermediate",
     description: "Sync key presses with descending neon pulses synchronized to procedural web audio tempos.",
     tags: ["Web Audio Clock", "Beat Timing", "Combo Multiplier"],
@@ -141,14 +131,11 @@ const IDEA_VAULT = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  let currentIndex = 0;
-  const ideaCardDisplay = document.getElementById("idea-card-display");
   const ideaTitle = document.getElementById("idea-title");
   const ideaCategory = document.getElementById("idea-category");
   const ideaIcon = document.getElementById("idea-icon");
   const ideaDescription = document.getElementById("idea-description");
   const ideaTechTags = document.getElementById("idea-tech-tags");
-  const rollIdeaBtn = document.getElementById("roll-idea-btn");
   const catalogGrid = document.getElementById("ideas-catalog-grid");
   const searchInput = document.getElementById("ideas-search-input");
   const categoryPills = document.querySelectorAll("#ideas-category-pills .pill");
@@ -156,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentCategory = "all";
   let searchQuery = "";
 
-  function displayRouletteIdea(index) {
+  function displayRouletteIdea(index = 0) {
     const item = IDEA_VAULT[index];
     if (!item) return;
     if (ideaTitle) ideaTitle.textContent = item.title;
@@ -169,15 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (rollIdeaBtn) {
-    rollIdeaBtn.addEventListener("click", () => {
-      currentIndex = Math.floor(Math.random() * IDEA_VAULT.length);
-      displayRouletteIdea(currentIndex);
-    });
-  }
-
-  // Render full catalog as reference concepts
-  if (catalogGrid) {
+  // Render full catalog as reference blueprints (without buttons or click actions)
+  function renderCatalog() {
+    if (!catalogGrid) return;
     catalogGrid.innerHTML = "";
 
     const filtered = IDEA_VAULT.filter((idea) => {
@@ -192,20 +173,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (filtered.length === 0) {
       catalogGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: var(--bg-surface); border: 1px dashed var(--border-medium); border-radius: var(--radius-lg);">
-          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.8rem;">🔍</span>
+          <div style="font-size: 2.2rem; color: var(--accent-cyan); margin-bottom: 0.8rem;"><i data-lucide="search-x"></i></div>
           <h3 style="color: #fff; margin-bottom: 0.5rem;">No Game Ideas Match Your Search</h3>
           <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.2rem;">Try searching for different keywords or clear the active category filter.</p>
         </div>
       `;
+      if (window.lucide) lucide.createIcons();
       return;
     }
 
     filtered.forEach((idea) => {
       const card = document.createElement("div");
       card.className = "idea-catalog-card";
+      const iconName = idea.lucideIcon || "gamepad-2";
       card.innerHTML = `
         <div class="idea-cat-header">
-          <span class="idea-icon-sm"><i data-lucide="${idea.lucideIcon || 'gamepad-2'}"></i></span>
+          <span class="idea-icon-sm"><i data-lucide="${iconName}"></i></span>
           <span class="difficulty-badge ${idea.difficulty.toLowerCase()}">${idea.difficulty}</span>
         </div>
         <h3>${idea.title}</h3>
@@ -219,13 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
             ${idea.features.map(f => `<li>${f}</li>`).join("")}
           </ul>
         </div>
-        <button class="btn btn-secondary btn-sm btn-disabled-concept" disabled title="This is a reference blueprint for trial purposes only.">
-          <i data-lucide="lock"></i> Example Concept (Disabled)
-        </button>
+        <div class="reference-blueprint-badge">
+          <i data-lucide="bookmark"></i> Reference Blueprint (Read-Only)
+        </div>
       `;
 
       catalogGrid.appendChild(card);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
   // Filter Search
@@ -249,8 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initial render
-  displayRouletteIdea(currentIndex);
-  if (window.lucide) {
-    lucide.createIcons();
-  }
+  displayRouletteIdea(0);
+  renderCatalog();
 });

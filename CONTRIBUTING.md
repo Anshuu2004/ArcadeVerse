@@ -343,31 +343,5 @@ Before submitting, make sure every box is checked:
 
 ---
 
-# 🏆 **COMMUNITY CONTRIBUTORS HALL OF FAME**
-
-All merged contributors are permanently honored below and synced in [leaderboard.html](leaderboard.html):
-
-| # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
-| :---: | :--- | :--- | :--- | :--- |
-| 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & Cyber Neon Pong** | `games/memory-matrix/`, `games/gamesbydb/` |
-| 1 | **mistu7debnath** | [@mistu7debnath](https://github.com/mistu7debnath) | **Flappy Cyber Jet** | `games/flappy-jet_mistu7debnath/` |
-| 1 | **Babin Bid** | [@Babin123456](https://github.com/Babin123456) | **Quantum 2048** | `games/quantum-2048_babin/` |
-| 2 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
-
----
-
-# 💡 **GAME IDEAS READY TO CLAIM**
-
-Visit the **[Ideas Vault](ideas.html)** or claim any of these concepts:
-- 🚀 **Flappy Cyber Jet** (`games/flappy-jet_contributor/`)
-- 🔢 **Quantum 2048** (`games/quantum-2048_contributor/`)
-- 🏓 **Neon Cyber Pong (PvP / AI)** (`games/cyber-pong_contributor/`)
-- 🏢 **Cyber Tower Stacker** (`games/tower-stacker_contributor/`)
-- 🛸 **Space Invaders 2026** (`games/space-invaders_contributor/`)
-- 🐛 **Whack-A-Bug Developer** (`games/whack-bug_contributor/`)
-- 🔤 **Cryptic Wordle Hack** (`games/wordle-hack_contributor/`)
-- 🦘 **Astro Infinite Jumper** (`games/astro-jumper_contributor/`)
-- 💣 **Quantum Minesweeper** (`games/minesweeper_contributor/`)
-- 🎹 **Synth-Wave Simon Says** (`games/simon-says_contributor/`)
-
 Happy Coding & Welcome to **Nexus Spring Of Code – Winter Edition 2026**! 🎉
+
