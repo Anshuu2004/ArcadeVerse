@@ -107,36 +107,70 @@ document.addEventListener("DOMContentLoaded", () => {
     contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
   }
 
-  // Render Podium for Verified Contributors Only (No Dummies)
+  // Helper to update dedicated Admin Spotlight UI
+  function updateAdminSpotlight(adminData) {
+    if (!adminData) return;
+    const adminScore = calculateScore(adminData);
+    const scoreEl = document.getElementById("admin-score");
+    const gamesEl = document.getElementById("admin-games");
+    const filesEl = document.getElementById("admin-files");
+    const commitsEl = document.getElementById("admin-commits");
+    const avatarEl = document.getElementById("admin-avatar");
+    const nameEl = document.getElementById("admin-name");
+    const handleEl = document.getElementById("admin-handle");
+
+    if (scoreEl) scoreEl.textContent = `${adminScore} pts`;
+    if (gamesEl) gamesEl.textContent = `${adminData.gamesCount || 2} Games`;
+    if (filesEl) filesEl.textContent = `${adminData.filesCount || 12} Files`;
+    if (commitsEl) commitsEl.textContent = `${adminData.commits || 19} Commits`;
+    if (avatarEl && adminData.avatar_url) avatarEl.src = adminData.avatar_url;
+    if (nameEl && adminData.name) nameEl.textContent = adminData.name;
+    if (handleEl && adminData.login) {
+      handleEl.textContent = `@${adminData.login}`;
+      handleEl.href = `https://github.com/${adminData.login}`;
+    }
+  }
+
+  // Render Podium for Community Contributors Only
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
 
-    if (contributorsData.length === 0) return;
+    // Exclude Admin from community podium
+    const communityContributors = contributorsData.filter(
+      c => c.login && c.login.toLowerCase() !== "debasmitabose0" && !c.isPlaceholder
+    );
 
-    // Filter to only real contributors
-    const realContributors = contributorsData.filter(c => !c.isPlaceholder);
+    if (communityContributors.length === 0) {
+      podiumContainer.innerHTML = `
+        <div class="podium-empty-notice" style="text-align: center; padding: 2rem; background: rgba(255, 255, 255, 0.02); border: 1px dashed var(--border-subtle); border-radius: var(--radius-lg); width: 100%; max-width: 600px; margin: 0 auto;">
+          <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🌟</div>
+          <h4 style="color: #fff; margin-bottom: 0.3rem;">Community Podium Awaiting Champions!</h4>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">Submit verified games, bug fixes, or UI features to earn your official place on the Hall of Fame podium.</p>
+        </div>
+      `;
+      return;
+    }
 
     let displayOrder = [];
-    if (realContributors.length === 1) {
-      // Only 1 contributor (Project Lead) -> display center solo champion podium
+    if (communityContributors.length === 1) {
       displayOrder = [{
-        ...realContributors[0],
+        ...communityContributors[0],
         rank: 1,
-        badge: "👑 #1 Project Lead & Champion",
+        badge: "👑 1st Champion",
         height: "podium-1 solo-podium"
       }];
-    } else if (realContributors.length === 2) {
+    } else if (communityContributors.length === 2) {
       displayOrder = [
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
+        { ...communityContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
+        { ...communityContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
       ];
     } else {
       // 3 or more contributors
       displayOrder = [
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" }
+        { ...communityContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
+        { ...communityContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
+        { ...communityContributors[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" }
       ];
     }
 
@@ -165,12 +199,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Render Full Leaderboard Table with Work Logs & File Counts
+  // Render Full Leaderboard Table with Work Logs (Community Contributors Only)
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
 
-    contributorsData.forEach((item, index) => {
+    // Exclude Admin from community leaderboard list
+    const communityContributors = contributorsData.filter(
+      c => c.login && c.login.toLowerCase() !== "debasmitabose0"
+    );
+
+    if (communityContributors.length === 0) {
+      const emptyTr = document.createElement("tr");
+      emptyTr.innerHTML = `
+        <td colspan="7" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+          🚀 <strong>No community PRs merged yet!</strong> Be the first contributor to claim Rank #1 on the leaderboard.
+        </td>
+      `;
+      tableBody.appendChild(emptyTr);
+      return;
+    }
+
+    communityContributors.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
       const filesCount = item.filesCount || (item.gamesCount * 3);
@@ -272,6 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         contributorsData = enrichedContributors;
+        const adminItem = contributorsData.find(c => c.login && c.login.toLowerCase() === "debasmitabose0");
+        if (adminItem) updateAdminSpotlight(adminItem);
+
         if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
       }
     } catch (err) {
@@ -292,6 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initial Run - auto-sync live repository data
+  updateAdminSpotlight(contributorsData[0]);
   sortContributors();
   renderPodium();
   renderTable();
