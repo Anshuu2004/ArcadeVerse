@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 <div align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=1e3a8a,2563eb,38bdf8,60a5fa&height=180&section=header&text=ArcadeVerse&fontSize=42&fontAlignY=38&desc=The%20Open-Source%20Community%20Arcade%20Station%20%E2%80%A2%20Nexus%20Spring%20Of%20Code%20%E2%80%93%20Winter%20Edition%202026&descAlignY=58&descSize=16&fontColor=ffffff" width="100%" alt="ArcadeVerse Header Wave" />
 
