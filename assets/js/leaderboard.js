@@ -1,7 +1,13 @@
 /**
  * Hall of Fame Live GitHub Contributors & Ranking Engine
  * Fetches real contributor stats from GitHub API (or seamlessly merges with games-registry)
- * Calculates contribution scores, renders the Top 3 Podium, and displays sorted rankings.
+ * 
+ * Architecture:
+ * - Admin (Project Lead) has a dedicated separate rank card at the top.
+ * - Podium and Leaderboard Table display ONLY Community Contributors.
+ * - Cards are static by default, with an elegant corner gradient radiating on hover.
+ * - Dual-category highest badges: Displays highest Game Dedicated badge and highest Milestone badge.
+ * - Direct GitHub Activity column with clickable links for Issues and PRs.
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -10,201 +16,365 @@ document.addEventListener("DOMContentLoaded", () => {
   const repoInput = document.getElementById("repo-input");
   const fetchBtn = document.getElementById("fetch-github-btn");
   const syncStatusText = document.getElementById("sync-status-text");
+  const adminMetaInfo = document.getElementById("admin-meta-info");
 
-  // Initial verified contributors (Project Lead)
+  // Leaderboard Switcher (Community Contributors vs Admin View)
+  const switchContribBtn = document.getElementById("switch-contributors-btn");
+  const switchAdminBtn = document.getElementById("switch-admin-btn");
+  const viewContributors = document.getElementById("view-contributors");
+  const viewAdmin = document.getElementById("view-admin");
+
+  if (switchContribBtn && switchAdminBtn && viewContributors && viewAdmin) {
+    switchContribBtn.addEventListener("click", () => {
+      switchContribBtn.classList.add("active");
+      switchAdminBtn.classList.remove("active");
+      viewContributors.style.display = "block";
+      viewAdmin.style.display = "none";
+      if (window.lucide) lucide.createIcons();
+    });
+
+    switchAdminBtn.addEventListener("click", () => {
+      switchAdminBtn.classList.add("active");
+      switchContribBtn.classList.remove("active");
+      viewAdmin.style.display = "block";
+      viewContributors.style.display = "none";
+      if (window.lucide) lucide.createIcons();
+    });
+  }
+
+  // Initial verified contributors from repository
   let contributorsData = [
     {
       login: "DebasmitaBose0",
       name: "Debasmita Bose",
       role: "Project Admin & Lead",
       avatar_url: "https://avatars.githubusercontent.com/u/144198639?v=4",
-      commits: 19,
+      commits: 37,
       gamesCount: 2,
+      mechanicsBonus: 2,
+      platformPRs: 2,
+      qualityPRs: 0,
+      bonusPts: 0,
       games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
+    },
+    {
+      login: "joitapaul",
+      name: "Joita Paul",
+      role: "Active Contributor",
+      avatar_url: "https://avatars.githubusercontent.com/u/104523098?v=4",
+      commits: 1,
+      gamesCount: 0,
+      mechanicsBonus: 0,
+      platformPRs: 0,
+      qualityPRs: 1,
+      bonusPts: 0,
+      games: []
     }
   ];
 
-  // Dynamic Contributor Role & Tier Badge Engine:
-  // Evaluates contributor roles based on overall commits and dedicated game contributions
-  function determineContributorRole(user) {
-    if (user.login && user.login.toLowerCase() === "debasmitabose0") {
-      return {
+  // Calculate ArcadeVerse Score:
+  // - Verified Game: 100 pts per integrated game in the 'games' folder
+  // - Mechanics & Physics Bonus: 30 pts per advanced game
+  // - Platform Feature & UI: 25 pts per core feature PR
+  // - Quality & Bug Fixes: 15 pts per bug fix / maintenance PR
+  function calculateScore(item) {
+    const gamePts = (item.gamesCount || 0) * 100;
+    const mechanicsPts = (item.mechanicsBonus || 0) * 30;
+    const platformPts = (item.platformPRs || 0) * 25;
+    const qualityPts = (item.qualityPRs || 0) * 15;
+    const bonus = item.bonusPts || 0;
+
+    const calculated = gamePts + mechanicsPts + platformPts + qualityPts + bonus;
+    // Base score for new contributors with merged PRs/commits (minimum 15 pts per merged contribution)
+    if (calculated === 0 && item.commits > 0) {
+      return item.commits * 15;
+    }
+    return calculated;
+  }
+
+  // Contributor Badges Engine:
+  // Evaluates and returns an array of the HIGHEST badges for EACH category:
+  // 1. Leadership Category (Project Admin & Lead)
+  // 2. Games Dedicated Category (45-Day NSoC Program Scaling):
+  //    - Master Game Architect (15+ Verified Games • 1500+ pts)
+  //    - Hyper Game Developer (8–14 Verified Games • 800–1499 pts)
+  //    - Arcade Developer (4–7 Verified Games • 400–799 pts)
+  //    - Arcade Explorer (1–3 Verified Games • 100–399 pts)
+  // 3. Platform & Core Engineering Category (except the 'games' folder, in the codebase modification):
+  //    - Master Core Architect (30+ Merged PRs • 750+ pts)
+  //    - Elite Contributor (10–29 Merged PRs • 250–749 pts)
+  //    - Platform Contributor (5–9 Merged PRs • 100–249 pts)
+  //    - Active Contributor (1–4 Merged PRs • 15–99 pts)
+  function getContributorBadges(user) {
+    const badges = [];
+    const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
+
+    // 1. Leadership Badge (Only for Project Lead)
+    if (isAdmin) {
+      badges.push({
         role: "Project Admin & Lead",
         tagClass: "role-admin",
-        badge: "👑 Project Admin & Lead"
-      };
+        label: "Project Admin & Lead",
+        lucideIcon: "crown",
+        category: "Leadership"
+      });
     }
 
-    const totalCommits = user.contributions || user.commits || 0;
+    // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 15+ Master, 8–14 Hyper, 4–7 Arcade Dev, 1–3 Explorer)
     const gamesCount = user.gamesCount || 0;
-
-    // Game folder focused developer tiers (calculated based on game count and activity)
-    if (gamesCount >= 2 || totalCommits >= 30) {
-      return {
+    if (gamesCount >= 15) {
+      badges.push({
+        role: "Master Game Architect",
+        tagClass: "role-master-architect",
+        label: "Master Game Architect",
+        lucideIcon: "crown",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount >= 8) {
+      badges.push({
         role: "Hyper Game Developer",
         tagClass: "role-hyper",
-        badge: "⚡ Hyper Game Developer"
-      };
-    }
-    if (gamesCount >= 1 && totalCommits >= 15) {
-      return {
+        label: "Hyper Game Developer",
+        lucideIcon: "zap",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount >= 4) {
+      badges.push({
         role: "Arcade Developer",
         tagClass: "role-arcade",
-        badge: "🕹️ Arcade Developer"
-      };
+        label: "Arcade Developer",
+        lucideIcon: "gamepad-2",
+        category: "Games Dedicated"
+      });
+    } else if (gamesCount >= 1) {
+      badges.push({
+        role: "Arcade Explorer",
+        tagClass: "role-explorer",
+        label: "Arcade Explorer",
+        lucideIcon: "compass",
+        category: "Games Dedicated"
+      });
     }
 
-    // Repository-wide commit milestone tiers
-    if (totalCommits >= 50) {
-      return {
-        role: "Master Contributor",
+    // 3. Platform & Core Engineering Track (Based on PRs, commits, and platform/fix points)
+    const commitsCount = user.commits || 0;
+    const platformPoints = ((user.platformPRs || 0) * 25) + ((user.qualityPRs || 0) * 15) + (user.bonusPts || 0);
+
+    if (commitsCount >= 30 || platformPoints >= 750) {
+      badges.push({
+        role: "Master Core Architect",
         tagClass: "role-master",
-        badge: "🏆 Master Contributor"
-      };
-    }
-    if (totalCommits >= 20) {
-      return {
+        label: "Master Core Architect",
+        lucideIcon: "shield-check",
+        category: "Platform & Core"
+      });
+    } else if (commitsCount >= 10 || platformPoints >= 250) {
+      badges.push({
         role: "Elite Contributor",
         tagClass: "role-elite",
-        badge: "💎 Elite Contributor"
-      };
-    }
-    if (totalCommits >= 10) {
-      return {
-        role: "Novice Contributor",
-        tagClass: "role-novice",
-        badge: "🌟 Novice Contributor"
-      };
-    }
-    if (totalCommits >= 5) {
-      return {
-        role: "Project Contributor",
-        tagClass: "role-project",
-        badge: "🚀 Project Contributor"
-      };
+        label: "Elite Contributor",
+        lucideIcon: "gem",
+        category: "Platform & Core"
+      });
+    } else if (commitsCount >= 5 || platformPoints >= 100) {
+      badges.push({
+        role: "Platform Contributor",
+        tagClass: "role-platform",
+        label: "Platform Contributor",
+        lucideIcon: "code-2",
+        category: "Platform & Core"
+      });
+    } else {
+      badges.push({
+        role: "Active Contributor",
+        tagClass: "role-active",
+        label: "Active Contributor",
+        lucideIcon: "sprout",
+        category: "Getting Started"
+      });
     }
 
-    return {
-      role: "Active Contributor",
-      tagClass: "role-active",
-      badge: "🌱 Active Contributor"
-    };
+    return badges;
   }
 
-  // Advanced Multidimensional Point Formula:
-  // - Commits: 10 pts per commit
-  // - Verified Game: 100 pts per integrated game
-  // - Files: 15 pts per valid source file (HTML, CSS, JS, etc.)
-  function calculateScore(item) {
-    const commitsPts = (item.commits || 0) * 10;
-    const gamesPts = (item.gamesCount || 0) * 100;
-    const filesPts = (item.filesCount || (item.gamesCount * 3)) * 15;
-    return commitsPts + gamesPts + filesPts;
+  // Get Community Contributors (Excludes Admin who has their separate dedicated rank)
+  // Ranked strictly by:
+  // 1. Verified Games count (primary)
+  // 2. Merged Commits / Contributions (secondary)
+  function getCommunityContributors() {
+    return contributorsData
+      .filter(item => item.login && item.login.toLowerCase() !== "debasmitabose0")
+      .sort((a, b) => {
+        if ((b.gamesCount || 0) !== (a.gamesCount || 0)) {
+          return (b.gamesCount || 0) - (a.gamesCount || 0);
+        }
+        return (b.commits || 0) - (a.commits || 0);
+      });
   }
 
-  // Sort contributors descending by score
-  function sortContributors() {
-    contributorsData.sort((a, b) => calculateScore(b) - calculateScore(a));
+  // Format effort & work breakdown label
+  function getWorkBreakdown(item) {
+    const games = item.gamesCount || 0;
+    const feat = item.platformPRs || 0;
+    const fix = item.qualityPRs || 0;
+    return `Games: ${games} • Feat: ${feat} • Fix: ${fix}`;
   }
 
-  // Render Podium for Verified Contributors Only (No Dummies)
+  // Render Top Community Contributors Podium
+  // Only displays real verified contributors who have contributed to the repository.
+  // Never renders dummy "Claim Rank" cards.
+  // Keeps card uncluttered since full work breakdown is in the table and category section below.
   function renderPodium() {
     if (!podiumContainer) return;
     podiumContainer.innerHTML = "";
 
-    if (contributorsData.length === 0) return;
+    const communityContributors = getCommunityContributors();
 
-    // Filter to only real contributors
-    const realContributors = contributorsData.filter(c => !c.isPlaceholder);
+    if (communityContributors.length === 0) {
+      podiumContainer.innerHTML = `
+        <div class="podium-empty-notice" style="text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); font-size: 0.95rem;">
+          <i data-lucide="sparkles" style="margin-right: 0.4rem;"></i> Verified community contributors will appear here automatically as contributions merge.
+        </div>
+      `;
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
 
-    let displayOrder = [];
-    if (realContributors.length === 1) {
-      // Only 1 contributor (Project Lead) -> display center solo champion podium
-      displayOrder = [{
-        ...realContributors[0],
-        rank: 1,
-        badge: "👑 #1 Project Lead & Champion",
-        height: "podium-1 solo-podium"
-      }];
-    } else if (realContributors.length === 2) {
-      displayOrder = [
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" }
+    // Determine slots strictly from actual verified contributors
+    let orderedContributors = [];
+
+    if (communityContributors.length === 1) {
+      // Single contributor: centered solo podium card
+      orderedContributors = [
+        { rank: 1, user: communityContributors[0], cardClass: "podium-1 podium-gold solo-podium", badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown" }
+      ];
+    } else if (communityContributors.length === 2) {
+      // Two contributors: 1st (Gold) and 2nd (Silver)
+      orderedContributors = [
+        { rank: 1, user: communityContributors[0], cardClass: "podium-1 podium-gold", badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown" },
+        { rank: 2, user: communityContributors[1], cardClass: "podium-2 podium-silver", badgeType: "silver", badgeLabel: "2nd Contributor", badgeIcon: "medal" }
       ];
     } else {
-      // 3 or more contributors
-      displayOrder = [
-        { ...realContributors[1], rank: 2, badge: "🥈 2nd Place", height: "podium-2" },
-        { ...realContributors[0], rank: 1, badge: "👑 1st Champion", height: "podium-1" },
-        { ...realContributors[2], rank: 3, badge: "🥉 3rd Place", height: "podium-3" }
+      // 3 or more: Olympic podium layout (2nd, 1st, 3rd)
+      orderedContributors = [
+        { rank: 2, user: communityContributors[1], cardClass: "podium-2 podium-silver", badgeType: "silver", badgeLabel: "2nd Contributor", badgeIcon: "medal" },
+        { rank: 1, user: communityContributors[0], cardClass: "podium-1 podium-gold", badgeType: "gold", badgeLabel: "1st Champion", badgeIcon: "crown" },
+        { rank: 3, user: communityContributors[2], cardClass: "podium-3 podium-bronze", badgeType: "bronze", badgeLabel: "3rd Contributor", badgeIcon: "medal" }
       ];
     }
 
-    displayOrder.forEach((item) => {
+    orderedContributors.forEach(slot => {
+      const item = slot.user;
       const score = calculateScore(item);
-      const filesCount = item.filesCount || (item.gamesCount * 3);
-      const roleMeta = determineContributorRole(item);
+      const badges = getContributorBadges(item);
+
       const card = document.createElement("div");
-      card.className = `podium-card ${item.height}`;
+      card.className = `podium-card ${slot.cardClass}`;
+      // Clean, uncluttered card: Rank badge, avatar, name, handle, primary badges, score, and profile link.
       card.innerHTML = `
-        <div class="podium-badge">${item.badge}</div>
+        <div class="podium-badge podium-badge-${slot.badgeType}">
+          <i data-lucide="${slot.badgeIcon}"></i> ${slot.badgeLabel}
+        </div>
         <img src="${item.avatar_url}" alt="${item.name}" class="podium-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
         <h3 class="podium-name">${item.name}</h3>
-        <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
-        <a href="https://github.com/${item.login}" target="_blank" class="podium-handle">@${item.login}</a>
+        <a href="https://github.com/${item.login}" target="_blank" rel="noopener noreferrer" class="podium-handle">@${item.login}</a>
+        
+        <div class="podium-badges-container">
+          ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
+        </div>
+
         <div class="podium-score-pill">
           <strong>${score}</strong> pts
         </div>
-        <div class="podium-meta-tags">
-          <span class="meta-badge">🎮 ${item.gamesCount} Game(s)</span>
-          <span class="meta-badge">📁 ${filesCount} Files</span>
-          <span class="meta-badge">💻 ${item.commits} Commits</span>
+        <div class="podium-sub-stat-text" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.6rem; display: flex; align-items: center; justify-content: center; gap: 0.35rem;">
+          ${item.gamesCount > 0 ? `<span><i data-lucide="gamepad-2" style="width: 0.8rem; height: 0.8rem;"></i> ${item.gamesCount} Game${item.gamesCount === 1 ? '' : 's'}</span> • ` : ''}
+          <span><i data-lucide="git-commit" style="width: 0.8rem; height: 0.8rem;"></i> ${item.commits} Commit${item.commits === 1 ? '' : 's'}</span>
         </div>
+
+        <a href="https://github.com/${item.login}" target="_blank" rel="noopener noreferrer" class="podium-gh-btn" title="View GitHub profile">
+          <i data-lucide="external-link"></i> View Profile
+        </a>
       `;
+
       podiumContainer.appendChild(card);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
-  // Render Full Leaderboard Table with Work Logs & File Counts
+  // Render Full Contributor Standings Table (Exclusively Community Contributors)
   function renderTable() {
     if (!tableBody) return;
     tableBody.innerHTML = "";
 
-    contributorsData.forEach((item, index) => {
+    const communityContributors = getCommunityContributors();
+
+    if (communityContributors.length === 0) {
+      const emptyTr = document.createElement("tr");
+      emptyTr.innerHTML = `
+        <td colspan="9" style="text-align: center; padding: 2.5rem; color: var(--text-muted);">
+          <i data-lucide="sparkles" style="margin-right: 0.4rem;"></i> Awaiting first community PR merges! Be the first contributor to claim Rank #1.
+        </td>
+      `;
+      tableBody.appendChild(emptyTr);
+      if (window.lucide) lucide.createIcons();
+      return;
+    }
+
+    communityContributors.forEach((item, index) => {
       const rank = index + 1;
       const score = calculateScore(item);
-      const filesCount = item.filesCount || (item.gamesCount * 3);
-      const roleMeta = determineContributorRole(item);
-      let rankBadge = `#${rank}`;
-      if (rank === 1) rankBadge = "🥇 #1";
-      else if (rank === 2) rankBadge = "🥈 #2";
-      else if (rank === 3) rankBadge = "🥉 #3";
+      const badges = getContributorBadges(item);
+
+      let rankBadgeHtml = `<span class="rank-tag">#${rank}</span>`;
+      if (rank === 1) {
+        rankBadgeHtml = `<span class="rank-tag rank-1"><i data-lucide="trophy"></i> #1</span>`;
+      } else if (rank === 2) {
+        rankBadgeHtml = `<span class="rank-tag rank-2"><i data-lucide="medal"></i> #2</span>`;
+      } else if (rank === 3) {
+        rankBadgeHtml = `<span class="rank-tag rank-3"><i data-lucide="medal"></i> #3</span>`;
+      }
 
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td><span class="rank-tag rank-${rank}">${rankBadge}</span></td>
+        <td>${rankBadgeHtml}</td>
         <td>
           <div class="table-user-cell">
             <img src="${item.avatar_url}" alt="${item.name}" class="table-user-avatar" onerror="this.src='https://github.com/identicons/${item.login}.png'">
             <div>
               <strong class="user-display-name">${item.name}</strong>
-              <div class="user-role-label">
-                <span class="role-pill-badge ${roleMeta.tagClass}">${roleMeta.badge}</span>
-              </div>
+              <span class="user-handle-sub">@${item.login}</span>
             </div>
+          </div>
+        </td>
+        <td>
+          <div class="contributor-badges-wrap">
+            ${badges.map(b => `<span class="role-pill-badge ${b.tagClass}"><i data-lucide="${b.lucideIcon}"></i> ${b.label}</span>`).join("")}
           </div>
         </td>
         <td>
           <a href="https://github.com/${item.login}" target="_blank" class="github-handle-link">@${item.login}</a>
         </td>
         <td style="text-align: center;">
-          <span class="games-count-pill" title="${(item.games || []).join(', ')}">🎮 ${item.gamesCount}</span>
+          <span class="games-count-pill" title="${(item.games || []).join(', ')}"><i data-lucide="gamepad-2"></i> ${item.gamesCount}</span>
         </td>
         <td style="text-align: center;">
-          <span class="files-count-pill" title="Source files committed">📁 ${filesCount} files</span>
+          <span class="files-count-pill" title="Effort: Games ${item.gamesCount}, Features ${item.platformPRs || 0}, Quality ${item.qualityPRs || 0}"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
         </td>
         <td style="text-align: center;">
-          <span class="commits-count-pill">💻 ${item.commits}</span>
+          <span class="commits-count-pill"><i data-lucide="git-commit"></i> ${item.commits}</span>
+        </td>
+        <td style="text-align: center;">
+          <div class="activity-links-group">
+            <a href="https://github.com/DebasmitaBose0/ArcadeVerse/issues?q=author%3A${item.login}" target="_blank" rel="noopener noreferrer" class="activity-link-btn" title="View Issues authored by @${item.login}">
+              <i data-lucide="circle-dot"></i> Issues
+            </a>
+            <a href="https://github.com/DebasmitaBose0/ArcadeVerse/pulls?q=author%3A${item.login}" target="_blank" rel="noopener noreferrer" class="activity-link-btn" title="View Pull Requests by @${item.login}">
+              <i data-lucide="git-pull-request"></i> PRs
+            </a>
+          </div>
         </td>
         <td style="text-align: right;">
           <strong class="score-highlight">${score} pts</strong>
@@ -212,11 +382,51 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tableBody.appendChild(tr);
     });
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
   }
 
-  // Fetch Live Contributions directly from GitHub REST API
-  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse") {
+  // Update Dedicated Admin Card at the top with live metadata
+  function updateAdminSpotlight(adminUser) {
+    if (!adminUser || !adminMetaInfo) return;
+    const score = calculateScore(adminUser);
+    adminMetaInfo.textContent = `${adminUser.commits} Commits • ${adminUser.gamesCount} Games • ${score} pts`;
+  }
+
+  // Live GitHub Contributions with LocalStorage TTL Cache
+  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse", forceRefresh = false) {
     if (!repo) return;
+
+    // Check LocalStorage Cache first
+    if (!forceRefresh) {
+      try {
+        const cachedRaw = localStorage.getItem(`${CACHE_KEY}_${repo}`);
+        if (cachedRaw) {
+          const cached = JSON.parse(cachedRaw);
+          const isFresh = (Date.now() - cached.timestamp) < CACHE_TTL;
+          if (isFresh && Array.isArray(cached.data) && cached.data.length > 0) {
+            contributorsData = cached.data;
+            const adminItem = contributorsData.find(c => c.login && c.login.toLowerCase() === "debasmitabose0");
+            if (adminItem) updateAdminSpotlight(adminItem);
+
+            sortContributors();
+            updateMetricsSummary();
+            renderPodium();
+            renderTable();
+            if (syncStatusText) {
+              const minutesAgo = Math.floor((Date.now() - cached.timestamp) / 60000);
+              syncStatusText.textContent = `Cached GitHub data (${minutesAgo}m ago • ${contributorsData.length} contributors)`;
+            }
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not read from cache:", e);
+      }
+    }
+
     if (syncStatusText) syncStatusText.textContent = `Connecting to GitHub API (${repo})...`;
 
     try {
@@ -227,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        // Fetch detailed profile for contributors to display accurate names
+        // Enrich profiles to resolve display names and cross-reference games/PRs
         const enrichedContributors = await Promise.all(
           data.map(async (user) => {
             let displayName = user.login;
@@ -242,58 +452,89 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
+            
+            // Check if contributor exists in CONTRIBUTORS_REGISTRY
+            let registryEntry = null;
+            if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
+              registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
+            }
+
             // Count registered games from GAMES_REGISTRY
             let userGames = [];
             if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
               userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
             }
-            const gamesCount = userGames.length > 0 ? userGames.length : (isAdmin ? 2 : 1);
-            // Each game has at least 3 source files (index.html, style.css, game.js) plus core docs
-            const filesCount = isAdmin ? (gamesCount * 3 + 6) : (gamesCount * 3);
+            const gamesCount = userGames.length > 0 ? userGames.length : (registryEntry ? registryEntry.gamesCount : (isAdmin ? 2 : 0));
 
-            const roleMeta = determineContributorRole({
-              login: user.login,
-              contributions: user.contributions,
-              gamesCount: gamesCount
-            });
+            const mechanicsBonus = registryEntry ? (registryEntry.mechanicsBonus || 0) : (isAdmin ? 2 : 0);
+            const platformPRs = registryEntry ? (registryEntry.platformPRs || 0) : (isAdmin ? 2 : 0);
+            const qualityPRs = registryEntry ? (registryEntry.qualityPRs || 0) : (isAdmin ? 0 : 1);
+            const bonusPts = registryEntry ? (registryEntry.bonusPts || 0) : 0;
 
             return {
               login: user.login,
-              name: displayName,
-              role: roleMeta.role,
-              roleClass: roleMeta.tagClass,
+              name: registryEntry ? registryEntry.name : displayName,
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
-              filesCount: filesCount,
-              games: userGames.length > 0 ? userGames.map(g => g.title) : ["Quantum Memory Matrix", "Cyber Neon Pong"]
+              mechanicsBonus: mechanicsBonus,
+              platformPRs: platformPRs,
+              qualityPRs: qualityPRs,
+              bonusPts: bonusPts,
+              games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
             };
           })
         );
 
         contributorsData = enrichedContributors;
-        if (syncStatusText) syncStatusText.textContent = `Live GitHub data synced! (${data.length} contributor(s) verified)`;
+
+        const adminUser = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
+        if (adminUser) updateAdminSpotlight(adminUser);
+
+        const communityCount = contributorsData.filter(c => c.login.toLowerCase() !== "debasmitabose0").length;
+        if (syncStatusText) syncStatusText.textContent = `GitHub Live Sync: 1 Admin Lead • ${communityCount} Community Contributor(s) active`;
       }
     } catch (err) {
-      console.warn("GitHub API rate limit or network issue:", err);
-      if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
+      console.warn("GitHub API notice:", err.message);
+      if (syncStatusText) {
+        syncStatusText.textContent = `Offline/Cached state: ${repo} (Rate limit safe)`;
+      }
     }
 
-    sortContributors();
+    // Render Clean Contributor Views
     renderPodium();
     renderTable();
   }
 
-  if (fetchBtn) {
-    fetchBtn.addEventListener("click", () => {
-      const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
-      fetchLiveGitHubContributions(repo);
+  // Filter Search
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderTable();
     });
   }
 
-  // Initial Run - auto-sync live repository data
-  sortContributors();
+  // Tier Filter Pills
+  tierPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      tierPills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+      currentTier = pill.getAttribute("data-tier");
+      renderTable();
+    });
+  });
+
+  if (fetchBtn) {
+    fetchBtn.addEventListener("click", () => {
+      const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
+      fetchLiveGitHubContributions(repo, true);
+    });
+  }
+
+  // Initial Run
+  const initialAdmin = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
+  if (initialAdmin) updateAdminSpotlight(initialAdmin);
   renderPodium();
   renderTable();
-  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse");
+  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse", false);
 });

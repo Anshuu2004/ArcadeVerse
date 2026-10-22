@@ -16,7 +16,7 @@ const GAMES_REGISTRY = [
     id: "memory-matrix",
     title: "Quantum Memory Matrix",
     category: "Puzzle",
-    icon: "🧩",
+    lucideIcon: "puzzle",
     description: "Cyberpunk card flipping memory matrix test. Match cyber glyphs under timed pressure.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -30,7 +30,7 @@ const GAMES_REGISTRY = [
     id: "gamesbydb",
     title: "Cyber Neon Pong",
     category: "Arcade",
-    icon: "🏓",
+    lucideIcon: "gamepad-2",
     description: "Classic retro pong arena with neon glow and dynamic canvas AI paddle physics.",
     author: "Debasmita Bose",
     github: "DebasmitaBose0",
@@ -52,6 +52,17 @@ const GAMES_REGISTRY = [
     path: "games/flappy-jet_mistu7debnath/index.html",
     tags: ["Arcade", "NSOC26"],
     stars: 18,
+    id: "quantum-2048_babin",
+    title: "Quantum 2048",
+    category: "Puzzle",
+    icon: "⚛️",
+    description: "Slide and merge radioactive isotopes on a 4x4 containment grid to synthesize the 2048 singularity.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/quantum-2048_babin/index.html",
+    tags: ["Puzzle", "Math", "Retro", "Synthesis"],
+    stars: 28,
     featured: true
   }
 ];
@@ -70,5 +81,11 @@ const CONTRIBUTORS_REGISTRY = [
     avatarInitial: "M",
     role: "Contributor (NSOC '26)",
     contributions: ["Flappy Cyber Jet"]
+    gamesCount: 2,
+    mechanicsBonus: 2,
+    platformPRs: 2,
+    qualityPRs: 0,
+    bonusPts: 0,
+    contributions: ["Quantum Memory Matrix", "Cyber Neon Pong", "Arcade Core Engine"]
   }
 ];
