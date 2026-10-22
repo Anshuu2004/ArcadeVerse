@@ -9,6 +9,16 @@
 
 const IDEA_VAULT = [
   {
+    id: "space-invaders",
+    title: "Space Invaders 2026",
+    category: "Action",
+    icon: "🛸",
+    difficulty: "Intermediate",
+    description: "Classic arcade space defense. Control your cannon with arrow keys and blast descending alien waves.",
+    tags: ["Sprite Animation", "Bullet Queues", "Wave Scaling"],
+    features: ["Multi-stage alien formations", "Destructible shield bunkers", "Mystery mothership spawn"]
+  },
+  {
     id: "flappy-cyber",
     title: "Flappy Cyber Jet",
     category: "Action",
@@ -107,11 +117,32 @@ const IDEA_VAULT = [
     description: "Watch and listen to synthesizer sound sequences, then repeat the exact musical pattern under timer.",
     tags: ["Web Audio API", "Array Queues", "Memory Challenge"],
     features: ["Synthesizer tone generation", "High score memory", "Speed acceleration per round"]
+  },
+  {
+    id: "tactical-battleship",
+    title: "Tactical Fleet Commander",
+    category: "Strategy",
+    icon: "🚢",
+    difficulty: "Intermediate",
+    description: "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
+    tags: ["2D Grid Arrays", "Fog of War", "AI Turn Engine"],
+    features: ["Turn-based AI targeting", "Radar sweep bonus", "Fleet status health dashboard"]
+  },
+  {
+    id: "neon-rhythm-runner",
+    title: "Neon Beat Runner",
+    category: "Rhythm",
+    icon: "🎵",
+    difficulty: "Intermediate",
+    description: "Sync key presses with descending neon pulses synchronized to procedural web audio tempos.",
+    tags: ["Web Audio Clock", "Beat Timing", "Combo Multiplier"],
+    features: ["Dynamic BPM scaling", "Perfect/Good/Miss score ratings", "Combo streak visual aura"]
   }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
+  const ideaCardDisplay = document.getElementById("idea-card-display");
   const ideaTitle = document.getElementById("idea-title");
   const ideaCategory = document.getElementById("idea-category");
   const ideaIcon = document.getElementById("idea-icon");
@@ -119,6 +150,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const ideaTechTags = document.getElementById("idea-tech-tags");
   const rollIdeaBtn = document.getElementById("roll-idea-btn");
   const catalogGrid = document.getElementById("ideas-catalog-grid");
+  const searchInput = document.getElementById("ideas-search-input");
+  const categoryPills = document.querySelectorAll("#ideas-category-pills .pill");
+
+  let currentCategory = "all";
+  let searchQuery = "";
 
   function displayRouletteIdea(index) {
     const item = IDEA_VAULT[index];
@@ -135,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (rollIdeaBtn) {
     rollIdeaBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % IDEA_VAULT.length;
+      currentIndex = Math.floor(Math.random() * IDEA_VAULT.length);
       displayRouletteIdea(currentIndex);
     });
   }
@@ -143,9 +179,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render full catalog as reference concepts
   if (catalogGrid) {
     catalogGrid.innerHTML = "";
-    IDEA_VAULT.forEach((idea) => {
+
+    const filtered = IDEA_VAULT.filter((idea) => {
+      const matchesCategory = currentCategory === "all" || idea.category.toLowerCase() === currentCategory.toLowerCase();
+      const matchesSearch = 
+        idea.title.toLowerCase().includes(searchQuery) ||
+        idea.description.toLowerCase().includes(searchQuery) ||
+        idea.tags.some(t => t.toLowerCase().includes(searchQuery));
+      return matchesCategory && matchesSearch;
+    });
+
+    if (filtered.length === 0) {
+      catalogGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; background: var(--bg-surface); border: 1px dashed var(--border-medium); border-radius: var(--radius-lg);">
+          <span style="font-size: 2.5rem; display: block; margin-bottom: 0.8rem;">🔍</span>
+          <h3 style="color: #fff; margin-bottom: 0.5rem;">No Game Ideas Match Your Search</h3>
+          <p style="color: var(--text-secondary); max-width: 480px; margin: 0 auto 1.2rem;">Try searching for different keywords or clear the active category filter.</p>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach((idea) => {
       const card = document.createElement("div");
-      card.className = "idea-catalog-card trial-card";
+      card.className = "idea-catalog-card";
       card.innerHTML = `
         <div class="idea-cat-header">
           <span class="idea-icon-sm"><i data-lucide="${idea.lucideIcon || 'gamepad-2'}"></i></span>
@@ -171,7 +228,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initial display
+  // Filter Search
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderCatalog();
+    });
+  }
+
+  // Category Pills
+  if (categoryPills) {
+    categoryPills.forEach((pill) => {
+      pill.addEventListener("click", () => {
+        categoryPills.forEach((p) => p.classList.remove("active"));
+        pill.classList.add("active");
+        currentCategory = pill.getAttribute("data-category");
+        renderCatalog();
+      });
+    });
+  }
+
+  // Initial render
   displayRouletteIdea(currentIndex);
   if (window.lucide) {
     lucide.createIcons();

@@ -395,9 +395,38 @@ document.addEventListener("DOMContentLoaded", () => {
     adminMetaInfo.textContent = `${adminUser.commits} Commits • ${adminUser.gamesCount} Games • ${score} pts`;
   }
 
-  // Fetch Live Contributions directly from GitHub REST API
-  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse") {
+  // Live GitHub Contributions with LocalStorage TTL Cache
+  async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse", forceRefresh = false) {
     if (!repo) return;
+
+    // Check LocalStorage Cache first
+    if (!forceRefresh) {
+      try {
+        const cachedRaw = localStorage.getItem(`${CACHE_KEY}_${repo}`);
+        if (cachedRaw) {
+          const cached = JSON.parse(cachedRaw);
+          const isFresh = (Date.now() - cached.timestamp) < CACHE_TTL;
+          if (isFresh && Array.isArray(cached.data) && cached.data.length > 0) {
+            contributorsData = cached.data;
+            const adminItem = contributorsData.find(c => c.login && c.login.toLowerCase() === "debasmitabose0");
+            if (adminItem) updateAdminSpotlight(adminItem);
+
+            sortContributors();
+            updateMetricsSummary();
+            renderPodium();
+            renderTable();
+            if (syncStatusText) {
+              const minutesAgo = Math.floor((Date.now() - cached.timestamp) / 60000);
+              syncStatusText.textContent = `Cached GitHub data (${minutesAgo}m ago • ${contributorsData.length} contributors)`;
+            }
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("Could not read from cache:", e);
+      }
+    }
+
     if (syncStatusText) syncStatusText.textContent = `Connecting to GitHub API (${repo})...`;
 
     try {
@@ -466,8 +495,10 @@ document.addEventListener("DOMContentLoaded", () => {
         if (syncStatusText) syncStatusText.textContent = `GitHub Live Sync: 1 Admin Lead • ${communityCount} Community Contributor(s) active`;
       }
     } catch (err) {
-      console.warn("GitHub API rate limit or network issue:", err);
-      if (syncStatusText) syncStatusText.textContent = `Live synced with repository: DebasmitaBose0/ArcadeVerse`;
+      console.warn("GitHub API notice:", err.message);
+      if (syncStatusText) {
+        syncStatusText.textContent = `Offline/Cached state: ${repo} (Rate limit safe)`;
+      }
     }
 
     // Render Clean Contributor Views
@@ -475,10 +506,28 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTable();
   }
 
+  // Filter Search
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      renderTable();
+    });
+  }
+
+  // Tier Filter Pills
+  tierPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      tierPills.forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+      currentTier = pill.getAttribute("data-tier");
+      renderTable();
+    });
+  });
+
   if (fetchBtn) {
     fetchBtn.addEventListener("click", () => {
       const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
-      fetchLiveGitHubContributions(repo);
+      fetchLiveGitHubContributions(repo, true);
     });
   }
 
@@ -487,5 +536,5 @@ document.addEventListener("DOMContentLoaded", () => {
   if (initialAdmin) updateAdminSpotlight(initialAdmin);
   renderPodium();
   renderTable();
-  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse");
+  fetchLiveGitHubContributions("DebasmitaBose0/ArcadeVerse", false);
 });
