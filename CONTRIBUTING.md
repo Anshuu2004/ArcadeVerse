@@ -227,14 +227,18 @@ Add your entry to the `GAMES_REGISTRY` array:
 {
   id: "game-name_your-username",
   title: "Your Game Title",
-  category: "Arcade", // Arcade | Retro | Puzzle | Action
+  category: "Arcade", // Valid: Arcade | Puzzle | Action | Retro | Strategy | Rhythm
   icon: "🕹️",
+  difficulty: "Beginner", // Beginner | Intermediate | Advanced
+  releaseDate: "2026-10-21",
   description: "Short description of your game.",
   author: "Your Name",
   github: "your-github-username",
   role: "Contributor",
   path: "games/game-name_your-username/index.html",
-  tags: ["Arcade", "NSOC26"]
+  tags: ["Arcade", "NSOC26"],
+  stars: 10,
+  featured: false
 }
 ```
 
