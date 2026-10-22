@@ -56,6 +56,17 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "cyber-stacker_babin",
+    title: "Cyber Tower Stacker",
+    category: "Arcade",
+    lucideIcon: "layers",
+    description: "Stack swinging neon slabs with precision timing. Unaligned edges are sliced off as the tower grows!",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/cyber-stacker_babin/index.html",
+    tags: ["Arcade", "Timing", "Slicing", "Physics"],
+    stars: 30,
     id: "neon-runner_babin",
     title: "Neon Beat Runner",
     category: "Rhythm",
@@ -86,9 +97,9 @@ const GAMES_REGISTRY = [
     author: "Babin Bid",
     github: "Babin123456",
     role: "Arcade Developer",
-    path: "games/synth-says_babin/index.html",
-    tags: ["Retro", "Memory", "Audio", "WebAudio"],
-    stars: 32,
+    path: "games/quantum-minesweeper_babin/index.html",
+    tags: ["Puzzle", "Logic", "Strategy", "Grid"],
+    stars: 31,
     featured: true
   },
   {
@@ -127,12 +138,12 @@ const CONTRIBUTORS_REGISTRY = [
     github: "Babin123456",
     avatarInitial: "B",
     role: "Arcade Developer (NSOC '26)",
-    gamesCount: 1,
-    mechanicsBonus: 1,
+    gamesCount: 2,
+    mechanicsBonus: 2,
     platformPRs: 2,
     qualityPRs: 1,
     bonusPts: 0,
-    contributions: ["Quantum 2048"]
+    contributions: ["Quantum 2048", "Cyber Tower Stacker"]
   },
   {
     name: "mistu7debnath",
