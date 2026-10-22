@@ -97,9 +97,9 @@ const GAMES_REGISTRY = [
     author: "Babin Bid",
     github: "Babin123456",
     role: "Arcade Developer",
-    path: "games/synth-says_babin/index.html",
-    tags: ["Retro", "Memory", "Audio", "WebAudio"],
-    stars: 32,
+    path: "games/quantum-minesweeper_babin/index.html",
+    tags: ["Puzzle", "Logic", "Strategy", "Grid"],
+    stars: 31,
     featured: true
   },
   {

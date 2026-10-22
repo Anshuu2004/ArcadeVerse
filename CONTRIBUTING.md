@@ -268,6 +268,7 @@ Inside your folder, create:
 > 🧪 **Tip:** No external CDNs or frameworks. Pure Vanilla HTML/CSS/JS only!
 
 ### 📌 STEP 4: REGISTER IN `assets/js/games-registry.js`
+> 💡 **Quick Tip:** Use our interactive **[Pre-Flight Validator Tool](submission-validator-babin/validator.html)** to automatically test your folder syntax and generate a valid JSON snippet!
 
 Add your entry to the `GAMES_REGISTRY` array:
 
