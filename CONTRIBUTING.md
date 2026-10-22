@@ -322,7 +322,7 @@ All merged contributors are permanently honored below and synced in [leaderboard
 | # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
 | :---: | :--- | :--- | :--- | :--- |
 | 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & Cyber Neon Pong** | `games/memory-matrix/`, `games/gamesbydb/` |
-| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
+| 1 | **mistu7debnath** | [@mistu7debnath](https://github.com/mistu7debnath) | **Flappy Cyber Jet** | `games/flappy-jet_mistu7debnath/` |
 
 ---
 

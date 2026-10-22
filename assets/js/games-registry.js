@@ -39,6 +39,20 @@ const GAMES_REGISTRY = [
     tags: ["Arcade", "Retro", "Paddle"],
     stars: 32,
     featured: true
+  },
+  {
+    id: "flappy-jet_mistu7debnath",
+    title: "Flappy Cyber Jet",
+    category: "Arcade",
+    icon: "🚀",
+    description: "Pilot a futuristic cyber jet through neon obstacles, dodge collisions, and beat your high score.",
+    author: "mistu7debnath",
+    github: "mistu7debnath",
+    role: "Contributor",
+    path: "games/flappy-jet_mistu7debnath/index.html",
+    tags: ["Arcade", "NSOC26"],
+    stars: 18,
+    featured: true
   }
 ];
 
@@ -49,5 +63,12 @@ const CONTRIBUTORS_REGISTRY = [
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
     contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
+  },
+  {
+    name: "mistu7debnath",
+    github: "mistu7debnath",
+    avatarInitial: "M",
+    role: "Contributor (NSOC '26)",
+    contributions: ["Flappy Cyber Jet"]
   }
 ];
