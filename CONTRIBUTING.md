@@ -16,27 +16,27 @@ ArcadeVerse is an open-source arcade gaming ecosystem crafted to offer an access
 
 ---
 
-# 🎖️ **CONTRIBUTOR TIERS, ROLES & HALL OF FAME BADGES**
+# 🎖️ **OFFICIAL CONTRIBUTOR RECOGNITION & HALL OF FAME BADGES**
 
-Every contributor in ArcadeVerse earns official recognition titles displayed live on our **Hall of Fame & Leaderboard**:
+ArcadeVerse features a **Balanced 2-Track Contributor Recognition System** scaled specifically for the 45-day **Nexus Spring Of Code – Winter Edition 2026** timeline. Badges are computed dynamically and showcased live on our [Hall of Fame & Leaderboard](leaderboard.html).
 
-### 🏆 **Points-Based Contributor Milestones**
+### 🕹️ **Track 1: Dedicated Game Creators Track** `(in the 'games' folder)`
 
-| Tier Title | Points Required | Description |
-| :--- | :---: | :--- |
-| **🚀 Project Contributor** | **10+ Points** | Getting started — verified PRs, bug fixes, or small features |
-| **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
-| **💎 Elite Contributor** | **50+ Points** | Major features, complex game mechanics, and active reviews |
-| **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
+| Contributor Badge | Criteria (45-Day NSoC Scaling) | Rewards & Privileges |
+| :--- | :--- | :--- |
+| **👑 Master Game Architect** | **15+ Verified Games** • `1500+ Arcade Points` | Ultimate Arcade Creator badge + Top Hall of Fame Spotlight |
+| **⚡ Hyper Game Developer** | **8–14 Verified Games** • `800–1499 Arcade Points` | Elite Game Developer badge + Hall of Fame Podium Spotlight |
+| **🎮 Arcade Developer** | **4–7 Verified Games** • `400–799 Arcade Points` | Verified Game Developer badge + Arcade Showcase |
+| **🧭 Arcade Explorer** | **1–3 Verified Games** • `100–399 Arcade Points` | Playable Game Badge + Arcade Player Modal showcase |
 
-> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin.
+### 💻 **Track 2: Platform & Core Engineering Track** `(except the 'games' folder, in the codebase modification)`
 
-### 🕹️ **Dedicated `games/` Developer Tiers**
-
-| Developer Title | Requirement | Description |
-| :--- | :---: | :--- |
-| **🕹️ Arcade Developer** | 1 verified game | Authored and polished a playable game in `games/game-name_contributor-name/` |
-| **⚡ Hyper Game Developer** | 2+ verified games | Authored multiple high-performance web arcade games |
+| Contributor Badge | Criteria (45-Day NSoC Scaling) | Rewards & Privileges |
+| :--- | :--- | :--- |
+| **🛡️ Master Core Architect** | **30+ Merged PRs** • `750+ Arcade Points` | Master Core Architect badge + Hall of Fame Podium Spotlight |
+| **💎 Elite Contributor** | **10–29 Merged PRs** • `250–749 Arcade Points` | Elite Contributor badge + Permanent Hall of Fame feature |
+| **💻 Platform Contributor** | **5–9 Merged PRs** • `100–249 Arcade Points` | Platform Contributor badge + Feature Author Spotlight |
+| **🌱 Active Contributor** | **1–4 Merged PRs** • `15–99 Arcade Points` | Listed in verified NSOC '26 contributors registry |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 >
@@ -44,45 +44,43 @@ Every contributor in ArcadeVerse earns official recognition titles displayed liv
 
 ---
 
-# 🛠️ **SCOPE OF CONTRIBUTIONS**
+# 💰 **DUAL POINT SYSTEMS: NSOC POINTS VS. IN-APP ARCADE POINTS**
 
-Contributions may include:
-- 🐛 **Bug fixes** — game bugs, UI glitches, responsive layout fixes
-- ✨ **Feature development** — new mini-games, AI gameplay, new modes
-- 📖 **Documentation** — guides, tutorials, code comments
-- 🎨 **UI/UX improvements** — CSS transitions, accessibility, typography
-- ⚡ **Code optimization** — `requestAnimationFrame` loops, lightweight assets
-- 🌐 **Website improvements** — portal enhancements, responsive fixes
-- 🔧 **Project maintenance** — registry cleanup, file structure hygiene
+To keep contributions rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems:
 
----
+### 1. 🏛️ **Official Nexus Spring Of Code (NSoC '26) Program Points**
+These are the official program points recorded on the central NSoC evaluation sheet. They are awarded strictly via GitHub PR **Level labels** assigned by the Project Admin upon merging:
 
-# 💰 **POINTS SYSTEM**
-
-Points are assigned strictly by the **Level label** that the Project Admin puts on your **merged PR**.
-
-| **Label** | **Points** | **Type of Work** |
+| PR Label | NSoC Points | Scope & Type of Work |
 | :--- | :---: | :--- |
-| `level1` | **3 points** | Documentation, typo fixes, and other small work |
-| `level2` | **5 points** | UI and frontend work: layouts, components, styling, page-level changes |
-| `level3` | **10 points** | Core logic, game mechanics, complex features |
+| `level1` | **3 points** | Documentation, README/guide updates, typo corrections, minor cosmetic fixes |
+| `level2` | **5 points** | Frontend UI enhancements, responsive styling, navigation, component layouts |
+| `level3` | **10 points** | Verified playable games in the `'games' folder`, complex game physics, core architecture |
 
 > [!IMPORTANT]
-> - The **`nsoc26` tag is mandatory** on every PR. Without it, your PR will **not be counted**.
-> - **Admins decide the level.** Do not argue for a higher level on a small change.
-> - Points are given only for **merged** PRs that follow all the rules.
-> - A tiny change (10–20 line edit) will **not** be accepted as Level 2 or Level 3.
+> - The **`nsoc26` label is mandatory** on every PR.
+> - **Level labels are assigned exclusively by Project Admins** based on the verified complexity and impact of the merged code.
+> - A minor 10–20 line patch will not be upgraded to Level 2 or Level 3.
+
+### 2. ⚡ **In-App Gamified Arcade Points (Live Application Scoring)**
+These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges:
+- **Verified Playable Game:** `+100 pts` base per conflict-free game integrated into the `'games' folder`.
+- **Mechanics & Physics Bonus:** `+30 pts` for custom Canvas rendering, 60fps game loops, AI opponents, sound FX, or particle engines.
+- **Platform Feature & UI Work:** `+25 pts` per merged core feature PR (except the 'games' folder, in codebase modifications).
+- **Quality & Bug Fixes:** `+15 pts` baseline per merged bug fix, mobile touch control fix, or CSS enhancement.
 
 ---
 
 # 🚀 **STEP-BY-STEP: YOUR FIRST MERGED PR**
 
 1. **Create an issue.** Find a bug or pick an open issue, raise it, and **wait for assignment**.
-2. **Strict 3-Day Deadline:** Once an issue is assigned to you, you **MUST submit your Pull Request within 3 days (72 hours)**. Inactive assignments past 3 days will be unassigned and reassigned to other contributors!
+2. **Issue Assignment & Submission Timeline (5-Day Target / 7-Day Auto-Unassign):**
+   - **Target Deadline (5 Days):** Once an issue is assigned to you, you should submit your Pull Request within **5 days (120 hours)**. If there is no progress or PR submitted by day 5, a warning/check-in will be issued.
+   - **Official NSoC Inactivity Policy (7 Days):** As per official NSoC rules, if an assigned contributor remains inactive with no PR submitted after **7 days**, the issue will automatically be unassigned and reassigned to another contributor waiting in line.
 3. **Fork and clone.** Fork the repo, clone it, and add the upstream remote.
 4. **Create a separate branch.** Never work directly on `main`! Create a dedicated branch per issue — e.g. `fix/issue-123` or `feat/game-name`.
 5. **Code and commit.** Follow this guide, keep changes inside your dedicated folder, test thoroughly, and write clear commit messages.
-6. **Open the PR.** Push, open a PR within the 3-day window, add `Closes #123` and a short summary. Include `nsoc26`.
+6. **Open the PR.** Push, open a PR within the 5-day window, add `Closes #123` and a short summary. Include `nsoc26`.
 7. **Review and merge.** Address feedback promptly. The Project Admin merges, adds labels, and your points hit the leaderboard.
 
 **Quick commands:**
@@ -92,7 +90,7 @@ git commit -m "Fix #123: <short description>"
 git push origin fix/issue-123
 ```
 
-**Flow:** Find Issue → Wait for Assignment → Fork & Clone → Create Separate Branch → Code (Submit within 3 Days) → Test → Commit → Push → Open PR → Review → Merge ✅
+**Flow:** Find Issue → Wait for Assignment → Fork & Clone → Create Separate Branch → Code (Submit within 5 Days) → Test → Commit → Push → Open PR → Review → Merge ✅
 
 ---
 
@@ -227,14 +225,18 @@ Add your entry to the `GAMES_REGISTRY` array:
 {
   id: "game-name_your-username",
   title: "Your Game Title",
-  category: "Arcade", // Arcade | Retro | Puzzle | Action
+  category: "Arcade", // Valid: Arcade | Puzzle | Action | Retro | Strategy | Rhythm
   icon: "🕹️",
+  difficulty: "Beginner", // Beginner | Intermediate | Advanced
+  releaseDate: "2026-10-21",
   description: "Short description of your game.",
   author: "Your Name",
   github: "your-github-username",
   role: "Contributor",
   path: "games/game-name_your-username/index.html",
-  tags: ["Arcade", "NSOC26"]
+  tags: ["Arcade", "NSOC26"],
+  stars: 10,
+  featured: false
 }
 ```
 
@@ -257,7 +259,7 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 
 - Read this contributing guide **before** you start coding.
 - **Wait for assignment** before you start working on an issue.
-- **Strict 3-day turnaround:** Submit your Pull Request within **3 days (72 hours)** of getting assigned. After 3 days of inactivity, the issue will be reassigned without prior notice.
+- **Target 5-Day Submission Timeline:** Submit your Pull Request within **5 days (120 hours)** of getting assigned. In accordance with official NSoC rules, after **7 days** of total inactivity without a PR, the issue will be automatically unassigned and reassigned to another contributor waiting in line.
 - **Always use a separate branch:** Create a dedicated branch for every issue. Never push or PR directly from `main`.
 - Keep PRs **small, focused, and linked** to a single issue.
 - Respond to review feedback **promptly**.
@@ -272,17 +274,26 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
 > - ❌ **Loose files in the home/root directory** — creating or dumping any files directly in the root directory
-> - ❌ **Non-compliant folder paths** — all enhancements/UI/bug fixes must be inside `<folder-name>-<your-name>/` (and game submissions inside `games/<game-name>_<contributor-name>/`)
-> - ❌ **Missing the 3-day assignment deadline** — holding onto an issue for more than 3 days without opening a PR
+> - ❌ **Non-compliant folder paths** — all enhancements/UI/bug fixes must be inside `<folder-name>-<your-name>/` (and game submissions inside `games/<game-name>_<contributor-name>/` within the `'games' folder`)
+> - ❌ **Exceeding the 7-day inactivity threshold** without opening a PR or communicating progress
 > - ❌ **Working directly on the `main` branch** — contributions must come from a separate feature/fix branch
 > - ❌ **Fake PRs** or meaningless contributions
 > - ❌ **Bulk PRs** submitted all at once
 > - ❌ **AI-generated spam** — unverified, broken AI dump code without manual testing
 > - ❌ **PRs without an assigned issue** — these will be closed immediately
 > - ❌ **Frameworks or heavy dependencies** — React, Vue, Angular, jQuery, Python backends are NOT allowed
-> - ❌ **Malicious code** — cryptominers, tracking scripts, harmful iframes
+> - ❌ **Malicious code** — cryptominers, tracking scripts, harmful iframes, or unescaped XSS injections
 > - ❌ **Tiny changes presented as bigger work** — a 10–20 line edit will not be accepted as Level 2/3
 > - ❌ **Multiple PRs from one shared branch** for the same issue
+
+---
+
+# 📜 **COMMUNITY HEALTH, CODE OF CONDUCT & SECURITY**
+
+ArcadeVerse is committed to providing a safe, welcoming, and inclusive community for all contributors:
+- **Code of Conduct:** All participants must abide by our [Code of Conduct](CODE_OF_CONDUCT.md). Harassment, disrespect, plagiarism, or manipulative behavior will lead to disqualification.
+- **Security Policy:** Review our [Security Policy](SECURITY.md) for vulnerability reporting guidelines and client-side web security best practices.
+- **License Agreement:** All contributions are subject to the permissive open-source terms of the [MIT License](LICENSE).
 
 ---
 
@@ -301,10 +312,10 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 Before submitting, make sure every box is checked:
 
 - [ ] The issue was officially assigned to me
-- [ ] I am submitting this PR **within 3 days** of getting assigned
+- [ ] I am submitting this PR **within the 5-day target window** (and well before the 7-day NSoC inactivity limit)
 - [ ] I created and worked on a **separate branch** (not `main`)
-- [ ] I have read this contributing guide
-- [ ] My change is meaningful, tested, and written by me
+- [ ] I have read this contributing guide and the [Code of Conduct](CODE_OF_CONDUCT.md)
+- [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
 - [ ] **No files were created directly in the home/root directory**
 - [ ] All site updates, enhancements, or bug fixes are organized inside `<folder-name>-<your-name>/`
 - [ ] Games are strictly inside `games/game-name_contributor-name/` *(for game submissions)*
@@ -322,7 +333,8 @@ All merged contributors are permanently honored below and synced in [leaderboard
 | # | Contributor Name | GitHub Handle | Game / Component Name | Strict Folder Path |
 | :---: | :--- | :--- | :--- | :--- |
 | 👑 | **Debasmita Bose (Project Admin)** | [@DebasmitaBose0](https://github.com/DebasmitaBose0) | **Quantum Memory Matrix & Cyber Neon Pong** | `games/memory-matrix/`, `games/gamesbydb/` |
-| 1 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
+| 1 | **Babin Bid** | [@Babin123456](https://github.com/Babin123456) | **Quantum 2048** | `games/quantum-2048_babin/` |
+| 2 | *Your Name Here* | *@your-github* | *Your Game Title* | `games/game-name_contributor-name/` |
 
 ---
 

@@ -20,10 +20,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const gameIframe = document.getElementById("game-iframe");
   const fullscreenBtn = document.getElementById("fullscreen-btn");
   const newTabBtn = document.getElementById("new-tab-btn");
+  const reloadBtn = document.getElementById("reload-btn");
   const modalWindow = document.querySelector(".modal-window");
+  const sortSelect = document.getElementById("catalog-sort-select");
 
   let currentCategory = "all";
   let searchQuery = "";
+  let currentSort = "featured";
+  let lastFocusedElement = null;
 
   // Update Stats
   if (totalGamesCount) totalGamesCount.textContent = GAMES_REGISTRY.length;
@@ -33,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderGames() {
     gamesGrid.innerHTML = "";
 
-    const filtered = GAMES_REGISTRY.filter((game) => {
+    let filtered = GAMES_REGISTRY.filter((game) => {
       const matchesCategory = currentCategory === "all" || game.category.toLowerCase() === currentCategory.toLowerCase();
       const matchesSearch = 
         game.title.toLowerCase().includes(searchQuery) ||
@@ -43,6 +47,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return matchesCategory && matchesSearch;
     });
+
+    // Apply Sorting
+    filtered.sort((a, b) => {
+      if (currentSort === "az") {
+        return a.title.localeCompare(b.title);
+      } else if (currentSort === "stars") {
+        return (b.stars || 0) - (a.stars || 0);
+      } else {
+        // "featured": featured games first, then by stars
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return (b.stars || 0) - (a.stars || 0);
+      }
+    });
+
+    // Handle Empty State
+    if (filtered.length === 0) {
+      const emptyCard = document.createElement("div");
+      emptyCard.className = "catalog-empty-state";
+      emptyCard.innerHTML = `
+        <div class="empty-state-icon">🕹️</div>
+        <h3 class="empty-state-title">No games found in "${currentCategory !== "all" ? currentCategory : searchQuery}"</h3>
+        <p class="empty-state-desc">
+          Be the pioneer contributor! Build the first game for this category under <code>games/&lt;game-name&gt;_&lt;your-name&gt;/</code> and claim your spot on the leaderboard.
+        </p>
+        <div class="empty-state-actions">
+          <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+            <span>🚀 Build a Game for This Category</span>
+          </a>
+          <button class="btn btn-secondary btn-sm" id="reset-filter-btn">
+            <span>🔄 Clear Filters</span>
+          </button>
+        </div>
+      `;
+
+      emptyCard.querySelector("#reset-filter-btn").addEventListener("click", () => {
+        searchQuery = "";
+        currentCategory = "all";
+        if (searchInput) searchInput.value = "";
+        categoryPills.forEach((p) => p.classList.remove("active"));
+        const allPill = document.querySelector('.category-pills .pill[data-category="all"]');
+        if (allPill) allPill.classList.add("active");
+        renderGames();
+      });
+
+      gamesGrid.appendChild(emptyCard);
+      return;
+    }
 
     filtered.forEach((game) => {
       const card = document.createElement("div");
@@ -70,16 +122,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const playBtn = card.querySelector(".btn-play-trigger");
       playBtn.addEventListener("click", (e) => {
         e.stopPropagation();
-        openGameModal(game);
+        openGameModal(game, playBtn);
       });
 
-      card.addEventListener("click", () => openGameModal(game));
+      card.addEventListener("click", () => openGameModal(game, card));
       gamesGrid.appendChild(card);
     });
   }
 
   // Modal Handlers
-  function openGameModal(game) {
+  function openGameModal(game, triggerElement = null) {
+    lastFocusedElement = triggerElement || document.activeElement;
     modalGameTitle.textContent = game.title;
     modalGameBadge.textContent = game.category;
     modalGameAuthor.textContent = `Built by @${game.author}`;
@@ -89,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gameModal.classList.add("active");
     gameModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    closeModalBtn.focus();
   }
 
   function closeGameModal() {
@@ -97,10 +151,25 @@ document.addEventListener("DOMContentLoaded", () => {
     gameIframe.src = "";
     document.body.style.overflow = "auto";
     modalWindow.classList.remove("fullscreen");
+    if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+      lastFocusedElement.focus();
+    }
   }
 
   closeModalBtn.addEventListener("click", closeGameModal);
   modalOverlay.addEventListener("click", closeGameModal);
+
+  if (reloadBtn) {
+    reloadBtn.addEventListener("click", () => {
+      if (gameIframe.src) {
+        const currentSrc = gameIframe.src;
+        gameIframe.src = "";
+        setTimeout(() => {
+          gameIframe.src = currentSrc;
+        }, 50);
+      }
+    });
+  }
 
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && gameModal.classList.contains("active")) {
@@ -111,6 +180,14 @@ document.addEventListener("DOMContentLoaded", () => {
   fullscreenBtn.addEventListener("click", () => {
     modalWindow.classList.toggle("fullscreen");
   });
+
+  // Sort Selector Change
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      renderGames();
+    });
+  }
 
   // Filter Search
   searchInput.addEventListener("input", (e) => {
@@ -126,16 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderGames();
     });
   });
-
-  // Navbar Squeeze Effect on Scroll
-  const navbar = document.getElementById("navbar");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 40) {
-      navbar.classList.add("scrolled");
-    } else {
-      navbar.classList.remove("scrolled");
-    }
-  }, { passive: true });
 
   // Initial render
   renderGames();
