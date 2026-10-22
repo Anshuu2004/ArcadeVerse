@@ -292,7 +292,7 @@ Add your entry to the `GAMES_REGISTRY` array:
 
 ### 📌 STEP 5: ADD YOUR NAME TO THE CONTRIBUTORS TABLE
 
-Add your row to the Hall of Fame table below!
+Add or update your contributor entry in `CONTRIBUTORS_REGISTRY` in `assets/js/games-registry.js` with your name, GitHub handle, and game.
 
 ### 📌 STEP 6: COMMIT, PUSH & OPEN PULL REQUEST
 

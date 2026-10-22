@@ -54,6 +54,22 @@ const GAMES_REGISTRY = [
     tags: ["Puzzle", "Math", "Retro", "Synthesis"],
     stars: 28,
     featured: true
+  },
+  {
+    id: "neon-asteroid-escape_joitapaul",
+    title: "Neon Asteroid Escape",
+    category: "Arcade",
+    lucideIcon: "rocket",
+    difficulty: "Intermediate",
+    releaseDate: "2026-10-22",
+    description: "Pilot a neon starship through an asteroid field, dodge hazards, and collect energy orbs.",
+    author: "Joita Paul",
+    github: "joitapaul",
+    role: "Contributor",
+    path: "games/neon-asteroid-escape_joitapaul/index.html",
+    tags: ["Arcade", "Space", "Survival", "NSOC26"],
+    stars: 0,
+    featured: false
   }
 ];
 
@@ -116,6 +132,6 @@ const CONTRIBUTORS_REGISTRY = [
     platformPRs: 0,
     qualityPRs: 1,
     bonusPts: 0,
-    contributions: ["Quality & Bug Fix PR"]
+    contributions: ["Quality & Bug Fix PR", "Neon Asteroid Escape"]
   }
 ];
