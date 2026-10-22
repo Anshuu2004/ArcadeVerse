@@ -67,17 +67,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const emptyCard = document.createElement("div");
       emptyCard.className = "catalog-empty-state";
       emptyCard.innerHTML = `
-        <div class="empty-state-icon">🕹️</div>
+        <div class="empty-state-icon"><i data-lucide="gamepad-2"></i></div>
         <h3 class="empty-state-title">No games found in "${currentCategory !== "all" ? currentCategory : searchQuery}"</h3>
         <p class="empty-state-desc">
           Be the pioneer contributor! Build the first game for this category under <code>games/&lt;game-name&gt;_&lt;your-name&gt;/</code> and claim your spot on the leaderboard.
         </p>
         <div class="empty-state-actions">
           <a href="https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-            <span>🚀 Build a Game for This Category</span>
+            <span><i data-lucide="rocket"></i> Build a Game for This Category</span>
           </a>
           <button class="btn btn-secondary btn-sm" id="reset-filter-btn">
-            <span>🔄 Clear Filters</span>
+            <span><i data-lucide="rotate-ccw"></i> Clear Filters</span>
           </button>
         </div>
       `;
@@ -93,15 +93,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       gamesGrid.appendChild(emptyCard);
+      if (window.lucide) lucide.createIcons();
       return;
     }
 
     filtered.forEach((game) => {
       const card = document.createElement("div");
       card.className = "game-card";
-      const iconHtml = game.lucideIcon 
-        ? `<i data-lucide="${game.lucideIcon}"></i>` 
-        : (game.icon || `<i data-lucide="gamepad-2"></i>`);
+      const iconName = game.lucideIcon || "gamepad-2";
+      const iconHtml = `<i data-lucide="${iconName}"></i>`;
 
       card.innerHTML = `
         <div class="game-card-preview">

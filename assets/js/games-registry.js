@@ -44,7 +44,7 @@ const GAMES_REGISTRY = [
     id: "flappy-jet_mistu7debnath",
     title: "Flappy Cyber Jet",
     category: "Arcade",
-    icon: "🚀",
+    lucideIcon: "rocket",
     description: "Pilot a futuristic cyber jet through neon obstacles, dodge collisions, and beat your high score.",
     author: "mistu7debnath",
     github: "mistu7debnath",
@@ -52,10 +52,13 @@ const GAMES_REGISTRY = [
     path: "games/flappy-jet_mistu7debnath/index.html",
     tags: ["Arcade", "NSOC26"],
     stars: 18,
+    featured: true
+  },
+  {
     id: "quantum-2048_babin",
     title: "Quantum 2048",
     category: "Puzzle",
-    icon: "⚛️",
+    lucideIcon: "atom",
     description: "Slide and merge radioactive isotopes on a 4x4 containment grid to synthesize the 2048 singularity.",
     author: "Babin Bid",
     github: "Babin123456",
@@ -72,20 +75,36 @@ const CONTRIBUTORS_REGISTRY = [
     name: "Debasmita Bose",
     github: "DebasmitaBose0",
     avatarInitial: "D",
-    role: "Project Admin (NSOC '26)",
-    contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
-  },
-  {
-    name: "mistu7debnath",
-    github: "mistu7debnath",
-    avatarInitial: "M",
-    role: "Contributor (NSOC '26)",
-    contributions: ["Flappy Cyber Jet"]
+    role: "Project Admin & Lead (NSOC '26)",
     gamesCount: 2,
     mechanicsBonus: 2,
     platformPRs: 2,
     qualityPRs: 0,
     bonusPts: 0,
     contributions: ["Quantum Memory Matrix", "Cyber Neon Pong", "Arcade Core Engine"]
+  },
+  {
+    name: "Babin Bid",
+    github: "Babin123456",
+    avatarInitial: "B",
+    role: "Arcade Developer (NSOC '26)",
+    gamesCount: 1,
+    mechanicsBonus: 1,
+    platformPRs: 2,
+    qualityPRs: 1,
+    bonusPts: 0,
+    contributions: ["Quantum 2048"]
+  },
+  {
+    name: "mistu7debnath",
+    github: "mistu7debnath",
+    avatarInitial: "M",
+    role: "Contributor (NSOC '26)",
+    gamesCount: 1,
+    mechanicsBonus: 1,
+    platformPRs: 0,
+    qualityPRs: 0,
+    bonusPts: 0,
+    contributions: ["Flappy Cyber Jet"]
   }
 ];

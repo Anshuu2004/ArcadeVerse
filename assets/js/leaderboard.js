@@ -42,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const CACHE_KEY = "arcadeverse_contributors_cache";
+  const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
   // Initial verified contributors from repository
   let contributorsData = [
     {
@@ -58,6 +61,32 @@ document.addEventListener("DOMContentLoaded", () => {
       games: ["Quantum Memory Matrix", "Cyber Neon Pong"]
     },
     {
+      login: "Babin123456",
+      name: "Babin Bid",
+      role: "Arcade Developer",
+      avatar_url: "https://avatars.githubusercontent.com/u/265290994?v=4",
+      commits: 11,
+      gamesCount: 1,
+      mechanicsBonus: 1,
+      platformPRs: 2,
+      qualityPRs: 1,
+      bonusPts: 0,
+      games: ["Quantum 2048"]
+    },
+    {
+      login: "mistu7debnath",
+      name: "mistu7debnath",
+      role: "Contributor",
+      avatar_url: "https://avatars.githubusercontent.com/u/132514330?v=4",
+      commits: 3,
+      gamesCount: 1,
+      mechanicsBonus: 1,
+      platformPRs: 0,
+      qualityPRs: 0,
+      bonusPts: 0,
+      games: ["Flappy Cyber Jet"]
+    },
+    {
       login: "joitapaul",
       name: "Joita Paul",
       role: "Active Contributor",
@@ -71,6 +100,46 @@ document.addEventListener("DOMContentLoaded", () => {
       games: []
     }
   ];
+
+  // Sync contributors data with local CONTRIBUTORS_REGISTRY and GAMES_REGISTRY
+  function loadRegistryContributors() {
+    if (typeof CONTRIBUTORS_REGISTRY === "undefined" || !Array.isArray(CONTRIBUTORS_REGISTRY)) return;
+
+    CONTRIBUTORS_REGISTRY.forEach(regUser => {
+      const existing = contributorsData.find(c => c.login && c.login.toLowerCase() === regUser.github.toLowerCase());
+      
+      let userGames = [];
+      if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+        userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === regUser.github.toLowerCase());
+      }
+      const gamesCount = userGames.length > 0 ? userGames.length : (regUser.gamesCount || 0);
+      const gamesList = userGames.length > 0 ? userGames.map(g => g.title) : (regUser.contributions || []);
+
+      if (existing) {
+        if (regUser.name) existing.name = regUser.name;
+        existing.gamesCount = Math.max(existing.gamesCount || 0, gamesCount);
+        existing.mechanicsBonus = regUser.mechanicsBonus || existing.mechanicsBonus || 0;
+        existing.platformPRs = regUser.platformPRs || existing.platformPRs || 0;
+        existing.qualityPRs = regUser.qualityPRs || existing.qualityPRs || 0;
+        existing.bonusPts = regUser.bonusPts || existing.bonusPts || 0;
+        if (gamesList.length > 0) existing.games = gamesList;
+      } else {
+        contributorsData.push({
+          login: regUser.github,
+          name: regUser.name,
+          role: regUser.role || "Community Contributor",
+          avatar_url: `https://github.com/${regUser.github}.png`,
+          commits: regUser.commits || 1,
+          gamesCount: gamesCount,
+          mechanicsBonus: regUser.mechanicsBonus || 0,
+          platformPRs: regUser.platformPRs || 0,
+          qualityPRs: regUser.qualityPRs || 0,
+          bonusPts: regUser.bonusPts || 0,
+          games: gamesList
+        });
+      }
+    });
+  }
 
   // Calculate ArcadeVerse Score:
   // - Verified Game: 100 pts per integrated game in the 'games' folder
@@ -411,8 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const adminItem = contributorsData.find(c => c.login && c.login.toLowerCase() === "debasmitabose0");
             if (adminItem) updateAdminSpotlight(adminItem);
 
-            sortContributors();
-            updateMetricsSummary();
             renderPodium();
             renderTable();
             if (syncStatusText) {
@@ -488,6 +555,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         contributorsData = enrichedContributors;
 
+        try {
+          localStorage.setItem(`${CACHE_KEY}_${repo}`, JSON.stringify({
+            timestamp: Date.now(),
+            data: enrichedContributors
+          }));
+        } catch (e) {
+          console.warn("Could not save to cache:", e);
+        }
+
         const adminUser = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
         if (adminUser) updateAdminSpotlight(adminUser);
 
@@ -506,24 +582,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTable();
   }
 
-  // Filter Search
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      searchQuery = e.target.value.toLowerCase().trim();
-      renderTable();
-    });
-  }
-
-  // Tier Filter Pills
-  tierPills.forEach((pill) => {
-    pill.addEventListener("click", () => {
-      tierPills.forEach((p) => p.classList.remove("active"));
-      pill.classList.add("active");
-      currentTier = pill.getAttribute("data-tier");
-      renderTable();
-    });
-  });
-
   if (fetchBtn) {
     fetchBtn.addEventListener("click", () => {
       const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
@@ -531,7 +589,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Initial Run
+  // Initial Run: Sync verified registry data first and render podium/table
+  loadRegistryContributors();
   const initialAdmin = contributorsData.find(c => c.login.toLowerCase() === "debasmitabose0");
   if (initialAdmin) updateAdminSpotlight(initialAdmin);
   renderPodium();

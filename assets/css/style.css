@@ -726,6 +726,18 @@ body {
 .game-card-preview .game-icon {
   font-size: 4rem;
   transition: transform 0.3s var(--ease-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-card-preview .game-icon i,
+.game-card-preview .game-icon svg {
+  width: 3.8rem;
+  height: 3.8rem;
+  color: var(--accent-cyan);
+  stroke-width: 1.75;
+  filter: drop-shadow(0 0 12px rgba(6, 182, 212, 0.45));
 }
 
 .game-card:hover .game-icon {
@@ -1850,16 +1862,62 @@ body {
   box-shadow: none;
 }
 
-.btn-disabled-concept {
+.btn-disabled-concept,
+.reference-blueprint-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
   width: 100%;
   margin-top: 1rem;
-  background: rgba(255, 255, 255, 0.04) !important;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03) !important;
   border: 1px dashed rgba(255, 255, 255, 0.15) !important;
   color: var(--text-muted) !important;
-  cursor: not-allowed !important;
+  cursor: default !important;
   pointer-events: none;
   font-size: 0.8rem;
-  opacity: 0.7;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+}
+
+.reference-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: #93c5fd;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+
+.reference-notice-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  user-select: none;
+  text-align: center;
+  max-width: 100%;
+}
+
+.reference-notice-pill code {
+  color: #60a5fa;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
 }
 
 /* Admin Spotlight Banner (Leaderboard) */
