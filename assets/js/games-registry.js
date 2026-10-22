@@ -43,6 +43,20 @@ const GAMES_REGISTRY = [
     tags: ["Arcade", "Retro", "Paddle"],
     stars: 32,
     featured: true
+  },
+  {
+    id: "quantum-2048_babin",
+    title: "Quantum 2048",
+    category: "Puzzle",
+    icon: "⚛️",
+    description: "Slide and merge radioactive isotopes on a 4x4 containment grid to synthesize the 2048 singularity.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/quantum-2048_babin/index.html",
+    tags: ["Puzzle", "Math", "Retro", "Synthesis"],
+    stars: 28,
+    featured: true
   }
 ];
 
@@ -53,5 +67,12 @@ const CONTRIBUTORS_REGISTRY = [
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
     contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
+  },
+  {
+    name: "Babin Bid",
+    github: "Babin123456",
+    avatarInitial: "B",
+    role: "Arcade Developer",
+    contributions: ["Quantum 2048"]
   }
 ];
