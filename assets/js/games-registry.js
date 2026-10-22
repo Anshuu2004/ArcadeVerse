@@ -41,6 +41,17 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "flappy-jet_mistu7debnath",
+    title: "Flappy Cyber Jet",
+    category: "Arcade",
+    icon: "🚀",
+    description: "Pilot a futuristic cyber jet through neon obstacles, dodge collisions, and beat your high score.",
+    author: "mistu7debnath",
+    github: "mistu7debnath",
+    role: "Contributor",
+    path: "games/flappy-jet_mistu7debnath/index.html",
+    tags: ["Arcade", "NSOC26"],
+    stars: 18,
     id: "quantum-2048_babin",
     title: "Quantum 2048",
     category: "Puzzle",
@@ -62,6 +73,14 @@ const CONTRIBUTORS_REGISTRY = [
     github: "DebasmitaBose0",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
+    contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
+  },
+  {
+    name: "mistu7debnath",
+    github: "mistu7debnath",
+    avatarInitial: "M",
+    role: "Contributor (NSOC '26)",
+    contributions: ["Flappy Cyber Jet"]
     gamesCount: 2,
     mechanicsBonus: 2,
     platformPRs: 2,
