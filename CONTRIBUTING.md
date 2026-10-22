@@ -131,6 +131,9 @@ git push origin fix/issue-123
 > - ❌ `games/pong/` *(ambiguous & collision-prone — will NOT be accepted)*
 > - ❌ `games/my-game/` *(will NOT be accepted)*
 >
+> 💡 **Review Requirement for Project Admin (PA):**
+> Every game must include a built-in **"How to Play / Controls & Rules"** screen or modal so the Project Admin can easily test, verify, and grade game mechanics during PR reviews.
+>
 > **Pull Requests not following these folder conventions will be closed and asked to reorganize.**
 
 ---
@@ -219,6 +222,17 @@ Inside your folder, create:
 - `index.html`
 - `style.css`
 - `game.js`
+- `README.md` (Optional but encouraged: technical overview & game architecture)
+
+> 🎮 **MANDATORY IN-GAME GUIDELINES & CONTROLS:**
+> Every submitted game **MUST provide clear, visible in-game "How to Play / Game Guidelines"** (via a modal, start screen overlay, or instructions drawer).
+> This allows the **Project Admin (PA)** and community players to immediately understand:
+> 1. **Controls:** Keyboard keys (e.g. WASD / Arrow keys / Spacebar), mouse clicks, or touch swipe gestures.
+> 2. **Game Objective & Rules:** What the player needs to accomplish to win or survive.
+> 3. **Scoring System:** How points/combos are earned and recorded.
+> 4. **Restart & Pause Controls:** How to restart or pause the game.
+> 
+> *Submissions without clear in-game instructions or controls documentation will be asked to add them before approval.*
 
 > 🧪 **Tip:** No external CDNs or frameworks. Pure Vanilla HTML/CSS/JS only!
 
