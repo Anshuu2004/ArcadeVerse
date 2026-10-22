@@ -56,6 +56,20 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "neon-runner_babin",
+    title: "Neon Beat Runner",
+    category: "Rhythm",
+    lucideIcon: "music-2",
+    description: "Sync key presses with descending neon pulses synchronized to procedural web audio tempos across 4 lanes.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/neon-runner_babin/index.html",
+    tags: ["Rhythm", "Music", "Reflex", "WebAudio"],
+    stars: 37,
+    featured: true
+  },
+  {
     id: "neon-asteroid-escape_joitapaul",
     title: "Neon Asteroid Escape",
     category: "Arcade",
