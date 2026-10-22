@@ -22,34 +22,31 @@ ArcadeVerse features a **Balanced 2-Track Contributor Recognition System** scale
 
 ### 🕹️ **Track 1: Dedicated Game Creators Track** `(in the 'games' folder)`
 
-| Tier Title | Points Required | Description |
-| :--- | :---: | :--- |
-| **🌱 Active Contributor** | **First Merged PR (3–5 pts)** | Getting started — first verified contribution |
-| **🚀 Project Contributor** | **10+ Points** | Verified PRs, bug fixes, UI components, or first game |
-| **🌟 Novice Contributor** | **25+ Points** | Consistent contributions across the codebase |
-| **💎 Elite Contributor** | **50+ Points** | Major features, multiple games, and active reviews |
-| **🏆 Master Contributor** | **100+ Points** | Outstanding leadership and top-tier open-source impact |
-
-> 💡 Points are earned via merged PRs labelled `level1` (3 pts), `level2` (5 pts), or `level3` (10 pts) by the Project Admin. Each verified game integrated into `games/` counts as a Level 3 contribution (10 pts).
-
-### 💻 **Track 2: Platform & Core Engineering Track** `(except the 'games' folder, in the codebase modification)`
-
 | Developer Title | Requirement | Description |
 | :--- | :---: | :--- |
-| **🕹️ Arcade Explorer** | 1 verified game | Authored and polished their first playable game in `games/game-name_contributor-name/` |
-| **🎮 Arcade Developer** | 2–4 verified games | Authored multiple polished games across arcade categories |
-| **⚡ Hyper Game Developer** | 5–9 verified games | Authored diverse, high-performance web arcade games |
-| **👑 Master Game Architect** | 10+ verified games | Master arcade author with top-tier game mechanics |
+| **🕹️ Arcade Explorer** | **1–3 verified games** | Authored and integrated their first playable game in `games/game-name_contributor-name/` |
+| **🎮 Arcade Developer** | **4–7 verified games** | Authored multiple polished games across arcade categories |
+| **⚡ Hyper Game Developer** | **8–14 verified games** | Authored diverse, high-performance web arcade games |
+| **👑 Master Game Architect** | **15+ verified games** | Master arcade author with top-tier game mechanics |
+
+### 💻 **Track 2: Platform & Universal Engineering Track** `(Codebase & Core Modifications)`
+
+| Tier Title | In-App Points Required | Description |
+| :--- | :---: | :--- |
+| **🌱 Active Contributor** | **15–99 Points** | Getting started — first verified bug fix, touch control, or documentation PR |
+| **⚡ Platform Contributor** | **100–249 Points** | Consistent contributions — UI portals, search/filter engines, or game integration |
+| **💎 Elite Contributor** | **250–749 Points** | Major platform features, multiple games, and active commit development |
+| **🛡️ Master Core Architect** | **750+ Points** | Outstanding architectural leadership, core platform engines, and top-tier impact |
 
 > 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
 >
-> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 15-minute TTL. Contributors can use real-time developer search and tier filter pills directly in [leaderboard.html](leaderboard.html).
+> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 30-minute TTL.
 
 ---
 
 # 💰 **DUAL POINT SYSTEMS: NSOC POINTS VS. IN-APP ARCADE POINTS**
 
-To keep contributions rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems:
+To keep contributions rewarding and transparent, ArcadeVerse utilizes two distinct, complementary point systems that must not be confused:
 
 ### 1. 🏛️ **Official Nexus Spring Of Code (NSoC '26) Program Points**
 These are the official program points recorded on the central NSoC evaluation sheet. They are awarded strictly via GitHub PR **Level labels** assigned by the Project Admin upon merging:
@@ -63,14 +60,18 @@ These are the official program points recorded on the central NSoC evaluation sh
 > [!IMPORTANT]
 > - The **`nsoc26` label is mandatory** on every PR.
 > - **Level labels are assigned exclusively by Project Admins** based on the verified complexity and impact of the merged code.
-> - A minor 10–20 line patch will not be upgraded to Level 2 or Level 3.
+> - A minor patch will not be upgraded to Level 2 or Level 3.
 
 ### 2. ⚡ **In-App Gamified Arcade Points (Live Application Scoring)**
-These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges:
-- **Verified Playable Game:** `+100 pts` base per conflict-free game integrated into the `'games' folder`.
-- **Mechanics & Physics Bonus:** `+30 pts` for custom Canvas rendering, 60fps game loops, AI opponents, sound FX, or particle engines.
-- **Platform Feature & UI Work:** `+25 pts` per merged core feature PR (except the 'games' folder, in codebase modifications).
-- **Quality & Bug Fixes:** `+15 pts` baseline per merged bug fix, mobile touch control fix, or CSS enhancement.
+These points power the real-time [Hall of Fame Leaderboard](leaderboard.html) rankings and dynamically synthesize your rank badges. This universal formula scores all types of contributions:
+
+$$\mathbf{Arcade\ Score} = (\text{Games} \times 100) + (\text{Mechanics} \times 25) + (\text{Features} \times 50) + (\text{Fixes} \times 25) + (\mathbf{Commits} \times \mathbf{5})$$
+
+- 🎮 **Verified Standalone Game:** `+100 pts` base per playable game integrated in `games/`
+- ⚡ **Mechanics & Physics Bonus:** `+25 pts` for custom Canvas rendering, 60fps loops, sound FX, physics, or touch controls
+- 🚀 **Platform Feature PR:** `+50 pts` per merged feature/UI PR (portals, dev tools, engines, navigation)
+- 🛠️ **Quality & Bug Fix PR:** `+25 pts` per merged bug fix, responsive styling, or documentation enhancement
+- 📦 **Merged Git Commits:** `+5 pts` per verified commit (rewards sustained, iterative code development)
 
 ---
 

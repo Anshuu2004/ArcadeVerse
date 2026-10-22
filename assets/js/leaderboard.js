@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Babin Bid",
       role: "Arcade Developer",
       avatar_url: "https://avatars.githubusercontent.com/u/265290994?v=4",
-      commits: 11,
+      commits: 19,
       gamesCount: 1,
       mechanicsBonus: 1,
       platformPRs: 2,
@@ -78,13 +78,26 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "mistu7debnath",
       role: "Contributor",
       avatar_url: "https://avatars.githubusercontent.com/u/132514330?v=4",
-      commits: 3,
+      commits: 2,
       gamesCount: 1,
       mechanicsBonus: 1,
       platformPRs: 0,
       qualityPRs: 0,
       bonusPts: 0,
       games: ["Flappy Cyber Jet"]
+    },
+    {
+      login: "hrshjswniii",
+      name: "Harsh Jaiswani",
+      role: "Active Contributor",
+      avatar_url: "https://avatars.githubusercontent.com/u/127110189?v=4",
+      commits: 2,
+      gamesCount: 0,
+      mechanicsBonus: 0,
+      platformPRs: 0,
+      qualityPRs: 1,
+      bonusPts: 0,
+      games: []
     },
     {
       login: "joitapaul",
@@ -141,39 +154,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Calculate ArcadeVerse Score:
-  // - Verified Game: 100 pts per integrated game in the 'games' folder
-  // - Mechanics & Physics Bonus: 30 pts per advanced game
-  // - Platform Feature & UI: 25 pts per core feature PR
-  // - Quality & Bug Fixes: 15 pts per bug fix / maintenance PR
+  // Universal In-App Arcade Point System:
+  // Completely distinct from the official NSoC 3 / 5 / 10 evaluation labels.
+  // - Verified Game: +100 pts per integrated game in 'games/' folder
+  // - Mechanics & Physics Bonus: +25 pts per advanced game (Canvas/Audio/Physics/AI)
+  // - Platform Feature PR: +50 pts per merged feature/UI PR
+  // - Quality & Bug Fixes: +25 pts per merged bug fix / maintenance PR
+  // - Merged Git Commits: +5 pts per verified commit (rewards sustained development)
   function calculateScore(item) {
     const gamePts = (item.gamesCount || 0) * 100;
-    const mechanicsPts = (item.mechanicsBonus || 0) * 30;
-    const platformPts = (item.platformPRs || 0) * 25;
-    const qualityPts = (item.qualityPRs || 0) * 15;
+    const mechanicsPts = (item.mechanicsBonus || 0) * 25;
+    const featurePts = (item.platformPRs || 0) * 50;
+    const fixPts = (item.qualityPRs || 0) * 25;
+    const commitPts = (item.commits || 0) * 5;
     const bonus = item.bonusPts || 0;
 
-    const calculated = gamePts + mechanicsPts + platformPts + qualityPts + bonus;
-    // Base score for new contributors with merged PRs/commits (minimum 15 pts per merged contribution)
-    if (calculated === 0 && item.commits > 0) {
-      return item.commits * 15;
-    }
-    return calculated;
+    return gamePts + mechanicsPts + featurePts + fixPts + commitPts + bonus;
   }
 
   // Contributor Badges Engine:
-  // Evaluates and returns an array of the HIGHEST badges for EACH category:
+  // Evaluates and returns an array of badges strictly and deterministically based on:
   // 1. Leadership Category (Project Admin & Lead)
-  // 2. Games Dedicated Category (45-Day NSoC Program Scaling):
-  //    - Master Game Architect (15+ Verified Games • 1500+ pts)
-  //    - Hyper Game Developer (8–14 Verified Games • 800–1499 pts)
-  //    - Arcade Developer (4–7 Verified Games • 400–799 pts)
-  //    - Arcade Explorer (1–3 Verified Games • 100–399 pts)
-  // 3. Platform & Core Engineering Category (except the 'games' folder, in the codebase modification):
-  //    - Master Core Architect (30+ Merged PRs • 750+ pts)
-  //    - Elite Contributor (10–29 Merged PRs • 250–749 pts)
-  //    - Platform Contributor (5–9 Merged PRs • 100–249 pts)
-  //    - Active Contributor (1–4 Merged PRs • 15–99 pts)
+  // 2. Games Dedicated Category (Count of verified standalone games in 'games/'):
+  //    - Master Game Architect (15+ Verified Games)
+  //    - Hyper Game Developer (8–14 Verified Games)
+  //    - Arcade Developer (4–7 Verified Games)
+  //    - Arcade Explorer (1–3 Verified Games)
+  // 3. Platform & Universal Engineering Category (Strictly bound to in-app Arcade Score):
+  //    - Master Core Architect (750+ Arcade Points)
+  //    - Elite Contributor (250–749 Arcade Points)
+  //    - Platform Contributor (100–249 Arcade Points)
+  //    - Active Contributor (15–99 Arcade Points)
   function getContributorBadges(user) {
     const badges = [];
     const isAdmin = user.login && user.login.toLowerCase() === "debasmitabose0";
@@ -189,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 2. Dedicated Game Developer Tier (45-Day NSoC Program Scaling: 15+ Master, 8–14 Hyper, 4–7 Arcade Dev, 1–3 Explorer)
+    // 2. Dedicated Game Developer Tier (Based on Verified Games in 'games/' folder)
     const gamesCount = user.gamesCount || 0;
     if (gamesCount >= 15) {
       badges.push({
@@ -225,11 +236,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // 3. Platform & Core Engineering Track (Based on PRs, commits, and platform/fix points)
-    const commitsCount = user.commits || 0;
-    const platformPoints = ((user.platformPRs || 0) * 25) + ((user.qualityPRs || 0) * 15) + (user.bonusPts || 0);
+    // 3. Platform & Universal Engineering Track (Directly bound to In-App Arcade Score)
+    const score = calculateScore(user);
 
-    if (commitsCount >= 30 || platformPoints >= 750) {
+    if (score >= 750) {
       badges.push({
         role: "Master Core Architect",
         tagClass: "role-master",
@@ -237,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "shield-check",
         category: "Platform & Core"
       });
-    } else if (commitsCount >= 10 || platformPoints >= 250) {
+    } else if (score >= 250) {
       badges.push({
         role: "Elite Contributor",
         tagClass: "role-elite",
@@ -245,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "gem",
         category: "Platform & Core"
       });
-    } else if (commitsCount >= 5 || platformPoints >= 100) {
+    } else if (score >= 100) {
       badges.push({
         role: "Platform Contributor",
         tagClass: "role-platform",
@@ -253,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
         lucideIcon: "code-2",
         category: "Platform & Core"
       });
-    } else {
+    } else if (score >= 15) {
       badges.push({
         role: "Active Contributor",
         tagClass: "role-active",
@@ -268,12 +278,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Get Community Contributors (Excludes Admin who has their separate dedicated rank)
   // Ranked strictly by:
-  // 1. Verified Games count (primary)
-  // 2. Merged Commits / Contributions (secondary)
+  // 1. Total Arcade Score (primary)
+  // 2. Verified Games count (secondary)
+  // 3. Merged Commits (tiebreaker)
   function getCommunityContributors() {
     return contributorsData
       .filter(item => item.login && item.login.toLowerCase() !== "debasmitabose0")
       .sort((a, b) => {
+        const scoreDiff = calculateScore(b) - calculateScore(a);
+        if (scoreDiff !== 0) return scoreDiff;
         if ((b.gamesCount || 0) !== (a.gamesCount || 0)) {
           return (b.gamesCount || 0) - (a.gamesCount || 0);
         }
@@ -430,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="games-count-pill" title="${(item.games || []).join(', ')}"><i data-lucide="gamepad-2"></i> ${item.gamesCount}</span>
         </td>
         <td style="text-align: center;">
-          <span class="files-count-pill" title="Effort: Games ${item.gamesCount}, Features ${item.platformPRs || 0}, Quality ${item.qualityPRs || 0}"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
+          <span class="files-count-pill" title="Universal Score: ${(item.gamesCount || 0) * 100}p (Games) + ${(item.mechanicsBonus || 0) * 25}p (Mechanics) + ${(item.platformPRs || 0) * 50}p (Feat) + ${(item.qualityPRs || 0) * 25}p (Fix) + ${(item.commits || 0) * 5}p (Commits)"><i data-lucide="git-pull-request"></i> ${getWorkBreakdown(item)}</span>
         </td>
         <td style="text-align: center;">
           <span class="commits-count-pill"><i data-lucide="git-commit"></i> ${item.commits}</span>
