@@ -38,7 +38,9 @@ ArcadeVerse features a **Balanced 2-Track Contributor Recognition System** scale
 | **💻 Platform Contributor** | **5–9 Merged PRs** • `100–249 Arcade Points` | Platform Contributor badge + Feature Author Spotlight |
 | **🌱 Active Contributor** | **1–4 Merged PRs** • `15–99 Arcade Points` | Listed in verified NSOC '26 contributors registry |
 
-> 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status and is featured in a dedicated Maintainer Spotlight.
+> 👑 **Project Lead & Architect:** **Debasmita Bose** ([@DebasmitaBose0](https://github.com/DebasmitaBose0)) holds the permanent Project Lead status.
+>
+> 🔄 **Live Leaderboard Caching & Sync:** Leaderboard rankings are calculated dynamically using verified GitHub commits, games count, and files added. To prevent GitHub API rate limits, responses are cached in `localStorage` with a 15-minute TTL. Contributors can use real-time developer search and tier filter pills directly in [leaderboard.html](leaderboard.html).
 
 ---
 

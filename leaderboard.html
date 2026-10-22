@@ -201,15 +201,58 @@
       </div>
     </section>
 
+    <!-- Platform Metrics Summary Overview -->
+    <div class="metrics-summary-grid">
+      <div class="metric-card">
+        <span class="metric-icon">🏆</span>
+        <div>
+          <div class="metric-number" id="metric-total-points">--</div>
+          <div class="metric-label">Points Awarded</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-icon">🎮</span>
+        <div>
+          <div class="metric-number" id="metric-total-games">--</div>
+          <div class="metric-label">Registered Games</div>
+        </div>
+      </div>
+      <div class="metric-card">
+        <span class="metric-icon">👥</span>
+        <div>
+          <div class="metric-number" id="metric-total-contributors">--</div>
+          <div class="metric-label">Verified Developers</div>
+        </div>
+      </div>
+    </div>
+
     <!-- GitHub Sync & Live Filter Controls -->
     <div class="leaderboard-toolbar">
-      <div class="sync-status-box">
-        <span class="sync-dot"></span>
-        <span id="sync-status-text">GitHub Live Contributions Synced</span>
+      <div class="toolbar-left">
+        <div class="sync-status-box">
+          <span class="sync-dot"></span>
+          <span id="sync-status-text">GitHub Live Contributions Synced</span>
+        </div>
+        <div class="search-box leaderboard-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="contributor-search-input" placeholder="Search developer or game...">
+        </div>
       </div>
-      <div class="repo-meta-box">
-        <input type="text" id="repo-input" placeholder="owner/repo (e.g. DebasmitaBose0/ArcadeVerse)" value="DebasmitaBose0/ArcadeVerse">
-        <button class="btn btn-secondary btn-sm" id="fetch-github-btn">🔄 Refresh Stats</button>
+
+      <div class="toolbar-right">
+        <div class="category-pills" id="leaderboard-tier-pills">
+          <button class="pill active" data-tier="all">All</button>
+          <button class="pill" data-tier="admin">Admins</button>
+          <button class="pill" data-tier="arcade">Arcade Devs</button>
+          <button class="pill" data-tier="milestone">Milestones</button>
+        </div>
+        <div class="repo-meta-box">
+          <input type="text" id="repo-input" placeholder="owner/repo" value="DebasmitaBose0/ArcadeVerse">
+          <button class="btn btn-secondary btn-sm" id="fetch-github-btn">🔄 Sync</button>
+        </div>
       </div>
     </div>
 
