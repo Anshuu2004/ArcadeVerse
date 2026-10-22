@@ -475,6 +475,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!adminUser || !adminMetaInfo) return;
     const score = calculateScore(adminUser);
     adminMetaInfo.textContent = `${adminUser.commits} Commits • ${adminUser.gamesCount} Games • ${score} pts`;
+
+    const adminBadgesContainer = document.getElementById("admin-badges-row");
+    if (adminBadgesContainer) {
+      const badges = getContributorBadges(adminUser);
+      adminBadgesContainer.innerHTML = badges.map(b => `
+        <span class="role-pill-badge ${b.tagClass}" title="${b.title}"><i data-lucide="${b.lucideIcon}"></i> ${b.role}</span>
+      `).join("");
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
   }
 
   // Live GitHub Contributions with LocalStorage TTL Cache
@@ -533,27 +544,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const isAdmin = user.login.toLowerCase() === "debasmitabose0";
             
-            // Check if contributor exists in CONTRIBUTORS_REGISTRY
+            // Check if contributor exists in CONTRIBUTORS_REGISTRY or initial baseline data
             let registryEntry = null;
             if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
               registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
             }
+            const localEntry = contributorsData.find(c => c.login && c.login.toLowerCase() === user.login.toLowerCase());
 
             // Count registered games from GAMES_REGISTRY
             let userGames = [];
             if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
               userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
             }
-            const gamesCount = userGames.length > 0 ? userGames.length : (registryEntry ? registryEntry.gamesCount : (isAdmin ? 2 : 0));
+            const gamesCount = userGames.length > 0 
+              ? userGames.length 
+              : (registryEntry ? (registryEntry.gamesCount || 0) : (localEntry ? (localEntry.gamesCount || 0) : (isAdmin ? 2 : 0)));
 
-            const mechanicsBonus = registryEntry ? (registryEntry.mechanicsBonus || 0) : (isAdmin ? 2 : 0);
-            const platformPRs = registryEntry ? (registryEntry.platformPRs || 0) : (isAdmin ? 2 : 0);
-            const qualityPRs = registryEntry ? (registryEntry.qualityPRs || 0) : (isAdmin ? 0 : 1);
-            const bonusPts = registryEntry ? (registryEntry.bonusPts || 0) : 0;
+            const mechanicsBonus = registryEntry?.mechanicsBonus ?? localEntry?.mechanicsBonus ?? (isAdmin ? 2 : 0);
+            const platformPRs = registryEntry?.platformPRs ?? localEntry?.platformPRs ?? (isAdmin ? 2 : 0);
+            const qualityPRs = registryEntry?.qualityPRs ?? localEntry?.qualityPRs ?? (isAdmin ? 0 : 1);
+            const bonusPts = registryEntry?.bonusPts ?? localEntry?.bonusPts ?? 0;
 
             return {
               login: user.login,
-              name: registryEntry ? registryEntry.name : displayName,
+              name: registryEntry ? registryEntry.name : (localEntry ? localEntry.name : displayName),
               avatar_url: user.avatar_url,
               commits: user.contributions,
               gamesCount: gamesCount,
@@ -561,7 +575,9 @@ document.addEventListener("DOMContentLoaded", () => {
               platformPRs: platformPRs,
               qualityPRs: qualityPRs,
               bonusPts: bonusPts,
-              games: userGames.length > 0 ? userGames.map(g => g.title) : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : [])
+              games: userGames.length > 0 
+                ? userGames.map(g => g.title) 
+                : (localEntry?.games && localEntry.games.length > 0 ? localEntry.games : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : []))
             };
           })
         );
