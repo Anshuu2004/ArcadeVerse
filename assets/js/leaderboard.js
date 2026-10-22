@@ -488,11 +488,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Live GitHub Contributions with LocalStorage TTL Cache
+  // Resolve display name synchronously without secondary API calls
+  function resolveDisplayName(login) {
+    if (!login) return "Contributor";
+    const lower = login.toLowerCase();
+
+    // Check CONTRIBUTORS_REGISTRY first
+    if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
+      const match = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === lower);
+      if (match && match.name) return match.name;
+    }
+
+    // Check GAMES_REGISTRY
+    if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+      const match = GAMES_REGISTRY.find(g => g.github && g.github.toLowerCase() === lower);
+      if (match && match.author) return match.author;
+    }
+
+    return login;
+  }
+
+  // Live GitHub Contributions with LocalStorage TTL Cache & Zero Secondary Requests
   async function fetchLiveGitHubContributions(repo = "DebasmitaBose0/ArcadeVerse", forceRefresh = false) {
     if (!repo) return;
 
-    // Check LocalStorage Cache first
+    // Check LocalStorage Cache first (unless force-refreshed)
     if (!forceRefresh) {
       try {
         const cachedRaw = localStorage.getItem(`${CACHE_KEY}_${repo}`);
@@ -522,65 +542,60 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/contributors`);
+
+      if (response.status === 403) {
+        throw new Error("RATE_LIMIT");
+      }
+
       if (!response.ok) {
         throw new Error(`GitHub returned status: ${response.status}`);
       }
+
       const data = await response.json();
 
       if (Array.isArray(data) && data.length > 0) {
-        // Enrich profiles to resolve display names and cross-reference games/PRs
-        const enrichedContributors = await Promise.all(
-          data.map(async (user) => {
-            let displayName = user.login;
-            try {
-              const userRes = await fetch(`https://api.github.com/users/${user.login}`);
-              if (userRes.ok) {
-                const userData = await userRes.json();
-                if (userData.name) displayName = userData.name;
-              }
-            } catch (e) {
-              console.warn("Could not fetch user details for", user.login);
-            }
+        // Map contributors in O(1) time per item - ZERO secondary network requests!
+        const enrichedContributors = data.map((user) => {
+          const isAdmin = user.login.toLowerCase() === "debasmitabose0";
 
-            const isAdmin = user.login.toLowerCase() === "debasmitabose0";
-            
-            // Check if contributor exists in CONTRIBUTORS_REGISTRY or initial baseline data
-            let registryEntry = null;
-            if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
-              registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
-            }
-            const localEntry = contributorsData.find(c => c.login && c.login.toLowerCase() === user.login.toLowerCase());
+          // Check if contributor exists in CONTRIBUTORS_REGISTRY or initial baseline data
+          let registryEntry = null;
+          if (typeof CONTRIBUTORS_REGISTRY !== "undefined" && Array.isArray(CONTRIBUTORS_REGISTRY)) {
+            registryEntry = CONTRIBUTORS_REGISTRY.find(c => c.github && c.github.toLowerCase() === user.login.toLowerCase());
+          }
+          const localEntry = contributorsData.find(c => c.login && c.login.toLowerCase() === user.login.toLowerCase());
 
-            // Count registered games from GAMES_REGISTRY
-            let userGames = [];
-            if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
-              userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
-            }
-            const gamesCount = userGames.length > 0 
-              ? userGames.length 
-              : (registryEntry ? (registryEntry.gamesCount || 0) : (localEntry ? (localEntry.gamesCount || 0) : (isAdmin ? 2 : 0)));
+          const displayName = registryEntry ? registryEntry.name : (localEntry ? localEntry.name : resolveDisplayName(user.login));
 
-            const mechanicsBonus = registryEntry?.mechanicsBonus ?? localEntry?.mechanicsBonus ?? (isAdmin ? 2 : 0);
-            const platformPRs = registryEntry?.platformPRs ?? localEntry?.platformPRs ?? (isAdmin ? 2 : 0);
-            const qualityPRs = registryEntry?.qualityPRs ?? localEntry?.qualityPRs ?? (isAdmin ? 0 : 1);
-            const bonusPts = registryEntry?.bonusPts ?? localEntry?.bonusPts ?? 0;
+          // Count registered games from GAMES_REGISTRY
+          let userGames = [];
+          if (typeof GAMES_REGISTRY !== "undefined" && Array.isArray(GAMES_REGISTRY)) {
+            userGames = GAMES_REGISTRY.filter(g => g.github && g.github.toLowerCase() === user.login.toLowerCase());
+          }
+          const gamesCount = userGames.length > 0 
+            ? userGames.length 
+            : (registryEntry ? (registryEntry.gamesCount || 0) : (localEntry ? (localEntry.gamesCount || 0) : (isAdmin ? 2 : 0)));
 
-            return {
-              login: user.login,
-              name: registryEntry ? registryEntry.name : (localEntry ? localEntry.name : displayName),
-              avatar_url: user.avatar_url,
-              commits: user.contributions,
-              gamesCount: gamesCount,
-              mechanicsBonus: mechanicsBonus,
-              platformPRs: platformPRs,
-              qualityPRs: qualityPRs,
-              bonusPts: bonusPts,
-              games: userGames.length > 0 
-                ? userGames.map(g => g.title) 
-                : (localEntry?.games && localEntry.games.length > 0 ? localEntry.games : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : []))
-            };
-          })
-        );
+          const mechanicsBonus = registryEntry?.mechanicsBonus ?? localEntry?.mechanicsBonus ?? (isAdmin ? 2 : 0);
+          const platformPRs = registryEntry?.platformPRs ?? localEntry?.platformPRs ?? (isAdmin ? 2 : 0);
+          const qualityPRs = registryEntry?.qualityPRs ?? localEntry?.qualityPRs ?? (isAdmin ? 0 : 1);
+          const bonusPts = registryEntry?.bonusPts ?? localEntry?.bonusPts ?? 0;
+
+          return {
+            login: user.login,
+            name: displayName,
+            avatar_url: user.avatar_url,
+            commits: user.contributions,
+            gamesCount: gamesCount,
+            mechanicsBonus: mechanicsBonus,
+            platformPRs: platformPRs,
+            qualityPRs: qualityPRs,
+            bonusPts: bonusPts,
+            games: userGames.length > 0 
+              ? userGames.map(g => g.title) 
+              : (localEntry?.games && localEntry.games.length > 0 ? localEntry.games : (isAdmin ? ["Quantum Memory Matrix", "Cyber Neon Pong"] : []))
+          };
+        });
 
         contributorsData = enrichedContributors;
 
@@ -602,7 +617,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (err) {
       console.warn("GitHub API notice:", err.message);
       if (syncStatusText) {
-        syncStatusText.textContent = `Offline/Cached state: ${repo} (Rate limit safe)`;
+        syncStatusText.textContent = err.message === "RATE_LIMIT"
+          ? `⚠️ GitHub API rate limit reached (60/hr). Showing cached/local data.`
+          : `Offline/Cached state: ${repo} (Rate limit safe)`;
       }
     }
 
@@ -614,7 +631,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (fetchBtn) {
     fetchBtn.addEventListener("click", () => {
       const repo = repoInput ? repoInput.value.trim() : "DebasmitaBose0/ArcadeVerse";
-      fetchLiveGitHubContributions(repo, true);
+      fetchBtn.disabled = true;
+      fetchBtn.textContent = "⏳ Syncing...";
+      fetchLiveGitHubContributions(repo, true).finally(() => {
+        setTimeout(() => {
+          fetchBtn.disabled = false;
+          fetchBtn.textContent = "🔄 Refresh Stats";
+        }, 1000);
+      });
     });
   }
 
