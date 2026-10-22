@@ -57,13 +57,16 @@ function renderBoard() {
     card.dataset.index = index;
 
     card.innerHTML = `
-      <div class="card-face card-front">⚛️</div>
+      <div class="card-face card-front"><i data-lucide="atom"></i></div>
       <div class="card-face card-back">${glyph}</div>
     `;
 
     card.addEventListener("click", () => handleCardClick(card));
     matrixGrid.appendChild(card);
   });
+  if (window.lucide) {
+    lucide.createIcons();
+  }
 }
 
 function handleCardClick(card) {
