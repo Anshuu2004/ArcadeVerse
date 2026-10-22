@@ -66,6 +66,8 @@ const CONTRIBUTORS_REGISTRY = [
     github: "DebasmitaBose0",
     avatarInitial: "D",
     role: "Project Admin (NSOC '26)",
+    commits: 19,
+    gamesCount: 2,
     contributions: ["Quantum Memory Matrix", "Arcade Core Engine"]
   },
   {

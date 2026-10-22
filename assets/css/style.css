@@ -1848,6 +1848,60 @@ body {
   color: #fbbf24;
 }
 
+/* Platform Metrics Summary Overview */
+.metrics-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-medium);
+}
+
+.metric-icon {
+  font-size: 2.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.metric-number {
+  font-size: 1.6rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: #fff;
+  line-height: 1.2;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* GitHub Sync Toolbar */
 .leaderboard-toolbar {
   display: flex;
@@ -1856,10 +1910,26 @@ body {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
-  padding: 1rem 1.6rem;
+  padding: 1.2rem 1.6rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.toolbar-left, .toolbar-right {
+  display: flex;
+  align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.leaderboard-search {
+  padding: 0.4rem 0.8rem;
+}
+
+.leaderboard-search input {
+  font-size: 0.86rem;
+  width: 200px;
 }
 
 .sync-status-box {
