@@ -56,6 +56,20 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "quantum-minesweeper_babin",
+    title: "Quantum Minesweeper",
+    category: "Puzzle",
+    lucideIcon: "bomb",
+    description: "Classic minefield sweeper with recursive flood fill, first-click safety, and subatomic hazard detection.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/quantum-minesweeper_babin/index.html",
+    tags: ["Puzzle", "Logic", "Strategy", "Grid"],
+    stars: 31,
+    featured: true
+  },
+  {
     id: "neon-asteroid-escape_joitapaul",
     title: "Neon Asteroid Escape",
     category: "Arcade",
