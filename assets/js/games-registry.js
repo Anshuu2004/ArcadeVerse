@@ -56,6 +56,17 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "space-invaders_babin",
+    title: "Space Invaders 2026",
+    category: "Action",
+    lucideIcon: "crosshair",
+    description: "Classic retro planetary defense. Control your energy cannon, shield behind bunkers, and shoot descending alien waves.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/space-invaders_babin/index.html",
+    tags: ["Action", "Arcade", "Retro", "Space", "Shooter"],
+    stars: 35,
     id: "synth-says_babin",
     title: "Synth-Wave Simon Says",
     category: "Retro",
