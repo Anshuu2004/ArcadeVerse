@@ -56,6 +56,44 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "cyber-snake_babin",
+    title: "Cyber Snake Matrix",
+    category: "Retro",
+    lucideIcon: "activity",
+    description: "Navigate the cyber grid, consume quantum energy bits, and expand your cybernetic memory tail with boundary warps.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/cyber-snake_babin/index.html",
+    tags: ["Retro", "Arcade", "Classic", "Snake"],
+    stars: 38,
+    id: "tactical-fleet_babin",
+    title: "Tactical Fleet Commander",
+    category: "Strategy",
+    lucideIcon: "anchor",
+    description: "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/tactical-fleet_babin/index.html",
+    tags: ["Strategy", "Turn-Based", "Naval", "Radar"],
+    stars: 36,
+    id: "whack-a-bug_babin",
+    title: "Whack-A-Bug Panic",
+    category: "Arcade",
+    lucideIcon: "bug",
+    description: "Whack unexpected production bugs emerging from server racks before CPU temperature reaches 100°C!",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/whack-a-bug_babin/index.html",
+    tags: ["Arcade", "Reflex", "Action", "Developer"],
+    stars: 33,
+    id: "cryptic-wordle_babin",
+    title: "Cryptic Wordle Hack",
+    category: "Puzzle",
+    lucideIcon: "type",
+    description: "Guess the secret 5-letter tech keyword in 6 tries with real-time green and amber matrix feedback clues.",
     id: "cyber-stacker_babin",
     title: "Cyber Tower Stacker",
     category: "Arcade",
@@ -97,9 +135,9 @@ const GAMES_REGISTRY = [
     author: "Babin Bid",
     github: "Babin123456",
     role: "Arcade Developer",
-    path: "games/quantum-minesweeper_babin/index.html",
-    tags: ["Puzzle", "Logic", "Strategy", "Grid"],
-    stars: 31,
+    path: "games/cryptic-wordle_babin/index.html",
+    tags: ["Puzzle", "Word", "Cyber", "Logic"],
+    stars: 34,
     featured: true
   },
   {
@@ -117,7 +155,25 @@ const GAMES_REGISTRY = [
     tags: ["Arcade", "Space", "Survival", "NSOC26"],
     stars: 0,
     featured: false
-  }
+  },
+
+  {
+  id: "astro-infinite-jumper_pragna7",
+  title: "Astro Infinite Jumper",
+  category: "Arcade",
+  lucideIcon: "arrow-up-circle",
+  difficulty: "Intermediate",
+  releaseDate: "2026-10-23",
+  description: "Bounce continuously upward across floating space platforms, collecting jetpacks and dodging black holes.",
+  author: "Pragna Seetha",
+  github: "pragna7",
+  role: "Contributor",
+  path: "games/astro-infinite-jumper_pragna7/index.html",
+  tags: ["Arcade", "Space", "Platformer", "NSOC26"],
+  stars: 10,
+  featured: true
+}
+
 ];
 
 const CONTRIBUTORS_REGISTRY = [
@@ -180,5 +236,17 @@ const CONTRIBUTORS_REGISTRY = [
     qualityPRs: 1,
     bonusPts: 0,
     contributions: ["Quality & Bug Fix PR", "Neon Asteroid Escape"]
+  },
+  {
+    name: "Pragna Seetha",
+    github: "pragna7",
+    avatarInitial: "P",
+    role: "Active Contributor (NSOC '26)",
+    gamesCount: 0,
+    mechanicsBonus: 0,
+    platformPRs: 0,
+    qualityPRs: 0,
+    bonusPts: 0,
+    contributions: [ "Astro Infinite Jumper" ]
   }
 ];
