@@ -4,17 +4,15 @@
  * Complies with strict isolation rules under pwa-engine-babin/
  */
 
-const CACHE_NAME = "arcadeverse-v2";
+const CACHE_NAME = "arcadeverse-v3";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
-  "./ideas.html",
   "./leaderboard.html",
   "./assets/css/style.css",
   "./assets/js/navbar.js",
   "./assets/js/games-registry.js",
   "./assets/js/app.js",
-  "./assets/js/ideas.js",
   "./assets/js/leaderboard.js"
 ];
 

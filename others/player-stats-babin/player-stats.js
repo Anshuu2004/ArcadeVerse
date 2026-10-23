@@ -20,11 +20,11 @@
       condition: (stats) => stats.distinctGames && stats.distinctGames.length >= 3
     },
     {
-      id: "vault_pioneer",
-      title: "Idea Collector",
-      description: "Explore the Open Game Ideas Vault blueprint gallery.",
-      icon: "💡",
-      condition: (stats) => stats.visitedIdeasVault === true
+      id: "contributor_reader",
+      title: "Open Source Scholar",
+      description: "Read the official ArcadeVerse Contributor Guide (CONTRIBUTING.md).",
+      icon: "📜",
+      condition: (stats) => stats.visitedContributing === true
     },
     {
       id: "fame_scout",
@@ -45,7 +45,7 @@
   let playerStats = JSON.parse(localStorage.getItem("arcadeverse_player_stats") || JSON.stringify({
     gamesLaunched: 0,
     distinctGames: [],
-    visitedIdeasVault: false,
+    visitedContributing: false,
     visitedLeaderboard: false,
     unlockedAchievements: []
   }));
@@ -199,15 +199,20 @@
   document.addEventListener("DOMContentLoaded", () => {
     injectAchievementsNavbarButton();
 
-    if (window.location.pathname.includes("ideas.html")) {
-      playerStats.visitedIdeasVault = true;
-      saveStats();
-      checkAchievements();
-    } else if (window.location.pathname.includes("leaderboard.html")) {
+    if (window.location.pathname.includes("leaderboard.html")) {
       playerStats.visitedLeaderboard = true;
       saveStats();
       checkAchievements();
     }
+
+    // Listen for contributing guide clicks
+    document.addEventListener("click", (e) => {
+      if (e.target.closest('a[href*="CONTRIBUTING"]')) {
+        playerStats.visitedContributing = true;
+        saveStats();
+        checkAchievements();
+      }
+    });
 
     // Listen for play buttons
     document.addEventListener("click", (e) => {

@@ -15,7 +15,6 @@
     { id: "tactical-fleet", title: "Tactical Fleet Commander", category: "Strategy", url: "index.html?game=tactical-fleet", desc: "Radar battleship grid tactical combat" },
     { id: "neon-runner", title: "Neon Beat Runner", category: "Rhythm", url: "index.html?game=neon-runner", desc: "4-lane synthwave rhythm reaction test" },
     { id: "cyber-snake", title: "Cyber Snake Matrix", category: "Classic", url: "index.html?game=cyber-snake", desc: "Portal wrap cyber neon snake" },
-    { id: "ideas-vault", title: "Ideas Vault Blueprints", category: "Community", url: "ideas.html", desc: "Browse 20+ open source game project ideas" },
     { id: "leaderboard", title: "Hall of Fame Leaderboard", category: "Stats", url: "leaderboard.html", desc: "View champion high scores and rankings" },
     { id: "contributing", title: "Contributor Guide", category: "Docs", url: "https://github.com/DebasmitaBose0/ArcadeVerse/blob/main/CONTRIBUTING.md", desc: "Step-by-step game submission rules" }
   ];

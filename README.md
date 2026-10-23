@@ -32,7 +32,7 @@
 - 🚀 **100% Native Web Standards:** Pure HTML5, CSS3, & Modern Vanilla JS. Runs instantly in any web browser without any installation!
 - 📁 **Isolated Directory Pattern (`games/game-name_contributor-name/`):** Every participant works inside their own isolated folder. **Zero Git merge conflicts!**
 - 🕹️ **Multi-Game Diversity:** Multiple contributors can build different versions of the same game idea without collision.
-- 💡 **Interactive Ideas Vault ([ideas.html](ideas.html)):** 20+ ready-to-claim game concepts with technical requirements.
+- 📖 **Comprehensive Contributor Guide ([CONTRIBUTING.md](CONTRIBUTING.md)):** Detailed instructions, isolation rules, and architecture guidelines on how to contribute features and games.
 - 🛠️ **Conflict-Free Automated Contribution:** Contributors simply add their 4 game files (including `game.json`) in their dedicated `games/` folder — our automated GitHub Actions workflow compiles the registry without conflicts!
 - 🏆 **Live GitHub Hall of Fame ([leaderboard.html](leaderboard.html)):** Real-time contribution scoring, podium champions, and custom rank badges fetched directly from the GitHub REST API!
 

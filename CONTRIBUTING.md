@@ -125,15 +125,15 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 >
 > ---
 >
-> **🚨 2. NEVER MODIFY ROOT FILES: `index.html`, `ideas.html`, `leaderboard.html`, OR `games-registry.js`**
+> **🚨 2. NEVER MODIFY ROOT FILES: `index.html`, `leaderboard.html`, OR `games-registry.js`**
 >
 > **You must NEVER edit or touch ANY existing root files in the main codebase!**
-> - **Strictly Forbidden:** Modifying `index.html`, `ideas.html`, `leaderboard.html`, or `assets/js/games-registry.js` in your Pull Request is strictly prohibited.
+> - **Strictly Forbidden:** Modifying `index.html`, `leaderboard.html`, or `assets/js/games-registry.js` in your Pull Request is strictly prohibited.
 > - **Why?** When multiple contributors edit shared root files simultaneously, merge conflicts happen on every PR.
 > - **Zero need for you to touch root files:** 
 >   - Game registration is handled automatically by our GitHub Actions workflow scanning your `game.json`.
 >   - I (Debasmita Bose, Project Admin) will personally link and redirect your verified game inside `index.html` after merging your PR.
-> - **Any PR that touches `index.html`, `ideas.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately.**
+> - **Any PR that touches `index.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately.**
 >
 > ---
 >
@@ -233,17 +233,15 @@ Open: `http://localhost:5500`
 ArcadeVerse/
 │
 ├── index.html                           # 🎮 Central Arcade Station (Linked by PA)
-├── CONTRIBUTING.md                      # 📖 This Guide (PA Advice & Rules)
+├── CONTRIBUTING.md                      # 📖 This Guide (PA Advice & Rules - READ FIRST)
 ├── README.md                            # 🌟 Project Overview
 ├── LICENSE                              # 📜 MIT License
 ├── leaderboard.html                     # 🏆 Live Hall of Fame Leaderboard
-├── ideas.html                           # 💡 Ideas Vault
 │
 ├── assets/
 │   ├── css/style.css                    # Theme Stylesheet
 │   └── js/
 │       ├── app.js                       # Platform Engine & Filter Logic
-│       ├── ideas.js                     # Idea Vault Roulette Engine
 │       ├── leaderboard.js               # Live GitHub API Sync Engine
 │       └── games-registry.js            # Auto-compiled from game.json by GitHub Actions
 │
@@ -372,7 +370,7 @@ As your Project Admin, here is what I expect from every contributor:
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
-> - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, `ideas.html`, or `leaderboard.html`. Game registration is automated via `game.json`, and I will link your game in `index.html`.
+> - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, or `leaderboard.html`. Game registration is automated via `game.json`, and I will link your game in `index.html`.
 > - ❌ **Adding README or documentation files inside game or feature folders** — no `README.md` or doc files are allowed in `games/<game_user>/` or `others/<feature-name>-<your-name>/`. Describe your changes in your PR description.
 > - ❌ **Loose files or individual folders in the home/root directory** — creating or dumping any files or feature folders directly in the root directory.
 > - ❌ **Creating games inside `others/`** — games must STRICTLY and MANDATORILY be placed under `games/<game-name_contributor-name>/` (games folder ei game create mandatory!). The `others/` folder is strictly reserved for non-game features and tools.
@@ -422,7 +420,7 @@ Before submitting your PR to me, make sure every box is checked:
 - [ ] I have read this contributing guide and the [Code of Conduct](CODE_OF_CONDUCT.md)
 - [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
 - [ ] **No files or folders were created directly in the home/root directory**
-- [ ] **I have NOT modified any root files (`index.html`, `ideas.html`, `leaderboard.html`, `games-registry.js`)**
+- [ ] **I have NOT modified any root files (`index.html`, `leaderboard.html`, `games-registry.js`)**
 - [ ] All new non-game features, UI enhancements, or bug fixes are isolated inside `others/<feature-name>-<your-name>/` (NO games in `others/`!)
 - [ ] Games are strictly and mandatorily inside `games/<game-name_contributor-name>/` *(games folder ei game create mandatory)*
 - [ ] Game contains **ONLY** `index.html`, `style.css`, `game.js`, and `game.json` (strictly 4 files — no `README.md`, no documentation files, and no extraneous assets/binaries)

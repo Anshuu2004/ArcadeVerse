@@ -1,6 +1,6 @@
 /**
  * ArcadeVerse Deep Link & Social Sharing Router
- * Enables direct URL sharing (?game=id or ?idea=id) with clipboard toast and Web Share API fallback
+ * Enables direct URL sharing (?game=id) with clipboard toast and Web Share API fallback
  * Complies with strict isolation rules under deeplink-engine-babin/
  */
 
@@ -68,7 +68,6 @@
   function handleDirectLinks() {
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get("game");
-    const ideaId = params.get("idea");
 
     if (gameId) {
       // Wait for games grid to populate
@@ -90,17 +89,6 @@
       }, 200);
 
       setTimeout(() => clearInterval(checkInterval), 4000);
-    }
-
-    if (ideaId) {
-      setTimeout(() => {
-        const targetCard = document.querySelector(`[data-idea-id="${ideaId}"]`);
-        if (targetCard) {
-          targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
-          targetCard.classList.add("deeplink-highlight");
-          setTimeout(() => targetCard.classList.remove("deeplink-highlight"), 2500);
-        }
-      }, 500);
     }
   }
 
