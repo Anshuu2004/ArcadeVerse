@@ -136,6 +136,18 @@ function buildRegistry() {
       qualityPRs: 1,
       bonusPts: 0,
       contributions: ["Quality & Bug Fix PR", "Neon Asteroid Escape"]
+    },
+    {
+      name: "Pragna Seetha",
+      github: "pragna7",
+      avatarInitial: "P",
+      role: "Contributor (NSOC '26)",
+      gamesCount: 1,
+      mechanicsBonus: 0,
+      platformPRs: 0,
+      qualityPRs: 0,
+      bonusPts: 0,
+      contributions: ["Astro Infinite Jumper"]
     }
   ];
 

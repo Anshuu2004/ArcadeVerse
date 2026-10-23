@@ -1,5 +1,26 @@
 const GAMES_REGISTRY = [
   {
+    "id": "astro-infinite-jumper_pragna7",
+    "title": "Astro Infinite Jumper",
+    "category": "Arcade",
+    "lucideIcon": "arrow-up-circle",
+    "description": "Bounce continuously upward across floating space platforms, collecting jetpacks and dodging black holes.",
+    "author": "Pragna Seetha",
+    "github": "pragna7",
+    "role": "Contributor",
+    "path": "games/astro-infinite-jumper_pragna7/index.html",
+    "tags": [
+      "Arcade",
+      "Space",
+      "Platformer",
+      "NSOC26"
+    ],
+    "stars": 10,
+    "featured": true,
+    "difficulty": "Intermediate",
+    "releaseDate": "2026-10-23"
+  },
+  {
     "id": "cryptic-wordle_babin",
     "title": "Cryptic Wordle Hack",
     "category": "Puzzle",
@@ -347,6 +368,20 @@ const CONTRIBUTORS_REGISTRY = [
     "contributions": [
       "Quality & Bug Fix PR",
       "Neon Asteroid Escape"
+    ]
+  },
+  {
+    "name": "Pragna Seetha",
+    "github": "pragna7",
+    "avatarInitial": "P",
+    "role": "Contributor (NSOC '26)",
+    "gamesCount": 1,
+    "mechanicsBonus": 0,
+    "platformPRs": 0,
+    "qualityPRs": 0,
+    "bonusPts": 0,
+    "contributions": [
+      "Astro Infinite Jumper"
     ]
   }
 ];
