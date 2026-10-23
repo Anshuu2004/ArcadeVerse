@@ -686,6 +686,48 @@ body {
   border-color: var(--accent-primary);
 }
 
+/* Dedicated Favorites Pill */
+.pill-favorites {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-color: rgba(244, 63, 94, 0.3);
+  color: #fca5a5;
+}
+
+.pill-favorites:hover, .pill-favorites.active {
+  background: #f43f5e;
+  border-color: #f43f5e;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35);
+}
+
+.pill-fav-icon {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.favorites-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #fecdd3;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.pill-favorites.active .favorites-count-badge {
+  background: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
 /* Clean, Solid Game Cards */
 .games-grid {
   display: grid;
@@ -757,6 +799,54 @@ body {
   border-radius: var(--radius-sm);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+/* Card Favorite Bookmark Button */
+.btn-card-favorite {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: rgba(12, 14, 20, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-smooth);
+  z-index: 5;
+  padding: 0;
+}
+
+.btn-card-favorite:hover {
+  background: rgba(244, 63, 94, 0.16);
+  border-color: rgba(244, 63, 94, 0.45);
+  color: #f43f5e;
+  transform: scale(1.1);
+}
+
+.btn-card-favorite .fav-heart-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), fill 0.2s ease, stroke 0.2s ease;
+}
+
+.btn-card-favorite.favorited {
+  background: rgba(244, 63, 94, 0.22);
+  border-color: rgba(244, 63, 94, 0.6);
+  color: #f43f5e;
+  box-shadow: 0 0 14px rgba(244, 63, 94, 0.35);
+}
+
+.btn-card-favorite.favorited .fav-heart-icon {
+  fill: #f43f5e;
+  stroke: #f43f5e;
+  transform: scale(1.12);
 }
 
 .game-card-body {
@@ -1369,6 +1459,18 @@ body {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+#modal-fav-btn.favorited {
+  color: #f43f5e;
+  border-color: rgba(244, 63, 94, 0.5);
+  background: rgba(244, 63, 94, 0.18);
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.3);
+}
+
+#modal-fav-btn.favorited .modal-fav-icon {
+  fill: #f43f5e;
+  stroke: #f43f5e;
 }
 
 .btn-close {
