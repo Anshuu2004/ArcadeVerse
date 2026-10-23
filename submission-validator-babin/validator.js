@@ -73,24 +73,21 @@
     chkFiles.className = "check-item valid";
     chkFiles.querySelector(".chk-icon").textContent = "✓";
 
-    // Generate JSON object
+    // Generate clean game.json metadata object
     const entry = {
-      id: folderName,
       title: title,
       category: category,
-      icon: icon,
+      lucideIcon: icon || "gamepad-2",
       description: desc,
       author: author || github,
       github: github,
-      role: "Contributor",
-      path: fullPath,
+      role: "Arcade Developer",
       tags: tags,
-      stars: Math.floor(Math.random() * 15) + 10,
-      featured: false
+      featured: true
     };
 
     const formattedJson = JSON.stringify(entry, null, 2);
-    jsonOutput.textContent = `  ${formattedJson},`;
+    jsonOutput.textContent = formattedJson;
   }
 
   // Copy Snippet
