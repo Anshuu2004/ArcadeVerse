@@ -106,14 +106,32 @@ git push origin fix/issue-123
 
 > [!CAUTION]
 >
-> **🚨 1. NO FILES IN ROOT / HOME DIRECTORY**
+> **🚨 1. GAME CREATION FILE & ICON REQUIREMENTS (MOST IMPORTANT)**
+>
+> When any contributor creates a game folder under `games/<game-name_contributor-name>/` and uploads their game:
+> - **Only HTML, CSS, and JS files are allowed:** No other files except `index.html`, `style.css`, `game.js`, and an optional `README.md` are required or permitted. Do NOT include binaries, images, audio files, zip archives, or heavy external assets.
+> - **Use Icons ONLY (NO Emojis):** Instead of emojis, **only SVG or Lucide icons must be used** across your game interface, buttons, and status displays. Emojis render inconsistently across operating systems and are strictly prohibited.
+>
+> ---
+>
+> **🚨 2. DO NOT TOUCH `index.html` OR ROOT MAIN CODEBASE FILES (MERGE CONFLICT PREVENTION)**
+>
+> **Contributors must NEVER edit or modify `index.html` (or other shared root files like `ideas.html`, `leaderboard.html`) in their Pull Requests!**
+> - When multiple contributors edit `index.html` simultaneously to link their games or script tags, severe merge conflicts occur on every PR.
+> - **Zero need to touch `index.html`:** Keep your entire contribution strictly within your dedicated folder (`games/<game-name_contributor-name>/` or `<feature-name>-<your-name>/`).
+> - **Admin handles integration:** After your game or feature passes verification and code review, the **Project Admin (Debasmita Bose) will personally link and redirect your game inside `index.html`**.
+> - Any PR that modifies `index.html` unnecessarily will be requested to revert changes to `index.html` before merge.
+>
+> ---
+>
+> **🚨 3. NO FILES IN ROOT / HOME DIRECTORY**
 >
 > **Do NOT create, add, or dump loose files directly in the repository root / home directory.**
 > Any PR that introduces files directly in the root directory will be **rejected immediately**.
 >
 > ---
 >
-> **🚨 2. ALL SITE CHANGES, UI IMPROVEMENTS, ENHANCEMENTS & BUG FIXES**
+> **🚨 4. ALL SITE CHANGES, UI IMPROVEMENTS, ENHANCEMENTS & BUG FIXES**
 >
 > For **ANY** type of contribution — including feature enhancements, bug fixes, UI/UX improvements, or any modifications across the site:
 >
@@ -128,7 +146,7 @@ git push origin fix/issue-123
 >
 > ---
 >
-> **🚨 3. GAME SUBMISSIONS: `games/game-name_contributor-name/`**
+> **🚨 5. GAME SUBMISSIONS: `games/game-name_contributor-name/`**
 >
 > Every game submission **MUST** be placed inside a dedicated subfolder in `games/` following this exact syntax:
 >
@@ -247,12 +265,16 @@ git checkout -b game/game-name_your-username
 mkdir games/game-name_your-username
 ```
 
-Inside your folder, create:
+Inside your folder, create **ONLY** these files (no other file formats, binaries, or assets permitted):
 
-- `index.html`
+- `index.html` (Use SVG or Lucide icons only — **NO emojis**)
 - `style.css`
 - `game.js`
-- `README.md` (Optional but encouraged: technical overview & game architecture)
+- `README.md` (Optional: technical architecture & overview)
+
+> ⚠️ **STRICT FILE & ICON RESTRICTIONS:**
+> - **No other files allowed:** Do NOT include extra asset files (PNG/JPG images, MP3 audio, zip archives, or subfolders). Only `index.html`, `style.css`, and `game.js` are required.
+> - **Icons Only (NO Emojis):** Instead of emojis, use clean SVG or Lucide icons throughout your UI, HUD, and buttons. Emojis are strictly disallowed.
 
 > 🎮 **MANDATORY IN-GAME GUIDELINES & CONTROLS:**
 > Every submitted game **MUST provide clear, visible in-game "How to Play / Game Guidelines"** (via a modal, start screen overlay, or instructions drawer).
@@ -328,6 +350,7 @@ Go to GitHub → click **"Compare & Pull Request"** targeting `main`.
 > [!CAUTION]
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
+> - ❌ **Modifying `index.html` or root core files** — contributors must NOT edit `index.html`, `ideas.html`, or `leaderboard.html`. The Project Admin will personally link/redirect verified games upon merging.
 > - ❌ **Loose files in the home/root directory** — creating or dumping any files directly in the root directory
 > - ❌ **Non-compliant folder paths** — all enhancements/UI/bug fixes must be inside `<folder-name>-<your-name>/` (and game submissions inside `games/<game-name>_<contributor-name>/` within the `'games' folder`)
 > - ❌ **Exceeding the 7-day inactivity threshold** without opening a PR or communicating progress
@@ -374,8 +397,11 @@ Before submitting, make sure every box is checked:
 - [ ] I have read this contributing guide and the [Code of Conduct](CODE_OF_CONDUCT.md)
 - [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
 - [ ] **No files were created directly in the home/root directory**
+- [ ] **I have NOT modified `index.html` or other root files** (Project Admin will link verified games directly)
 - [ ] All site updates, enhancements, or bug fixes are organized inside `<folder-name>-<your-name>/`
 - [ ] Games are strictly inside `games/game-name_contributor-name/` *(for game submissions)*
+- [ ] Game contains **ONLY** `index.html`, `style.css`, and `game.js` (no extraneous assets, binaries, or image/audio dumps)
+- [ ] Used **icons only (SVG / Lucide)** in the game UI — **NO emojis**
 - [ ] Entry added to `assets/js/games-registry.js` *(for game submissions)*
 - [ ] The PR says `Closes #issue-number` with a short summary
 - [ ] The PR includes the `nsoc26` tag
