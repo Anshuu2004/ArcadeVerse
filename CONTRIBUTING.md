@@ -137,30 +137,32 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 >
 > ---
 >
-> **🚨 3. ALL NEW FEATURES, UI ENHANCEMENTS & BUG FIXES MUST BE IN A NEW ISOLATED FOLDER**
+> **🚨 3. ALL NON-GAME FEATURES, UI ENHANCEMENTS & TOOLS MUST BE UNDER `others/`**
 >
-> If you are contributing a new feature, platform enhancement, UI improvement, or fix:
-> - **You must NEVER edit existing site files directly.**
-> - Instead, **create a brand new folder** under `ArcadeVerse/` following this mandatory naming convention:
+> Due to our rapidly growing contributor base, to keep the repository root clean and structured, **all new features, platform enhancements, dev tools, or bug fixes other than games MUST be placed inside the `others/` folder**:
 >
 >   ```text
->   <feature-name>-<your-name>/
+>   others/<feature-name>-<your-name>/
 >   ```
 >
-> - Inside your dedicated folder, create your respective component files (e.g. `feature.html`, `feature.css`, `feature.js`).
+> - **What belongs here?** Any kind of contribution other than games — UI portals, telemetry engines, sound engines, theme customizers, accessibility tools, search modals, etc.
+> - **STRICTLY NO GAMES IN `others/`:** You must **NEVER** create a game inside the `others/` folder! The `games/` folder is strictly and mandatorily the ONLY place where games are created. Any game submitted in `others/` will be rejected immediately.
+> - Inside your dedicated folder (`others/<feature-name>-<your-name>/`), create your respective component files (e.g. `feature.html`, `feature.css`, `feature.js`).
 > - **Do NOT add `README.md` or documentation files inside this folder** — explain your changes directly in your GitHub Pull Request description so I can review them.
-> - **Examples:** `navbar-redesign-rohit/`, `sound-engine-sneha/`, `theme-customizer-arjun/`
+> - **Examples:** `others/accessibility-engine-babin/`, `others/sound-engine-babin/`, `others/theme-customizer-babin/`, `others/global-search-babin/`
 >
 > ---
 >
-> **🚨 4. NO LOOSE FILES IN ROOT / HOME DIRECTORY**
+> **🚨 4. NO LOOSE FILES OR INDIVIDUAL FOLDERS IN ROOT DIRECTORY**
 >
-> **Do NOT create, add, or dump loose files directly in the repository root / home directory.**
-> All files must live strictly inside your dedicated feature folder (`<feature-name>-<your-name>/`) or game folder (`games/<game-name_contributor-name>/`).
+> **Do NOT create, add, or dump loose files or individual feature folders directly in the repository root / home directory.**
+> The root directory must remain clean and pristine:
+> - All game submissions must live strictly inside `games/<game-name_contributor-name>/`.
+> - All non-game features, tools, and UI components must live strictly inside `others/<feature-name>-<your-name>/`.
 >
 > ---
 >
-> **🚨 5. GAME FOLDER NAMING CONVENTION: `games/game-name_contributor-name/`**
+> **🚨 5. GAME FOLDER NAMING CONVENTION: `games/game-name_contributor-name/` (MANDATORY FOR GAMES)**
 >
 > Every game submission **MUST** be placed inside a dedicated subfolder in `games/` following this exact syntax:
 >
@@ -168,13 +170,16 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 > games/game-name_contributor-name/
 > ```
 >
+> 🕹️ **Games folder ei game create mandatory!** Creating a game anywhere else (such as inside `others/` or the root directory) is strictly prohibited and will result in immediate PR rejection.
+>
 > **Examples:**
 >
 > - ✅ `games/cyber-pong_rohit/`
 > - ✅ `games/quantum-2048_sneha/`
 > - ✅ `games/flappy-jet_arjun/`
 > - ❌ `games/pong/` *(ambiguous & collision-prone — will NOT be accepted)*
-> - ❌ `games/my-game/` *(will NOT be accepted)*
+> - ❌ `others/cyber-pong_rohit/` *(GAMES ARE FORBIDDEN IN `others/` — will NOT be accepted)*
+> - ❌ `my-game-rohit/` *(DO NOT create game folders in root — will NOT be accepted)*
 >
 > 💡 **My Review Requirement as Project Admin (PA):**
 > Every game must include a built-in **"How to Play / Controls & Rules"** screen or modal so that I can easily test, verify, and evaluate your game mechanics during my review.
@@ -242,19 +247,20 @@ ArcadeVerse/
 │       ├── leaderboard.js               # Live GitHub API Sync Engine
 │       └── games-registry.js            # Auto-compiled from game.json by GitHub Actions
 │
-├── <feature-name>-<your-name>/          # 🚀 Isolated Feature Folder Naming Convention
-│   │                                    # (For UI enhancements, components, bug fixes — NO README/docs)
-│   ├── component.html                   # HTML structure
-│   ├── component.css                    # Component styling
-│   └── component.js                     # Component logic
+├── games/                               # 🕹️ MANDATORY Games Directory (Games ONLY!)
+│   └── <game-name_contributor-name>/    # 🚀 Isolated Game Folder (Strictly 4 files)
+│       │                                # (NO README/docs, SVG/Lucide icons only, NO emojis)
+│       ├── index.html                   # Game canvas & markup
+│       ├── style.css                    # Game styling
+│       ├── game.js                      # Game logic
+│       └── game.json                    # Game metadata (Automated registry compilation)
 │
-└── games/                               # 🕹️ Community Games Root Directory
-    └── <game-name_contributor-name>/    # 🚀 Isolated Game Folder Naming Convention (Strictly 4 files)
-        │                                # (NO README/docs, SVG/Lucide icons only, NO emojis)
-        ├── index.html                   # Game canvas & markup
-        ├── style.css                    # Game styling
-        ├── game.js                      # Game logic
-        └── game.json                    # Game metadata (Automated registry compilation)
+└── others/                              # 🛠️ MANDATORY Non-Game Features & Tools Directory
+    └── <feature-name>-<your-name>/      # 🚀 Isolated Feature Folder (NO games allowed here!)
+        │                                # (For UI enhancements, components, bug fixes — NO README/docs)
+        ├── component.html               # Feature structure/page (if applicable)
+        ├── component.css                # Feature styling
+        └── component.js                 # Feature logic / engine
 ```
 
 ---
@@ -367,9 +373,10 @@ As your Project Admin, here is what I expect from every contributor:
 > The following are **strictly prohibited** and will result in PR rejection or disqualification:
 >
 > - ❌ **Modifying `games-registry.js`, `index.html`, or root core files** — contributors must NOT edit `assets/js/games-registry.js`, `index.html`, `ideas.html`, or `leaderboard.html`. Game registration is automated via `game.json`, and I will link your game in `index.html`.
-> - ❌ **Adding README or documentation files inside game or feature folders** — no `README.md` or doc files are allowed in `games/<game_user>/` or `<feature>-<user>/`. Describe your changes in your PR description.
-> - ❌ **Loose files in the home/root directory** — creating or dumping any files directly in the root directory.
-> - ❌ **Non-compliant folder paths** — all enhancements/UI/bug fixes must be inside `<folder-name>-<your-name>/` (and game submissions inside `games/<game-name>_<contributor-name>/` within the `'games'` folder).
+> - ❌ **Adding README or documentation files inside game or feature folders** — no `README.md` or doc files are allowed in `games/<game_user>/` or `others/<feature-name>-<your-name>/`. Describe your changes in your PR description.
+> - ❌ **Loose files or individual folders in the home/root directory** — creating or dumping any files or feature folders directly in the root directory.
+> - ❌ **Creating games inside `others/`** — games must STRICTLY and MANDATORILY be placed under `games/<game-name_contributor-name>/` (games folder ei game create mandatory!). The `others/` folder is strictly reserved for non-game features and tools.
+> - ❌ **Non-compliant folder paths** — all non-game enhancements/UI/bug fixes must be inside `others/<feature-name>-<your-name>/` (and game submissions inside `games/<game-name_contributor-name>/` within the `games/` folder).
 > - ❌ **Exceeding the 7-day inactivity threshold** without opening a PR or communicating progress.
 > - ❌ **Working directly on the `main` branch** — contributions must come from a separate feature/fix branch.
 > - ❌ **Fake PRs** or meaningless contributions.
@@ -414,10 +421,10 @@ Before submitting your PR to me, make sure every box is checked:
 - [ ] I created and worked on a **separate branch** (not `main`)
 - [ ] I have read this contributing guide and the [Code of Conduct](CODE_OF_CONDUCT.md)
 - [ ] My change is meaningful, tested, and written by me (100% Vanilla JS/HTML/CSS)
-- [ ] **No files were created directly in the home/root directory**
+- [ ] **No files or folders were created directly in the home/root directory**
 - [ ] **I have NOT modified any root files (`index.html`, `ideas.html`, `leaderboard.html`, `games-registry.js`)**
-- [ ] All new features, UI enhancements, or bug fixes are isolated inside `<feature-name>-<your-name>/`
-- [ ] Games are strictly inside `games/game-name_contributor-name/` *(for game submissions)*
+- [ ] All new non-game features, UI enhancements, or bug fixes are isolated inside `others/<feature-name>-<your-name>/` (NO games in `others/`!)
+- [ ] Games are strictly and mandatorily inside `games/<game-name_contributor-name>/` *(games folder ei game create mandatory)*
 - [ ] Game contains **ONLY** `index.html`, `style.css`, `game.js`, and `game.json` (strictly 4 files — no `README.md`, no documentation files, and no extraneous assets/binaries)
 - [ ] Used **icons only (SVG / Lucide)** in the game UI — **NO emojis**
 - [ ] Added `game.json` inside the game folder (I have **NOT** edited `assets/js/games-registry.js`)

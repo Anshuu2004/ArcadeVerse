@@ -10,7 +10,7 @@
   function registerServiceWorker() {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("pwa-engine-babin/sw.js", { scope: "./" })
+        navigator.serviceWorker.register("others/pwa-engine-babin/sw.js", { scope: "./" })
           .then((reg) => {
             console.log("ArcadeVerse PWA Service Worker active. Scope:", reg.scope);
           })
