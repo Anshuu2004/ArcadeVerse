@@ -2,9 +2,11 @@
 .achievements-nav-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--text-muted);
+  color: #cbd5e1;
   width: 38px;
   height: 38px;
+  min-width: 38px;
+  padding: 0 !important;
   border-radius: 8px;
   display: inline-flex;
   justify-content: center;
@@ -13,6 +15,13 @@
   transition: all 0.2s ease;
   position: relative;
   margin-right: 0.25rem;
+}
+
+.achievements-nav-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  display: block;
 }
 
 .achievements-nav-btn:hover {

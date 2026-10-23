@@ -265,6 +265,16 @@ body {
   flex-shrink: 0;
 }
 
+.nav-actions .btn-icon {
+  width: 38px !important;
+  height: 38px !important;
+  min-width: 38px !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 /* Mobile Hamburger Toggle Button (Hidden on Desktop) */
 .mobile-menu-btn {
   display: none;
