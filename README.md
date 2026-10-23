@@ -129,53 +129,6 @@ A huge thank you to all the amazing developers building, contributing, and refin
   <img src="https://contrib.rocks/image?repo=DebasmitaBose0/ArcadeVerse" alt="ArcadeVerse Contributors" />
 </a>
 
-<br><br>
-
-<table>
-  <tr>
-    <td align="center" width="20%">
-      <a href="https://github.com/DebasmitaBose0">
-        <img src="https://github.com/DebasmitaBose0.png?size=100" width="80px" alt="Debasmita Bose" style="border-radius: 50%;" /><br />
-        <sub><b>Debasmita Bose</b></sub>
-      </a><br />
-      <sub>👑 Project Admin & Lead</sub><br />
-      <a href="https://github.com/DebasmitaBose0"><sub>@DebasmitaBose0</sub></a>
-    </td>
-    <td align="center" width="20%">
-      <a href="https://github.com/Babin123456">
-        <img src="https://github.com/Babin123456.png?size=100" width="80px" alt="Babin Bid" style="border-radius: 50%;" /><br />
-        <sub><b>Babin Bid</b></sub>
-      </a><br />
-      <sub>🎮 Arcade Developer</sub><br />
-      <a href="https://github.com/Babin123456"><sub>@Babin123456</sub></a>
-    </td>
-    <td align="center" width="20%">
-      <a href="https://github.com/mistu7debnath">
-        <img src="https://github.com/mistu7debnath.png?size=100" width="80px" alt="Manisha Debnath" style="border-radius: 50%;" /><br />
-        <sub><b>Manisha Debnath</b></sub>
-      </a><br />
-      <sub>🕹️ Contributor</sub><br />
-      <a href="https://github.com/mistu7debnath"><sub>@mistu7debnath</sub></a>
-    </td>
-    <td align="center" width="20%">
-      <a href="https://github.com/joitapaul">
-        <img src="https://github.com/joitapaul.png?size=100" width="80px" alt="Joita Paul" style="border-radius: 50%;" /><br />
-        <sub><b>Joita Paul</b></sub>
-      </a><br />
-      <sub>🕹️ Contributor</sub><br />
-      <a href="https://github.com/joitapaul"><sub>@joitapaul</sub></a>
-    </td>
-    <td align="center" width="20%">
-      <a href="https://github.com/hrshjswniii">
-        <img src="https://github.com/hrshjswniii.png?size=100" width="80px" alt="Harsh Jaiswani" style="border-radius: 50%;" /><br />
-        <sub><b>Harsh Jaiswani</b></sub>
-      </a><br />
-      <sub>🌱 Contributor</sub><br />
-      <a href="https://github.com/hrshjswniii"><sub>@hrshjswniii</sub></a>
-    </td>
-  </tr>
-</table>
-
 <p align="center">
   <b>Want to be featured here?</b> Read our <a href="CONTRIBUTING.md"><b>Contribution Guide</b></a>, pick an open issue, and submit your Pull Request! 🚀
 </p>
@@ -191,5 +144,4 @@ A huge thank you to all the amazing developers building, contributing, and refin
     Designed & Engineered with ❤️ by <b><a href="https://github.com/DebasmitaBose0">Debasmita Bose</a></b> for <b>Nexus Spring Of Code – Winter Edition 2026</b> ❄️<br>
     <i>Empowering open-source contributors with their first real merge!</i> 🚀
   </p>
-</div>
-
+</div> 
