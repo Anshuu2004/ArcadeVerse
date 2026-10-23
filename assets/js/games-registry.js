@@ -56,6 +56,17 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "cyber-snake_babin",
+    title: "Cyber Snake Matrix",
+    category: "Retro",
+    lucideIcon: "activity",
+    description: "Navigate the cyber grid, consume quantum energy bits, and expand your cybernetic memory tail with boundary warps.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/cyber-snake_babin/index.html",
+    tags: ["Retro", "Arcade", "Classic", "Snake"],
+    stars: 38,
     id: "tactical-fleet_babin",
     title: "Tactical Fleet Commander",
     category: "Strategy",
