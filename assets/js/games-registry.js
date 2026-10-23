@@ -56,6 +56,17 @@ const GAMES_REGISTRY = [
     featured: true
   },
   {
+    id: "tactical-fleet_babin",
+    title: "Tactical Fleet Commander",
+    category: "Strategy",
+    lucideIcon: "anchor",
+    description: "Command a grid-based naval fleet. Plan radar strikes and strategically sink hidden enemy carrier units.",
+    author: "Babin Bid",
+    github: "Babin123456",
+    role: "Arcade Developer",
+    path: "games/tactical-fleet_babin/index.html",
+    tags: ["Strategy", "Turn-Based", "Naval", "Radar"],
+    stars: 36,
     id: "whack-a-bug_babin",
     title: "Whack-A-Bug Panic",
     category: "Arcade",
