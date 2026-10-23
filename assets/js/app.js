@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filtered.forEach((game) => {
       const card = document.createElement("div");
       card.className = "game-card";
+      card.setAttribute("data-game-id", game.id);
       const iconName = game.lucideIcon || "gamepad-2";
       const iconHtml = `<i data-lucide="${iconName}"></i>`;
       const favorited = favs.has(game.id);

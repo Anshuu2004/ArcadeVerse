@@ -72,15 +72,14 @@
     if (gameId) {
       // Wait for games grid to populate
       const checkInterval = setInterval(() => {
-        const targetBtn = document.querySelector(`[data-game-id="${gameId}"] .btn-play, [data-game-id="${gameId}"]`);
-        if (targetBtn) {
+        const targetCard = document.querySelector(`[data-game-id="${gameId}"], [data-game-id*="${gameId}"], [data-id="${gameId}"]`);
+        if (targetCard) {
           clearInterval(checkInterval);
-          targetBtn.scrollIntoView({ behavior: "smooth", block: "center" });
-          targetBtn.classList.add("deeplink-highlight");
+          targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetCard.classList.add("deeplink-highlight");
           setTimeout(() => {
-            targetBtn.classList.remove("deeplink-highlight");
-            // If it has a play button click it
-            const playBtn = targetBtn.querySelector(".btn-play") || targetBtn;
+            targetCard.classList.remove("deeplink-highlight");
+            const playBtn = targetCard.querySelector(".btn-play-trigger, .btn-play") || targetCard;
             if (playBtn && typeof playBtn.click === "function") {
               playBtn.click();
             }
