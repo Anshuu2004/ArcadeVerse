@@ -287,6 +287,360 @@ const GAMES_REGISTRY = [
   }
 ];
 
+const FEATURES_REGISTRY = [
+  {
+    "id": "accessibility-engine-babin",
+    "title": "Accessibility & A11y Suite",
+    "category": "Accessibility",
+    "type": "background-plugin",
+    "lucideIcon": "accessibility",
+    "description": "High-contrast themes, scalable typography, screen-reader support, and reduced motion modes.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/accessibility-engine-babin",
+    "tags": [
+      "A11y",
+      "Accessibility",
+      "Contrast",
+      "UI"
+    ],
+    "js": "others/accessibility-engine-babin/a11y-engine.js",
+    "css": "others/accessibility-engine-babin/a11y.css"
+  },
+  {
+    "id": "cache-inspector-babin",
+    "title": "Cache & Quota Storage Inspector",
+    "category": "Diagnostics",
+    "type": "standalone-tool",
+    "lucideIcon": "database",
+    "description": "Analyze browser Cache Storage partitions, test offline availability, and track client storage quotas.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/cache-inspector-babin",
+    "tags": [
+      "PWA",
+      "Storage",
+      "Cache",
+      "Diagnostics"
+    ],
+    "path": "others/cache-inspector-babin/inspector.html"
+  },
+  {
+    "id": "cheat-console-babin",
+    "title": "Developer Debug CLI & Cheat Console",
+    "category": "Developer Tool",
+    "type": "standalone-tool",
+    "lucideIcon": "terminal",
+    "description": "Quake-style in-game dropdown debug terminal, Konami code detector, and game engine time dilation.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/cheat-console-babin",
+    "tags": [
+      "CLI",
+      "Debug",
+      "Cheats",
+      "Terminal"
+    ],
+    "path": "others/cheat-console-babin/console.html"
+  },
+  {
+    "id": "chiptune-jukebox-babin",
+    "title": "8-Bit Chiptune Retro Jukebox",
+    "category": "Audio",
+    "type": "standalone-tool",
+    "lucideIcon": "music",
+    "description": "Retro 8-bit web audio chiptune synthesizer with real-time waveform spectrum visualizer.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/chiptune-jukebox-babin",
+    "tags": [
+      "Audio",
+      "Chiptune",
+      "8-bit",
+      "Synth"
+    ],
+    "path": "others/chiptune-jukebox-babin/jukebox.html"
+  },
+  {
+    "id": "cloud-save-vault-babin",
+    "title": "Cloud Save & State Vault",
+    "category": "Data Management",
+    "type": "standalone-tool",
+    "lucideIcon": "cloud",
+    "description": "Cross-game save state snapshot manager, JSON backup export/import, and quota telemetry.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/cloud-save-vault-babin",
+    "tags": [
+      "SaveState",
+      "Cloud",
+      "Backup",
+      "Storage"
+    ],
+    "path": "others/cloud-save-vault-babin/vault.html"
+  },
+  {
+    "id": "code-linter-babin",
+    "title": "Arcade Submission Code Linter",
+    "category": "Developer Tool",
+    "type": "standalone-tool",
+    "lucideIcon": "check-circle",
+    "description": "Client-side AST checker validating game files against 4-file rules, no-emoji policy, and DOM safety.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/code-linter-babin",
+    "tags": [
+      "Linter",
+      "AST",
+      "Validation",
+      "QA"
+    ],
+    "path": "others/code-linter-babin/linter.html"
+  },
+  {
+    "id": "deeplink-engine-babin",
+    "title": "Deep-Linking & Direct Sharing Engine",
+    "category": "Platform",
+    "type": "background-plugin",
+    "lucideIcon": "share-2",
+    "description": "URL hash routing (#game=id) supporting direct game launching, modal deep-linking, and social sharing.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/deeplink-engine-babin",
+    "tags": [
+      "Routing",
+      "DeepLink",
+      "Share",
+      "URL"
+    ],
+    "js": "others/deeplink-engine-babin/deeplink.js",
+    "css": "others/deeplink-engine-babin/deeplink.css"
+  },
+  {
+    "id": "fps-telemetry-babin",
+    "title": "FPS & Frame Latency Telemetry",
+    "category": "Diagnostics",
+    "type": "standalone-tool",
+    "lucideIcon": "gauge",
+    "description": "Real-time FPS overlay HUD, frame time latency graphs, and dynamic quality performance scaler.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/fps-telemetry-babin",
+    "tags": [
+      "FPS",
+      "Telemetry",
+      "Performance",
+      "Benchmark"
+    ],
+    "path": "others/fps-telemetry-babin/telemetry.html"
+  },
+  {
+    "id": "gamepad-hub-babin",
+    "title": "HTML5 Gamepad & Rumble Hub",
+    "category": "Hardware",
+    "type": "standalone-tool",
+    "lucideIcon": "gamepad",
+    "description": "Standard HTML5 Gamepad controller manager, dynamic button remapping, and dual-motor haptic rumble test.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/gamepad-hub-babin",
+    "tags": [
+      "Gamepad",
+      "Controller",
+      "Haptics",
+      "Input"
+    ],
+    "path": "others/gamepad-hub-babin/hub.html"
+  },
+  {
+    "id": "global-search-babin",
+    "title": "Global Quick Search Modal",
+    "category": "Navigation",
+    "type": "background-plugin",
+    "lucideIcon": "search",
+    "description": "Quick-access Ctrl+K search popup with fuzzy matching across games, categories, tags, and authors.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/global-search-babin",
+    "tags": [
+      "Search",
+      "Hotkeys",
+      "Modal",
+      "Navigation"
+    ],
+    "js": "others/global-search-babin/search-modal.js",
+    "css": "others/global-search-babin/search-modal.css"
+  },
+  {
+    "id": "leaderboard-export-babin",
+    "title": "Leaderboard Analytics & Export Engine",
+    "category": "Analytics",
+    "type": "background-plugin",
+    "lucideIcon": "download",
+    "description": "Export live leaderboard standings to CSV, JSON, and printable Hall of Fame certificates.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/leaderboard-export-babin",
+    "tags": [
+      "Export",
+      "CSV",
+      "JSON",
+      "Certificate"
+    ],
+    "js": "others/leaderboard-export-babin/export-engine.js",
+    "css": "others/leaderboard-export-babin/export-engine.css"
+  },
+  {
+    "id": "player-stats-babin",
+    "title": "Player Stats & Streak Tracker",
+    "category": "Analytics",
+    "type": "background-plugin",
+    "lucideIcon": "trophy",
+    "description": "Local player telemetry tracking games played, session duration, high scores, and daily activity streaks.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/player-stats-babin",
+    "tags": [
+      "Stats",
+      "Streaks",
+      "Telemetry",
+      "Achievements"
+    ],
+    "js": "others/player-stats-babin/player-stats.js",
+    "css": "others/player-stats-babin/player-stats.css"
+  },
+  {
+    "id": "pwa-engine-babin",
+    "title": "Progressive Web App Offline Engine",
+    "category": "Platform",
+    "type": "background-plugin",
+    "lucideIcon": "wifi",
+    "description": "Service Worker offline asset caching, background synchronization, and install prompt banner.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/pwa-engine-babin",
+    "tags": [
+      "PWA",
+      "Offline",
+      "ServiceWorker",
+      "Install"
+    ],
+    "js": "others/pwa-engine-babin/pwa-client.js",
+    "css": "others/pwa-engine-babin/pwa.css"
+  },
+  {
+    "id": "recent-games-babin",
+    "title": "Recently Played Games Tray",
+    "category": "Navigation",
+    "type": "background-plugin",
+    "lucideIcon": "history",
+    "description": "Sticky quick-launch dock remembering recently played games in chronological order.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/recent-games-babin",
+    "tags": [
+      "History",
+      "Recent",
+      "QuickLaunch",
+      "Dock"
+    ],
+    "js": "others/recent-games-babin/recent-games.js",
+    "css": "others/recent-games-babin/recent-games.css"
+  },
+  {
+    "id": "replay-recorder-babin",
+    "title": "Gameplay Replay & Canvas Recorder",
+    "category": "Media",
+    "type": "standalone-tool",
+    "lucideIcon": "video",
+    "description": "Canvas capture video recorder, WebM clip exporter, and high-resolution screenshot generator.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/replay-recorder-babin",
+    "tags": [
+      "Record",
+      "Video",
+      "Replay",
+      "Screenshot"
+    ],
+    "path": "others/replay-recorder-babin/recorder.html"
+  },
+  {
+    "id": "sound-engine-babin",
+    "title": "Retro Audio & SFX Engine",
+    "category": "Audio",
+    "type": "background-plugin",
+    "lucideIcon": "volume-2",
+    "description": "Web Audio API synthesized sound effects for buttons, cards, modal popups, and global audio toggle.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/sound-engine-babin",
+    "tags": [
+      "SFX",
+      "WebAudio",
+      "Sound",
+      "Haptics"
+    ],
+    "js": "others/sound-engine-babin/sound-engine.js",
+    "css": "others/sound-engine-babin/sound-toggle.css"
+  },
+  {
+    "id": "speedrun-timer-babin",
+    "title": "Speedrun Split Timer Overlay",
+    "category": "Utility",
+    "type": "standalone-tool",
+    "lucideIcon": "timer",
+    "description": "High-precision floating split timer overlay for speedruns with split tracking and local comparisons.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/speedrun-timer-babin",
+    "tags": [
+      "Speedrun",
+      "Timer",
+      "Splits",
+      "Precision"
+    ],
+    "path": "others/speedrun-timer-babin/timer.html"
+  },
+  {
+    "id": "theme-customizer-babin",
+    "title": "Cyber Theme & Palette Customizer",
+    "category": "Theme",
+    "type": "background-plugin",
+    "lucideIcon": "palette",
+    "description": "Real-time theme engine supporting Cyber Neon, Synthwave, Matrix Green, and Midnight Blue palettes.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/theme-customizer-babin",
+    "tags": [
+      "Themes",
+      "Palettes",
+      "CSS",
+      "Customizer"
+    ],
+    "js": "others/theme-customizer-babin/theme-customizer.js",
+    "css": "others/theme-customizer-babin/theme-customizer.css"
+  },
+  {
+    "id": "virtual-gamepad-babin",
+    "title": "Mobile Touch Virtual Gamepad",
+    "category": "Input",
+    "type": "standalone-tool",
+    "lucideIcon": "smartphone",
+    "description": "On-screen virtual D-Pad, dual analog joysticks, and touch event dispatcher for mobile devices.",
+    "author": "Babin Bid",
+    "github": "Babin123456",
+    "folder": "others/virtual-gamepad-babin",
+    "tags": [
+      "Touch",
+      "Mobile",
+      "Joystick",
+      "Virtual"
+    ],
+    "path": "others/virtual-gamepad-babin/gamepad.html"
+  }
+];
+
 const CONTRIBUTORS_REGISTRY = [
   {
     "name": "Debasmita Bose",
@@ -311,7 +665,7 @@ const CONTRIBUTORS_REGISTRY = [
     "role": "Arcade Developer (NSOC '26)",
     "gamesCount": 10,
     "mechanicsBonus": 2,
-    "platformPRs": 2,
+    "platformPRs": 19,
     "qualityPRs": 1,
     "bonusPts": 0,
     "contributions": [

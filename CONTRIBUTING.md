@@ -115,6 +115,7 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 > **🚨 1. GAME CREATION FILE & ICON REQUIREMENTS (MOST IMPORTANT)**
 >
 > When you create a game folder under `games/<game-name_your-name>/`:
+>
 > - **Strictly 4 Files Only (1 HTML, 1 CSS, 1 JS, 1 JSON):** Every game folder must contain **strictly and exclusively** these 4 files:
 >   1. `index.html` (Game canvas & markup — use SVG/Lucide icons only, **NO emojis**)
 >   2. `style.css` (Game styling)
@@ -128,11 +129,12 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 > **🚨 2. NEVER MODIFY ROOT FILES: `index.html`, `leaderboard.html`, OR `games-registry.js`**
 >
 > **You must NEVER edit or touch ANY existing root files in the main codebase!**
+>
 > - **Strictly Forbidden:** Modifying `index.html`, `leaderboard.html`, or `assets/js/games-registry.js` in your Pull Request is strictly prohibited.
 > - **Why?** When multiple contributors edit shared root files simultaneously, merge conflicts happen on every PR.
-> - **Zero need for you to touch root files:** 
->   - Game registration is handled automatically by our GitHub Actions workflow scanning your `game.json`.
->   - I (Debasmita Bose, Project Admin) will personally link and redirect your verified game inside `index.html` after merging your PR.
+> - **Zero need for you to touch root files:**
+>   - Game and feature registrations are handled automatically by our GitHub Actions workflow scanning `game.json` and `feature.json`.
+>   - The platform dynamic loader automatically registers and connects your components.
 > - **Any PR that touches `index.html`, `leaderboard.html`, or `games-registry.js` will be rejected immediately.**
 >
 > ---
@@ -141,13 +143,13 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 >
 > Due to our rapidly growing contributor base, to keep the repository root clean and structured, **all new features, platform enhancements, dev tools, or bug fixes other than games MUST be placed inside the `others/` folder**:
 >
->   ```text
->   others/<feature-name>-<your-name>/
->   ```
+> ```text
+> others/<feature-name>-<your-name>/
+> ```
 >
 > - **What belongs here?** Any kind of contribution other than games — UI portals, telemetry engines, sound engines, theme customizers, accessibility tools, search modals, etc.
 > - **STRICTLY NO GAMES IN `others/`:** You must **NEVER** create a game inside the `others/` folder! The `games/` folder is strictly and mandatorily the ONLY place where games are created. Any game submitted in `others/` will be rejected immediately.
-> - Inside your dedicated folder (`others/<feature-name>-<your-name>/`), create your respective component files (e.g. `feature.html`, `feature.css`, `feature.js`).
+> - Inside your dedicated folder (`others/<feature-name>-<your-name>/`), create your respective component files along with a `feature.json` metadata file (e.g. `feature.html`, `feature.css`, `feature.js`, `feature.json`).
 > - **Do NOT add `README.md` or documentation files inside this folder** — explain your changes directly in your GitHub Pull Request description so I can review them.
 > - **Examples:** `others/accessibility-engine-your-name/`, `others/sound-engine-your-name/`, `others/theme-customizer-your-name/`, `others/global-search-your-name/`
 >
@@ -157,6 +159,7 @@ To keep this project scalable and prevent hundreds of merge conflicts, I have es
 >
 > **Do NOT create, add, or dump loose files or individual feature folders directly in the repository root / home directory.**
 > The root directory must remain clean and pristine:
+>
 > - All game submissions must live strictly inside `games/<game-name_your-name>/`.
 > - All non-game features, tools, and UI components must live strictly inside `others/<feature-name>-<your-name>/`.
 >
@@ -295,10 +298,13 @@ Inside your folder, create **ONLY** these 4 files:
 - `game.json` (Game metadata — enables automated registration!)
 
 > ⚠️ **STRICT FILE & ICON RESTRICTIONS:**
+>
 > - **No README / Documentation files needed:** Do NOT create a `README.md` or any documentation files in your game folder. Keep the folder strictly limited to your game code (`index.html`, `style.css`, `game.js`, `game.json`).
 > - **No other files allowed:** Do NOT include extra asset files (PNG/JPG images, MP3 audio, zip archives, or subfolders).
 > - **Icons Only (NO Emojis):** Instead of emojis, use clean SVG or Lucide icons throughout your UI, HUD, and buttons. Emojis are strictly disallowed.
-
+>
+> ---
+>
 > 🎮 **MANDATORY IN-GAME GUIDELINES & CONTROLS:**
 > Every submitted game **MUST provide clear, visible in-game "How to Play / Game Guidelines"** (via a modal, start screen overlay, or instructions drawer).
 > This allows me as the **Project Admin (PA)** and community players to immediately understand:
@@ -312,7 +318,7 @@ Inside your folder, create **ONLY** these 4 files:
 >
 > 🧪 **Tip:** No external CDNs or frameworks. Pure Vanilla HTML/CSS/JS only!
 
-### 📌 STEP 4: ADD YOUR `game.json` METADATA
+### 📌 STEP 4: ADD YOUR `game.json` OR `feature.json` METADATA
 
 Inside your game folder (`games/game-name_your-name/`), create `game.json`:
 
@@ -330,10 +336,13 @@ Inside your game folder (`games/game-name_your-name/`), create `game.json`:
 }
 ```
 
+For non-game features inside `others/<feature-name>-<your-name>/`, create `feature.json` with your metadata (`id`, `title`, `category`, `type`, `author`, `github`, `entryHtml` or `js`/`css`).
+
 > ⚡ **ZERO MERGE CONFLICT WORKFLOW:**
+>
 > - **Do NOT edit `assets/js/games-registry.js` or `index.html`.**
-> - When I merge your Pull Request into `main`, our **GitHub Actions automated workflow** will instantly detect your `game.json` and compile `games-registry.js` automatically!
-> - I will personally link your game in `index.html`.
+> - When I merge your Pull Request into `main`, our **GitHub Actions automated workflow** will instantly detect your `game.json` or `feature.json` and compile the registries automatically!
+> - The automated dynamic loader will display and activate your component on `index.html`.
 
 ### 📌 STEP 5: COMMIT, PUSH & OPEN PULL REQUEST
 

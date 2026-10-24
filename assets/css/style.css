@@ -811,6 +811,25 @@ body {
   letter-spacing: 0.5px;
 }
 
+.game-category-tag.tool-tag {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.pill-tools {
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+}
+
+.pill-tools:hover,
+.pill-tools.active {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: #38bdf8;
+  color: #fff;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+}
+
 /* Card Favorite Bookmark Button */
 .btn-card-favorite {
   position: absolute;
